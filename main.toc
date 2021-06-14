@@ -1,5 +1,0 @@
-\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\babel@toc {spanish}{}
-\contentsline {chapter}{Declaration of Authorship}{\es@scroman {iii}}{section*.1}%
-\contentsline {chapter}{Resumen}{\es@scroman {vii}}{section*.2}%
-\contentsline {chapter}{Acknowledgements}{\es@scroman {ix}}{section*.3}%

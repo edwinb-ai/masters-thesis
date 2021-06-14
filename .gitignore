@@ -8,6 +8,7 @@
 *.out
 *.run*
 *.sync*
+*.toc
 
 ## Latex bibliography files
 *.bbl
