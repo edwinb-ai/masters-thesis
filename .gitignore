@@ -1,0 +1,15 @@
+## Latex files
+*.aux
+*.fdb*
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run*
+*.sync*
+
+## Latex bibliography files
+*.bbl
+*.blg
+main-blx.bib
