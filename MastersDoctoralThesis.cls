@@ -246,7 +246,12 @@
 
 \usepackage{xcolor} % Required for specifying custom colours
 
-\colorlet{mdtRed}{red!50!black}
+%% Blue color
+\definecolor{GtoBlue}{HTML}{0B4F8D}
+%% Gold color
+\definecolor{GtoGold}{HTML}{958956}
+%% Yellow color
+\definecolor{GtoYellow}{HTML}{FFD466}
 
 %----------------------------------------------------------------------------------------
 %	MARGINS
@@ -408,8 +413,8 @@ KOMA-script documentation for details.}]{fancyhdr}
 %	ACKNOWLEDGEMENTS PAGE DESIGN
 %----------------------------------------------------------------------------------------
 
-\usepackage{xcolor}
-\colorlet{mdtRed}{red!50!black}
+% \usepackage{xcolor}
+% \colorlet{GtoBlue}{red!50!black}
 \newcommand{\acknowledgementname}{Acknowledgements}
 \providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish} {\acknowledgementname}{Acknowledgements} % Acknowledgement text for English countries
 \providecaptionname{german,ngerman,austrian,naustrian}{\acknowledgementname}{Danksagung} % Acknowledgement text for Germanic countries
@@ -524,8 +529,8 @@ bookmarksopenlevel=0,
 hypertexnames=false,
 colorlinks=true,% Set to false to disable coloring links
 citecolor=magenta,% The color of citations
-linkcolor=red,% The color of references to document elements (sections, figures, etc)
-urlcolor=mdtRed,% The color of hyperlinks (URLs)
+linkcolor=GtoGold,% The color of references to document elements (sections, figures, etc)
+urlcolor=GtoBlue,% The color of hyperlinks (URLs)
 pdfstartview={FitV},
 unicode,
 breaklinks=true,
