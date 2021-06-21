@@ -1,5 +1,6 @@
-% Chapter Template
-
+%%--------- Comandos especiales
+\newcommand{\vecr}{\mathbf{r}}
+%%
 \chapter{Solución a la ecuación de Ornstein-Zernike mediante redes neuronales} % Main chapter title
 
 \label{Cap3} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
@@ -14,40 +15,86 @@ En particular, se espera que una red neuronal pueda servir como paramatrización
 función puente en la condición de cerradura de la ecuación de OZ, y así evitar la decisión
 arbitraria de aproximaciones escogiendo una función puente en particular.
 
-En esta sección se detalla la metodología creada y los fundamentos matemáticos bajo los cuales
-se puede hacer uso de redes neuronales para resolver la ecuación de OZ. Se comparan estos
-resultados con los obtenidos con simulación por computadora.
+En este capítulo se detalla la metodología creada y los fundamentos matemáticos bajo los
+cuales se puede hacer uso de redes neuronales para resolver la ecuación de OZ.
+Se comparan estos resultados con los obtenidos con simulación por computadora.
+En el apéndice se describe la solución general a la ecuación de OZ, mientras que
+en este capítulo se detalla su modificación para emplear redes neuronales.
 
-\section{Marco Teórico}
+\section{Parametrización de la función puente}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+La ecuación de Ornstein-Zernike está dada por
 
-%-----------------------------------
-%	SUBSECTION 1
-%-----------------------------------
-\subsection{Subsection 1}
+\begin{subequations}
+    \begin{align*}
+         & c(\vecr) = h(\vecr) +
+        n \int_{V}
+        c(\vecr^{\prime})
+        h(\lvert \vecr - \vecr^{\prime} \rvert)
+        d\vecr^{\prime} \label{eq:oz1} \\
+         & c(\vecr)
+        = \exp{\left[
+                -  \beta u(\vecr)
+                +  \gamma(\vecr)
+                + B(\vecr)
+                \right]} -
+        \gamma(\vecr)
+        - 1
+    \end{align*}
+\end{subequations}
 
-Nunc posuere quam at lectus tristique eu ultrices augue venenatis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam erat volutpat. Vivamus sodales tortor eget quam adipiscing in vulputate ante ullamcorper. Sed eros ante, lacinia et sollicitudin et, aliquam sit amet augue. In hac habitasse platea dictumst.
+con la notación ya conocida para esta ecuación.
 
-%-----------------------------------
-%	SUBSECTION 2
-%-----------------------------------
+Sea $N_{\theta}(\vecr)$ una red neuronal con pesos $\theta$. Se propone que
+$N_{\theta}(\vecr)$ reemplace a la función puente $B(\vecr)$ en la ecuación
+anterior tal que ahora se tiene la siguiente expresión para la cerradura
 
-\subsection{Subsection 2}
-Morbi rutrum odio eget arcu adipiscing sodales. Aenean et purus a est pulvinar pellentesque. Cras in elit neque, quis varius elit. Phasellus fringilla, nibh eu tempus venenatis, dolor elit posuere quam, quis adipiscing urna leo nec orci. Sed nec nulla auctor odio aliquet consequat. Ut nec nulla in ante ullamcorper aliquam at sed dolor. Phasellus fermentum magna in augue gravida cursus. Cras sed pretium lorem. Pellentesque eget ornare odio. Proin accumsan, massa viverra cursus pharetra, ipsum nisi lobortis velit, a malesuada dolor lorem eu neque.
+\begin{equation}
+    c(\vecr) = \exp{\left[
+            -  \beta u(\vecr)
+            +  \gamma(\vecr)
+            + N_{\theta}(\vecr)
+            \right]} -
+    \gamma(\vecr)
+    - 1 ,
+    \label{eq:parametrizacion}
+\end{equation}
+
+y la ecuación de OZ queda de la misma forma.
+Se pretende trabajar a partir de esta hipótesis donde la función puente
+pueda tomar cualquier valor en particular que permita la solución de la
+ecuación de OZ.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
 
-\section{Metodología}
+\section{Esquema de entrenamiento}
 
-Sed ullamcorper quam eu nisl interdum at interdum enim egestas. Aliquam placerat justo sed lectus lobortis ut porta nisl porttitor. Vestibulum mi dolor, lacinia molestie gravida at, tempus vitae ligula. Donec eget quam sapien, in viverra eros. Donec pellentesque justo a massa fringilla non vestibulum metus vestibulum. Vestibulum in orci quis felis tempor lacinia. Vivamus ornare ultrices facilisis. Ut hendrerit volutpat vulputate. Morbi condimentum venenatis augue, id porta ipsum vulputate in. Curabitur luctus tempus justo. Vestibulum risus lectus, adipiscing nec condimentum quis, condimentum nec nisl. Aliquam dictum sagittis velit sed iaculis. Morbi tristique augue sit amet nulla pulvinar id facilisis ligula mollis. Nam elit libero, tincidunt ut aliquam at, molestie in quam. Aenean rhoncus vehicula hendrerit.
+Ahora que se tiene la parametrización, se debe desarrollar una forma para ajustar los
+pesos de la red neuronal $N_{\theta}(\vecr),$ y que al mismo tiempo permita la solución
+de la ecuación de OZ.
+
+Para crear un esquema de entrenamiento se requiere primero de una \textbf{función de costo}
+que sea utilizada para generar información del ajuste necesario de los pesos $\theta$.
+Tomando en cuenta que el esquema iterativo de Piccard crea una sucesión de funciones
+estimadas $\{\gamma_1(\vecr), \gamma_2(\vecr), \dots, \gamma_n(\vecr)\}$, se propone que la función de costo
+sea
+
+\begin{equation}
+    J(\theta) = \left(\gamma_{n}(\vecr; \theta) - \gamma_{n-1}(\vecr; \theta) \right)^2
+    \label{eq:costo}
+\end{equation}
+
+donde $\gamma_{n}(\vecr; \theta)$ es la enésima función estimada de $\gamma(\vecr)$
+mediante el método iterativo. La notación $\gamma(\vecr; \theta)$ indica que depende
+implícitamente de los pesos de la red neuronal, como se puede ver en el ecuación~\eqref{eq:parametrizacion}.
+Esto significa que si los pesos de $N$ cambian, entonces la función $\gamma$ debe cambiar.
+Sin embargo, esto no significa que $\gamma$ depende \emph{directamente} de los pesos.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
 %----------------------------------------------------------------------------------------
 
 \section{Resultados}
-% \lipsum[1-1]
-Sed ullamcorper quam eu nisl interdum at interdum enim egestas. Aliquam placerat justo sed lectus lobortis ut porta nisl porttitor. Vestibulum mi dolor, lacinia molestie gravida at, tempus vitae ligula. Donec eget quam sapien, in viverra eros. Donec pellentesque justo a massa fringilla non vestibulum metus vestibulum. Vestibulum in orci quis felis tempor lacinia. Vivamus ornare ultrices facilisis. Ut hendrerit volutpat vulputate. Morbi condimentum venenatis augue, id porta ipsum vulputate in. Curabitur luctus tempus justo. Vestibulum risus lectus, adipiscing nec condimentum quis, condimentum nec nisl. Aliquam dictum sagittis velit sed iaculis. Morbi tristique augue sit amet nulla pulvinar id facilisis ligula mollis. Nam elit libero, tincidunt ut aliquam at, molestie in quam. Aenean rhoncus vehicula hendrerit.
+
