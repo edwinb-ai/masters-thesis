@@ -75,6 +75,7 @@ Ahora que se tiene la parametrización, se debe desarrollar una forma para ajust
 pesos de la red neuronal $N_{\theta}(\vecr),$ y que al mismo tiempo permita la solución
 de la ecuación de OZ.
 
+\subsection{Función de costo}
 Para crear un esquema de entrenamiento se requiere primero de una \textbf{función de costo}
 que sea utilizada para generar información del ajuste necesario de los pesos $\theta$.
 Tomando en cuenta que el esquema iterativo de Piccard crea una sucesión de funciones
@@ -82,14 +83,14 @@ estimadas $\{\gamma_1(\vecr), \gamma_2(\vecr), \dots, \gamma_n(\vecr)\}$, se pro
 sea
 
 \begin{equation}
-    J(\theta) = \left(\gamma_{n}(\vecr; \theta) - \gamma_{n-1}(\vecr; \theta) \right)^2
+    J(\theta) = \left[\gamma_{n}(\vecr; \theta) - \gamma_{n-1}(\vecr; \theta) \right]^2
     \label{eq:costo}
 \end{equation}
 
 donde $\gamma_{n}(\vecr; \theta)$ es la enésima función estimada de $\gamma(\vecr)$
 mediante el método iterativo. La notación $\gamma(\vecr; \theta)$ indica que depende
 implícitamente de los pesos de la red neuronal, como se puede ver en el ecuación~\eqref{eq:parametrizacion}.
-Esto significa que si los pesos de $N$ cambian, entonces la función $\gamma$ debe cambiar.
+Esto significa que si los pesos de $N_{\theta}(\vecr)$ cambian, entonces la función $\gamma$ debe cambiar.
 Sin embargo, esto no significa que $\gamma$ depende \emph{directamente} de los pesos.
 
 %----------------------------------------------------------------------------------------
