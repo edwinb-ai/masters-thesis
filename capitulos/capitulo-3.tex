@@ -70,7 +70,6 @@ ecuación de OZ.
 %----------------------------------------------------------------------------------------
 
 \section{Esquema de entrenamiento}
-
 Ahora que se tiene la parametrización, se debe desarrollar una forma para ajustar los
 pesos de la red neuronal $N_{\theta}(\vecr),$ y que al mismo tiempo permita la solución
 de la ecuación de OZ.
@@ -92,6 +91,39 @@ mediante el método iterativo. La notación $\gamma(\vecr; \theta)$ indica que d
 implícitamente de los pesos de la red neuronal, como se puede ver en el ecuación~\eqref{eq:parametrizacion}.
 Esto significa que si los pesos de $N_{\theta}(\vecr)$ cambian, entonces la función $\gamma$ debe cambiar.
 Sin embargo, esto no significa que $\gamma$ depende \emph{directamente} de los pesos.
+
+\subsection{Problema de optimización}
+Usando la función de costo~\eqref{eq:costo} ahora se puede plantear un problema de optimización
+que permita el ajuste de los pesos de $N_{\theta}(\vecr).$
+
+El problema de optimización en este caso es \emph{sin restricciones} y está
+definido de la siguiente forma
+
+\begin{equation}
+    \begin{aligned}
+    & \underset{\theta}{\text{min}}
+    & & J(\theta)
+    \end{aligned}
+    \label{eq:optimizacion}
+\end{equation}
+
+Esto significa que buscamos los parámetros óptimos $\theta^*$ que minimicen la diferencia
+entre las iteraciones calculadas de las funciones $\gamma(\vecr; \theta).$
+Este problema de optimización se puede resolver de forma iterativa, al mismo tiempo que
+se resuelve la ecuación de OZ.
+
+\subsection{Actualización de pesos}
+El método iterativo empleado está basado en la técnica de \emph{descenso de gradiente}
+para actualizar los pesos de la red neuronal.
+Esto significa que la regla de actualización es
+
+\begin{equation}
+    \theta_{n+1} = \theta_n - \nabla_{\theta} J(\theta) .
+    \label{eq:gradiente}
+\end{equation}
+
+En este cálculo se necesita la información del gradiente de la función de costo respecto
+a los pesos. El cálculo detallado del gradiente se describe en el apéndice.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
