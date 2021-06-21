@@ -139,14 +139,14 @@ la solución a la ecuación de Ornstein-Zernike usando redes neuronales.
 
 Para resolver la ecuación de OZ con la parametrización~\eqref{eq:parametrizacion} se tienen lo siguientes pasos:
 
-\begin{itemize}
-    \item Dado el potencial de interación $u(\vecr)$, se emplea la ecuación~\eqref{eq:parametrizacion} para obtener el valor de $c(\vecr; \theta),$ la cual ahora depende implícitamente de los pesos de $\nnet$. En este paso también se requiere de un valor inicial para $\gamma_1(\vecr),$ el cual se inicializa de acuerdo a la metodología de Ng de cinco puntos, descrita en el apéndice. %% TODO: Cambiar el nombre del apéndice
+\begin{enumerate}
+    \item Dado el potencial de interación $u(\vecr)$, se emplea la ecuación~\eqref{eq:parametrizacion} para obtener el valor de $c(\vecr; \theta),$ la cual ahora depende implícitamente de los pesos de $\nnet$. En este paso también se requiere de un valor inicial para $\gamma_{n}(\vecr),$ el cual se inicializa de acuerdo a la metodología de Ng de cinco puntos, descrita en el apéndice. %% TODO: Cambiar el nombre del apéndice
     \item El valor de $c(\vecr; \theta)$ se transforma mediante la transformada de Fourier, para obtener $\hat{c}(\veck; \theta)$.
-    \item Se transforma mediante la transformada de Fourier toda la ecuación de OZ, y se deja en términos de la función $\hat{\gamma}(\veck)$. Usando la información encontrada sobre la función $\hat{c}(\veck; \theta)$, se encuentra una nueva función $\hat{\gamma}(\veck; \theta)$.
-    \item Luego, se anti-transforma la función $\hat{\gamma}(\veck; \theta)$ para obtener la nueva estimación de $\gamma_2(\vecr; \theta)$.
-    \item Usando ambas estimaciones $\gamma_{1}, \gamma_2$, se evalúa la función de costo~\eqref{eq:costo}, y se realiza el cálculo del gradiente, $\nabla_{\theta} J(\theta)$.
-    \item Se actualizan los pesos usando la expresión~\eqref{eq:gradiente}, y se reinicia el proceso. En la siguiente iteración, la función inicial será ahora $\gamma_2$, para entonces obtener una nueva estimación $\gamma_3$, y así sucesivamente.
-\end{itemize}
+    \item Se transforma mediante la transformada de Fourier toda la ecuación de OZ, y se deja en términos de la función $\hat{\gamma}(\veck)$. Usando la información encontrada sobre la función $\hat{c}(\veck; \theta)$, se encuentra una nueva función $\hat{\gamma}_{n}(\veck; \theta)$.
+    \item Luego, se antitransforma la función $\hat{\gamma}_{n}(\veck; \theta)$ para obtener la nueva estimación de $\gamma_{n+1}(\vecr; \theta)$.
+    \item Usando ambas estimaciones $\gamma_{n}, \gamma_{n+1}$, se evalúa la función de costo~\eqref{eq:costo}, y se realiza el cálculo del gradiente, $\nabla_{\theta} J(\theta)$.
+    \item Se actualizan los pesos usando la expresión~\eqref{eq:gradiente}, y se reinicia el proceso. En la siguiente iteración, la función inicial será ahora $\gamma_{n+1}$, para entonces obtener una nueva estimación $\gamma_{n+2}$, y así sucesivamente.
+\end{enumerate}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
