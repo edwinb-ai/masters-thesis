@@ -3,7 +3,7 @@
 \newcommand{\veck}{\mathbf{k}}
 \newcommand{\nnet}{N_{\theta}(\mathbf{r})}
 %%
-\chapter{Solución a la ecuación de Ornstein-Zernike mediante redes neuronales} % Main chapter title
+\chapter{Solución a la ecuación de Ornstein-Zernike usando redes neuronales} % Main chapter title
 
 \label{Cap3} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
@@ -147,6 +147,19 @@ Para resolver la ecuación de OZ con la parametrización~\eqref{eq:parametrizaci
     \item Usando ambas estimaciones $\gamma_{n}, \gamma_{n+1}$, se evalúa la función de costo~\eqref{eq:costo}, y se realiza el cálculo del gradiente, $\nabla_{\theta} J(\theta)$.
     \item Se actualizan los pesos usando la expresión~\eqref{eq:gradiente}, y se reinicia el proceso. En la siguiente iteración, la función inicial será ahora $\gamma_{n+1}$, para entonces obtener una nueva estimación $\gamma_{n+2}$, y así sucesivamente.
 \end{enumerate}
+
+\subsection{Convergencia del entrenamiento}
+El procedimiento descrito anteriormente se repite de forma indefinida hasta lograr la 
+convergencia, dada por la siguiente expresión
+
+\begin{equation}
+    {\lvert \gamma_{n+1} - \gamma_{n} \rvert}^2 \leq \epsilon
+    \label{eq:tolerancia}
+\end{equation}
+
+donde $\lvert \cdot \rvert$ indica el valor absoluto, y $\epsilon \in [0, 1]$.
+En particular, la tolerancia en todos los experimentos realizados en este capítulo fue de
+$\epsilon = 1 \times 10^{-5}$.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
