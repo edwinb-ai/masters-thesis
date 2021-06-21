@@ -1,5 +1,7 @@
 %%--------- Comandos especiales
 \newcommand{\vecr}{\mathbf{r}}
+\newcommand{\veck}{\mathbf{k}}
+\newcommand{\nnet}{N_{\theta}(\mathbf{r})}
 %%
 \chapter{Solución a la ecuación de Ornstein-Zernike mediante redes neuronales} % Main chapter title
 
@@ -45,15 +47,15 @@ La ecuación de Ornstein-Zernike está dada por
 
 con la notación ya conocida para esta ecuación.
 
-Sea $N_{\theta}(\vecr)$ una red neuronal con pesos $\theta$. Se propone que
-$N_{\theta}(\vecr)$ reemplace a la función puente $B(\vecr)$ en la ecuación
+Sea $\nnet$ una red neuronal con pesos $\theta$. Se propone que
+$\nnet$ reemplace a la función puente $B(\vecr)$ en la ecuación
 anterior tal que ahora se tiene la siguiente expresión para la cerradura
 
 \begin{equation}
     c(\vecr) = \exp{\left[
             -  \beta u(\vecr)
             +  \gamma(\vecr)
-            + N_{\theta}(\vecr)
+            + \nnet
             \right]} -
     \gamma(\vecr)
     - 1 ,
@@ -71,7 +73,7 @@ ecuación de OZ.
 
 \section{Esquema de entrenamiento}
 Ahora que se tiene la parametrización, se debe desarrollar una forma para ajustar los
-pesos de la red neuronal $N_{\theta}(\vecr),$ y que al mismo tiempo permita la solución
+pesos de la red neuronal $\nnet$, y que al mismo tiempo permita la solución
 de la ecuación de OZ.
 
 \subsection{Función de costo}
@@ -89,20 +91,20 @@ sea
 donde $\gamma_{n}(\vecr; \theta)$ es la enésima función estimada de $\gamma(\vecr)$
 mediante el método iterativo. La notación $\gamma(\vecr; \theta)$ indica que depende
 implícitamente de los pesos de la red neuronal, como se puede ver en el ecuación~\eqref{eq:parametrizacion}.
-Esto significa que si los pesos de $N_{\theta}(\vecr)$ cambian, entonces la función $\gamma$ debe cambiar.
+Esto significa que si los pesos de $\nnet$ cambian, entonces la función $\gamma$ debe cambiar.
 Sin embargo, esto no significa que $\gamma$ depende \emph{directamente} de los pesos.
 
 \subsection{Problema de optimización}
 Usando la función de costo~\eqref{eq:costo} ahora se puede plantear un problema de optimización
-que permita el ajuste de los pesos de $N_{\theta}(\vecr).$
+que permita el ajuste de los pesos de $\nnet$.
 
 El problema de optimización en este caso es \emph{sin restricciones} y está
 definido de la siguiente forma
 
 \begin{equation}
     \begin{aligned}
-    & \underset{\theta}{\text{min}}
-    & & J(\theta)
+         & \underset{\theta}{\text{min}}
+         &                               & J(\theta)
     \end{aligned}
     \label{eq:optimizacion}
 \end{equation}
@@ -115,15 +117,36 @@ se resuelve la ecuación de OZ.
 \subsection{Actualización de pesos}
 El método iterativo empleado está basado en la técnica de \emph{descenso de gradiente}
 para actualizar los pesos de la red neuronal.
-Esto significa que la regla de actualización es
+Esto significa que en general, una regla de actualización está dada por una expresión
+semejante a la siguiente
 
 \begin{equation}
     \theta_{n+1} = \theta_n - \nabla_{\theta} J(\theta) .
     \label{eq:gradiente}
 \end{equation}
 
-En este cálculo se necesita la información del gradiente de la función de costo respecto
-a los pesos. El cálculo detallado del gradiente se describe en el apéndice.
+% TODO: Cambiar el nombre del apéndice
+Independientemente de la expresión de la actualización de los pesos, este cálculo
+cálculo requiere de la información del gradiente de la función de costo respecto
+a los pesos.
+Para este caso en particular, el cálculo detallado del gradiente se describe en el apéndice.
+Una vez que se tiene esta información, lo que resta es construir un algoritmo que use
+este esquema de entrenamiento y que resuelva la ecuación de OZ.
+
+\subsection{Solución a la ecuación de Ornstein-Zernike con redes neuronales}
+Con los todos los elementos necesarios, se puede entonces definir el esquema general para
+la solución a la ecuación de Ornstein-Zernike usando redes neuronales.
+
+Para resolver la ecuación de OZ con la parametrización~\eqref{eq:parametrizacion} se tienen lo siguientes pasos:
+
+\begin{itemize}
+    \item Dado el potencial de interación $u(\vecr)$, se emplea la ecuación~\eqref{eq:parametrizacion} para obtener el valor de $c(\vecr; \theta),$ la cual ahora depende implícitamente de los pesos de $\nnet$. En este paso también se requiere de un valor inicial para $\gamma_1(\vecr),$ el cual se inicializa de acuerdo a la metodología de Ng de cinco puntos, descrita en el apéndice. %% TODO: Cambiar el nombre del apéndice
+    \item El valor de $c(\vecr; \theta)$ se transforma mediante la transformada de Fourier, para obtener $\hat{c}(\veck; \theta)$.
+    \item Se transforma mediante la transformada de Fourier toda la ecuación de OZ, y se deja en términos de la función $\hat{\gamma}(\veck)$. Usando la información encontrada sobre la función $\hat{c}(\veck; \theta)$, se encuentra una nueva función $\hat{\gamma}(\veck; \theta)$.
+    \item Luego, se anti-transforma la función $\hat{\gamma}(\veck; \theta)$ para obtener la nueva estimación de $\gamma_2(\vecr; \theta)$.
+    \item Usando ambas estimaciones $\gamma_{1}, \gamma_2$, se evalúa la función de costo~\eqref{eq:costo}, y se realiza el cálculo del gradiente, $\nabla_{\theta} J(\theta)$.
+    \item Se actualizan los pesos usando la expresión~\eqref{eq:gradiente}, y se reinicia el proceso. En la siguiente iteración, la función inicial será ahora $\gamma_2$, para entonces obtener una nueva estimación $\gamma_3$, y así sucesivamente.
+\end{itemize}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
