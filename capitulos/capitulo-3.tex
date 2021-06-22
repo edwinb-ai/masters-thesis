@@ -167,10 +167,10 @@ sucesivas de las funciones $\gamma$ sean muy semejantes entre sí.
 %----------------------------------------------------------------------------------------
 %	SECTION 3
 %----------------------------------------------------------------------------------------
-
-\section{Resultados}
-En esta sección se muestran los resultados obtenidos usando la metodología descrita
-en la sección anterior, con algunas modificaciones.
+\section{Metodología}
+En esta sección se detallan los aspectos importantes de la implementación del método
+descrito en la sección anterior, como lo son la arquitectura de la red neuronal, el método
+de optimización, y la elección de las funciones de activación.
 
 \subsection{Elección del optimizador}
 La regla general de actualización de pesos~\eqref{eq:gradiente} fue implementada para 
@@ -191,6 +191,12 @@ En los resultados presentados en esta sección, se emplearon los hiperparámetro
 valores estándar, $\beta_1=0.9$ y $\beta_2=0.999$. Es importante notar que este método
 de optimización utiliza sus propios mecanismos para controlar los gradiente, así como
 estos hiperparámetros.
+
+
+%----------------------------------------------------------------------------------------
+%	SECTION 4
+%----------------------------------------------------------------------------------------
+\section{Resultados}
 
 \begin{figure}[p]
     \begin{tabular}{cc}
