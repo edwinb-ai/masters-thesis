@@ -171,29 +171,22 @@ sucesivas de las funciones $\gamma$ sean muy semejantes entre sí.
 \section{Resultados}
 
 \begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figuras/capitulo-3/p=0.15.pdf}
-    \caption{Una figura.}
-    \label{fig:fig1}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figuras/capitulo-3/p=0.25.pdf}
-    \caption{Una figura.}
-    \label{fig:fig2}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figuras/capitulo-3/p=0.35.pdf}
-    \caption{Una figura.}
-    \label{fig:fig3}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figuras/capitulo-3/p=0.45.pdf}
-    \caption{Una figura.}
-    \label{fig:fig4}
+    \begin{tabular}{cc}
+        \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/p=0.15.pdf} & 
+        \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/p=0.25.pdf} \\
+        (a) & (b) \\[6pt]
+        \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/p=0.35.pdf} &   \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/p=0.45.pdf} \\
+        (c) & (d) \\[6pt]
+    \end{tabular}
+    \captionsetup{singlelinecheck=off}
+    \caption[fig1]{Funciones de distribución radial obtenidas con simulación por computadora y mediante el uso de la metodología descrita en este capítulo, usando redes neuronales. Se presentan cuatro densidades: 
+    \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
+        \item $\phi=15\%$
+        \item $\phi=25\%$
+        \item $\phi=35\%$
+        \item $\phi=45\%$
+    \end{enumerate*}
+    . En cada una, se muestran las comparaciones con tres diferentes aproximaciones para la función puente: \emph{mV}, Verlet modificada; \emph{PY}, Percus-Yevick; y \emph{HNC}, Hypernetted Chain.
+    }
+    \label{fig:estructuras-neuronales}
 \end{figure}
