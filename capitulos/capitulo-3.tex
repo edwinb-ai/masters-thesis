@@ -167,12 +167,12 @@ sucesivas de las funciones $\gamma$ sean muy semejantes entre sí.
 %----------------------------------------------------------------------------------------
 %	SECTION 3
 %----------------------------------------------------------------------------------------
-\section{Metodología}
+\section{Implementación}
 En esta sección se detallan los aspectos importantes de la implementación del método
 descrito en la sección anterior, como lo son la arquitectura de la red neuronal, el método
 de optimización, y la elección de las funciones de activación.
 
-\subsection{Elección del optimizador}
+\subsection{Elección de optimizador}
 La regla general de actualización de pesos~\eqref{eq:gradiente} fue implementada para 
 resolver el problema de optimización, sin embargo, problemas numéricos impedían la
 convergencia del entrenamiento.
@@ -194,12 +194,30 @@ estos hiperparámetros.
 
 \subsection{Arquitectura de la red neuronal}
 
-\begin{figure}
+\begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/neural-network.pdf}
     \vspace{-1.5cm}
     \caption{Esquema genérico de una red neuronal multicapa completamente conectada. En especial, es importante notar la forma de la red, donde se tienen dos capas escondidas. Cada una de estas \emph{unidades} o \emph{nodos} está siendo evaluada por una función de activación. La arquitectura usada en los resultados de este capítulo es más grande, pero tiene la misma forma.}
     \label{fig:nn-esquema}
 \end{figure}
+
+La arquitectura de la red neuronal empleada en todos los experimentos es aquella que se
+muestra en el esquema de la figura~\ref{fig:nn-esquema}, excepto por el número de unidades
+en las capas ocultas.
+Es decir, la arquitectura es de \emph{cuatro capas}, una capa de \emph{entrada} con una
+unidad, dos capas ocultas con 5000 unidades cada una, y por último una capa de \emph{salida}
+con una sola unidad.
+
+La función de activación que se empleó fue la función \emph{ReLU}~\cite{glorotDeepSparseRectifier2011},
+la cual está definida con la siguiente expresión
+
+\begin{equation*}
+    \text{ReLU}(x) = \text{max}{(0, x)} .
+\end{equation*}
+
+Esta función de activación se aplica a todas las capas a excepción de la capa de entrada.
+Se escogió esta función de activación debido a que todas las más comunes ($\tanh, \text{softmax}$, entre otras),
+provocaban inconsistencias numéricas.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 4
