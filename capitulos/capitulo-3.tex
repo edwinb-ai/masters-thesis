@@ -14,8 +14,9 @@
 Las \emph{redes neuronales} fungen como aproximadores universales~\cite{hornikMultilayerFeedforwardNetworks1989, hornikApproximationCapabilitiesMultilayer1991, cybenkoApproximationSuperpositionsSigmoidal1989},
 y como tal pueden ser utilizadas para aproximar cualquier función continua para un determinado tipo de arquitectura.
 En particular, se espera que una red neuronal pueda servir como paramatrización de la
-función puente en la condición de cerradura de la ecuación de OZ, y así evitar la decisión
-arbitraria de aproximaciones escogiendo una función puente en particular.
+función puente en la condición de cerradura de la ecuación de OZ, y así evitar escoger
+una aproximación en especial, y dejar que la red neuronal tome la forma necesaria
+para resolver la ecuación integral.
 
 En este capítulo se detalla la metodología creada y los fundamentos matemáticos bajo los
 cuales se puede hacer uso de redes neuronales para resolver la ecuación de OZ.
@@ -127,24 +128,24 @@ semejante a la siguiente
 
 % TODO: Cambiar el nombre del apéndice
 Independientemente de la expresión de la actualización de los pesos, este cálculo
-cálculo requiere de la información del gradiente de la función de costo respecto
-a los pesos.
+requiere de la información del gradiente de la función de costo respecto a los pesos,
+$\nabla_{\theta} J(\theta)$.
 Para este caso en particular, el cálculo detallado del gradiente se describe en el apéndice.
 Una vez que se tiene esta información, lo que resta es construir un algoritmo que use
 este esquema de entrenamiento y que resuelva la ecuación de OZ.
 
 \subsection{Solución a la ecuación de Ornstein-Zernike con redes neuronales}
-Con los todos los elementos necesarios, se puede entonces definir el esquema general para
+Con todos los elementos necesarios, se puede entonces definir el esquema general para
 la solución a la ecuación de Ornstein-Zernike usando redes neuronales.
 
 Para resolver la ecuación de OZ con la parametrización~\eqref{eq:parametrizacion} se tienen lo siguientes pasos:
 
 \begin{enumerate}
     \item Dado el potencial de interación $u(\vecr)$, se emplea la ecuación~\eqref{eq:parametrizacion} para obtener el valor de $c(\vecr; \theta),$ la cual ahora depende implícitamente de los pesos de $\nnet$. En este paso también se requiere de un valor inicial para $\gamma_{n}(\vecr),$ el cual se inicializa de acuerdo a la metodología de Ng de cinco puntos, descrita en el apéndice. %% TODO: Cambiar el nombre del apéndice
-    \item El valor de $c(\vecr; \theta)$ se transforma mediante la transformada de Fourier, para obtener $\hat{c}(\veck; \theta)$.
-    \item Se transforma mediante la transformada de Fourier toda la ecuación de OZ, y se deja en términos de la función $\hat{\gamma}(\veck)$. Usando la información encontrada sobre la función $\hat{c}(\veck; \theta)$, se encuentra una nueva función $\hat{\gamma}_{n}(\veck; \theta)$.
-    \item Luego, se antitransforma la función $\hat{\gamma}_{n}(\veck; \theta)$ para obtener la nueva estimación de $\gamma_{n+1}(\vecr; \theta)$.
-    \item Usando ambas estimaciones $\gamma_{n}, \gamma_{n+1}$, se evalúa la función de costo~\eqref{eq:costo}, y se realiza el cálculo del gradiente, $\nabla_{\theta} J(\theta)$.
+    \item La función $c(\vecr; \theta)$ se transforma mediante la transformada de Fourier, para obtener $\hat{c}(\veck; \theta)$.
+    \item Se transforma mediante la transformada de Fourier toda la ecuación de OZ, y se deja en términos de la función $\hat{\gamma}(\veck)$. Usando la información encontrada sobre la función $\hat{c}(\veck; \theta)$, se encuentra una nueva función $\hat{\gamma}_{n+1}(\veck; \theta)$.
+    \item Luego, se antitransforma la función $\hat{\gamma}_{n+1}(\veck; \theta)$ para obtener la nueva estimación, $\gamma_{n+1}(\vecr; \theta)$.
+    \item Usando ambas estimaciones $\gamma_{n}$ y $\gamma_{n+1}$, se evalúa la función de costo~\eqref{eq:costo} y se realiza el cálculo del gradiente, $\nabla_{\theta} J(\theta)$.
     \item Se actualizan los pesos usando la expresión~\eqref{eq:gradiente}, y se reinicia el proceso. En la siguiente iteración, la función inicial será ahora $\gamma_{n+1}$, para entonces obtener una nueva estimación $\gamma_{n+2}$, y así sucesivamente.
 \end{enumerate}
 
@@ -158,7 +159,7 @@ convergencia, dada por la siguiente expresión
 \end{equation}
 
 donde $\lvert \cdot \rvert$ indica el valor absoluto, y $\epsilon \in [0, 1]$.
-En particular, la tolerancia en todos los experimentos realizados en este capítulo fue de
+En particular, la tolerancia en todos los experimentos realizados fue de
 $\epsilon = 1 \times 10^{-5}$.
 En otras palabras, se exige a la red neuronal ajustar sus pesos hasta que las estimaciones
 sucesivas de las funciones $\gamma$ sean muy semejantes entre sí.
