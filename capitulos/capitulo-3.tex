@@ -169,8 +169,30 @@ sucesivas de las funciones $\gamma$ sean muy semejantes entre sí.
 %----------------------------------------------------------------------------------------
 
 \section{Resultados}
+En esta sección se muestran los resultados obtenidos usando la metodología descrita
+en la sección anterior, con algunas modificaciones.
 
-\begin{figure}
+\subsection{Elección del optimizador}
+La regla general de actualización de pesos~\eqref{eq:gradiente} fue implementada para 
+resolver el problema de optimización, sin embargo, problemas numéricos impedían la
+convergencia del entrenamiento.
+
+Para resolver este problema se optó por utilizar el método \emph{Adam}~\cite{kingmaAdamMethodStochastic2017},
+el cual es un método de optimización adecuado para entrenamiento de redes neuronales,
+sobre todo cuando el gradiente puede ser \emph{disperso}, i.e. que muchas de sus entradas
+sean cero.
+El método \emph{Adam} emplea diversas reglas para ajustar la dirección de descenso del
+gradiente, así como los hiperparámetros asociados al método. En particular, este método
+utiliza dos hiperparámetros, $\beta_1$, que controla el promedio móvil
+del gradiente calculado; y $\beta_2$, que controla el cuadrado del gradiente. Ambas
+cantidades son necesarias para la convergencia óptima del algoritmo.
+
+En los resultados presentados en esta sección, se emplearon los hiperparámetros con sus
+valores estándar, $\beta_1=0.9$ y $\beta_2=0.999$. Es importante notar que este método
+de optimización utiliza sus propios mecanismos para controlar los gradiente, así como
+estos hiperparámetros.
+
+\begin{figure}[p]
     \begin{tabular}{cc}
         \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/p=0.15.pdf} & 
         \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/p=0.25.pdf} \\
