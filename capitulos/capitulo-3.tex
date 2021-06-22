@@ -122,9 +122,12 @@ Esto significa que en general, una regla de actualización está dada por una ex
 semejante a la siguiente
 
 \begin{equation}
-    \theta_{n+1} = \theta_n - \nabla_{\theta} J(\theta) .
+    \theta_{n+1} = \theta_n - \eta \nabla_{\theta} J(\theta) .
     \label{eq:gradiente}
 \end{equation}
+
+donde $\eta$ se conoce como la \emph{razón de aprendizaje}, y es un parámetro que controla
+el tamaño de paso del gradiente hacia la dirección de descenso.
 
 % TODO: Cambiar el nombre del apéndice
 Independientemente de la expresión de la actualización de los pesos, este cálculo
@@ -190,7 +193,9 @@ cantidades son necesarias para la convergencia óptima del algoritmo.
 En los resultados presentados en esta sección, se emplearon los hiperparámetros con sus
 valores estándar, $\beta_1=0.9$ y $\beta_2=0.999$. Es importante notar que este método
 de optimización utiliza sus propios mecanismos para controlar los gradiente, así como
-estos hiperparámetros.
+estos hiperparámetros. El valor de la \emph{razón de aprendizaje}, $\eta$
+en la ecuación~\eqref{eq:gradiente}, utilizado en todos los experimentos fue de
+$\eta=1\times10^{-4}$.
 
 \subsection{Arquitectura de la red neuronal}
 
