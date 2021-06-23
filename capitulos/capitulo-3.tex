@@ -202,8 +202,8 @@ Las ecuaciones que definen al método de optimización son las siguientes
     \label{eq:adam}
 \end{align}
 
-donde $\odot$ significa la multiplicación entrada por entrada, o producto de Hadamard;
-$\oslash$ significa la división entrada por entrada, o división de Hadamard;
+donde $\odot$ significa multiplicación entrada por entrada, o producto de Hadamard;
+$\oslash$ significa división entrada por entrada, o división de Hadamard;
 y $\varepsilon$ es un número de tolerancia que impide la división por cero.
 
 En los resultados presentados en esta sección, se emplearon los hiperparámetros con sus
@@ -270,10 +270,10 @@ simulaciones por computadora, no se necesita esta partición.
     \captionsetup{singlelinecheck=off}
     \caption[Funciones de distribución radial con redes neuronales.]{Funciones de distribución radial obtenidas con simulación por computadora y mediante el uso de la metodología descrita en este capítulo, usando redes neuronales. Se presentan cuatro densidades: 
     \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item $\phi=15\%$
-        \item $\phi=25\%$
-        \item $\phi=35\%$
-        \item $\phi=45\%$
+        \item $\phi=\num{0.15}$
+        \item $\phi=\num{0.25}$
+        \item $\phi=\num{0.35}$
+        \item $\phi=\num{0.45}$
     \end{enumerate*}
     . En cada una, se muestran las comparaciones con tres diferentes aproximaciones para la función puente: \emph{mV}, Verlet modificada; \emph{PY}, Percus-Yevick; y \emph{HNC}, Hypernetted Chain.
     }
@@ -287,11 +287,12 @@ Estas funciones describen la estructura del líquido, y son el tema central de e
 de la metodología descrita en este capítulo.
 
 \subsection{Densidades bajas}
-Primero se analizarán y discutirán las densidades bajas $\phi=\num{0.15},\num{0.25}$,
+Primero se analizarán y discutirán las densidades bajas $\phi=\numlist{0.15; 0.25}$,
 las cuales corresponden a las gráficas (a) y (b) en la figura~\ref{fig:estructuras-neuronales}.
 Los resultados que se observan es que, a densidades bajas, las aproximaciones HNC y
-redes neuronales son más precisas que Percus-Yevick y Verlet modificada.
-En especial, es importante observar que
+redes neuronales son más precisas que Percus-Yevick y Verlet modificada, sin embargo
+ninguna de estas cuatro aproximaciones logra obtener resultados comparables a aquellos
+de la simulación por computadora. En especial, es importante observar que
 la aproximación de redes neuronales es un poco más precisa que la HNC, aunque sigue 
 sobreestimando el pico principal que se encuentra en $r^* = \sigma$.
 Por otro lado, las aproximaciones de Percus-Yevick y Verlet modificada subestiman el pico
@@ -306,3 +307,25 @@ evaluada la red neuronal, la aproximación es muy semajante a HNC.
 Otro factor importante a observar es que esta forma también es ligeramente diferente a
 la encontrada con las simulaciones por computadora, pues las aproximaciones de
 Percus-Yevick y Verlet modificada son más precisas en este aspecto.
+
+\subsection{Densidades altas}
+Ahora se discutirán los resultados para las densidades altas $\phi=\numlist{0.35; 0.45}$,
+las cuales corresponden a las gráficas (c) y (d) en la figura~\ref{fig:estructuras-neuronales}.
+De la misma forma que para las densidades bajas, las aproximaciones HNC y redes neuronales
+para las densidades altas no son muy precisas. Ahora, y como era de esperarse, las 
+aproximaciones Percus-Yevick y Verlet modificada son las más precisas, siendo Verlet
+modificada la más precisa de todas. Esto se puede observar en la figura~\ref{fig:estructuras-neuronales}
+al ver que el pico principal está muy bien estimado por la aproximación Verlet modificada,
+mientras que las aproximaciones HNC y redes neuronales sobreestiman por mucho este valor.
+
+Por otro lado, y semejante al caso para densidades bajas, la forma funcional de $g(r^*)$
+es diferente entre la obtenida con simulación por computadora de aquella utilizando la
+aproximación de redes neuronales. De hecho, al igual que antes, el resultado es muy
+semejante al obtenido con la aproximación HNC. Esto es algo importante de observar, y
+sustenta la hipótesis de que la aproximación de red neuronal se reduce a la aproximación
+HNC.
+Esto implica que la red neuronal en realidad está aproximando una función puente
+$B(\vecr) \approx 0$.
+Si se observan las aproximaciones de Percus-Yevick y Verlet modificada, volvemos a observar
+que la aproximación de Verlet modificada es la más precisa, pues la forma funcional de
+$g(r^*)$ es muy semejante a la obtenida con simulación por computadora.
