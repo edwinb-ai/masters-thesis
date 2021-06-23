@@ -163,7 +163,7 @@ convergencia, dada por la siguiente expresión
 
 donde $\lvert \cdot \rvert$ indica el valor absoluto, y $\epsilon \in [0, 1]$.
 En particular, la tolerancia en todos los experimentos realizados fue de
-$\epsilon = 1 \times 10^{-5}$.
+$\epsilon = \num{1e-5}$.
 En otras palabras, se exige a la red neuronal ajustar sus pesos hasta que las estimaciones
 sucesivas de las funciones $\gamma$ sean muy semejantes entre sí.
 
@@ -196,7 +196,7 @@ valores estándar, $\beta_1=0.9$ y $\beta_2=0.999$. Es importante notar que este
 de optimización utiliza sus propios mecanismos para controlar los gradiente, así como
 estos hiperparámetros. El valor de la \emph{razón de aprendizaje}, $\eta$
 en la ecuación~\eqref{eq:gradiente}, utilizado en todos los experimentos fue de
-$\eta=1 \times 10^{-4}$.
+$\eta=\num{1e-4}$.
 
 \subsection{Arquitectura de la red neuronal}
 
@@ -211,7 +211,7 @@ La arquitectura de la red neuronal empleada en todos los experimentos es aquella
 muestra en el esquema de la figura~\ref{fig:nn-esquema}, excepto por el número de unidades
 en las capas ocultas.
 Es decir, la arquitectura es de \emph{cuatro capas}, una capa de \emph{entrada} con una
-unidad, dos capas ocultas con 5000 unidades cada una, y por último una capa de \emph{salida}
+unidad, dos capas ocultas con 1024 unidades cada una, y por último una capa de \emph{salida}
 con una sola unidad.
 
 La función de activación que se empleó fue la función \emph{ReLU}~\cite{glorotDeepSparseRectifier2011},
@@ -222,18 +222,19 @@ la cual está definida con la siguiente expresión
 \end{equation*}
 
 Esta función de activación se aplica a todas las capas a excepción de la capa de entrada.
-Se escogió esta función de activación debido a que todas las más comunes ($\tanh, \text{softmax}$, entre otras),
+Se escogió esta función de activación debido a que todas las más comunes ($\tanh, \text{softmax}$, etc.),
 provocaban inconsistencias numéricas.
 
 \subsection{Parámetros físicos}
 
 % TODO: Poner la referencia a la ecuación del potencial
-Para resolver la ecuación de OZ se empleó un radio de corte $r_c=7.0\sigma$, donde $\sigma$
+Para resolver la ecuación de OZ se empleó un radio de corte $r_c=7\sigma$, donde $\sigma$
 es el diámetro de las partículas, y tiene por valor $\sigma=1$.
-El potencial empleado fue el de pseudo-esferas duras, tanto para la solución de la ecuación
+El potencial empleado fue el de pseudo-esferas duras (Ref), tanto para la solución de la ecuación
 de OZ como para los resultados obtenidos de simulación por computadora.
 
-Se exploraron densidades $\phi \in [0.15, 0.45]$, con $\Delta \phi = 0.05$. Por cada valor
+Se exploraron densidades $\phi \in [\num{0.15}, \num{0.45}]$, con
+$\Delta \phi = \num{0.05}$. Por cada valor
 de la densidad se utilizó una partición de la densidad de 70 puntos para lograr la
 convergencia del método iterativo.
 
