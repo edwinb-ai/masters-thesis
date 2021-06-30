@@ -135,27 +135,30 @@ such that the squared difference between successive approximations is minimized.
 This optimization problem can be solved iteratively, along with the solution of the
 OZ equation, which is also an iterative process.
 
-\subsection{Actualización de pesos}
-El método iterativo empleado está basado en la técnica de \emph{descenso de gradiente}
-para actualizar los pesos de la red neuronal.
-Esto significa que en general, una regla de actualización está dada por una expresión
-semejante a la siguiente
+\subsection{Weight updates}
+The iterative method employed to adjust the weights of $\nnet$ is based on the
+\emph{gradient descent} method~\cite{nocedalNumericalOptimization2006}.
+The most general update rule for a method based on gradient descent reads
 
 \begin{equation}
     \theta_{n+1} = \theta_n - \eta \nabla_{\theta} J(\theta) .
     \label{eq:gradiente}
 \end{equation}
 
-donde $\eta$ se conoce como la \emph{razón de aprendizaje}, y es un parámetro que controla
-el tamaño de paso del gradiente hacia la dirección de descenso.
+where $\eta$ is known as the \emph{learning rate}, and it is a hyperparameter
+that controls the step size at each iteration while moving toward the minimum
+of a cost function.
+As it is a hyperparameter, this value needs to be \emph{tuned} accordingly, so
+that the method converges properly.
 
 % TODO: Cambiar el nombre del apéndice
-Independientemente de la expresión de la actualización de los pesos, este cálculo
-requiere de la información del gradiente de la función de costo respecto a los pesos,
-$\nabla_{\theta} J(\theta)$.
-Para este caso en particular, el cálculo detallado del gradiente se describe en el apéndice.
-Una vez que se tiene esta información, lo que resta es construir un algoritmo que use
-este esquema de entrenamiento y que resuelva la ecuación de OZ.
+Regardless of the particular expression for the weight update rule, every method
+based of the gradient descent method \emph{requires} the gradient information from
+the cost function with respect to the weights, $\nabla_{\theta} J(\theta)$.
+In this particular case, the detailed computation of the gradient is described in
+the appendix (Ref a apéndice).
+One this information is obtained, all that is left is to build an algorithm that
+can correctly use this training scheme and solve the OZ equation.
 
 \subsection{Solución a la ecuación de Ornstein-Zernike con redes neuronales}
 Con todos los elementos necesarios, se puede entonces definir el esquema general para
