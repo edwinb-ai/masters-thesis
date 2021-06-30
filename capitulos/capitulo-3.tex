@@ -114,25 +114,26 @@ In other word, the expression~\eqref{eq:costo} is requiring for the two last app
 to be as equal as possible. This will enforce a change on the weights every time both
 approximations deviate between them.
 
-\subsection{Problema de optimización}
-Usando la función de costo~\eqref{eq:costo} ahora se puede plantear un problema de optimización
-que permita el ajuste de los pesos de $\nnet$.
+\subsection{Optimization problem}
+With a cost function at hand, an optimization problem can be defined such that the
+weights of $\nnet$ will be adjusted properly.
 
-El problema de optimización en este caso es \emph{sin restricciones} y está
-definido de la siguiente forma
+This optimization problem is in fact an \emph{unconstrained optimization problem},
+and it is defined simply as
 
 \begin{equation}
     \begin{aligned}
          & \underset{\theta}{\text{min}}
          & & J(\theta)
     \end{aligned}
+    .
     \label{eq:optimizacion}
 \end{equation}
 
-Esto significa que buscamos los parámetros óptimos $\theta^*$ que minimicen la diferencia
-entre las iteraciones calculadas de las funciones $\gamma(\vecr; \theta).$
-Este problema de optimización se puede resolver de forma iterativa, al mismo tiempo que
-se resuelve la ecuación de OZ.
+With the formulation, a search for the best values for the weights need to be found
+such that the squared difference between successive approximations is minimized.
+This optimization problem can be solved iteratively, along with the solution of the
+OZ equation, which is also an iterative process.
 
 \subsection{Actualización de pesos}
 El método iterativo empleado está basado en la técnica de \emph{descenso de gradiente}
