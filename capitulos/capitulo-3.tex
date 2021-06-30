@@ -84,7 +84,7 @@ be devised. This new numerical scheme must also be able to solve the OZ equation
 simultaneously finding the appropiate weights for $\nnet$.
 
 \subsection{Cost function}
-It was previously mentioned that the main problem to solve is to find the weights of
+It was mentioned previously that the main problem to solve is to find the weights of
 $\nnet$ that can successfully solve the Ornstein-Zernike equation
 for a given interaction potential.
 To solve such problem, a \textbf{cost function} must be defined, and be used as part of
@@ -92,16 +92,16 @@ a \emph{minimization} problem.
 
 To define such a function, we consider the successive approximations obtained from the
 iterative Piccard scheme to solve the OZ equation, $\{\gamma_1(\vecr), \gamma_2(\vecr), \dots, \gamma_n(\vecr)\}$.
-From the numerical algorithm, we expect to have found a solution when each approximation
-is close to the previous one. This can be translated into a cost function like the
-following expression
+From this, we expect to have found a solution when each approximation
+is \emph{close enough} to the previous one. This can be translated into the following
+cost function
 
 \begin{equation}
     J(\theta) = \left[\gamma_{n}(\vecr; \theta) - \gamma_{n-1}(\vecr; \theta) \right]^2
     \label{eq:costo}
 \end{equation}
 
-where $\gamma_{n}(\vecr; \theta)$ is the $n-$th approximated function of the indirect
+where $\gamma_{n}(\vecr; \theta)$ is the $n-$th approximation of the indirect
 correlation function, $\gamma(\vecr)$.
 The notation $\gamma(\vecr; \theta)$ indicates that the function depends implicitly
 on the weights of the neural network, as seen in equation~\eqref{eq:parametrizacion}.
@@ -110,7 +110,7 @@ from the $\gamma$ function. Nevertheless, this does not mean that the indirect
 correlation function itself depends explicitly, nor directly, on the weights of
 $\nnet$.
 
-In other word, the expression~\eqref{eq:costo} is requiring for the two last approximations
+In other words, the expression~\eqref{eq:costo} is requiring for the last two approximations
 to be as equal as possible. This will enforce a change on the weights every time both
 approximations deviate between them.
 
@@ -130,8 +130,8 @@ and it is defined simply as
     \label{eq:optimizacion}
 \end{equation}
 
-With the formulation, a search for the best values for the weights need to be found
-such that the squared difference between successive approximations is minimized.
+This formulation is just a search for the best values for the weights that minimize
+the squared difference between successive approximations.
 This optimization problem can be solved iteratively, along with the solution of the
 OZ equation, which is also an iterative process.
 
@@ -147,35 +147,34 @@ The most general update rule for a method based on gradient descent reads
 
 where $\eta$ is known as the \emph{learning rate}, and it is a hyperparameter
 that controls the step size at each iteration while moving toward the minimum
-of a cost function.
-As it is a hyperparameter, this value needs to be \emph{tuned} accordingly, so
+of a cost function. Tthis value needs to be \emph{tuned} accordingly, so
 that the method converges properly.
 
 % TODO: Cambiar el nombre del apéndice
-Regardless of the particular expression for the weight update rule, every method
-based of the gradient descent method \emph{requires} the gradient information from
+Regardless of the particular expression for the weight updates, every method
+based on the gradient descent method \emph{requires} the gradient information from
 the cost function with respect to the weights, $\nabla_{\theta} J(\theta)$.
 In this particular case, the detailed computation of the gradient is described in
 the appendix (Ref a apéndice).
-One this information is obtained, all that is left is to build an algorithm that
+Once this information is obtained, all that is left is to build an algorithm that
 can correctly use this training scheme and solve the OZ equation.
 
-\subsection{Solución a la ecuación de Ornstein-Zernike con redes neuronales}
-Con todos los elementos necesarios, se puede entonces definir el esquema general para
-la solución a la ecuación de Ornstein-Zernike usando redes neuronales.
+\subsection{Solving the Ornstein-Zernike equation with neural networks}
+Having described all the necessary elements needed, a general layout for the solution
+of the Ornstein-Zernike using neural networks is now presented.
 
-Para resolver la ecuación de OZ con la parametrización~\eqref{eq:parametrizacion} se tienen lo siguientes pasos:
+Thus, we have the following step to solve the OZ using the parametrization~\eqref{eq:parametrizacion}:
 
 \begin{enumerate}
-    \item Dado el potencial de interación $u(\vecr)$, se emplea la ecuación~\eqref{eq:parametrizacion} para obtener el valor de $c(\vecr; \theta),$ la cual ahora depende implícitamente de los pesos de $\nnet$. En este paso también se requiere de un valor inicial para $\gamma_{n}(\vecr),$ el cual se inicializa de acuerdo a la metodología de Ng de cinco puntos, descrita en el apéndice. %% TODO: Cambiar el nombre del apéndice
-    \item La función $c(\vecr; \theta)$ se transforma mediante la transformada de Fourier, para obtener $\hat{c}(\veck; \theta)$.
-    \item Se transforma mediante la transformada de Fourier toda la ecuación de OZ, y se deja en términos de la función $\hat{\gamma}(\veck)$. Usando la información encontrada sobre la función $\hat{c}(\veck; \theta)$, se encuentra una nueva función $\hat{\gamma}_{n+1}(\veck; \theta)$.
-    \item Luego, se antitransforma la función $\hat{\gamma}_{n+1}(\veck; \theta)$ para obtener la nueva estimación, $\gamma_{n+1}(\vecr; \theta)$.
-    \item Usando ambas estimaciones $\gamma_{n}$ y $\gamma_{n+1}$, se evalúa la función de costo~\eqref{eq:costo} y se realiza el cálculo del gradiente, $\nabla_{\theta} J(\theta)$.
-    \item Se actualizan los pesos usando la expresión~\eqref{eq:gradiente}, y se reinicia el proceso. En la siguiente iteración, la función inicial será ahora $\gamma_{n+1}$, para entonces obtener una nueva estimación $\gamma_{n+2}$, y así sucesivamente.
+    \item Given a particular interaction potential $\beta u(\vecr)$, equation~\eqref{eq:parametrizacion} is used to obtain the value of the direct correlation function $c(\vecr; \theta)$, which now depends implicitly on the weights of $\nnet$. In this step, an initial value for $\gamma_{n}(\vecr)$ is needed, which is initialized based on the five-point Ng methodology. (Ref a apéndice)
+    \item The newly found function $c(\vecr; \theta)$ is transformed to a reciprocal space by means of the Fourier transform yielding the new function $\hat{c}(\veck; \theta)$.
+    \item Then, the full OZ equation(Ref a ec) is Fourier transformed. Using the information from the previous step, a new estimation of the indirect correlation function is obtained, $\hat{\gamma}_{n+1}(\veck; \theta)$.
+    \item The Fourier transform is applied once again to return all the functions to real space. With this operation, a new estimation $\gamma_{n+1}(\vecr; \theta)$ is computed from the transformed function, $\hat{\gamma}_{n+1}(\veck; \theta)$.
+    \item Both estimations, $\gamma_{n}$ and $\gamma_{n+1}$, are used to evaluate the cost function~\eqref{eq:costo}, and the computation of the gradient $\nabla_{\theta} J(\theta)$ is performed.
+    \item The weights $\theta$ are updated with the gradient descent rule~\eqref{eq:gradiente}, and the process is repeated from step 1. In the next iteration, the initial value for the indirect correlation function will be $\gamma_{n+1}$, and a new estimation $\gamma_{n+2}$ will be obtained. This process is repeated until convergence.
 \end{enumerate}
 
-\subsection{Convergencia del entrenamiento}
+\subsection{Convergence criterion}
 El procedimiento descrito anteriormente se repite de forma indefinida hasta lograr la 
 convergencia, dada por la siguiente expresión
 
