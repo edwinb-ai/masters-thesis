@@ -3,7 +3,7 @@
 \newcommand{\veck}{\mathbf{k}}
 \newcommand{\nnet}{N_{\theta}(\mathbf{r})}
 %%
-\chapter{Neural networks as an approximation of the bridge function} % Main chapter title
+\chapter{Neural networks as an approximation for the bridge function} % Main chapter title
 
 \label{Cap3} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
@@ -12,12 +12,12 @@
 %----------------------------------------------------------------------------------------
 
 Neural networks can be used as \emph{universal approximators}~\cite{hornikMultilayerFeedforwardNetworks1989, hornikApproximationCapabilitiesMultilayer1991, cybenkoApproximationSuperpositionsSigmoidal1989},
-which means that they effectively can be used as powerful interpolators for some specific
+in other words, they can take the form of any continuous function for some specific
 types of architectures.
-In particular, it is expected of a neural network to be useful as a bridge function
-parametrization in the closure expression for the Ornstein-Zernike equation. With this,
-we avoid choosing a particular approximation for a given interaction potential, and we
-leave the choice of the bridge function to the neural network itself, while
+In particular, it is hypothesized that a neural network might be useful as a bridge function
+parametrization in the closure expression for the Ornstein-Zernike equation. If this is true,
+then choosing a particular approximation can be avoided for a given interaction potential, 
+and leave the choice of the bridge function to the neural network itself, while
 simultaneously solving the Ornstein-Zernike equation.
 
 In this chapter, we show in detail the methodology created to achieve such a task, and
@@ -27,7 +27,8 @@ These results are compared to those obtained from computer simulations to assess
 quality of the solution.
 In the appendix, the detailed algorithm used to solve the Ornstein-Zernike equation
 is presented, along with a detailed computation of the gradients used for the
-training scheme.
+training scheme. Here, we shall focus only on the main results and the algorithm structure
+in general.
 
 \section{Parametrization of the bridge function}
 
