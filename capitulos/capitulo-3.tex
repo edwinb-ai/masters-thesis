@@ -11,18 +11,23 @@
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 
-Las \emph{redes neuronales} fungen como aproximadores universales~\cite{hornikMultilayerFeedforwardNetworks1989, hornikApproximationCapabilitiesMultilayer1991, cybenkoApproximationSuperpositionsSigmoidal1989},
-y como tal pueden ser utilizadas para aproximar cualquier función continua para un determinado tipo de arquitectura.
-En particular, se espera que una red neuronal pueda servir como paramatrización de la
-función puente en la condición de cerradura de la ecuación de OZ, y así evitar escoger
-una aproximación en especial, y dejar que la red neuronal tome la forma necesaria
-para resolver la ecuación integral.
+Neural networks can be used as \emph{universal approximators}~\cite{hornikMultilayerFeedforwardNetworks1989, hornikApproximationCapabilitiesMultilayer1991, cybenkoApproximationSuperpositionsSigmoidal1989},
+which means that they effectively can be used as powerful interpolators for some specific
+types of architectures.
+In particular, it is expected of a neural network to be useful as a bridge function
+parametrization in the closure expression for the Ornstein-Zernike equation. With this,
+we avoid choosing a particular approximation for a given interaction potential, and we
+leave the choice of the bridge function to the neural network itself, while
+simultaneously solving the Ornstein-Zernike equation.
 
-En este capítulo se detalla la metodología creada y los fundamentos matemáticos bajo los
-cuales se puede hacer uso de redes neuronales para resolver la ecuación de OZ.
-Se comparan estos resultados con los obtenidos con simulación por computadora.
-En el apéndice se describe la solución general a la ecuación de OZ, mientras que
-en este capítulo se detalla su modificación para emplear redes neuronales.
+In this chapter, we show in detail the methodology created to achieve such a task, and
+the mathematical structure with which a neural network can be used to solve the
+Ornstein-Zernike equation.
+These results are compared to those obtained from computer simulations to assess the
+quality of the solution.
+In the appendix, the detailed algorithm used to solve the Ornstein-Zernike equation
+is presented, along with a detailed computation of the gradients used for the
+training scheme.
 
 \section{Parametrización de la función puente}
 
@@ -218,7 +223,7 @@ $\eta=\num{1e-4}$.
 \begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/neural-network.pdf}
     \vspace{-1.5cm}
-    \caption{Esquema genérico de una red neuronal multicapa completamente conectada. Es importante notar la forma de la red, donde se tienen dos capas escondidas. Los círculos representan \emph{unidades} o \emph{nodos}, que están siendo evaluados por una función de activación. Los nodos que se ven separados de las capas (aquellos que están en la parte superior del esquema) son los \emph{sesgos} de las capas penúltima y última, respectivamente. La arquitectura usada en los resultados de este capítulo es diferente y más grande, pero tiene la misma estructura.}
+    \caption[Esquema genérico de una red neuronal.]{Esquema genérico de una red neuronal multicapa completamente conectada. Es importante notar la forma de la red, donde se tienen dos capas escondidas. Los círculos representan \emph{unidades} o \emph{nodos}, que están siendo evaluados por una función de activación. Los nodos que se ven separados de las capas (aquellos que están en la parte superior del esquema) son los \emph{sesgos} de las capas penúltima y última, respectivamente. La arquitectura usada en los resultados de este capítulo es diferente y más grande, pero tiene la misma estructura.}
     \label{fig:nn-esquema}
 \end{figure}
 
