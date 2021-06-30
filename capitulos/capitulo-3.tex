@@ -3,7 +3,7 @@
 \newcommand{\veck}{\mathbf{k}}
 \newcommand{\nnet}{N_{\theta}(\mathbf{r})}
 %%
-\chapter{Solución a la ecuación de Ornstein-Zernike usando redes neuronales} % Main chapter title
+\chapter{Neural networks as an approximation of the bridge function} % Main chapter title
 
 \label{Cap3} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
@@ -29,9 +29,9 @@ In the appendix, the detailed algorithm used to solve the Ornstein-Zernike equat
 is presented, along with a detailed computation of the gradients used for the
 training scheme.
 
-\section{Parametrización de la función puente}
+\section{Parametrization of the bridge function}
 
-La ecuación de Ornstein-Zernike está dada por
+The Ornstein-Zernike equation is given by the following expression
 
 \begin{subequations}
     \begin{align*}
@@ -51,11 +51,12 @@ La ecuación de Ornstein-Zernike está dada por
     \end{align*}
 \end{subequations}
 
-con la notación ya conocida para esta ecuación.
+with the already know notation for each quantity (Ref a marco teórico).
 
-Sea $\nnet$ una red neuronal con pesos $\theta$. Se propone que
-$\nnet$ reemplace a la función puente $B(\vecr)$ en la ecuación
-anterior tal que ahora se tiene la siguiente expresión para la cerradura
+Let $\nnet$ be a neural network with weights $\theta$. The main hypothesis
+of this chapter is that $\nnet$ can replace the bridge function $B(\vecr)$
+in the previous equation, which will yield the following expression for
+the closure relation
 
 \begin{equation}
     c(\vecr) = \exp{\left[
@@ -64,14 +65,13 @@ anterior tal que ahora se tiene la siguiente expresión para la cerradura
             + \nnet
             \right]} -
     \gamma(\vecr)
-    - 1 ,
+    - 1 .
     \label{eq:parametrizacion}
 \end{equation}
 
-y la ecuación de OZ queda de la misma forma.
-Se pretende trabajar a partir de esta hipótesis donde la función puente
-pueda tomar cualquier valor en particular que permita la solución de la
-ecuación de OZ.
+With this new expression, the main problem to solve is to find the weights
+of $\nnet$ that can successfully solve the Ornstein-Zernike equation
+for a given interaction potential.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
