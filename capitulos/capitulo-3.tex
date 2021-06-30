@@ -52,7 +52,7 @@ The Ornstein-Zernike equation is given by the following expression
     \end{align*}
 \end{subequations}
 
-with the already know notation for each quantity (Ref a marco teórico).
+with the already known notation for each quantity (Ref a marco teórico).
 
 Let $\nnet$ be a neural network with weights $\theta$. The main hypothesis
 of this chapter is that $\nnet$ can replace the bridge function $B(\vecr)$
@@ -72,34 +72,47 @@ the closure relation
 
 With this new expression, the main problem to solve is to find the weights
 of $\nnet$ that can successfully solve the Ornstein-Zernike equation
-for a given interaction potential.
+for a given interaction potential, $\beta u(\vecr)$.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
 
-\section{Esquema de entrenamiento}
-Ahora que se tiene la parametrización, se debe desarrollar una forma para ajustar los
-pesos de la red neuronal $\nnet$, y que al mismo tiempo permita la solución
-de la ecuación de OZ.
+\section{Training scheme}
+Now that a parametrization is defined, a way to fit the weights of the neural network must
+be devised. This new numerical scheme must also be able to solve the OZ equation, while
+simultaneously finding the appropiate weights for $\nnet$.
 
-\subsection{Función de costo}
-Para crear un esquema de entrenamiento se requiere primero de una \textbf{función de costo}
-que sea utilizada para generar información del ajuste necesario de los pesos $\theta$.
-Tomando en cuenta que el esquema iterativo de Piccard crea una sucesión de funciones
-estimadas $\{\gamma_1(\vecr), \gamma_2(\vecr), \dots, \gamma_n(\vecr)\}$, se propone que la función de costo
-sea
+\subsection{Cost function}
+It was previously mentioned that the main problem to solve is to find the weights of
+$\nnet$ that can successfully solve the Ornstein-Zernike equation
+for a given interaction potential.
+To solve such problem, a \textbf{cost function} must be defined, and be used as part of
+a \emph{minimization} problem.
+
+To define such a function, we consider the successive approximations obtained from the
+iterative Piccard scheme to solve the OZ equation, $\{\gamma_1(\vecr), \gamma_2(\vecr), \dots, \gamma_n(\vecr)\}$.
+From the numerical algorithm, we expect to have found a solution when each approximation
+is close to the previous one. This can be translated into a cost function like the
+following expression
 
 \begin{equation}
     J(\theta) = \left[\gamma_{n}(\vecr; \theta) - \gamma_{n-1}(\vecr; \theta) \right]^2
     \label{eq:costo}
 \end{equation}
 
-donde $\gamma_{n}(\vecr; \theta)$ es la enésima función estimada de $\gamma(\vecr)$
-mediante el método iterativo. La notación $\gamma(\vecr; \theta)$ indica que depende
-implícitamente de los pesos de la red neuronal, como se puede ver en el ecuación~\eqref{eq:parametrizacion}.
-Esto significa que si los pesos de $\nnet$ cambian, entonces la función $\gamma$ debe cambiar.
-Sin embargo, esto no significa que $\gamma$ depende \emph{directamente} de los pesos.
+where $\gamma_{n}(\vecr; \theta)$ is the $n-$th approximated function of the indirect
+correlation function, $\gamma(\vecr)$.
+The notation $\gamma(\vecr; \theta)$ indicates that the function depends implicitly
+on the weights of the neural network, as seen in equation~\eqref{eq:parametrizacion}.
+This means that, if the weights of $\nnet$ change, we should expect a change in the output
+from the $\gamma$ function. Nevertheless, this does not mean that the indirect
+correlation function itself depends explicitly, nor directly, on the weights of
+$\nnet$.
+
+In other word, the expression~\eqref{eq:costo} is requiring for the two last approximations
+to be as equal as possible. This will enforce a change on the weights every time both
+approximations deviate between them.
 
 \subsection{Problema de optimización}
 Usando la función de costo~\eqref{eq:costo} ahora se puede plantear un problema de optimización
