@@ -264,27 +264,27 @@ The activation function used was the \emph{ReLU}~\cite{glorotDeepSparseRectifier
 function which has the form
 
 \begin{equation*}
-    \text{ReLU}(x) = \text{max}{(0, x)} .
+    \text{ReLU}(x) = \max{(0, x)} .
 \end{equation*}
 
 This activation function is applied to all the nodes in the layers, with the exception
 of the input layer. This function was chosen due to the fact that the other most common
 functions ($\tanh, \text{softmax}$, etc.) generated numerical instabilities in the
-algorithm.
+algorithm when training the neural network.
 
 \subsection{Physical parameters}
 
 % TODO: Poner la referencia a la ecuación del potencial
-Para resolver la ecuación de OZ se empleó un radio de corte $r_c=7\sigma$, donde $\sigma$
-es el diámetro de las partículas y tiene por valor $\sigma=1$.
-El potencial empleado fue el de pseudo-esferas duras (Ref), tanto para la solución de la ecuación
-de OZ como para los resultados obtenidos de simulación por computadora.
+To solve the OZ equation a cutoff radius of $r_c=7\sigma$ was used, where $\sigma$ is the
+particle diameter and it fixed to be $\sigma=1$.
+The interaction potential used was the pseudo hard sphere potential (Ref a ec.), both
+for the solution of the OZ equation as well as the results obtained from computer simulations.
 
-Se exploraron siete densidades diferentes en un rango de
-$\phi \in [\num{0.15}, \num{0.45}]$, con $\Delta \phi = \num{0.05}$. Por cada valor
-de la densidad se utilizó una partición de la densidad de 70 puntos para lograr la
-convergencia del método iterativo cuando se resolvió la ecuación de OZ. En el caso de las
-simulaciones por computadora, no se necesita esta partición.
+Seven different densities were explored in the range $\phi \in [\num{0.15}, \num{0.45}]$, 
+with $\Delta \phi = \num{0.05}$.
+For each density value, a grid of 70 points was used to ensure convergence of the iterative
+algorithm when solving for the OZ equation. This was not the case of the computer 
+simulations, where such partition is not needed.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 4
@@ -300,35 +300,36 @@ simulaciones por computadora, no se necesita esta partición.
         (c) & (d) \\[6pt]
     \end{tabular}
     \captionsetup{singlelinecheck=off}
-    \caption[Funciones de distribución radial con redes neuronales.]{Funciones de distribución radial obtenidas con simulación por computadora y mediante el uso de la metodología descrita en este capítulo, usando redes neuronales. Se presentan cuatro densidades: 
+    \caption[Radial distribution functions with neural networks.]{Radial distribution functions obtained from computer simulations and with the methodology describes in this chapter, with the neural network parametrization. Four different density values are presented:
     \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
         \item $\phi=\num{0.15}$
         \item $\phi=\num{0.25}$
         \item $\phi=\num{0.35}$
         \item $\phi=\num{0.45}$
     \end{enumerate*}
-    . En cada una, se muestran las comparaciones con tres diferentes aproximaciones para la función puente: \emph{mV}, Verlet modificada; \emph{PY}, Percus-Yevick; y \emph{HNC}, Hypernetted Chain.
-    }
+    . In each figure, a comparison between three common bridge function approximation appear along with the computer simulation results and the neural network approximation. The approximations are \emph{mV}, modified Verlet; \emph{PY}, Percus-Yevick; y \emph{HNC}, and Hypernetted Chain.}
     \label{fig:estructuras-neuronales}
 \end{figure}
 
-Con todos los elementos descritos en las secciones anteriores, los resultados obtenidos en 
-esta sección se muestran en la figura~\ref{fig:estructuras-neuronales}, que corresponden
-a las funciones de distribución radial, $g(r^*)$, de las densidades del líquido estudiadas.
-Estas funciones describen la estructura del líquido, y son el tema central de estudio
-de la metodología descrita en este capítulo.
+Now that all the elements needed have been described in previous sections, all the obtained
+results in this chapter are shown in figure~\ref{fig:estructuras-neuronales}, which 
+correspond to the radial distribution functions, $g(r^*)$, of the densities studied.
+These functions describe de structure of the liquid, and are the main talking point of the
+application from the methodology developed in this work.
 
 \subsection{Low densities}
-Primero se analizarán y discutirán las densidades bajas $\phi=\numlist{0.15; 0.25}$,
-las cuales corresponden a las gráficas (a) y (b) en la figura~\ref{fig:estructuras-neuronales}.
-Los resultados que se observan es que, a densidades bajas, las aproximaciones HNC y
-redes neuronales son más precisas que Percus-Yevick y Verlet modificada, sin embargo
-ninguna de estas cuatro aproximaciones logra obtener resultados comparables a aquellos
-de la simulación por computadora. En especial, es importante observar que
-la aproximación de redes neuronales es un poco más precisa que la HNC, aunque sigue 
-sobreestimando el pico principal que se encuentra en $r^* = \sigma$.
-Por otro lado, las aproximaciones de Percus-Yevick y Verlet modificada subestiman el pico
-principal para ambas densidades.
+To begin the discussion of the results obtained, this section will deal with the low 
+density values $\phi=\numlist{0.15; 0.25}$, which are shown in plots (a) and (b) in 
+figure~\ref{fig:estructuras-neuronales}.
+The results show that, at low densities, the HNC and neural network approximations are
+more precise than the Percus-Yevick and modified Verlet approximations. Although, all
+approximations seem to fall short compared to computer simulations. It is specially
+important to note that the neural network approximation is somewhat more precise than
+the HNC approximation, which can be quantitatively measured by the estimation of the
+principal peak in the plot. This peak can be found in the vicinity of $r^* = \sigma$. 
+Nevertheless, it is still overestimated, which is the same case for the HNC approximation.
+However, this is not the case for the Percus-Yevick and modified Verlet approximations,
+which undervalue the main peak.
 
 Tambíen es importante observar la forma funcional de $g(r^*)$. Para el caso de HNC y redes 
 neuronales, parece ser que la forma es muy semejante entre ambas aproximaciones, e incluso 
