@@ -191,13 +191,13 @@ functions are equal between them, up to the defined tolerance $\epsilon$.
 %----------------------------------------------------------------------------------------
 %	SECTION 3
 %----------------------------------------------------------------------------------------
-\section{Implementación}
+\section{Implementation}
 En esta sección se detallan los aspectos importantes de la implementación del método
 descrito en la sección anterior, como lo son la arquitectura de la red neuronal, el método
 de optimización, y la elección de las funciones de activación, así como los parámetros
 utilizados para resolver la ecuación de OZ.
 
-\subsection{Elección de optimizador}
+\subsection{Choice of optimization algorithm}
 La regla general de actualización de pesos~\eqref{eq:gradiente} fue implementada para 
 resolver el problema de optimización, sin embargo, problemas numéricos impedían la
 convergencia del entrenamiento.
@@ -234,7 +234,7 @@ así como estos hiperparámetros. El valor de la \emph{razón de aprendizaje}, $
 en la ecuación~\eqref{eq:gradiente}, utilizado en todos los experimentos fue de
 $\eta=\num{1e-4}$.
 
-\subsection{Arquitectura de la red neuronal}
+\subsection{Neural network architecture}
 
 \begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/neural-network.pdf}
@@ -261,7 +261,7 @@ Esta función de activación se aplica a todas las capas a excepción de la capa
 Se escogió esta función de activación debido a que todas las más comunes ($\tanh, \text{softmax}$, etc.),
 provocaban inconsistencias numéricas.
 
-\subsection{Parámetros físicos}
+\subsection{Physical parameters}
 
 % TODO: Poner la referencia a la ecuación del potencial
 Para resolver la ecuación de OZ se empleó un radio de corte $r_c=7\sigma$, donde $\sigma$
@@ -278,7 +278,7 @@ simulaciones por computadora, no se necesita esta partición.
 %----------------------------------------------------------------------------------------
 %	SECTION 4
 %----------------------------------------------------------------------------------------
-\section{Resultados}
+\section{Results}
 
 \begin{figure}[p]
     \begin{tabular}{cc}
@@ -307,7 +307,7 @@ a las funciones de distribución radial, $g(r^*)$, de las densidades del líquid
 Estas funciones describen la estructura del líquido, y son el tema central de estudio
 de la metodología descrita en este capítulo.
 
-\subsection{Densidades bajas}
+\subsection{Low densities}
 Primero se analizarán y discutirán las densidades bajas $\phi=\numlist{0.15; 0.25}$,
 las cuales corresponden a las gráficas (a) y (b) en la figura~\ref{fig:estructuras-neuronales}.
 Los resultados que se observan es que, a densidades bajas, las aproximaciones HNC y
@@ -329,7 +329,7 @@ Otro factor importante a observar es que esta forma también es ligeramente dife
 la encontrada con las simulaciones por computadora, pues las aproximaciones de
 Percus-Yevick y Verlet modificada son más precisas en este aspecto.
 
-\subsection{Densidades altas}
+\subsection{High densities}
 Ahora se discutirán los resultados para las densidades altas $\phi=\numlist{0.35; 0.45}$,
 las cuales corresponden a las gráficas (c) y (d) en la figura~\ref{fig:estructuras-neuronales}.
 De la misma forma que para las densidades bajas, las aproximaciones HNC y redes neuronales
