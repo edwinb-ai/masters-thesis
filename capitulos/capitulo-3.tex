@@ -175,19 +175,18 @@ Thus, we have the following step to solve the OZ using the parametrization~\eqre
 \end{enumerate}
 
 \subsection{Convergence criterion}
-El procedimiento descrito anteriormente se repite de forma indefinida hasta lograr la 
-convergencia, dada por la siguiente expresión
+The procedure describe in the previous section is repeated indefinetely until convergence
+is achieved. This convergence criterion is defined as follows
 
 \begin{equation}
     {\lvert \gamma_{n+1} - \gamma_{n} \rvert}^2 \leq \epsilon
     \label{eq:tolerancia}
 \end{equation}
 
-donde $\lvert \cdot \rvert$ indica el valor absoluto, y $\epsilon \in [0, 1]$.
-En particular, la tolerancia en todos los experimentos realizados fue de
-$\epsilon = \num{1e-5}$.
-En otras palabras, se exige a la red neuronal ajustar sus pesos hasta que las estimaciones
-sucesivas de las funciones $\gamma$ sean muy semejantes entre sí.
+where $\lvert \cdot \rvert$ indicates the absolute value, and $\epsilon \in \numlist{0; 1}$.
+In particular, the numerical tolerance in all the experiments has a value of $\epsilon = \num{1e-5}$.
+This means that the weights are adjusted until the successive estimations of the $\gamma$
+functions are equal between them, up to the defined tolerance $\epsilon$.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
