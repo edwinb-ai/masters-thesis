@@ -241,27 +241,36 @@ $\eta=\num{1e-4}$ for all the experiments.
 \begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/neural-network.pdf}
     \vspace{-1.5cm}
-    \caption[Esquema genérico de una red neuronal.]{Esquema genérico de una red neuronal multicapa completamente conectada. Es importante notar la forma de la red, donde se tienen dos capas escondidas. Los círculos representan \emph{unidades} o \emph{nodos}, que están siendo evaluados por una función de activación. Los nodos que se ven separados de las capas (aquellos que están en la parte superior del esquema) son los \emph{sesgos} de las capas penúltima y última, respectivamente. La arquitectura usada en los resultados de este capítulo es diferente y más grande, pero tiene la misma estructura.}
+    \caption[General schematics of a neural network.]{Cartoon of a fully connected multilayer neural network. Note that there are two \emph{hidden layers}. The circles represent the \emph{nodes} or \emph{units} used to compute the final output. These nodes are using an activation function to account for nonlinearities. The top-most nodes that seem different from the main nodes are known as the \emph{bias} nodes. The real architecture used in this chapter is larger, with many more nodes and connections, but the topology is the same.}
     \label{fig:nn-esquema}
 \end{figure}
 
-La arquitectura de la red neuronal empleada en todos los experimentos es aquella que se
-muestra en el esquema de la figura~\ref{fig:nn-esquema}, excepto por el número de unidades
-en las capas ocultas.
-Es decir, la arquitectura es de \emph{cuatro capas}, una capa de \emph{entrada} con una
-unidad, dos capas ocultas con 1024 unidades cada una, y por último una capa de \emph{salida}
-con una sola unidad.
+The neural network architecture used in all the experiments is very similar to the one
+shown in figure~\ref{fig:nn-esquema}, with the exception of the number of nodes in all the
+layers.
+Particularly, the neural network is made of \emph{four layers}, all connected among them.
+There is an \emph{input} layer, two \emph{hidden} layers, and a final \emph{output} layers.
+All layers have the same number of nodes, which is 4096. Additional nodes are added to the
+final two layers that serve as the \emph{bias}.
 
-La función de activación que se empleó fue la función \emph{ReLU}~\cite{glorotDeepSparseRectifier2011},
-la cual está definida con la siguiente expresión
+All the weights must be initialized appropiately, and in this case the Glorot uniform
+distribution was used~\cite{glorotUnderstandingDifficultyTraining2010}, which has proven
+to be a way to help the convergence of neural networks. This means that the weights
+are initialized as $\theta_{ij} \sim U \left[ -\frac{6}{\sqrt{(in + out)}}, \frac{6}{\sqrt{(in + out)}} \right]$,
+where $in$ represents the number of units in the input layer, and $out$ the number of
+units in the output layer. All bias nodes were initialized to be zero.
+
+The activation function used was the \emph{ReLU}~\cite{glorotDeepSparseRectifier2011}
+function which has the form
 
 \begin{equation*}
     \text{ReLU}(x) = \text{max}{(0, x)} .
 \end{equation*}
 
-Esta función de activación se aplica a todas las capas a excepción de la capa de entrada.
-Se escogió esta función de activación debido a que todas las más comunes ($\tanh, \text{softmax}$, etc.),
-provocaban inconsistencias numéricas.
+This activation function is applied to all the nodes in the layers, with the exception
+of the input layer. This function was chosen due to the fact that the other most common
+functions ($\tanh, \text{softmax}$, etc.) generated numerical instabilities in the
+algorithm.
 
 \subsection{Physical parameters}
 
