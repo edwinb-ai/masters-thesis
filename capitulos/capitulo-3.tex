@@ -324,41 +324,46 @@ figure~\ref{fig:estructuras-neuronales}.
 The results show that, at low densities, the HNC and neural network approximations are
 more precise than the Percus-Yevick and modified Verlet approximations. Although, all
 approximations seem to fall short compared to computer simulations. It is specially
-important to note that the neural network approximation is somewhat more precise than
+important to note that the neural network approximation is a little bit more precise than
 the HNC approximation, which can be quantitatively measured by the estimation of the
 principal peak in the plot. This peak can be found in the vicinity of $r^* = \sigma$. 
 Nevertheless, it is still overestimated, which is the same case for the HNC approximation.
 However, this is not the case for the Percus-Yevick and modified Verlet approximations,
 which undervalue the main peak.
 
-Tambíen es importante observar la forma funcional de $g(r^*)$. Para el caso de HNC y redes 
-neuronales, parece ser que la forma es muy semejante entre ambas aproximaciones, e incluso 
-pudiera ser la misma. Esto implica que, de alguna forma, los pesos de la red neuronal se 
-ajustaron lo suficiente tal que la aproximación resulta ser HNC, o algo semejante.
-Dicho de otra forma, los pesos son muy cercanos a cero tal que al ser
-evaluada la red neuronal, la aproximación es muy semajante a HNC.
-Otro factor importante a observar es que esta forma también es ligeramente diferente a
-la encontrada con las simulaciones por computadora, pues las aproximaciones de
-Percus-Yevick y Verlet modificada son más precisas en este aspecto.
+It is also important to notice the functional form of $g(r^*)$. For the HNC and neural
+network approximations, it appears to have the same form between approximations, and it 
+might as well be the same. This would imply that, somehow, the weights of the neural network
+were updated enough such that a minimum was found, and this minimum was very close to the
+HNC approximation. In other words, the results suggest that the weights are very close to
+zero, such that when the neural network is evaluated, the output is close to the
+result obtained from the HNC approximation.
+Another important aspect to observe is that this functional form is slightly different
+to the one seen from computer simulations, and that both approximations, Percus-Yevick and
+modified Verlet, are closer to the form found in the computer simulations results.
 
 \subsection{High densities}
-Ahora se discutirán los resultados para las densidades altas $\phi=\numlist{0.35; 0.45}$,
-las cuales corresponden a las gráficas (c) y (d) en la figura~\ref{fig:estructuras-neuronales}.
-De la misma forma que para las densidades bajas, las aproximaciones HNC y redes neuronales
-para las densidades altas no son muy precisas. Ahora, y como era de esperarse, las 
-aproximaciones Percus-Yevick y Verlet modificada son las más precisas, siendo Verlet
-modificada la más precisa de todas. Esto se puede observar en la figura~\ref{fig:estructuras-neuronales}
-al ver que el pico principal está muy bien estimado por la aproximación Verlet modificada,
-mientras que las aproximaciones HNC y redes neuronales sobreestiman por mucho este valor.
+We now turn our discussion to the high density values of $\phi=\numlist{0.35; 0.45}$,
+represented in plots (c) and (d) in the figure~\ref{fig:estructuras-neuronales}.
+In the same spirit as before with the low densities, the HNC and neural network 
+approximations are not precise when compared to computer simulations. In this case,
+the Percus-Yevick and modified Verlet are even more precise, which was expected.
+This is because the HNC approximation is a very good approximation for long range
+interaction potentials (Ref faltante), and Percus-Yevick as well as modified Verlet are 
+better suited for short range potentials, such as the one studied here.
+In this case, modified Verlet is the most precise of the approximations used, which
+can be appraised in figure~\ref{fig:estructuras-neuronales}, where the main peak
+is well estimated by the approximation when compared to the computer simulation
+results. However, the HNC and neural network approximation overestimate this property.
 
-Por otro lado, y semejante al caso para densidades bajas, la forma funcional de $g(r^*)$
-es diferente entre la obtenida con simulación por computadora de aquella utilizando la
-aproximación de redes neuronales. De hecho, al igual que antes, el resultado es muy
-semejante al obtenido con la aproximación HNC. Esto es algo importante de observar, y
-sustenta la hipótesis de que la aproximación de red neuronal se reduce a la aproximación
-HNC.
-Esto implica que la red neuronal en realidad está aproximando una función puente
-$B(\vecr) \approx 0$.
-Si se observan las aproximaciones de Percus-Yevick y Verlet modificada, volvemos a observar
-que la aproximación de Verlet modificada es la más precisa, pues la forma funcional de
-$g(r^*)$ es muy semejante a la obtenida con simulación por computadora.
+Further, the functional form of $g(r^*)$ computed with the neural network approximation 
+is quite different to the one obtained with computer simulations. Indeed, the result
+obtained is similar to the one obtained with the HNC approximation. This was also the
+case for low densities. This result is important, backing the hypothesis that the
+neural network might reduce to the HNC approximation.
+This would imply that the neural network is in fact approximating the bridge function
+$B(\vecr) \approx 0$. If we now pay attention to the Percus-Yevick and modified Verlet
+approximations, we can see that the modified Verlet bridge function is the most precise
+out of all the set of bridge functions used. In other words, we observe that this
+estimation predicts the main peak well, as can be seen when compared to the results
+obtained from computer simulations.
