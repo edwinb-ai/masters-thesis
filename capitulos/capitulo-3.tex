@@ -291,45 +291,49 @@ simulations, where such partition is not needed.
 %----------------------------------------------------------------------------------------
 \section{Results}
 
-\begin{figure}[p]
-    \begin{tabular}{cc}
-        \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/p=0.15.pdf} & 
-        \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/p=0.25.pdf} \\
-        (a) & (b) \\[6pt]
-        \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/p=0.35.pdf} &   \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/p=0.45.pdf} \\
-        (c) & (d) \\[6pt]
-    \end{tabular}
-    \captionsetup{singlelinecheck=off}
-    \caption[Radial distribution functions with neural networks.]{Radial distribution functions obtained from computer simulations and with the methodology describes in this chapter, with the neural network parametrization. Four different density values are presented:
-    \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item $\phi=\num{0.15}$
-        \item $\phi=\num{0.25}$
-        \item $\phi=\num{0.35}$
-        \item $\phi=\num{0.45}$
-    \end{enumerate*}
-    . In each figure, a comparison between three common bridge function approximation appear along with the computer simulation results and the neural network approximation. The approximations are \emph{mV}, modified Verlet; \emph{PY}, Percus-Yevick; y \emph{HNC}, and Hypernetted Chain.}
-    \label{fig:estructuras-neuronales}
+% \begin{figure}[p]
+%     \begin{tabular}{cc}
+%         \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/sim_p=0.15.pdf} & 
+%         \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/comparison_p=0.15.pdf} \\
+%         (a) & (b) \\[6pt]
+%     \end{tabular}
+%     \captionsetup{singlelinecheck=off}
+%     \caption[Radial distribution functions with neural networks.]{Radial distribution functions obtained from computer simulations and with the methodology described in this chapter, with the neural network parametrization. Four different density values are presented:
+%     \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
+%         \item $\phi=\num{0.15}$
+%         \item $\phi=\num{0.25}$
+%         \item $\phi=\num{0.35}$
+%         \item $\phi=\num{0.45}$
+%     \end{enumerate*}
+%     . In each figure, a comparison between three common bridge function approximation appear along with the computer simulation results and the neural network approximation. The approximations are \emph{mV}, modified Verlet; \emph{PY}, Percus-Yevick; y \emph{HNC}, and Hypernetted Chain.}
+%     \label{fig:estructuras-neuronales}
+% \end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.45.pdf}
+    \caption[New figure.]{A figure.}
+    \label{fig:rdf45}
 \end{figure}
 
-Now that all the elements needed have been described in previous sections, all the obtained
-results in this chapter are shown in figure~\ref{fig:estructuras-neuronales}, which 
-correspond to the radial distribution functions, $g(r^*)$, of the densities studied.
-These functions describe de structure of the liquid, and are the main talking point of the
-application from the methodology developed in this work.
+Using all the elements previously described, it is time to investigate the results obtained
+from the proposed methodology. The main point of discussion will be the radial distribution
+function \textemdash $g(r^*)$ \textemdash for different values of densities, both in the
+low and high density regimes.
 
 \subsection{Low densities}
-To begin the discussion of the results obtained, this section will deal with the low 
+To begin the discussion, this section will deal with the low 
 density values $\phi=\numlist{0.15; 0.25}$, which are shown in plots (a) and (b) in 
-figure~\ref{fig:estructuras-neuronales}.
+figure~\ref{fig:rdf45}.
 The results show that, at low densities, the HNC and neural network approximations are
-more precise than the Percus-Yevick and modified Verlet approximations. Although, all
+more precise than the modified Verlet approximation. Although, all
 approximations seem to fall short compared to computer simulations. It is specially
 important to note that the neural network approximation is a little bit more precise than
-the HNC approximation, which can be quantitatively measured by the estimation of the
-principal peak in the plot. This peak can be found in the vicinity of $r^* = \sigma$. 
-Nevertheless, it is still overestimated, which is the same case for the HNC approximation.
-However, this is not the case for the Percus-Yevick and modified Verlet approximations,
-which undervalue the main peak.
+the HNC approximation, which can be qualitatively appraised by observing the estimation of 
+the main peak in the radial distribution function. This peak can be found in the vicinity 
+of $r^* = \sigma$. Nevertheless, it is still overestimated, which is the same case for the
+HNC approximation. However, this is not the case for the Percus-Yevick and modified Verlet 
+approximations, which undervalue the main peak.
 
 It is also important to notice the functional form of $g(r^*)$. For the HNC and neural
 network approximations, it appears to have the same form between approximations, and it 
@@ -339,8 +343,8 @@ HNC approximation. In other words, the results suggest that the weights are very
 zero, such that when the neural network is evaluated, the output is close to the
 result obtained from the HNC approximation.
 Another important aspect to observe is that this functional form is slightly different
-to the one seen from computer simulations, and that both approximations, Percus-Yevick and
-modified Verlet, are closer to the form found in the computer simulations results.
+to the one seen from computer simulations, and that the modified Verlet approximation is 
+closer to the form found in the computer simulations results.
 
 \subsection{High densities}
 We now turn our discussion to the high density values of $\phi=\numlist{0.35; 0.45}$,
