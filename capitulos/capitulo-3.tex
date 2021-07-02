@@ -367,3 +367,19 @@ approximations, we can see that the modified Verlet bridge function is the most 
 out of all the set of bridge functions used. In other words, we observe that this
 estimation predicts the main peak well, as can be seen when compared to the results
 obtained from computer simulations.
+
+\subsection{Does the neural network approximation reduce to the HNC bridge function?}
+It would seem as though the neural network approximation reduces to the HNC
+approximation, as seen in the results from the previous section. In this section
+we shall investigate this matter in detail.
+
+One way to approach this is to investigate the evolution of the weights $\theta$ from
+$\nnet$, from the moment it was initialized to the moment its training finalized.
+A histogram of this can be seen in figure (Ref a figura). We can observe that the way
+the weights show a diagonal represent a linear relationship between the initial
+weights, $\theta_{i}$, and the trained weights, $\theta_{t}$. In other words,
+the weights follow the linear expression
+$\theta_{t} = \alpha \theta_{i} + \beta + \epsilon$, with
+$\epsilon \sim \mathcal{N}(\mu, \sigma^{2})$ a normal random variable with mean
+$\mu$ and standard deviation $\sigma$.
+% TODO: Hablar sobre la poca desviación de los resultados, sobre todo hacer hincapié en el hecho de que, el no moverse mucho del cero implica que HNC es un mínimo estable y por lo tanto los pesos prefieren quedarse oscilando en este valor. Por otro lado, hablar sobre la importancia de que un valor aleatorio (o función aleatoria, matrices aleatorias, algo semejante) puede aproximar una función puente, pues esto no es algo trivial. Esto significa que se pueden aproximar las expansiones diagramáticas mediante procesos aleatorios, lo cual tiene implicaciones teóricas interesantes.
