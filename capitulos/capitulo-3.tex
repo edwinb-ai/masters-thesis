@@ -36,7 +36,7 @@ The Ornstein-Zernike equation is given by the following expression
 
 \begin{subequations}
     \begin{align*}
-         & c(\vecr) = h(\vecr) +
+         & h(\vecr) = c(\vecr) +
         n \int_{V}
         c(\vecr^{\prime})
         h(\lvert \vecr - \vecr^{\prime} \rvert)
@@ -101,17 +101,18 @@ cost function
     \label{eq:costo}
 \end{equation}
 
-where $\gamma_{n}(\vecr; \theta)$ is the $n-$th approximation of the indirect
+where $\gamma_{n}(\vecr; \theta)$ is the $n$-th approximation of the indirect
 correlation function, $\gamma(\vecr)$.
-The notation $\gamma(\vecr; \theta)$ indicates that the function depends implicitly
+The notation $\gamma(\vecr; \theta)$ indicates that the function now depends implicitly
 on the weights of the neural network, as seen in equation~\eqref{eq:parametrizacion}.
 This means that, if the weights of $\nnet$ change, we should expect a change in the output
 from the $\gamma$ function. Nevertheless, this does not mean that the indirect
 correlation function itself depends explicitly, nor directly, on the weights of
 $\nnet$.
 
-In other words, the expression~\eqref{eq:costo} is requiring for the last two approximations
-to be as equal as possible. This will enforce a change on the weights every time both
+Another way of looking at expression~\eqref{eq:costo} is that we require that the last 
+two approximations of the $\gamma$ function in each iteration from the numerical scheme to 
+be as equal as possible. This will enforce a change on the weights every time both 
 approximations deviate between them.
 
 \subsection{Optimization problem}
@@ -147,7 +148,7 @@ The most general update rule for a method based on gradient descent reads
 
 where $\eta$ is known as the \emph{learning rate}, and it is a hyperparameter
 that controls the step size at each iteration while moving toward the minimum
-of a cost function. Tthis value needs to be \emph{tuned} accordingly, so
+of a cost function. This value needs to be \emph{tuned} accordingly, so
 that the method converges properly.
 
 % TODO: Cambiar el nombre del apéndice
@@ -163,15 +164,15 @@ can correctly use this training scheme and solve the OZ equation.
 Having described all the necessary elements needed, a general layout for the solution
 of the Ornstein-Zernike using neural networks is now presented.
 
-Thus, we have the following step to solve the OZ using the parametrization~\eqref{eq:parametrizacion}:
+Thus, we propose the following steps to solve the OZ using the parametrization~\eqref{eq:parametrizacion}:
 
 \begin{enumerate}
     \item Given a particular interaction potential $\beta u(\vecr)$, equation~\eqref{eq:parametrizacion} is used to obtain the value of the direct correlation function $c(\vecr; \theta)$, which now depends implicitly on the weights of $\nnet$. In this step, an initial value for $\gamma_{n}(\vecr)$ is needed, which is initialized based on the five-point Ng methodology. (Ref a apéndice)
     \item The newly found function $c(\vecr; \theta)$ is transformed to a reciprocal space by means of the Fourier transform yielding the new function $\hat{c}(\veck; \theta)$.
     \item Then, the full OZ equation(Ref a ec) is Fourier transformed. Using the information from the previous step, a new estimation of the indirect correlation function is obtained, $\hat{\gamma}_{n+1}(\veck; \theta)$.
     \item The Fourier transform is applied once again to return all the functions to real space. With this operation, a new estimation $\gamma_{n+1}(\vecr; \theta)$ is computed from the transformed function, $\hat{\gamma}_{n+1}(\veck; \theta)$.
-    \item Both estimations, $\gamma_{n}$ and $\gamma_{n+1}$, are used to evaluate the cost function~\eqref{eq:costo}, and the computation of the gradient $\nabla_{\theta} J(\theta)$ is performed.
-    \item The weights $\theta$ are updated with the gradient descent rule~\eqref{eq:gradiente}, and the process is repeated from step 1. In the next iteration, the initial value for the indirect correlation function will be $\gamma_{n+1}$, and a new estimation $\gamma_{n+2}$ will be obtained. This process is repeated until convergence.
+    \item Both estimations, $\gamma_{n}$ and $\gamma_{n+1}$, are used to evaluate the cost function~\eqref{eq:costo}, while simultaneously computing the gradient $\nabla_{\theta} J(\theta)$.
+    \item The weights $\theta$ are updated a gradient descent rule, similar to~\eqref{eq:gradiente}, and the process is repeated from step 1. In the next iteration, the initial value for the indirect correlation function will be $\gamma_{n+1}$, and a new estimation $\gamma_{n+2}$ will be obtained. This process is repeated until convergence.
 \end{enumerate}
 
 \subsection{Convergence criterion}
@@ -179,13 +180,17 @@ The procedure describe in the previous section is repeated indefinetely until co
 is achieved. This convergence criterion is defined as follows
 
 \begin{equation}
-    {\lvert \gamma_{n+1} - \gamma_{n} \rvert}^2 \leq \epsilon
+    \sum_{i=1}^{N} {\left( \gamma^{n+1}_{i} - \gamma^{n}_{i} \right)}^2 \leq \epsilon .
     \label{eq:tolerancia}
 \end{equation}
 
-where $\lvert \cdot \rvert$ indicates the absolute value, and $\epsilon \in [0,1]$.
-In particular, the numerical tolerance in all the experiments has a value of
-$\epsilon = \num{1e-5}$.
+This expression is also known as the \emph{mean squared error}~\cite{goodfellowDeepLearning2016}.
+Here, we sum all the $N$ elements of the squared difference between estimates $\gamma_{n+1}$
+and $\gamma_{n}$. The paramater $\epsilon \in [0,1]$ is a tolerance value that indicates an 
+upper bound for the error between estimations. When the computed error is below this 
+tolerance value, we consider the algorithm to have converged to some minimum.
+In particular, the numerical tolerance in all the experiments was fixed to be
+$\epsilon = \num{5e-6}$.
 This means that the weights are adjusted until the successive estimations of the $\gamma$
 functions are equal between them, up to the defined tolerance $\epsilon$.
 
@@ -204,9 +209,9 @@ implemented to solve the optimization problem, but numerical instabilities rende
 method unstable and convergence was almost never achieved.
 
 To solve this issue, the \emph{Adam}~\cite{kingmaAdamMethodStochastic2017} optimization 
-method was then chosen. This optimization method is an excellent choice for the training
+method was chosen. This optimization method is an excellent choice for the training
 of neural networks, even more so when the gradient is expected to be \emph{sparse}, i.e.
-most of the elements of the gradient itself are zeroes.
+most of the elements of the gradient itself are zeros.
 The \emph{Adam} method uses several rules to adjust the descent direction of the gradient,
 as well as the hyperparameters related to the acceleration mechanism of the method.
 Notably, there are two important hyperparameters used by the method, $\beta_1$,
@@ -257,8 +262,9 @@ final two layers that serve as the \emph{bias}.
 All the weights must be initialized appropiately, and in this case the Glorot uniform
 distribution was used~\cite{glorotUnderstandingDifficultyTraining2010}, which has proven
 to be a way to help the convergence of neural networks. This means that the weights
-are initialized as $\theta_{ij} \sim U \left[ -\frac{6}{\sqrt{(in + out)}}, \frac{6}{\sqrt{(in + out)}} \right]$,
-where $in$ represents the number of units in the input layer, and $out$ the number of
+are initialized as $\theta_{ij} \sim \mathcal{U} \left[ -\frac{6}{\sqrt{(in + out)}}, \frac{6}{\sqrt{(in + out)}} \right]$,
+where $\mathcal{U}$ is the uniform probability distribution;
+$in$ represents the number of units in the input layer; and $out$ the number of
 units in the output layer. All bias nodes were initialized to be zero.
 
 The activation function used was the \emph{ReLU}~\cite{glorotDeepSparseRectifier2011}
@@ -277,73 +283,21 @@ algorithm when training the neural network.
 
 % TODO: Poner la referencia a la ecuación del potencial
 To solve the OZ equation a cutoff radius of $r_c=7\sigma$ was used, where $\sigma$ is the
-particle diameter and it fixed to be $\sigma=1$.
+particle diameter and it was fixed to be $\sigma=1$.
 The interaction potential used was the pseudo hard sphere potential (Ref a ec.), both
 for the solution of the OZ equation as well as the results obtained from computer simulations.
 
 Seven different densities were explored in the range $\phi \in [\num{0.15}, \num{0.45}]$, 
 with $\Delta \phi = \num{0.05}$.
 For each density value, a grid of 70 points was used to ensure convergence of the iterative
-algorithm when solving for the OZ equation. This was not the case of the computer 
+algorithm when solving for the OZ equation. This was not the case for the computer 
 simulations, where such partition is not needed.
+% TODO: Escribir sobre los parámetros empleados para hacer la simulación, cómo se hizo la simulación, qué técnica, y todo lo necesario para reproducir los resultados. Puede ser una nueva subsección, o renombrar esta subsección a algo más general y que solamente sea un párrafo largo.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 4
 %----------------------------------------------------------------------------------------
 \section{Results}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.15.pdf}
-    \caption[Radial distribution function, $\phi=0.15$.]{The radial distribution function for density value $\phi=0.15$ obtained from computer simulations, and three different approximations:
-    \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item \emph{mV}, modified Verlet
-        \item \emph{HNC}, Hypernetted Chain
-        \item \emph{Neural network}, neural network approximation.
-    \end{enumerate*}
-    }
-    \label{fig:rdf15}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.25.pdf}
-    \caption[Radial distribution function, $\phi=0.25$.]{The radial distribution function for density value $\phi=0.25$ obtained from computer simulations, and three different approximations:
-    \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item \emph{mV}, modified Verlet
-        \item \emph{HNC}, Hypernetted Chain
-        \item \emph{Neural network}, neural network approximation.
-    \end{enumerate*}
-    }
-    \label{fig:rdf25}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.35.pdf}
-    \caption[Radial distribution function, $\phi=0.35$.]{The radial distribution function for density value $\phi=0.35$ obtained from computer simulations, and three different approximations:
-    \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item \emph{mV}, modified Verlet
-        \item \emph{HNC}, Hypernetted Chain
-        \item \emph{Neural network}, neural network approximation.
-    \end{enumerate*}
-    }
-    \label{fig:rdf35}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.45.pdf}
-    \caption[Radial distribution function, $\phi=0.45$.]{The radial distribution function for density value $\phi=0.45$ obtained from computer simulations, and three different approximations:
-    \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item \emph{mV}, modified Verlet
-        \item \emph{HNC}, Hypernetted Chain
-        \item \emph{Neural network}, neural network approximation.
-    \end{enumerate*}
-    }
-    \label{fig:rdf45}
-\end{figure}
-
 Using all the elements previously described, it is time to investigate the results obtained
 from the proposed methodology. The main point of discussion will be the radial distribution
 function \textemdash $g(r^*)$ \textemdash for different values of densities, both in the
@@ -399,6 +353,58 @@ approximations, we can see that the modified Verlet bridge function is the most 
 out of all the set of bridge functions used. In other words, we observe that this
 estimation predicts the main peak well, as can be seen when compared to the results
 obtained from computer simulations.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.15.pdf}
+    \caption[Radial distribution function, $\phi=0.15$.]{The radial distribution function for density value $\phi=0.15$ obtained from computer simulations, and three different approximations:
+    \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
+        \item \emph{mV}, modified Verlet
+        \item \emph{HNC}, Hypernetted Chain
+        \item \emph{Neural network}, neural network approximation.
+    \end{enumerate*}
+    }
+    \label{fig:rdf15}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.25.pdf}
+    \caption[Radial distribution function, $\phi=0.25$.]{The radial distribution function for density value $\phi=0.25$ obtained from computer simulations, and three different approximations:
+    \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
+        \item \emph{mV}, modified Verlet
+        \item \emph{HNC}, Hypernetted Chain
+        \item \emph{Neural network}, neural network approximation.
+    \end{enumerate*}
+    }
+    \label{fig:rdf25}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.35.pdf}
+    \caption[Radial distribution function, $\phi=0.35$.]{The radial distribution function for density value $\phi=0.35$ obtained from computer simulations, and three different approximations:
+    \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
+        \item \emph{mV}, modified Verlet
+        \item \emph{HNC}, Hypernetted Chain
+        \item \emph{Neural network}, neural network approximation.
+    \end{enumerate*}
+    }
+    \label{fig:rdf35}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.45.pdf}
+    \caption[Radial distribution function, $\phi=0.45$.]{The radial distribution function for density value $\phi=0.45$ obtained from computer simulations, and three different approximations:
+    \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
+        \item \emph{mV}, modified Verlet
+        \item \emph{HNC}, Hypernetted Chain
+        \item \emph{Neural network}, neural network approximation.
+    \end{enumerate*}
+    }
+    \label{fig:rdf45}
+\end{figure}
 
 \subsection{Does the neural network approximation reduce to the HNC bridge function?}
 It would seem as though the neural network approximation reduces to the HNC
