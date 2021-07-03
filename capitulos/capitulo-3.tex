@@ -183,8 +183,9 @@ is achieved. This convergence criterion is defined as follows
     \label{eq:tolerancia}
 \end{equation}
 
-where $\lvert \cdot \rvert$ indicates the absolute value, and $\epsilon \in \numlist{0; 1}$.
-In particular, the numerical tolerance in all the experiments has a value of $\epsilon = \num{1e-5}$.
+where $\lvert \cdot \rvert$ indicates the absolute value, and $\epsilon \in [0,1]$.
+In particular, the numerical tolerance in all the experiments has a value of
+$\epsilon = \num{1e-5}$.
 This means that the weights are adjusted until the successive estimations of the $\gamma$
 functions are equal between them, up to the defined tolerance $\epsilon$.
 
@@ -291,31 +292,13 @@ simulations, where such partition is not needed.
 %----------------------------------------------------------------------------------------
 \section{Results}
 
-% \begin{figure}[p]
-%     \begin{tabular}{cc}
-%         \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/sim_p=0.15.pdf} & 
-%         \includegraphics[width=0.47\textwidth]{figuras/capitulo-3/comparison_p=0.15.pdf} \\
-%         (a) & (b) \\[6pt]
-%     \end{tabular}
-%     \captionsetup{singlelinecheck=off}
-%     \caption[Radial distribution functions with neural networks.]{Radial distribution functions obtained from computer simulations and with the methodology described in this chapter, with the neural network parametrization. Four different density values are presented:
-%     \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-%         \item $\phi=\num{0.15}$
-%         \item $\phi=\num{0.25}$
-%         \item $\phi=\num{0.35}$
-%         \item $\phi=\num{0.45}$
-%     \end{enumerate*}
-%     . In each figure, a comparison between three common bridge function approximation appear along with the computer simulation results and the neural network approximation. The approximations are \emph{mV}, modified Verlet; \emph{PY}, Percus-Yevick; y \emph{HNC}, and Hypernetted Chain.}
-%     \label{fig:estructuras-neuronales}
-% \end{figure}
-
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.15.pdf}
     \caption[Radial distribution function, $\phi=0.15$.]{The radial distribution function for density value $\phi=0.15$ obtained from computer simulations, and three different approximations:
     \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item \emph{mV}, modified Verlet,
-        \item \emph{HNC}, Hypernetted Chain,
+        \item \emph{mV}, modified Verlet
+        \item \emph{HNC}, Hypernetted Chain
         \item \emph{Neural network}, neural network approximation.
     \end{enumerate*}
     }
@@ -327,8 +310,8 @@ simulations, where such partition is not needed.
     \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.25.pdf}
     \caption[Radial distribution function, $\phi=0.25$.]{The radial distribution function for density value $\phi=0.25$ obtained from computer simulations, and three different approximations:
     \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item \emph{mV}, modified Verlet,
-        \item \emph{HNC}, Hypernetted Chain,
+        \item \emph{mV}, modified Verlet
+        \item \emph{HNC}, Hypernetted Chain
         \item \emph{Neural network}, neural network approximation.
     \end{enumerate*}
     }
@@ -340,8 +323,8 @@ simulations, where such partition is not needed.
     \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.35.pdf}
     \caption[Radial distribution function, $\phi=0.35$.]{The radial distribution function for density value $\phi=0.35$ obtained from computer simulations, and three different approximations:
     \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item \emph{mV}, modified Verlet,
-        \item \emph{HNC}, Hypernetted Chain,
+        \item \emph{mV}, modified Verlet
+        \item \emph{HNC}, Hypernetted Chain
         \item \emph{Neural network}, neural network approximation.
     \end{enumerate*}
     }
@@ -353,8 +336,8 @@ simulations, where such partition is not needed.
     \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.45.pdf}
     \caption[Radial distribution function, $\phi=0.45$.]{The radial distribution function for density value $\phi=0.45$ obtained from computer simulations, and three different approximations:
     \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item \emph{mV}, modified Verlet,
-        \item \emph{HNC}, Hypernetted Chain,
+        \item \emph{mV}, modified Verlet
+        \item \emph{HNC}, Hypernetted Chain
         \item \emph{Neural network}, neural network approximation.
     \end{enumerate*}
     }
@@ -368,8 +351,7 @@ low and high density regimes.
 
 \subsection{Low densities}
 To begin the discussion, this section will deal with the low 
-density values $\phi=\numlist{0.15; 0.25}$, which are shown in plots (a) and (b) in 
-figure~\ref{fig:rdf45}.
+density values $\phi=\numlist[list-pair-separator={\enspace\text{and}\enspace}]{0.15;0.25}$, which are shown in figures~(\ref{fig:rdf15}, \ref{fig:rdf25}).
 The results show that, at low densities, the HNC and neural network approximations are
 more precise than the modified Verlet approximation. Although, all
 approximations seem to fall short compared to computer simulations. It is specially
@@ -392,8 +374,9 @@ to the one seen from computer simulations, and that the modified Verlet approxim
 closer to the form found in the computer simulations results.
 
 \subsection{High densities}
-We now turn our discussion to the high density values of $\phi=\numlist{0.35; 0.45}$,
-represented in plots (c) and (d) in the figure~\ref{fig:estructuras-neuronales}.
+We now turn our discussion to the high density values of
+$\phi=\numlist[list-pair-separator={\enspace\text{and}\enspace}]{0.35; 0.45}$,
+represented in figures~(\ref{fig:rdf35}, \ref{fig:rdf45}).
 In the same spirit as before with the low densities, the HNC and neural network 
 approximations are not precise when compared to computer simulations. In this case,
 the Percus-Yevick and modified Verlet are even more precise, which was expected.
@@ -401,8 +384,8 @@ This is because the HNC approximation is a very good approximation for long rang
 interaction potentials (Ref faltante), and Percus-Yevick as well as modified Verlet are 
 better suited for short range potentials, such as the one studied here.
 In this case, modified Verlet is the most precise of the approximations used, which
-can be appraised in figure~\ref{fig:estructuras-neuronales}, where the main peak
-is well estimated by the approximation when compared to the computer simulation
+can be appraised in figures~(\ref{fig:rdf35}, \ref{fig:rdf45}), where the 
+main peak is well estimated by the approximation when compared to the computer simulation
 results. However, the HNC and neural network approximation overestimate this property.
 
 Further, the functional form of $g(r^*)$ computed with the neural network approximation 
