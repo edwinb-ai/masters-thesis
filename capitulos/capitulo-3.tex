@@ -282,9 +282,8 @@ of the input layer. This function was chosen due to the fact that the other most
 functions ($\tanh, \text{softmax}$, etc.) generated numerical instabilities in the
 algorithm when training the neural network.
 
-\subsection{Physical parameters}
+\subsection{Physical parameters and simulations}
 
-% TODO: Poner la referencia a la ecuación del potencial
 To solve the OZ equation a cutoff radius of $r_c=7\sigma$ was used, where $\sigma$ is the
 particle diameter and it was fixed to be $\sigma=1$.
 The interaction potential used was the pseudo hard sphere potential (Ref a ec.), both
@@ -295,7 +294,13 @@ with $\Delta \phi = \num{0.05}$.
 For each density value, a grid of 70 points was used to ensure convergence of the iterative
 algorithm when solving for the OZ equation. This was not the case for the computer 
 simulations, where such partition is not needed.
-% TODO: Escribir sobre los parámetros empleados para hacer la simulación, cómo se hizo la simulación, qué técnica, y todo lo necesario para reproducir los resultados. Puede ser una nueva subsección, o renombrar esta subsección a algo más general y que solamente sea un párrafo largo.
+
+Computer simulations results were obtained using the traditional Monte Carlo simulation
+method for the NVT method (Ref a marco teórico). The total number of particles was 2197,
+the system was equilibrated for a total of 10 million Monte Carlo steps, and the radial
+distribution functions were obtained from the sampling of 7 million steps.
+The same pseudo hard sphere potential (Ref a ecuación) was used, instead of the true hard 
+sphere potential, for a fair comparison with the results obtained from the OZ equation.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 4
