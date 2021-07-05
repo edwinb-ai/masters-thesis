@@ -247,22 +247,26 @@ $\eta=\num{1e-4}$ for all the experiments.
 \begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/neural-network.pdf}
     \vspace{-1.5cm}
-    \caption[General schematics of a neural network.]{Cartoon of a fully connected multilayer neural network. Note that there are two \emph{hidden layers}. The circles represent the \emph{nodes} or \emph{units} used to compute the final output. These nodes are using an activation function to account for nonlinearities. The top-most nodes that seem different from the main nodes are known as the \emph{bias} nodes. The real architecture used in this chapter is larger, with many more nodes and connections, but the topology is the same.}
+    \caption[General schematics of a neural network.]{Cartoon of a fully connected multilayer neural network. Note that there is one \emph{hidden layer}. The circles represent the \emph{nodes} or \emph{units} used to compute the final output. These nodes are being evaluated by an activation function to account for nonlinearities. The top-most nodes that seem different from the main nodes are known as the \emph{bias} nodes. The real architecture used in this chapter is larger, with many more nodes and connections, but the topology is the same.}
     \label{fig:nn-esquema}
 \end{figure}
 
 The neural network architecture used in all the experiments is very similar to the one
 shown in figure~\ref{fig:nn-esquema}, with the exception of the number of nodes in all the
 layers.
-Particularly, the neural network is made of \emph{four layers}, all connected among them.
-There is an \emph{input} layer, two \emph{hidden} layers, and a final \emph{output} layers.
+Particularly, the neural network is made of \emph{three layers}, all connected among them.
+There is an \emph{input} layer, one \emph{hidden} layer, and a final \emph{output} layer.
 All layers have the same number of nodes, which is 4096. Additional nodes are added to the
 final two layers that serve as the \emph{bias}.
 
 All the weights must be initialized appropiately, and in this case the Glorot uniform
 distribution was used~\cite{glorotUnderstandingDifficultyTraining2010}, which has proven
-to be a way to help the convergence of neural networks. This means that the weights
-are initialized as $\theta_{ij} \sim \mathcal{U} \left[ -\frac{6}{\sqrt{(in + out)}}, \frac{6}{\sqrt{(in + out)}} \right]$,
+to be an excellent way to help the convergence of neural networks.
+When using the Glorot uniform distribution, the weights are initialized as
+$
+\theta_{ij} \sim \mathcal{U} \left[ -\frac{6}{\sqrt{(in + out)}},
+\frac{6}{\sqrt{(in + out)}} \right]
+$,
 where $\mathcal{U}$ is the uniform probability distribution;
 $in$ represents the number of units in the input layer; and $out$ the number of
 units in the output layer. All bias nodes were initialized to be zero.
