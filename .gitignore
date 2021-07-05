@@ -14,3 +14,6 @@
 *.bbl
 *.blg
 main-blx.bib
+
+## Editor
+.vscode/
