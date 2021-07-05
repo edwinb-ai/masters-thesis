@@ -151,12 +151,11 @@ that controls the step size at each iteration while moving toward the minimum
 of a cost function. This value needs to be \emph{tuned} accordingly, so
 that the method converges properly.
 
-% TODO: Cambiar el nombre del apéndice
 Regardless of the particular expression for the weight updates, every method
 based on the gradient descent method \emph{requires} the gradient information from
 the cost function with respect to the weights, $\nabla_{\theta} J(\theta)$.
 In this particular case, the detailed computation of the gradient is described in
-the appendix (Ref a apéndice).
+the appendix~\ref{AppendixA}.
 Once this information is obtained, all that is left is to build an algorithm that
 can correctly use this training scheme and solve the OZ equation.
 
@@ -167,7 +166,7 @@ of the Ornstein-Zernike using neural networks is now presented.
 Thus, we propose the following steps to solve the OZ using the parametrization~\eqref{eq:parametrizacion}:
 
 \begin{enumerate}
-    \item Given a particular interaction potential $\beta u(\vecr)$, equation~\eqref{eq:parametrizacion} is used to obtain the value of the direct correlation function $c(\vecr; \theta)$, which now depends implicitly on the weights of $\nnet$. In this step, an initial value for $\gamma_{n}(\vecr)$ is needed, which is initialized based on the five-point Ng methodology. (Ref a apéndice)
+    \item Given a particular interaction potential $\beta u(\vecr)$, equation~\eqref{eq:parametrizacion} is used to obtain the value of the direct correlation function $c(\vecr; \theta)$, which now depends implicitly on the weights of $\nnet$. In this step, an initial value for $\gamma_{n}(\vecr)$ is needed, which is initialized based on the five-point Ng methodology~\ref{AppendixA}.
     \item The newly found function $c(\vecr; \theta)$ is transformed to a reciprocal space by means of the Fourier transform yielding the new function $\hat{c}(\veck; \theta)$.
     \item Then, the full OZ equation(Ref a ec) is Fourier transformed. Using the information from the previous step, a new estimation of the indirect correlation function is obtained, $\hat{\gamma}_{n+1}(\veck; \theta)$.
     \item The Fourier transform is applied once again to return all the functions to real space. With this operation, a new estimation $\gamma_{n+1}(\vecr; \theta)$ is computed from the transformed function, $\hat{\gamma}_{n+1}(\veck; \theta)$.
