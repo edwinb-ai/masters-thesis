@@ -416,6 +416,31 @@ obtained from computer simulations.
 \end{figure}
 
 \subsection{Does the neural network approximation reduce to the HNC bridge function?}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.15.pdf}
+    \caption[Comparison between weights, $\phi=0.15$.]{Some weights.}
+    \label{fig:pesos15}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.25.pdf}
+    \caption[Comparison between weights, $\phi=0.25$.]{Some weights.}
+    \label{fig:pesos25}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.35.pdf}
+    \caption[Comparison between weights, $\phi=0.35$.]{Some weights.}
+    \label{fig:pesos35}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.45.pdf}
+    \caption[Comparison between weights, $\phi=0.45$.]{Some weights.}
+    \label{fig:pesos45}
+\end{figure}
+
 It would seem as though the neural network approximation reduces to the HNC
 approximation, as seen in the results from the previous section. In this section
 we shall investigate this matter in detail.
@@ -429,4 +454,5 @@ the weights follow the linear expression
 $\theta_{t} = \alpha \theta_{i} + \beta + \epsilon$, with
 $\epsilon \sim \mathcal{N}(\mu, \sigma^{2})$ a normal random variable with mean
 $\mu$ and standard deviation $\sigma$.
-% TODO Hablar sobre la poca desviación de los resultados, sobre todo hacer hincapié en el hecho de que, el no moverse mucho del cero implica que HNC es un mínimo estable y por lo tanto los pesos prefieren quedarse oscilando en este valor. Por otro lado, hablar sobre la importancia de que un valor aleatorio (o función aleatoria, matrices aleatorias, algo semejante) puede aproximar una función puente, pues esto no es algo trivial. Esto significa que se pueden aproximar las expansiones diagramáticas mediante procesos aleatorios, lo cual tiene implicaciones teóricas interesantes.
+% TODO: Hablar sobre la poca desviación de los resultados, sobre todo hacer hincapié en el hecho de que, el no moverse mucho del cero implica que HNC es un mínimo estable y por lo tanto los pesos prefieren quedarse oscilando en este valor. Por otro lado, hablar sobre la importancia de que un valor aleatorio (o función aleatoria, matrices aleatorias, algo semejante) puede aproximar una función puente, pues esto no es algo trivial. Esto significa que se pueden aproximar las expansiones diagramáticas mediante procesos aleatorios, lo cual tiene implicaciones teóricas interesantes.
+% TODO: El hecho de que los valores estén alejados del centro significa que la desviación de la media es grande. Esto puede implicar que, entre más cerca se esté del centro, menor es el cambio entre pesos entrenados e iniciales. Esto no da un argumento de porqué se reduce a HNC, sino que puede dar un argumento sobre la dinámica de entrenamiento. Esto puede ser el argumento de que quizás el hecho de que se queda alrededor de HNC porque es un mínimo ocasiona que los pesos no cambien demasiado al ser entrenados.
