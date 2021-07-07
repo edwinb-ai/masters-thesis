@@ -247,11 +247,13 @@
 \usepackage{xcolor} % Required for specifying custom colours
 
 %% Blue color
-\definecolor{GtoBlue}{HTML}{0B4F8D}
+\definecolor{GtoBlue}{HTML}{344B74}
 %% Gold color
-\definecolor{GtoGold}{HTML}{958956}
+\definecolor{GtoGold}{HTML}{9E915C}
 %% Yellow color
-\definecolor{GtoYellow}{HTML}{FFD466}
+\definecolor{GtoYellow}{HTML}{FED060}
+%% For citations
+\definecolor{CitationColor}{HTML}{ff5c4d}
 
 %----------------------------------------------------------------------------------------
 %	MARGINS
@@ -529,9 +531,9 @@ bookmarksopen=true,
 bookmarksopenlevel=0,
 hypertexnames=false,
 colorlinks=true,% Set to false to disable coloring links
-citecolor=magenta,% The color of citations
-linkcolor=GtoGold,% The color of references to document elements (sections, figures, etc)
-urlcolor=GtoBlue,% The color of hyperlinks (URLs)
+citecolor=CitationColor,% The color of citations
+linkcolor=GtoBlue,% The color of references to document elements (sections, figures, etc)
+urlcolor=GtoGold,% The color of hyperlinks (URLs)
 pdfstartview={FitV},
 unicode,
 breaklinks=true,

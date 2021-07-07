@@ -187,9 +187,9 @@ This expression is also known as the \emph{mean squared error}~\cite{goodfellowD
 Here, we sum all the $N$ elements of the squared difference between estimates $\gamma_{n+1}$
 and $\gamma_{n}$. The paramater $\epsilon \in [0,1]$ is a tolerance value that indicates an 
 upper bound for the error between estimations. When the computed error is below this 
-tolerance value, we consider the algorithm to have converged to some minimum.
-In particular, the numerical tolerance in all the experiments was fixed to be
-$\epsilon = \num{5e-6}$.
+tolerance value, we consider the algorithm to have converged to a particular minimum.
+Specifically, the numerical tolerance in all the experiments was fixed to be
+$\epsilon = \num{1e-5}$.
 This means that the weights are adjusted until the successive estimations of the $\gamma$
 functions are equal between them, up to the defined tolerance $\epsilon$.
 
@@ -199,12 +199,12 @@ functions are equal between them, up to the defined tolerance $\epsilon$.
 \section{Implementation}
 In this section we detail the most important aspects about the implementation of the
 method described in the previous section. This includes the topology of the neural network,
-the optimization method, and the choice of activation function. The physical parameters used
-to solve the OZ equation are also outlined.
+the optimization method, and the choice of activation function. The physical parameters
+as well as the computer simulations methods used to solve the OZ equation are also outlined.
 
 \subsection{Choice of optimization algorithm}
 The general rule for the weight update based on gradient descent~\eqref{eq:gradiente} was
-implemented to solve the optimization problem, but numerical instabilities rendered this 
+implemented to solve the optimization problem, but numerical inconsistencies rendered this 
 method unstable and convergence was almost never achieved.
 
 To solve this issue, the \emph{Adam}~\cite{kingmaAdamMethodStochastic2017} optimization 
@@ -213,10 +213,10 @@ of neural networks, even more so when the gradient is expected to be \emph{spars
 most of the elements of the gradient itself are zeros.
 The \emph{Adam} method uses several rules to adjust the descent direction of the gradient,
 as well as the hyperparameters related to the acceleration mechanism of the method.
-Notably, there are two important hyperparameters used by the method, $\beta_1$,
+Notably, there are two important hyperparameters used by the method; $\beta_1$,
 which controls the moving average of the computed gradient; and $\beta_2$, which controls
-the gradient squared. Both parameters are necessary for the optimal convergence of the
-algorithm.
+the value of the gradient squared. Both parameters are necessary for the optimal 
+convergence of the algorithm.
 
 The equations that define the optimization method are the following
 
@@ -279,8 +279,8 @@ function which has the form
 
 This activation function is applied to all the nodes in the layers, with the exception
 of the input layer. This function was chosen due to the fact that the other most common
-functions ($\tanh, \text{softmax}$, etc.) generated numerical instabilities in the
-algorithm when training the neural network.
+functions ($\tanh, \text{softmax}$, etc.) were numerically unstable in the training process 
+of the neural network.
 
 \subsection{Physical parameters and simulations}
 
@@ -299,22 +299,24 @@ Computer simulations results were obtained using the traditional Monte Carlo sim
 method for the NVT ensemble (Ref a marco teórico). The total number of particles was 2197,
 the system was equilibrated for a total of 10 million Monte Carlo steps, and the radial
 distribution functions were obtained from the sampling of 7 million steps, after
-the system was equilibrated.
-The same pseudo hard sphere potential (Ref a ecuación) was used, instead of the true hard 
-sphere potential, for a fair comparison with the results obtained from the OZ equation.
+the system was equilibrated. To reduce the number of computations, a cutoff radius of
+half the size of the simulation box was used for the evaluation of the interaction 
+potential. Periodic boundary conditions were applied accordingly. The same pseudo hard 
+sphere potential (Ref a ecuación) was used, instead of the true hard sphere potential, for 
+a fair comparison with the results obtained from the OZ equation.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 4
 %----------------------------------------------------------------------------------------
 \section{Results}
-It is time to investigate the results obtained from the proposed methodology, using all the 
-elements previously described. The main point of discussion will be the radial distribution
+It is now time to investigate the results obtained from the proposed methodology, using all the elements previously described.
+The main point of discussion will be the radial distribution
 function \textemdash $g(r^*)$ \textemdash for different values of densities, both in the
 low and high density regimes.
 
 \subsection{Low densities}
 To begin the discussion, this section will deal with the low 
-density values $\phi=\numlist[list-pair-separator={\enspace\text{and}\enspace}]{0.15;0.25}$, which are shown in figures~(\ref{fig:rdf15}, \ref{fig:rdf25}).
+density values of $\phi=\numlist[list-pair-separator={\enspace\text{and}\enspace}]{0.15;0.25}$, which are shown in figures~(\ref{fig:rdf15}, \ref{fig:rdf25}).
 The results show that, at low densities, the HNC and neural network approximations are
 more precise than the modified Verlet approximation. Although, all
 approximations seem to fall short compared to computer simulations. It is specially
@@ -322,8 +324,8 @@ important to note that the neural network approximation is a little bit more pre
 the HNC approximation, which can be qualitatively appraised by observing the estimation of 
 the main peak in the radial distribution function. This peak can be found in the vicinity 
 of $r^* = \sigma$. Nevertheless, it is still overestimated, which is the same case for the
-HNC approximation. However, this is not the case for the Percus-Yevick and modified Verlet 
-approximations, which undervalue the main peak.
+HNC approximation. However, this is not the case for the modified Verlet approximation, 
+which undervalue the main peak.
 
 It is also important to notice the functional form of $g(r^*)$. For the HNC and neural
 network approximations, it appears to have the same form between approximations, and it 
@@ -342,10 +344,10 @@ $\phi=\numlist[list-pair-separator={\enspace\text{and}\enspace}]{0.35; 0.45}$,
 represented in figures~(\ref{fig:rdf35}, \ref{fig:rdf45}).
 In the same spirit as before with the low densities, the HNC and neural network 
 approximations are not precise when compared to computer simulations. In this case,
-the Percus-Yevick and modified Verlet are even more precise, which was expected.
+the modified Verlet bridge function approximation is even more precise, which was expected.
 This is because the HNC approximation is a very good approximation for long range
-interaction potentials (Ref faltante), and Percus-Yevick as well as modified Verlet are 
-better suited for short range potentials, such as the one studied here.
+interaction potentials (Ref faltante), whereas the modified Verlet is better suited for 
+short range potentials, such as the one studied here.
 In this case, modified Verlet is the most precise of the approximations used, which
 can be appraised in figures~(\ref{fig:rdf35}, \ref{fig:rdf45}), where the 
 main peak is well estimated by the approximation when compared to the computer simulation
@@ -357,8 +359,8 @@ obtained is similar to the one obtained with the HNC approximation. This was als
 case for low densities. This result is important, backing the hypothesis that the
 neural network might reduce to the HNC approximation.
 This would imply that the neural network is in fact approximating the bridge function
-$B(\vecr) \approx 0$. If we now pay attention to the Percus-Yevick and modified Verlet
-approximations, we can see that the modified Verlet bridge function is the most precise
+$B(\vecr) \approx 0$. If we now pay attention to the modified Verlet
+approximation, we can see that the modified Verlet bridge function is the most precise
 out of all the set of bridge functions used. In other words, we observe that this
 estimation predicts the main peak well, as can be seen when compared to the results
 obtained from computer simulations.
@@ -372,6 +374,7 @@ obtained from computer simulations.
         \item \emph{HNC}, Hypernetted Chain
         \item \emph{Neural network}, neural network approximation.
     \end{enumerate*}
+    Inset shows the region close to the second peak.
     }
     \label{fig:rdf15}
 \end{figure}
@@ -385,6 +388,7 @@ obtained from computer simulations.
         \item \emph{HNC}, Hypernetted Chain
         \item \emph{Neural network}, neural network approximation.
     \end{enumerate*}
+    Inset shows the region close to the second peak.
     }
     \label{fig:rdf25}
 \end{figure}
@@ -398,6 +402,7 @@ obtained from computer simulations.
         \item \emph{HNC}, Hypernetted Chain
         \item \emph{Neural network}, neural network approximation.
     \end{enumerate*}
+    Inset shows the region close to the second peak.
     }
     \label{fig:rdf35}
 \end{figure}
@@ -411,6 +416,7 @@ obtained from computer simulations.
         \item \emph{HNC}, Hypernetted Chain
         \item \emph{Neural network}, neural network approximation.
     \end{enumerate*}
+    Inset shows the region close to the second peak.
     }
     \label{fig:rdf45}
 \end{figure}
@@ -419,25 +425,25 @@ obtained from computer simulations.
 
 \begin{figure}
     \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.15.pdf}
-    \caption[Comparison between weights, $\phi=0.15$.]{Some weights.}
+    \caption[Comparison between weights, $\phi=0.15$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.15$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.} 
     \label{fig:pesos15}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.25.pdf}
-    \caption[Comparison between weights, $\phi=0.25$.]{Some weights.}
+    \caption[Comparison between weights, $\phi=0.25$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.25$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
     \label{fig:pesos25}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.35.pdf}
-    \caption[Comparison between weights, $\phi=0.35$.]{Some weights.}
+    \caption[Comparison between weights, $\phi=0.35$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.35$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
     \label{fig:pesos35}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.45.pdf}
-    \caption[Comparison between weights, $\phi=0.45$.]{Some weights.}
+    \caption[Comparison between weights, $\phi=0.45$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.45$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
     \label{fig:pesos45}
 \end{figure}
 
@@ -453,6 +459,6 @@ weights, $\theta_{i}$, and the trained weights, $\theta_{t}$. In other words,
 the weights follow the linear expression
 $\theta_{t} = \alpha \theta_{i} + \beta + \epsilon$, with
 $\epsilon \sim \mathcal{N}(\mu, \sigma^{2})$ a normal random variable with mean
-$\mu$ and standard deviation $\sigma$.
+$\mu$ and variance $\sigma^2$.
 % TODO: Hablar sobre la poca desviación de los resultados, sobre todo hacer hincapié en el hecho de que, el no moverse mucho del cero implica que HNC es un mínimo estable y por lo tanto los pesos prefieren quedarse oscilando en este valor. Por otro lado, hablar sobre la importancia de que un valor aleatorio (o función aleatoria, matrices aleatorias, algo semejante) puede aproximar una función puente, pues esto no es algo trivial. Esto significa que se pueden aproximar las expansiones diagramáticas mediante procesos aleatorios, lo cual tiene implicaciones teóricas interesantes.
 % TODO: El hecho de que los valores estén alejados del centro significa que la desviación de la media es grande. Esto puede implicar que, entre más cerca se esté del centro, menor es el cambio entre pesos entrenados e iniciales. Esto no da un argumento de porqué se reduce a HNC, sino que puede dar un argumento sobre la dinámica de entrenamiento. Esto puede ser el argumento de que quizás el hecho de que se queda alrededor de HNC porque es un mínimo ocasiona que los pesos no cambien demasiado al ser entrenados.
