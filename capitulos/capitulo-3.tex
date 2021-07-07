@@ -440,24 +440,6 @@ result as the HNC approximation.
     \label{fig:pesos15}
 \end{figure}
 
-\begin{figure}
-    \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.25.pdf}
-    \caption[Comparison between weights, $\phi=0.25$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.25$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
-    \label{fig:pesos25}
-\end{figure}
-
-\begin{figure}
-    \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.35.pdf}
-    \caption[Comparison between weights, $\phi=0.35$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.35$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
-    \label{fig:pesos35}
-\end{figure}
-
-\begin{figure}
-    \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.45.pdf}
-    \caption[Comparison between weights, $\phi=0.45$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.45$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
-    \label{fig:pesos45}
-\end{figure}
-
 We shall now examine the evolution of the weights $\theta$ from
 $\nnet$, from the moment it was initialized to the moment its training finalized.
 A histogram of this for each density value can be seen in
@@ -488,6 +470,12 @@ the OZ equation, and solutions around this particular approximation might be as 
 solutions. This, however, does not answer the question of why the spread is larger when
 higher densities are inspected.
 
+\begin{figure}
+    \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.25.pdf}
+    \caption[Comparison between weights, $\phi=0.25$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.25$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
+    \label{fig:pesos25}
+\end{figure}
+
 \subsection{The Hypernetted Chain approximation as a stable minimum}
 It would seem that the way the weights are updated, albeit with minimal change from its
 initial values, is due to the fact of having reached a minimum already.
@@ -517,6 +505,18 @@ enough. However, for the \emph{higher density} values, the approximation is not 
 and the optimization method was trying to adjust the weights accordingly, even if
 unsuccessfully.
 
+\begin{figure}
+    \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.35.pdf}
+    \caption[Comparison between weights, $\phi=0.35$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.35$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
+    \label{fig:pesos35}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.45.pdf}
+    \caption[Comparison between weights, $\phi=0.45$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.45$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
+    \label{fig:pesos45}
+\end{figure}
+
 \subsection{Does the neural network reduce to HNC?}
 For the low density regimes, HNC is an accurate approximation for the interaction potential.
 Hence, the neural network is an accurate approximation. On the contrary, for high density
@@ -529,7 +529,22 @@ We only possess \emph{statistical evidence} from the training dynamics that the 
 network weights do not change much throughout its training.
 
 This observation might shed the light into possibilities of changing the way the neural
-network propagates its values and return an output.
+network propagates its values and return an output. For example, a modification to the
+neural network topology might be in order, such that introducing important 
+nonlinearities that are consistent with the physical properties of the system can yield
+better results. For the case of hard spheres, the work by Malijevský and Labík~\cite{malijevskyBridgeFunctionHard1987}
+shows that the bridge function has particular functional properties, such that the
+bridge function is non-negative and oscillating, among others. These properties can then
+be consolidated within the neural network structure and investigate if the neural network 
+weights change considerably.
+From this, one might expect two outcomes. Firstly, the case where the \emph{weights change},
+which would mean that adding nonlinearities according to some aspect of the interaction 
+potential prove benefitial for the weight update and training dynamics.
+Secondly, the case where the \emph{weights do not change}. In this case, we might
+be able the have stronger evidence that, regardless of the neural network structure,
+this kind of approximation will have a high chance of reproducing the HNC results.
+In any case, in either scenario we do not have the information to assess if the neural
+network might actually be \emph{more precise} than it is in its current form.
 
 % TODO: Hablar sobre la poca desviación de los resultados, sobre todo hacer hincapié en el hecho de que, el no moverse mucho del cero implica que HNC es un mínimo estable y por lo tanto los pesos prefieren quedarse oscilando en este valor. Por otro lado, hablar sobre la importancia de que un valor aleatorio (o función aleatoria, matrices aleatorias, algo semejante) puede aproximar una función puente, pues esto no es algo trivial. Esto significa que se pueden aproximar las expansiones diagramáticas mediante procesos aleatorios, lo cual tiene implicaciones teóricas interesantes.
 % TODO: El hecho de que los valores estén alejados del centro significa que la desviación de la media es grande. Esto puede implicar que, entre más cerca se esté del centro, menor es el cambio entre pesos entrenados e iniciales. Esto no da un argumento de porqué se reduce a HNC, sino que puede dar un argumento sobre la dinámica de entrenamiento. Esto puede ser el argumento de que quizás el hecho de que se queda alrededor de HNC porque es un mínimo ocasiona que los pesos no cambien demasiado al ser entrenados.
