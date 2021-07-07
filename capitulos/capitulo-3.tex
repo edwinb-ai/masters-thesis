@@ -315,17 +315,19 @@ function \textemdash $g(r^*)$ \textemdash for different values of densities, bot
 low and high density regimes.
 
 \subsection{Low densities}
-To begin the discussion, this section will deal with the low 
+In this section we will deal with the low 
 density values of $\phi=\numlist[list-pair-separator={\enspace\text{and}\enspace}]{0.15;0.25}$, which are shown in figures~(\ref{fig:rdf15}, \ref{fig:rdf25}).
 The results show that, at low densities, the HNC and neural network approximations are
 more precise than the modified Verlet approximation. Although, all
-approximations seem to fall short compared to computer simulations. It is specially
-important to note that the neural network approximation is a little bit more precise than
-the HNC approximation, which can be qualitatively appraised by observing the estimation of 
-the main peak in the radial distribution function. This peak can be found in the vicinity 
-of $r^* = \sigma$. Nevertheless, it is still overestimated, which is the same case for the
-HNC approximation. However, this is not the case for the modified Verlet approximation, 
-which undervalue the main peak.
+approximations seem to fall short compared to computer simulations. This is seen espcially
+in the neighborhood around the second peak, which are represented in the insets from
+figures~(\ref{fig:rdf15}, \ref{fig:rdf25}).
+It is specially important to note that the neural network approximation is a little bit 
+more precise than the HNC approximation, which can be qualitatively appraised by observing 
+the estimation of the main peak in the radial distribution function. This peak can be found 
+in the vicinity of $r^* = 1$. Nevertheless, it is still overestimated, which is the 
+same case for the HNC approximation. However, this is not the case for the modified Verlet 
+approximation, which undervalue the main peak.
 
 It is also important to notice the functional form of $g(r^*)$. For the HNC and neural
 network approximations, it appears to have the same form between approximations, and it 
@@ -339,7 +341,7 @@ to the one seen from computer simulations, and that the modified Verlet approxim
 closer to the form found in the computer simulations results.
 
 \subsection{High densities}
-We now turn our discussion to the high density values of
+We now turn our attention to the high density values of
 $\phi=\numlist[list-pair-separator={\enspace\text{and}\enspace}]{0.35; 0.45}$,
 represented in figures~(\ref{fig:rdf35}, \ref{fig:rdf45}).
 In the same spirit as before with the low densities, the HNC and neural network 
@@ -374,7 +376,7 @@ obtained from computer simulations.
         \item \emph{HNC}, Hypernetted Chain
         \item \emph{Neural network}, neural network approximation.
     \end{enumerate*}
-    Inset shows the region close to the second peak.
+    Inset shows the region close to the peak about $r^{*}=2$.
     }
     \label{fig:rdf15}
 \end{figure}
@@ -388,7 +390,7 @@ obtained from computer simulations.
         \item \emph{HNC}, Hypernetted Chain
         \item \emph{Neural network}, neural network approximation.
     \end{enumerate*}
-    Inset shows the region close to the second peak.
+    Inset shows the region close to the peak about $r^{*}=2$.
     }
     \label{fig:rdf25}
 \end{figure}
@@ -402,7 +404,7 @@ obtained from computer simulations.
         \item \emph{HNC}, Hypernetted Chain
         \item \emph{Neural network}, neural network approximation.
     \end{enumerate*}
-    Inset shows the region close to the second peak.
+    Inset shows the region close to the peak about $r^{*}=2$.
     }
     \label{fig:rdf35}
 \end{figure}
@@ -416,12 +418,21 @@ obtained from computer simulations.
         \item \emph{HNC}, Hypernetted Chain
         \item \emph{Neural network}, neural network approximation.
     \end{enumerate*}
-    Inset shows the region close to the second peak.
+    Inset shows the region close to the peak about $r^{*}=2$.
     }
     \label{fig:rdf45}
 \end{figure}
 
-\subsection{Does the neural network approximation reduce to the HNC bridge function?}
+\section{Discussion}
+It would seem as though the neural network approximation reduces to the HNC
+approximation, as seen in the results from the previous section. In this section
+we shall investigate this matter in detail.
+We will also continue the discussion of the results presented and try to make sense
+of the training dynamics of the neural network. This is an important topic to
+address due to the clear results that the neural network provides almost the same
+result as the HNC approximation.
+
+\subsection{Weight evolution of the neural network}
 
 \begin{figure}
     \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.15.pdf}
@@ -447,18 +458,78 @@ obtained from computer simulations.
     \label{fig:pesos45}
 \end{figure}
 
-It would seem as though the neural network approximation reduces to the HNC
-approximation, as seen in the results from the previous section. In this section
-we shall investigate this matter in detail.
-
-One way to approach this is to investigate the evolution of the weights $\theta$ from
+We shall now examine the evolution of the weights $\theta$ from
 $\nnet$, from the moment it was initialized to the moment its training finalized.
-A histogram of this can be seen in figure (Ref a figura). We can observe that the way
-the weights show a diagonal represent a linear relationship between the initial
-weights, $\theta_{i}$, and the trained weights, $\theta_{t}$. In other words,
-the weights follow the linear expression
+A histogram of this for each density value can be seen in
+figures~(\ref{fig:pesos15}, \ref{fig:pesos25}, \ref{fig:pesos35}, \ref{fig:pesos45}).
+We can observe that the way the weights show a diagonal represent a linear relationship 
+between the initial weights, $\theta_{i}$, and the trained weights, $\theta_{t}$. In other 
+words, the weights follow the linear expression
 $\theta_{t} = \alpha \theta_{i} + \beta + \epsilon$, with
 $\epsilon \sim \mathcal{N}(\mu, \sigma^{2})$ a normal random variable with mean
-$\mu$ and variance $\sigma^2$.
+$\mu$ and variance $\sigma^2$. The noise term can be any other continuous probability 
+distribution, but without loss of generality the normal distribution was chosen for
+our purposes. For now, we are not interested in the values of $\alpha$ or $\beta$,
+but merely on the linear relationship between them.
+
+One thing to notice is the fact that the higher the value for the density, the larger
+the variance is. If we observe the variance for the density $\phi=0.15$ in figure~\ref{fig:pesos15}
+we see that the variance is small due to the fact that the blue shaded region around
+the diagonal is close to it. If we now see the same figure~\ref{fig:pesos45} for the 
+density value of $\phi=0.45$ we see that this shaded region is significantly larger.
+This would mean that, at higher densities, the weights of $\nnet$ are more spread out
+from the mean, and the neural network might have adjusted its weights to account for
+different computations of the bridge function.
+
+The most interesting part of this is the fact that the weights from initialization
+do not change much throughout the training scheme, which would imply that a local minimum
+has already been found. This might be the case, for the HNC is actually a solution to
+the OZ equation, and solutions around this particular approximation might be as well 
+solutions. This, however, does not answer the question of why the spread is larger when
+higher densities are inspected.
+
+\subsection{The Hypernetted Chain approximation as a stable minimum}
+It would seem that the way the weights are updated, albeit with minimal change from its
+initial values, is due to the fact of having reached a minimum already.
+We must recall that the weight update and neural network training is essentially an
+optimization problem~\eqref{eq:optimizacion}, and the main goal is to find a minimum
+of the cost function~\eqref{eq:costo}. With the results presented so far, it might be
+possible to postulate that the \emph{HNC approximation is a stable minimum} for the
+neural network $\nnet$.
+This would answer the question of why the weights of the neural network during training
+explored in the previous section did not change very much throughout the numerical scheme.
+Because if we have already found a minimum, the optimization algorithm might end up
+oscillating in the proximity of this value.
+
+On the other hand, this idea could also give answer to the question of why the spread
+is large for higher density values. If we pay close attention to the approximation
+results for the \emph{low density} values in figure~\ref{fig:rdf15}, we can see that
+although every approximation given a low accuracy estimation of the second peak as shown
+in the inset, for the main peak, the neural network approximation is very accurate.
+If we now observe the figure~\ref{fig:rdf45} which refers to the \emph{high density} value
+we can see that the estimation is quite poor.
+Let us now relate this to the weight evolution. For the \emph{low density} regime, the 
+weight evolution has a \emph{lower variance}; for the \emph{high density} regime, there
+is now a \emph{higher variance} in the weight evolution.
+This suggests that, for \emph{lower density} values, there was no need to adjust the
+weights more than shown in figure~\ref{fig:pesos15} because the approximation is accurate
+enough. However, for the \emph{higher density} values, the approximation is not good enough
+and the optimization method was trying to adjust the weights accordingly, even if
+unsuccessfully.
+
+\subsection{Does the neural network reduce to HNC?}
+For the low density regimes, HNC is an accurate approximation for the interaction potential.
+Hence, the neural network is an accurate approximation. On the contrary, for high density
+regimes, both approximation fail to provide an accurate solution.
+
+If, in fact, the neural network is oscillating about zero (the HNC approximation), then
+it makes sense that both estimations give the results observed. Yet, we cannot gaurantee
+by any means possible that the neural network reduces to the HNC approximation.
+We only possess \emph{statistical evidence} from the training dynamics that the neural
+network weights do not change much throughout its training.
+
+This observation might shed the light into possibilities of changing the way the neural
+network propagates its values and return an output.
+
 % TODO: Hablar sobre la poca desviación de los resultados, sobre todo hacer hincapié en el hecho de que, el no moverse mucho del cero implica que HNC es un mínimo estable y por lo tanto los pesos prefieren quedarse oscilando en este valor. Por otro lado, hablar sobre la importancia de que un valor aleatorio (o función aleatoria, matrices aleatorias, algo semejante) puede aproximar una función puente, pues esto no es algo trivial. Esto significa que se pueden aproximar las expansiones diagramáticas mediante procesos aleatorios, lo cual tiene implicaciones teóricas interesantes.
 % TODO: El hecho de que los valores estén alejados del centro significa que la desviación de la media es grande. Esto puede implicar que, entre más cerca se esté del centro, menor es el cambio entre pesos entrenados e iniciales. Esto no da un argumento de porqué se reduce a HNC, sino que puede dar un argumento sobre la dinámica de entrenamiento. Esto puede ser el argumento de que quizás el hecho de que se queda alrededor de HNC porque es un mínimo ocasiona que los pesos no cambien demasiado al ser entrenados.
