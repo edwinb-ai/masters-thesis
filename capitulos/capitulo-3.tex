@@ -523,7 +523,7 @@ Hence, the neural network is an accurate approximation. On the contrary, for hig
 regimes, both approximation fail to provide an accurate solution.
 
 If, in fact, the neural network is oscillating about zero (the HNC approximation), then
-it makes sense that both estimations give the results observed. Yet, we cannot gaurantee
+it makes sense that both estimations give the results observed. Yet, we cannot guarantee
 by any means possible that the neural network reduces to the HNC approximation.
 We only possess \emph{statistical evidence} from the training dynamics that the neural
 network weights do not change much throughout its training.
@@ -546,5 +546,67 @@ this kind of approximation will have a high chance of reproducing the HNC result
 In any case, in either scenario we do not have the information to assess if the neural
 network might actually be \emph{more precise} than it is in its current form.
 
-% TODO: Hablar sobre la poca desviación de los resultados, sobre todo hacer hincapié en el hecho de que, el no moverse mucho del cero implica que HNC es un mínimo estable y por lo tanto los pesos prefieren quedarse oscilando en este valor. Por otro lado, hablar sobre la importancia de que un valor aleatorio (o función aleatoria, matrices aleatorias, algo semejante) puede aproximar una función puente, pues esto no es algo trivial. Esto significa que se pueden aproximar las expansiones diagramáticas mediante procesos aleatorios, lo cual tiene implicaciones teóricas interesantes.
-% TODO: El hecho de que los valores estén alejados del centro significa que la desviación de la media es grande. Esto puede implicar que, entre más cerca se esté del centro, menor es el cambio entre pesos entrenados e iniciales. Esto no da un argumento de porqué se reduce a HNC, sino que puede dar un argumento sobre la dinámica de entrenamiento. Esto puede ser el argumento de que quizás el hecho de que se queda alrededor de HNC porque es un mínimo ocasiona que los pesos no cambien demasiado al ser entrenados.
+\subsection{Neural networks as random polynomial approximations}
+An interesting result from this investigation is the fact that a random approximation
+provides a solution to the OZ equation. To understand the significance of this,
+we must recall that the bridge function can, in fact, be understood as a
+power series in density~\cite{hansenTheorySimpleLiquids2013}
+
+\begin{equation}
+    b(\vecr) = b^{(2)}(\vecr) \rho^2 + b^{(3)}(\vecr) \rho^2 + \cdots
+    \label{eq:expansion-densidad}
+\end{equation}
+
+where the notation $b^{(n)}(\vecr)$ indicates the $n$-particle bridge function, i.e. the
+estimation of the bridge function for $n$ interacting particles. It is espcially
+important to note that the coefficients $b^{(n)}(\vecr)$ are, in general, very high-dimensional
+integrals that are mostly \emph{intractable}. Almost always, for a given bridge function
+approximation, numerical methods are in order if these coefficients are to be determined.
+Only for special cases can these coefficients be determined in closed form, e.g.
+for the Percus-Yevick approximation the value of 
+$$
+b^{(2)}(\vecr) = -\frac{1}{2}{\left[ g_{1}(\vecr) \right]}^2
+$$
+is known from diagrammatic methods~\cite{hansenTheorySimpleLiquids2013}. In this
+expression, $g_{1}(\vecr)$ represents the single-particle radial distribution function.
+
+Let us now understand the role of random polynomials and their relation to the neural
+network bridge function approximation used in this investigation.
+Let $p_n$ be an algebraic polynomial of the form
+
+\begin{equation}
+    p_n(z) = a_0 + a_1 z + a_2 z^2 + a_3 z^3 + \cdots + a_n z^n, \quad
+    z \in \mathbb{C}
+    \label{eq:random-poly}
+\end{equation}
+
+where the coefficients $a_0, a_1, \dots , a_n$ are independent real-valued random variables
+with finite mean and finite variance. These kind of polynomials have found successful
+applications in some areas of physics~\cite{houghZerosGaussianAnalytic2009}.
+These polynomials have also been the interest of mathematical research~\cite{edelmanHowManyZeros1995}.
+
+Now, by means of the universal approximation theorem, we can regard the neural network
+as a power series similar to~\eqref{eq:random-poly}. To see this more clearly, we
+can think of the weights of the neural network as some coefficients of a power series,
+obtained under some transformation that take in the weights and return the coefficients
+needed to build a power series, as needed.
+Further, if we compare directly equation~\eqref{eq:random-poly}
+and equation~\eqref{eq:expansion-densidad}, we can see that these expressions
+are related through their coefficients, implying that random variables might be able
+to give an answer to the $n$ particle bridge functions in the power series.
+This insight might pave the way for an important way of computing coefficients
+by using neural networks, or related probabilistic methods.
+One of the downsides of this is the fact that the probability
+distribution for the coefficients $a_0, a_1, \dots , a_n$ cannot be known even through the
+training dynamics of the neural network. A naive way of acquiring the underlying 
+probability distribution is to suppose there is
+a unique probability distribution and estimate its mean and variance by maximum likelihood
+estimation techniques~\cite{hastieElementsStatisticalLearning2009}.
+Still, even if there was a relation between random polynomials and the bridge function, 
+there can be no guarantee that the resulting approximation is good enough, or that it could 
+reproduce the physics of the problem properly.
+This is just mere speculation that a deeper relationship between the neural network 
+approximation and the bridge function might be exploitable through the lens of random
+polynomials and probability theory.
+
+% TODO: Cerrar la sección con "concluding remarks" mencionando que se puede reducir el número de parámetros a estimar si se usan métodos de reducción de dimensionalidad. También mencionar que se puede crear un método de optimización donde ahora se exige que la compresibilidad sea la misma para diferentes rutas, junto con sus desventajas. Esto va a dar pauta al siguiente capítulo, donde se hace esta misma experimentación.
