@@ -549,6 +549,16 @@ this kind of approximation will have a high chance of reproducing the HNC result
 In any case, in either scenario we do not have the information to assess if the neural
 network might actually be \emph{more precise} than it is in its current form.
 
+Similar results were found by Goodall and Lee~\cite{goodallInferenceUniversalOrnsteinZernike}
+while using data from simulations. In this approach, a data set was built with several
+functions that came from physical properties of the liquid. If the data set was built
+just using the indirect correlation function, the neural network trained from this data
+set would yield results similar or worse to those obtained with the HNC approximation.
+So, in some sense, the proposed methodology here might actually be better than a fully
+data-driven methodology. However, this just makes a stronger case for the argument that,
+indeed, the neural network might reduce to the HNC approximation and not have enough
+information about the system to adjust the weights properly.
+
 \subsection{Neural networks as random polynomial approximations}
 An interesting result from this investigation is the fact that a random approximation
 provides a solution to the OZ equation. To understand the significance of this,
@@ -566,7 +576,7 @@ important to note that the coefficients $b^{(n)}(\vecr)$ are, in general, very h
 integrals that are mostly \emph{intractable}. Almost always, for a given bridge function
 approximation, numerical methods are in order if these coefficients are to be determined.
 Only for special cases can these coefficients be determined in closed form, e.g.
-for the Percus-Yevick approximation the value of 
+for the Percus-Yevick approximation the value of
 \[
 b^{(2)}(\vecr) = -\frac{1}{2}{\left[ g_{1}(\vecr) \right]}^2
 \]
@@ -595,9 +605,10 @@ obtained under some transformation that take in the weights and return the coeff
 needed to build a power series, as needed.
 Further, if we compare directly \autoref{eq:random-poly}
 and \autoref{eq:expansion-densidad}, we can see that these expressions
-are related through their coefficients, implying that random variables might be able
-to give an answer to the $n$ particle bridge functions in the power series.
-This insight might pave the way for an important way of computing coefficients
+are related through their coefficients, with the exception of the first two terms, implying 
+that random variables might be able to give an answer to the $n$ particle bridge functions 
+in the power series.
+This insight might pave the way for a novel way of computing coefficients
 by using neural networks, or related probabilistic methods.
 One of the downsides of this is the fact that the probability
 distribution for the coefficients $a_0, a_1, \dots , a_n$ cannot be known even through the
@@ -612,4 +623,48 @@ This is just mere speculation that a deeper relationship between the neural netw
 approximation and the bridge function might be exploitable through the lens of random
 polynomials and probability theory.
 
-% TODO: Cerrar la sección con "concluding remarks" mencionando que se puede reducir el número de parámetros a estimar si se usan métodos de reducción de dimensionalidad. También mencionar que se puede crear un método de optimización donde ahora se exige que la compresibilidad sea la misma para diferentes rutas, junto con sus desventajas. Esto va a dar pauta al siguiente capítulo, donde se hace esta misma experimentación.
+\section{Concluding remarks and prospects}
+Even though neural networks can approximate any continuous function,
+it is up to the implementation that uses them
+to profit from the underlying domain knowledge of the problem to be solved. In this case,
+even if the methodology created is \emph{theoretically possible} it raises the question of
+whether the neural networks are the most suitable solution for the OZ equation.
+Such might be the case for the methodology presented here. After all, the results shown
+seem to make it clear that a neural network reduces to one of the classic approximations,
+the Hypernetted Chain approximation, which is not the best approximation for all kinds
+of interaction potentials, and most certainly is not the case of the pseudo hard sphere
+and hard sphere potentials.
+At any rate, these results show a promising application of such models, in the form of
+understanding how or why certain bridge function approximations provide a solution to the 
+OZ equation. Unlike the use of fully data-driven methodologies like the one from
+Goodall and Lee~\cite{goodallInferenceUniversalOrnsteinZernike},
+the proposed methodology might somehow be able to provide intuition into what is happening
+with the bridge function itself without the need of other theoretical methods.
+
+One of the main drawbacks of the current proposal is the fact that the number of weights
+is too large to effectively train well. This might be a reason of why the spread was
+too small in the weight evolution of $\nnet$. A way to alleviate this problem is to use
+dimensionality reduction techniques such as
+PCA~\cite{hastieElementsStatisticalLearning2009}. These methods can adequately reduce the
+total number of weights to be trained, without losing too much information from the learning
+dynamics.
+
+In order to use the physics of the problem to our advantage, a different optimization
+problem might be formulated, in which case a thermodynamic consistency cost function
+might be able to drive the learning dynamics. This proposal will try to minimize the 
+difference between two different routes to compute the pressure in the liquid, to
+mention just an example. A deficiency of such scheme is that the cost function will be
+a highly nonlinear function, and possibly a \emph{black-box function}, in which case
+the gradient might be hard or even impossible to compute in a timely manner.
+Nevertheless, such approach could be a dramatic improvement over the methodology presented
+here, even more so if coupled with a dimensionality reduction technique.
+
+In closing, neural networks are capable models to approximation any function, but domain
+knowledge of the problem is needed for these models to succeed when no data set is 
+available. In the idea presented here, we wanted to investigate two things, whether neural
+networks could solve for the OZ equation and their quality of approximation. It was shown
+that, indeed, neural networks can solve for the OZ equation, but without more information
+on the system itself, neural networks do not generalize well and their training dynamics
+suffer greatly. The information that they gather is minimal, but their training dynamics
+shed some light into the possibilities of using probability methods to approximate
+bridge functions in liquids.
