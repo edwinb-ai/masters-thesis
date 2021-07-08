@@ -26,7 +26,8 @@ the mathematical structure with which a neural network can be used to solve the
 Ornstein-Zernike equation.
 These results are compared to those obtained from computer simulations to assess the
 quality of the solution.
-In the appendix, the detailed algorithm used to solve the Ornstein-Zernike equation
+In the appendices (\autoref{AppendixA}, \autoref{AppendixB}), the numerical algorithm used 
+to solve the Ornstein-Zernike equation
 is presented, along with a detailed computation of the gradients used for the
 training scheme. Here, we shall focus only on the main results and the algorithm structure
 in general.
@@ -168,7 +169,7 @@ Thus, we propose the following steps to solve the OZ using the parametrization
 described by \autoref{eq:parametrizacion}:
 
 \begin{enumerate}
-    \item Given a particular interaction potential $\beta u(\vecr)$, \autoref{eq:parametrizacion} is used to obtain the value of the direct correlation function $c(\vecr; \theta)$, which now depends implicitly on the weights of $\nnet$. In this step, an initial value for $\gamma_{n}(\vecr)$ is needed, which is initialized based on the five-point Ng methodology~\ref{AppendixA}.
+    \item Given a particular interaction potential $\beta u(\vecr)$, \autoref{eq:parametrizacion} is used to obtain the value of the direct correlation function $c(\vecr; \theta)$, which now depends implicitly on the weights of $\nnet$. In this step, an initial value for $\gamma_{n}(\vecr)$ is needed, which is initialized based on the five-point Ng methodology shown in \autoref{AppendixB}.
     \item The newly found function $c(\vecr; \theta)$ is transformed to a reciprocal space by means of the Fourier transform yielding the new function $\hat{c}(\veck; \theta)$.
     \item Then, the full OZ equation(Ref a ec) is Fourier transformed. Using the information from the previous step, a new estimation of the indirect correlation function is obtained, $\hat{\gamma}_{n+1}(\veck; \theta)$.
     \item The Fourier transform is applied once again to return all the functions to real space. With this operation, a new estimation $\gamma_{n+1}(\vecr; \theta)$ is computed from the transformed function, $\hat{\gamma}_{n+1}(\veck; \theta)$.
