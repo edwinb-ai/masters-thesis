@@ -1,10 +1,11 @@
-%%--------- Comandos especiales
+%-----------------------------
+%	Comandos especiales
+%-----------------------------
 \newcommand{\vecr}{\mathbf{r}}
 \newcommand{\veck}{\mathbf{k}}
 \newcommand{\nnet}{N_{\theta}(\mathbf{r})}
 %%
-\chapter{Neural networks as an approximation for the bridge function} % Main chapter title
-
+\chapter{Neural networks as an approximation for the bridge function}
 \label{Cap3}
 
 %----------------------------------------------------------------------------------------
@@ -104,13 +105,13 @@ cost function
 where $\gamma_{n}(\vecr; \theta)$ is the $n$-th approximation of the indirect
 correlation function, $\gamma(\vecr)$.
 The notation $\gamma(\vecr; \theta)$ indicates that the function now depends implicitly
-on the weights of the neural network, as seen in equation~\eqref{eq:parametrizacion}.
+on the weights of the neural network, as seen in \autoref{eq:parametrizacion}.
 This means that, if the weights of $\nnet$ change, we should expect a change in the output
 from the $\gamma$ function. Nevertheless, this does not mean that the indirect
 correlation function itself depends explicitly, nor directly, on the weights of
 $\nnet$.
 
-Another way of looking at expression~\eqref{eq:costo} is that we require that the last 
+Another way of looking at \autoref{eq:costo} is that we require that the last 
 two approximations of the $\gamma$ function in each iteration from the numerical scheme to 
 be as equal as possible. This will enforce a change on the weights every time both 
 approximations deviate between them.
@@ -155,7 +156,7 @@ Regardless of the particular expression for the weight updates, every method
 based on the gradient descent method \emph{requires} the gradient information from
 the cost function with respect to the weights, $\nabla_{\theta} J(\theta)$.
 In this particular case, the detailed computation of the gradient is described in
-the appendix~\ref{AppendixA}.
+the \autoref{AppendixA}.
 Once this information is obtained, all that is left is to build an algorithm that
 can correctly use this training scheme and solve the OZ equation.
 
@@ -163,15 +164,16 @@ can correctly use this training scheme and solve the OZ equation.
 Having described all the necessary elements needed, a general layout for the solution
 of the Ornstein-Zernike using neural networks is now presented.
 
-Thus, we propose the following steps to solve the OZ using the parametrization~\eqref{eq:parametrizacion}:
+Thus, we propose the following steps to solve the OZ using the parametrization
+described by \autoref{eq:parametrizacion}:
 
 \begin{enumerate}
-    \item Given a particular interaction potential $\beta u(\vecr)$, equation~\eqref{eq:parametrizacion} is used to obtain the value of the direct correlation function $c(\vecr; \theta)$, which now depends implicitly on the weights of $\nnet$. In this step, an initial value for $\gamma_{n}(\vecr)$ is needed, which is initialized based on the five-point Ng methodology~\ref{AppendixA}.
+    \item Given a particular interaction potential $\beta u(\vecr)$, \autoref{eq:parametrizacion} is used to obtain the value of the direct correlation function $c(\vecr; \theta)$, which now depends implicitly on the weights of $\nnet$. In this step, an initial value for $\gamma_{n}(\vecr)$ is needed, which is initialized based on the five-point Ng methodology~\ref{AppendixA}.
     \item The newly found function $c(\vecr; \theta)$ is transformed to a reciprocal space by means of the Fourier transform yielding the new function $\hat{c}(\veck; \theta)$.
     \item Then, the full OZ equation(Ref a ec) is Fourier transformed. Using the information from the previous step, a new estimation of the indirect correlation function is obtained, $\hat{\gamma}_{n+1}(\veck; \theta)$.
     \item The Fourier transform is applied once again to return all the functions to real space. With this operation, a new estimation $\gamma_{n+1}(\vecr; \theta)$ is computed from the transformed function, $\hat{\gamma}_{n+1}(\veck; \theta)$.
     \item Both estimations, $\gamma_{n}$ and $\gamma_{n+1}$, are used to evaluate the cost function~\eqref{eq:costo}, while simultaneously computing the gradient $\nabla_{\theta} J(\theta)$.
-    \item The weights $\theta$ are updated a gradient descent rule, similar to~\eqref{eq:gradiente}, and the process is repeated from step 1. In the next iteration, the initial value for the indirect correlation function will be $\gamma_{n+1}$, and a new estimation $\gamma_{n+2}$ will be obtained. This process is repeated until convergence.
+    \item The weights $\theta$ are updated a gradient descent rule, similar to \autoref{eq:gradiente}, and the process is repeated from step 1. In the next iteration, the initial value for the indirect correlation function will be $\gamma_{n+1}$, and a new estimation $\gamma_{n+2}$ will be obtained. This process is repeated until convergence.
 \end{enumerate}
 
 \subsection{Convergence criterion}
@@ -238,7 +240,7 @@ as optimal in the original work~\cite{kingmaAdamMethodStochastic2017}, which are
 $\beta_1=\num{0.9}$ and $\beta_2=\num{0.999}$. It is important to note that this method
 has its own mechanisms to control and modify the gradients, as well as the hyperparameters.
 This makes it a \emph{hands-off} method, without the need to tune the hyperparameters.
-The \emph{learning rate}, $\eta$ in equation~\eqref{eq:gradiente}, was fixed to
+The \emph{learning rate}, $\eta$ in \autoref{eq:gradiente}, was fixed to
 $\eta=\num{1e-4}$ for all the experiments.
 
 \subsection{Neural network architecture}
@@ -251,7 +253,7 @@ $\eta=\num{1e-4}$ for all the experiments.
 \end{figure}
 
 The neural network architecture used in all the experiments is very similar to the one
-shown in figure~\ref{fig:nn-esquema}, with the exception of the number of nodes in all the
+shown in \autoref{fig:nn-esquema}, with the exception of the number of nodes in all the
 layers.
 Particularly, the neural network is made of \emph{three layers}, all connected among them.
 There is an \emph{input} layer, one \emph{hidden} layer, and a final \emph{output} layer.
@@ -455,9 +457,9 @@ our purposes. For now, we are not interested in the values of $\alpha$ or $\beta
 but merely on the linear relationship between them.
 
 One thing to notice is the fact that the higher the value for the density, the larger
-the variance is. If we observe the variance for the density $\phi=0.15$ in figure~\ref{fig:pesos15}
+the variance is. If we observe the variance for the density $\phi=0.15$ in \autoref{fig:pesos15}
 we see that the variance is small due to the fact that the blue shaded region around
-the diagonal is close to it. If we now see the same figure~\ref{fig:pesos45} for the 
+the diagonal is close to it. If we now see the same \autoref{fig:pesos45} for the 
 density value of $\phi=0.45$ we see that this shaded region is significantly larger.
 This would mean that, at higher densities, the weights of $\nnet$ are more spread out
 from the mean, and the neural network might have adjusted its weights to account for
@@ -491,16 +493,16 @@ oscillating in the proximity of this value.
 
 On the other hand, this idea could also give answer to the question of why the spread
 is large for higher density values. If we pay close attention to the approximation
-results for the \emph{low density} values in figure~\ref{fig:rdf15}, we can see that
+results for the \emph{low density} values in \autoref{fig:rdf15}, we can see that
 although every approximation given a low accuracy estimation of the second peak as shown
 in the inset, for the main peak, the neural network approximation is very accurate.
-If we now observe the figure~\ref{fig:rdf45} which refers to the \emph{high density} value
+If we now observe the \autoref{fig:rdf45} which refers to the \emph{high density} value
 we can see that the estimation is quite poor.
 Let us now relate this to the weight evolution. For the \emph{low density} regime, the 
 weight evolution has a \emph{lower variance}; for the \emph{high density} regime, there
 is now a \emph{higher variance} in the weight evolution.
 This suggests that, for \emph{lower density} values, there was no need to adjust the
-weights more than shown in figure~\ref{fig:pesos15} because the approximation is accurate
+weights more than shown in \autoref{fig:pesos15} because the approximation is accurate
 enough. However, for the \emph{higher density} values, the approximation is not good enough
 and the optimization method was trying to adjust the weights accordingly, even if
 unsuccessfully.
@@ -564,9 +566,9 @@ integrals that are mostly \emph{intractable}. Almost always, for a given bridge 
 approximation, numerical methods are in order if these coefficients are to be determined.
 Only for special cases can these coefficients be determined in closed form, e.g.
 for the Percus-Yevick approximation the value of 
-$$
+\[
 b^{(2)}(\vecr) = -\frac{1}{2}{\left[ g_{1}(\vecr) \right]}^2
-$$
+\]
 is known from diagrammatic methods~\cite{hansenTheorySimpleLiquids2013}. In this
 expression, $g_{1}(\vecr)$ represents the single-particle radial distribution function.
 
@@ -590,8 +592,8 @@ as a power series similar to~\eqref{eq:random-poly}. To see this more clearly, w
 can think of the weights of the neural network as some coefficients of a power series,
 obtained under some transformation that take in the weights and return the coefficients
 needed to build a power series, as needed.
-Further, if we compare directly equation~\eqref{eq:random-poly}
-and equation~\eqref{eq:expansion-densidad}, we can see that these expressions
+Further, if we compare directly \autoref{eq:random-poly}
+and \autoref{eq:expansion-densidad}, we can see that these expressions
 are related through their coefficients, implying that random variables might be able
 to give an answer to the $n$ particle bridge functions in the power series.
 This insight might pave the way for an important way of computing coefficients
@@ -602,9 +604,9 @@ training dynamics of the neural network. A naive way of acquiring the underlying
 probability distribution is to suppose there is
 a unique probability distribution and estimate its mean and variance by maximum likelihood
 estimation techniques~\cite{hastieElementsStatisticalLearning2009}.
-Still, even if there was a relation between random polynomials and the bridge function, 
-there can be no guarantee that the resulting approximation is good enough, or that it could 
-reproduce the physics of the problem properly.
+Still, even if there could be a relation between random polynomials and the bridge 
+function, there can be no guarantee that the resulting approximation is good enough, or 
+that it could reproduce the physics of the problem properly.
 This is just mere speculation that a deeper relationship between the neural network 
 approximation and the bridge function might be exploitable through the lens of random
 polynomials and probability theory.
