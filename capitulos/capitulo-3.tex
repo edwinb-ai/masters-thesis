@@ -549,7 +549,7 @@ network might actually be \emph{more precise} than it is in its current form.
     \label{fig:pesos45}
 \end{figure}
 
-Similar results were found by Goodall and Lee~\cite{goodallInferenceUniversalOrnsteinZernike}
+Similar results were found by Goodall and Lee~\cite{a.goodallDatadrivenApproximationsBridge2021}
 while using data from simulations. In this approach, a data set was built with several
 functions that came from physical properties of the liquid. If the data set was built
 just using the indirect correlation function, the neural network trained from this data
@@ -637,7 +637,7 @@ and hard sphere potentials.
 At any rate, these results show a promising application of such models, in the form of
 understanding how or why certain bridge function approximations provide a solution to the 
 OZ equation. Unlike the use of fully data-driven methodologies like the one from
-Goodall and Lee~\cite{goodallInferenceUniversalOrnsteinZernike},
+Goodall and Lee~\cite{a.goodallDatadrivenApproximationsBridge2021},
 the proposed methodology might somehow be able to provide intuition into what is happening
 with the bridge function itself without the need of other theoretical methods.
 
@@ -645,9 +645,9 @@ One of the main drawbacks of the current proposal is the fact that the number of
 is too large to effectively train well. This might be a reason of why the spread was
 too small in the weight evolution of $\nnet$. A way to alleviate this problem is to use
 dimensionality reduction techniques such as
-PCA~\cite{hastieElementsStatisticalLearning2009}. These methods can adequately reduce the
-total number of weights to be trained, without losing too much information from the learning
-dynamics.
+Principal Component Analysis~\cite{hastieElementsStatisticalLearning2009}. 
+These methods can adequately reduce the total number of weights to be trained, without 
+losing too much information from the learning dynamics.
 
 In order to use the physics of the problem to our advantage, a different optimization
 problem might be formulated, in which case a thermodynamic consistency cost function
@@ -655,16 +655,16 @@ might be able to drive the learning dynamics. This proposal will try to minimize
 difference between two different routes to compute the pressure in the liquid, to
 mention just an example. A deficiency of such scheme is that the cost function will be
 a highly nonlinear function, and possibly a \emph{black-box function}, in which case
-the gradient might be hard or even impossible to compute in a timely manner.
+the gradient of the function might be hard or even impossible to compute in a timely manner.
 Nevertheless, such approach could be a dramatic improvement over the methodology presented
 here, even more so if coupled with a dimensionality reduction technique.
 
-In closing, neural networks are capable models to approximation any function, but domain
-knowledge of the problem is needed for these models to succeed when no data set is 
-available. In the idea presented here, we wanted to investigate two things, whether neural
-networks could solve for the OZ equation and their quality of approximation. It was shown
-that, indeed, neural networks can solve for the OZ equation, but without more information
-on the system itself, neural networks do not generalize well and their training dynamics
-suffer greatly. The information that they gather is minimal, but their training dynamics
-shed some light into the possibilities of using probability methods to approximate
+In closing, neural networks are capable models for the approximation of any continuous function, 
+but domain knowledge of the problem is needed for these models to succeed when no data set 
+is available. In the idea presented in this chapter, we wanted to investigate two things, 
+whether neural networks could solve for the OZ equation and their quality of approximation. 
+It was shown that, indeed, neural networks can solve for the OZ equation, but without more 
+information on the system itself, neural networks do not generalize well and their training 
+dynamics suffer greatly. The information that they gather is minimal, but their training 
+dynamics shed some light into the possibilities of using probability methods to approximate
 bridge functions in liquids.
