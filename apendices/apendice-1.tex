@@ -1,11 +1,65 @@
-\chapter{Gradient Computations}
+\chapter{Gradient Computation}
 \label{AppendixA}
 
-In \autoref{Cap3}
+In \autoref{Cap3} a training scheme was developed to adjust the weights of a neural
+network while simultaneously solving for the OZ equation. A crucial part of
+this algorithm is the \emph{gradient computation}. In this section, we shall work
+out the details of this computation.
+
+Recall that we want a neural network $\nnet$ with weights $\theta$ to work as a
+parametrization in the closure expression of the OZ equation, as defined in
+\autoref{eq:parametrizacion}. To find the weights of the neural network, an
+unconstrained optimization problem was presented, which was meant to be solved with
+an iterative procedure known as \emph{gradient descent}, which has the following
+general rule
+
+\[
+\theta_{n+1} = \theta_{n} - \eta \nabla_{\theta} J(\theta)
+\]
+
+where the cost function $J(\theta)$ is defined in \autoref{eq:costo}; $\nabla_{\theta}$
+is the gradient of $J(\theta)$ with respect to the weights, $\theta$; and $\eta$ is known
+as the learning rate, which controls the length of the step taken by the gradient
+towards a minimum.
+
+We are now interested in the closed form of $\nabla_{\theta}$. If we now use the
+definition of the cost function as defined in \autoref{eq:costo}, we have for the
+gradient
 
 \begin{equation}
-    x = ay + b
-    \label{eq:test1}
+    \nabla_{\theta} J(\theta) = \nabla_{\theta} \left[\gamma_{n}(\vecr; \theta) - \gamma_{n-1}(\vecr; \theta) \right]^2
+    \label{eq:grad1}
 \end{equation}
 
-some \autoref{eq:test1}
+where $\gamma_{n}(\vecr; \theta)$ is the $n$-th approximation of the indirect
+correlation function, $\gamma(\vecr)$.
+The notation $\gamma(\vecr; \theta)$ indicates that the function now depends implicitly
+on the weights of the neural network. This is essential to note, because the fact that 
+the dependence is implicit will have an important role in the development of the
+computations.
+
+We now apply the gradient operation to \autoref{eq:grad1} to obtain the following
+expression
+
+\begin{equation}
+    \nabla_{\theta} J(\theta) = 2 \left[\gamma_{n}(\vecr; \theta) - \gamma_{n-1}(\vecr; \theta) \right]
+    \left[ \partial_{\theta} \gamma_{n}(\vecr; \theta) - \partial_{\theta} \gamma_{n-1}(\vecr; \theta) \right]
+    \label{eq:grad2}
+\end{equation}
+
+which results from direct application of the chain rule. Now, we must recall that an
+essential property of $\gamma_{n}(\vecr; \theta)$ is its implicit dependency on the
+weights, thus an expression for $\partial_{\theta} \gamma_{n}(\vecr; \theta)$ needs to
+be found by some other route. Notably, this expression should be expressed in terms
+of a quantity that \emph{does in fact depend} on the weights. In this case, the neural
+network $\nnet$, which has a direct dependency on the weights.
+
+In order to find this new expression, we invoke \autoref{eq:parametrizacion} and
+differentiate it with respect to the weights
+
+\begin{equation}
+    \frac{\partial c(\vecr; \theta)}{\partial \theta} = \frac{\partial}{\partial \theta}
+    \left[ e^{p(\vecr, \theta)} - \gamma(\vecr; \theta) - 1 \right] =
+    e^{p(\vecr, \theta)} \partial_{\theta} p(\vecr, \theta) - \partial_{\theta} \gamma(\vecr; \theta)
+    \label{eq:grad3}
+\end{equation}
