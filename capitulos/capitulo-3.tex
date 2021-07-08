@@ -514,12 +514,6 @@ unsuccessfully.
     \label{fig:pesos35}
 \end{figure}
 
-\begin{figure}
-    \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.45.pdf}
-    \caption[Comparison between weights, $\phi=0.45$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.45$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
-    \label{fig:pesos45}
-\end{figure}
-
 \subsection{Does the neural network reduce to HNC?}
 For the low density regimes, HNC is an accurate approximation for the interaction potential.
 Hence, the neural network is an accurate approximation. On the contrary, for high density
@@ -548,6 +542,12 @@ be able the have stronger evidence that, regardless of the neural network struct
 this kind of approximation will have a high chance of reproducing the HNC results.
 In any case, in either scenario we do not have the information to assess if the neural
 network might actually be \emph{more precise} than it is in its current form.
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.45.pdf}
+    \caption[Comparison between weights, $\phi=0.45$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.45$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
+    \label{fig:pesos45}
+\end{figure}
 
 Similar results were found by Goodall and Lee~\cite{goodallInferenceUniversalOrnsteinZernike}
 while using data from simulations. In this approach, a data set was built with several
