@@ -5,6 +5,8 @@
 \newcommand{\veck}{\mathbf{k}}
 \newcommand{\nnet}{N_{\theta}(\mathbf{r})}
 %%
+\def\Itemautorefname{Figure}
+%%
 \chapter{Neural networks as an approximation for the bridge function}
 \label{Cap3}
 
@@ -13,8 +15,8 @@
 %----------------------------------------------------------------------------------------
 
 Neural networks can be used as \emph{universal approximators}~\cite{hornikMultilayerFeedforwardNetworks1989, hornikApproximationCapabilitiesMultilayer1991, cybenkoApproximationSuperpositionsSigmoidal1989},
-i.e. they can take the form of any continuous function for some specific
-network topologies.
+i.e. they can take the form of any continuous function if and only if the conditions of the
+\emph{universal approximation theorem} hold~\cite{parkMinimumWidthUniversal2020,zhouUniversalityDeepConvolutional2020}.
 The aim of this chapter is to investigate the hypothesis that a neural network might be 
 useful as a bridge function parametrization in the closure expression for the 
 Ornstein-Zernike equation.
@@ -25,7 +27,7 @@ explore the implications of two inquiries:
 
 \begin{enumerate}[(a)]
     \item Is it possible to solve for the Ornstein-Zernike equation using a neural network?
-    \item If is is possible, how good is the quality of the approximation for the pseudo hard sphere potential?
+    \item If it is indeed possible, how good is the quality of the approximation for the pseudo hard sphere potential?
 \end{enumerate}
 
 In this chapter, we show in detail the methodology created to answer these questions, and
@@ -41,7 +43,7 @@ in general.
 
 \section{Parametrization of the bridge function}
 
-The Ornstein-Zernike equation is given by the following expression
+The Ornstein-Zernike equation is given by the following coupled equations
 
 \begin{subequations}
     \begin{align*}
@@ -138,8 +140,9 @@ and it is defined simply as
     \label{eq:optimizacion}
 \end{equation}
 
-This formulation is just a search for the best values for the weights that minimize
-the squared difference between successive approximations.
+This formulation is just a search for the best values of the weights that minimize
+the squared difference between successive approximations. We denote these optimal values
+as the \emph{minimizer}, or $\theta^{*}$, such that $J(\theta^{*})$ is a minimum.
 This optimization problem can be solved iteratively, along with the solution of the
 OZ equation, which is also an iterative process.
 
@@ -156,7 +159,9 @@ The most general update rule for a method based on gradient descent reads
 where $\eta$ is known as the \emph{learning rate}, and it is a hyperparameter
 that controls the step size at each iteration while moving toward the minimum
 of a cost function. This value needs to be \emph{tuned} accordingly, so
-that the method converges properly.
+that the method converges properly. By tuning the parameter we mean that this value
+should change until the numerical scheme is stable enough, or provides the best
+possible answer to the optimization problem.
 
 Regardless of the particular expression for the weight updates, every method
 based on the gradient descent method \emph{requires} the gradient information from
@@ -174,16 +179,16 @@ Thus, we propose the following steps to solve the OZ using the parametrization
 described by \autoref{eq:parametrizacion}:
 
 \begin{enumerate}
-    \item Given a particular interaction potential $\beta u(\vecr)$, \autoref{eq:parametrizacion} is used to obtain the value of the direct correlation function $c(\vecr; \theta)$, which now depends implicitly on the weights of $\nnet$. In this step, an initial value for $\gamma_{n}(\vecr)$ is needed, which is initialized based on the five-point Ng methodology shown in \autoref{AppendixB}.
-    \item The newly found function $c(\vecr; \theta)$ is transformed to a reciprocal space by means of the Fourier transform yielding the new function $\hat{c}(\veck; \theta)$.
-    \item Then, the full OZ equation(Ref a ec) is Fourier transformed. Using the information from the previous step, a new estimation of the indirect correlation function is obtained, $\hat{\gamma}_{n+1}(\veck; \theta)$.
-    \item The Fourier transform is applied once again to return all the functions to real space. With this operation, a new estimation $\gamma_{n+1}(\vecr; \theta)$ is computed from the transformed function, $\hat{\gamma}_{n+1}(\veck; \theta)$.
-    \item Both estimations, $\gamma_{n}$ and $\gamma_{n+1}$, are used to evaluate the cost function~\eqref{eq:costo}, while simultaneously computing the gradient $\nabla_{\theta} J(\theta)$.
-    \item The weights $\theta$ are updated a gradient descent rule, similar to \autoref{eq:gradiente}, and the process is repeated from step 1. In the next iteration, the initial value for the indirect correlation function will be $\gamma_{n+1}$, and a new estimation $\gamma_{n+2}$ will be obtained. This process is repeated until convergence.
+    \item Given a particular interaction potential $\beta u(\vecr)$, \autoref{eq:parametrizacion} is used to obtain the value of the direct correlation function $c(\vecr)$. In this step, an initial value for $\gamma_{n}(\vecr)$ is needed, which is initialized based on the five-point Ng methodology shown in \autoref{AppendixB}.
+    \item The newly found function $c(\vecr)$ is transformed to a reciprocal space by means of the Fourier transform yielding the new function $\hat{c}(\veck)$.
+    \item Then, the full OZ equation(Ref a ec marco teórico) is Fourier transformed. Using the information from the previous step, a new estimation of the indirect correlation function is obtained, $\hat{\gamma}_{n+1}(\veck, \theta)$.
+    \item The Fourier transform is applied once again to return all the functions to real space. With this operation, a new estimation $\gamma_{n+1}(\vecr, \theta)$ is computed from the transformed function, $\hat{\gamma}_{n+1}(\veck, \theta)$.
+    \item Both estimations, $\gamma_{n}$ and $\gamma_{n+1}$, are used to evaluate \autoref{eq:costo}. In this step, the gradient $\nabla_{\theta} J(\theta)$ is computed as well.
+    \item The weights $\theta$ are updated using a gradient descent rule, similar to \autoref{eq:gradiente}, and the process is repeated from step 1. In the next iteration, the initial value for the indirect correlation function will be $\gamma_{n+1}$, and a new estimation $\gamma_{n+2}$ will be obtained. This process is repeated until convergence.
 \end{enumerate}
 
 \subsection{Convergence criterion}
-The procedure describe in the previous section is repeated indefinetely until convergence
+The procedure described in the previous section is repeated indefinetely until convergence
 is achieved. This convergence criterion is defined as follows
 
 \begin{equation}
@@ -211,7 +216,7 @@ the optimization method, and the choice of activation function. The physical par
 as well as the computer simulations methods used to solve the OZ equation are also outlined.
 
 \subsection{Choice of optimization algorithm}
-The general rule for the weight update based on gradient descent~\eqref{eq:gradiente} was
+The general rule for the weight update based on \autoref{eq:gradiente} was
 implemented to solve the optimization problem, but numerical inconsistencies rendered this 
 method unstable and convergence was almost never achieved.
 
@@ -249,16 +254,16 @@ This makes it a \emph{hands-off} method, without the need to tune the hyperparam
 The \emph{learning rate}, $\eta$ in \autoref{eq:gradiente}, was fixed to
 $\eta=\num{1e-4}$ for all the experiments.
 
-\subsection{Neural network architecture}
+\subsection{Neural network topology}
 
 \begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/neural-network.pdf}
     \vspace{-1.5cm}
-    \caption[General schematics of a neural network.]{Cartoon of a fully connected multilayer neural network. Note that there is one \emph{hidden layer}. The circles represent the \emph{nodes} or \emph{units} used to compute the final output. These nodes are being evaluated by an activation function to account for nonlinearities. The top-most nodes that seem different from the main nodes are known as the \emph{bias} nodes. The real architecture used in this chapter is larger, with many more nodes and connections, but the topology is the same.}
+    \caption[General schematics of a neural network.]{Cartoon of a fully connected multilayer neural network. Note that there is one \emph{hidden layer}. The circles represent the \emph{nodes} or \emph{units} used to compute the final output. These nodes are being evaluated by an activation function to account for nonlinearities. The top-most nodes that seem different from the main nodes are known as the \emph{bias} nodes. The real topology used in this chapter is larger, with many more nodes and connections, but the topology is the same.}
     \label{fig:nn-esquema}
 \end{figure}
 
-The neural network architecture used in all the experiments is very similar to the one
+The neural network topology used in all the experiments is identical to the one
 shown in \autoref{fig:nn-esquema}, with the exception of the number of nodes in all the
 layers.
 Particularly, the neural network is made of \emph{three layers}, all connected among them.
@@ -309,7 +314,7 @@ the system was equilibrated for a total of 10 million Monte Carlo steps, and the
 distribution functions were obtained from the sampling of 7 million steps, after
 the system was equilibrated. To reduce the number of computations, a cutoff radius of
 half the size of the simulation box was used for the evaluation of the interaction 
-potential. Periodic boundary conditions were applied accordingly. The same pseudo hard 
+potential. Periodic boundary conditions were used accordingly. The same pseudo hard 
 sphere potential (Ref a ecuación) was used, instead of the true hard sphere potential, for 
 a fair comparison with the results obtained from the OZ equation.
 
@@ -324,12 +329,12 @@ low and high density regimes.
 
 \subsection{Low densities}
 In this section we will deal with the low 
-density values of $\phi=\numlist[list-pair-separator={\enspace\text{and}\enspace}]{0.15;0.25}$, which are shown in figures~(\ref{fig:rdf15}, \ref{fig:rdf25}).
+density values of $\phi=\numlist[list-pair-separator={\enspace\text{and}\enspace}]{0.15;0.25}$, which are shown in \autoref{fig:rdf15} and \autoref{fig:rdf25}.
 The results show that, at low densities, the HNC and neural network approximations are
 more precise than the modified Verlet approximation. Although, all
 approximations seem to fall short compared to computer simulations. This is seen espcially
 in the neighborhood around the second peak, which are represented in the insets from
-figures~(\ref{fig:rdf15}, \ref{fig:rdf25}).
+figures~(\autoref{fig:rdf15}, \autoref{fig:rdf25}).
 It is specially important to note that the neural network approximation is a little bit 
 more precise than the HNC approximation, which can be qualitatively appraised by observing 
 the estimation of the main peak in the radial distribution function. This peak can be found 
@@ -375,7 +380,7 @@ out of all the set of bridge functions used. In other words, we observe that thi
 estimation predicts the main peak well, as can be seen when compared to the results
 obtained from computer simulations.
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.15.pdf}
     \caption[Radial distribution function, $\phi=0.15$.]{The radial distribution function for density value $\phi=0.15$ obtained from computer simulations, and three different approximations:
@@ -389,7 +394,7 @@ obtained from computer simulations.
     \label{fig:rdf15}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.25.pdf}
     \caption[Radial distribution function, $\phi=0.25$.]{The radial distribution function for density value $\phi=0.25$ obtained from computer simulations, and three different approximations:
@@ -403,7 +408,7 @@ obtained from computer simulations.
     \label{fig:rdf25}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.35.pdf}
     \caption[Radial distribution function, $\phi=0.35$.]{The radial distribution function for density value $\phi=0.35$ obtained from computer simulations, and three different approximations:
@@ -417,7 +422,7 @@ obtained from computer simulations.
     \label{fig:rdf35}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.45.pdf}
     \caption[Radial distribution function, $\phi=0.45$.]{The radial distribution function for density value $\phi=0.45$ obtained from computer simulations, and three different approximations:
@@ -442,7 +447,7 @@ result as the HNC approximation.
 
 \subsection{Weight evolution of the neural network}
 
-\begin{figure}
+\begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.15.pdf}
     \caption[Comparison between weights, $\phi=0.15$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.15$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.} 
     \label{fig:pesos15}
@@ -478,7 +483,7 @@ the OZ equation, and solutions around this particular approximation might be as 
 solutions. This, however, does not answer the question of why the spread is larger when
 higher densities are inspected.
 
-\begin{figure}
+\begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.25.pdf}
     \caption[Comparison between weights, $\phi=0.25$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.25$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
     \label{fig:pesos25}
@@ -513,7 +518,7 @@ enough. However, for the \emph{higher density} values, the approximation is not 
 and the optimization method was trying to adjust the weights accordingly, even if
 unsuccessfully.
 
-\begin{figure}
+\begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.35.pdf}
     \caption[Comparison between weights, $\phi=0.35$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.35$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
     \label{fig:pesos35}
@@ -548,7 +553,7 @@ this kind of approximation will have a high chance of reproducing the HNC result
 In any case, in either scenario we do not have the information to assess if the neural
 network might actually be \emph{more precise} than it is in its current form.
 
-\begin{figure}
+\begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.45.pdf}
     \caption[Comparison between weights, $\phi=0.45$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.45$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
     \label{fig:pesos45}
