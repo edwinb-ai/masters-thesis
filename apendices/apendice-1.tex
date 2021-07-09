@@ -22,45 +22,44 @@ is the gradient of $J(\theta)$ with respect to the weights, $\theta$; and $\eta$
 as the learning rate, which controls the length of the step taken by the gradient
 towards a minimum.
 
-We are now interested in the closed form of $\nabla_{\theta}$. If we now use the
+We are now interested in the closed form of $\nabla_{\theta} J(\theta)$. If we now use the
 definition of the cost function as defined in \autoref{eq:costo}, we have for the
 gradient
 
 \begin{equation}
-    \nabla_{\theta} J(\theta) = \nabla_{\theta} \left[\gamma_{n}(\vecr; \theta) - \gamma_{n-1}(\vecr; \theta) \right]^2
+    \nabla_{\theta} J(\theta) = \nabla_{\theta} \left[\gamma_{n}(\vecr, \theta) - \gamma_{n-1}(\vecr, \theta) \right]^2
     \label{eq:grad1}
 \end{equation}
 
-where $\gamma_{n}(\vecr; \theta)$ is the $n$-th approximation of the indirect
+where $\gamma_{n}(\vecr, \theta)$ is the $n$-th approximation of the indirect
 correlation function, $\gamma(\vecr)$.
-The notation $\gamma(\vecr; \theta)$ indicates that the function now depends implicitly
-on the weights of the neural network. This is essential to note, because the fact that 
-the dependence is implicit will have an important role in the development of the
-computations.
+The notation $\gamma(\vecr, \theta)$ indicates that the function now depends
+on the weights of the neural network. When the weights $\theta$ are modified, the output of
+$\gamma(\vecr, \theta)$ must change as well.
 
 We now apply the gradient operation to \autoref{eq:grad1} to obtain the following
 expression
 
 \begin{equation}
-    \nabla_{\theta} J(\theta) = 2 \left[\gamma_{n}(\vecr; \theta) - \gamma_{n-1}(\vecr; \theta) \right]
-    \left[ \partial_{\theta} \gamma_{n}(\vecr; \theta) - \partial_{\theta} \gamma_{n-1}(\vecr; \theta) \right]
+    \nabla_{\theta} J(\theta) = 2 \left[\gamma_{n}(\vecr, \theta) - \gamma_{n-1}(\vecr, \theta) \right]
+    \left[ \partial_{\theta} \gamma_{n}(\vecr, \theta) - \partial_{\theta} \gamma_{n-1}(\vecr, \theta) \right]
     \label{eq:grad2}
 \end{equation}
 
-which results from direct application of the chain rule. Now, we must recall that an
-essential property of $\gamma_{n}(\vecr; \theta)$ is its implicit dependency on the
-weights, thus an expression for $\partial_{\theta} \gamma_{n}(\vecr; \theta)$ needs to
+which results from direct application of the chain rule. Now, an expression for
+$\partial_{\theta} \gamma_{n}(\vecr, \theta)$ needs to
 be found by some other route. Notably, this expression should be expressed in terms
-of a quantity that \emph{does in fact depend} on the weights. In this case, the neural
+of a quantity that \emph{depends on the weights}, $\theta$. In this case, 
+this would mean that we seek some expression in terms of the neural
 network $\nnet$, which has a direct dependency on the weights.
 
 In order to find this new expression, we invoke \autoref{eq:parametrizacion} and
 differentiate it with respect to the weights
 
 \begin{equation}
-    \frac{\partial c(\vecr; \theta)}{\partial \theta} = \frac{\partial}{\partial \theta}
-    \left[ e^{p(\vecr, \theta)} - \gamma(\vecr; \theta) - 1 \right] =
-    e^{p(\vecr, \theta)} \partial_{\theta} p(\vecr, \theta) - \partial_{\theta} \gamma(\vecr; \theta)
+    \frac{\partial c(\vecr)}{\partial \theta} = \frac{\partial}{\partial \theta}
+    \left[ e^{p(\vecr, \theta)} - \gamma(\vecr, \theta) - 1 \right] =
+    e^{p(\vecr, \theta)} \partial_{\theta} p(\vecr, \theta) - \partial_{\theta} \gamma(\vecr, \theta)
     ,
     \label{eq:grad3}
 \end{equation}
@@ -68,70 +67,71 @@ differentiate it with respect to the weights
 here we have for $p(\vecr, \theta)$
 
 \begin{equation}
-    p(\vecr, \theta) = -\beta u(\vecr) + \gamma(\vecr; \theta) + \nnet
+    p(\vecr, \theta) = -\beta u(\vecr) + \gamma(\vecr, \theta) + \nnet
     \label{eq:pr}    
 \end{equation}
 
 with derivative with respect to the weights
 
 \begin{equation}
-    \partial_{\theta} p(\vecr, \theta) = \partial_{\theta} \gamma(\vecr; \theta) + \partial_{\theta} \nnet
+    \partial_{\theta} p(\vecr, \theta) = \partial_{\theta} \gamma(\vecr, \theta) + \partial_{\theta} \nnet
     .
     \label{eq:grad-pr}
 \end{equation}
 
-Now, in \autoref{eq:grad3} we have the expression $\frac{\partial c(\vecr; \theta)}{\partial \theta}$
-but the function $c(\vecr; \theta)$ does not depend explicitly on the weights, hence
-$\frac{\partial c(\vecr; \theta)}{\partial \theta}=0$.
+Now, in \autoref{eq:grad3} we have the expression 
+$\frac{\partial c(\vecr)}{\partial \theta}$
+but the function $c(\vecr)$ does not depend explicitly on the weights, hence
+$\frac{\partial c(\vecr)}{\partial \theta} = 0$.
 
 Putting all this information together we are able to find an expression for
-$\partial_{\theta} \gamma_{n}(\vecr; \theta)$.
-We take \autoref{eq:grad3} together with \autoref{eq:grad-pr}, and we obtain the following
+$\partial_{\theta} \gamma_{n}(\vecr, \theta)$.
+We take \autoref{eq:grad3} together with \autoref{eq:grad-pr} to obtain the following
 expression
 
 \begin{equation}
-    \frac{\partial c(\vecr; \theta)}{\partial \theta} = 0 =
-    e^{p(\vecr, \theta)} \left[ \partial_{\theta} \gamma(\vecr; \theta) + \partial_{\theta} \nnet \right]
-    - \partial_{\theta} \gamma(\vecr; \theta)
+    \frac{\partial c(\vecr)}{\partial \theta} = 0 =
+    e^{p(\vecr, \theta)} \left[ \partial_{\theta} \gamma(\vecr, \theta) + \partial_{\theta} \nnet \right]
+    - \partial_{\theta} \gamma(\vecr, \theta)
     \label{eq:grad4}
 \end{equation}
 
-and now to look for an expression for $\partial_{\theta} \gamma(\vecr; \theta)$, we perform
+and now to find an expression for $\partial_{\theta} \gamma(\vecr, \theta)$ we perform
 the following steps:
 
 \begin{subequations}
     \begin{align*}
         0 &=
-        e^{p(\vecr, \theta)} \left[ \partial_{\theta} \gamma(\vecr; \theta) + \partial_{\theta} \nnet \right]
-        - \partial_{\theta} \gamma(\vecr; \theta) \\
-        0 &= e^{p(\vecr, \theta)} \partial_{\theta} \gamma(\vecr; \theta) + 
+        e^{p(\vecr, \theta)} \left[ \partial_{\theta} \gamma(\vecr, \theta) + \partial_{\theta} \nnet \right]
+        - \partial_{\theta} \gamma(\vecr, \theta) \\
+        0 &= e^{p(\vecr, \theta)} \partial_{\theta} \gamma(\vecr, \theta) + 
         e^{p(\vecr, \theta)} \partial_{\theta} \nnet -
-        \partial_{\theta} \gamma(\vecr; \theta) \\
-        \partial_{\theta} \gamma(\vecr; \theta) \left[ 1 - e^{p(\vecr, \theta)} \right] &=
+        \partial_{\theta} \gamma(\vecr, \theta) \\
+        \partial_{\theta} \gamma(\vecr, \theta) \left[ 1 - e^{p(\vecr, \theta)} \right] &=
         e^{p(\vecr, \theta)} \partial_{\theta} \nnet
     \end{align*}
     \begin{equation}
-        \boxed{\partial_{\theta} \gamma(\vecr; \theta) = \frac{e^{p(\vecr, \theta)} \partial_{\theta} \nnet}{1 - e^{p(\vecr, \theta)}}}
+        \boxed{\partial_{\theta} \gamma(\vecr, \theta) = \frac{e^{p(\vecr, \theta)} \partial_{\theta} \nnet}{1 - e^{p(\vecr, \theta)}}}
         \label{eq:grad5}
     \end{equation}
 \end{subequations}
 
-An equation for the derivative $\partial_{\theta} \gamma(\vecr; \theta)$ has now been found 
+An equation for the derivative $\partial_{\theta} \gamma(\vecr, \theta)$ has now been found 
 which does satisfy the conditions of being dependent on the weights explicitly by means of
 the derivative of $\nnet$ with respect to $\theta$.
 
 Take \autoref{eq:grad2}
 
 \begin{equation*}
-    \nabla_{\theta} J(\theta) = 2 \left[\gamma_{n}(\vecr; \theta) - \gamma_{n-1}(\vecr; \theta) \right]
-    \left[ \partial_{\theta} \gamma_{n}(\vecr; \theta) - \partial_{\theta} \gamma_{n-1}(\vecr; \theta) \right] ,
+    \nabla_{\theta} J(\theta) = 2 \left[\gamma_{n}(\vecr, \theta) - \gamma_{n-1}(\vecr, \theta) \right]
+    \left[ \partial_{\theta} \gamma_{n}(\vecr, \theta) - \partial_{\theta} \gamma_{n-1}(\vecr, \theta) \right] ,
 \end{equation*}
 
 and plug in \autoref{eq:grad5} to obtain a closed form of the gradient we seek
 
 \begin{equation}
     \boxed{
-    \nabla_{\theta} J(\theta) = 2 \left[\gamma_{n}(\vecr; \theta) - \gamma_{n-1}(\vecr; \theta) \right]
+    \nabla_{\theta} J(\theta) = 2 \left[\gamma_{n}(\vecr, \theta) - \gamma_{n-1}(\vecr, \theta) \right]
     \left[ \frac{e^{p_{n}(\vecr, \theta)} \partial_{\theta} \nnet}{1 - e^{p_{n}(\vecr, \theta)}} - \frac{e^{p_{n-1}(\vecr, \theta)} \partial_{\theta} \nnet}{1 - e^{p_{n-1}(\vecr, \theta)}} \right]
     }
     \label{eq:closed}
@@ -140,7 +140,7 @@ and plug in \autoref{eq:grad5} to obtain a closed form of the gradient we seek
 with
 
 \[
-p_{n}(\vecr, \theta) = -\beta u(\vecr) + \gamma_{n}(\vecr; \theta) + \nnet .
+p_{n}(\vecr, \theta) = -\beta u(\vecr) + \gamma_{n}(\vecr, \theta) + \nnet .
 \]
 
 In practice, a smoothing factor of $\varepsilon=\num{1e-7}$ was used in the denominator of 

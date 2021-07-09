@@ -561,17 +561,27 @@ information about the system to adjust the weights properly.
 
 \subsection{Neural networks as random polynomial approximations}
 An interesting result from this investigation is the fact that a random approximation
-provides a solution to the OZ equation. To understand the significance of this,
-we must recall that the bridge function can, in fact, be understood as a
+provides a solution to the OZ equation. In what way is it random? Take the weights of the
+neural network to be the coefficients of some \emph{random polynomial}, i.e. a polynomial 
+with coefficients that come from some probability distribution $P$. This is something that 
+is not trivial on why it could work as a bridge function approximation, even if the result
+is very close to the HNC approximation. This would imply that, for the probability 
+distribution $P$ with some finite variance $\sigma^2$ and mean $\mu=0$, the resulting
+polynomial would yield a bridge function estimation similar to the HNC closure relation.
+Yet, the reason why a random approximation might be a solution to the OZ equation is not
+clear.
+
+To understand the significance of this, we must recall that the bridge function can, in 
+fact, be understood as a
 power series in density~\cite{hansenTheorySimpleLiquids2013}
 
 \begin{equation}
-    b(\vecr) = b^{(2)}(\vecr) \rho^2 + b^{(3)}(\vecr) \rho^2 + \cdots
+    b(\vecr) = b^{(2)}(\vecr) \rho^2 + b^{(3)}(\vecr) \rho^3 + \cdots
     \label{eq:expansion-densidad}
 \end{equation}
 
 where the notation $b^{(n)}(\vecr)$ indicates the $n$-particle bridge function, i.e. the
-estimation of the bridge function for $n$ interacting particles. It is espcially
+estimation of the bridge function for $n$ interacting particles. It is specially
 important to note that the coefficients $b^{(n)}(\vecr)$ are, in general, very high-dimensional
 integrals that are mostly \emph{intractable}. Almost always, for a given bridge function
 approximation, numerical methods are in order if these coefficients are to be determined.
@@ -599,18 +609,29 @@ applications in some areas of physics~\cite{houghZerosGaussianAnalytic2009}.
 These polynomials have also been the interest of mathematical research~\cite{edelmanHowManyZeros1995}.
 
 Now, by means of the universal approximation theorem, we can regard the neural network
-as a power series similar to~\eqref{eq:random-poly}. To see this more clearly, we
+as a power series similar to \autoref{eq:random-poly}. To see this more clearly, we
 can think of the weights of the neural network as some coefficients of a power series,
 obtained under some transformation that take in the weights and return the coefficients
-needed to build a power series, as needed.
+needed to build a power series.
 Further, if we compare directly \autoref{eq:random-poly}
 and \autoref{eq:expansion-densidad}, we can see that these expressions
 are related through their coefficients, with the exception of the first two terms, implying 
 that random variables might be able to give an answer to the $n$ particle bridge functions 
 in the power series.
-This insight might pave the way for a novel way of computing coefficients
-by using neural networks, or related probabilistic methods.
-One of the downsides of this is the fact that the probability
+
+Indeed, this is a convenient way of estimating the coefficients of the bridge function,
+when expressed in a power series of the density or any other correlation functions.
+Although, the practical way to estimate these coefficients is to enforce thermodynamic
+self-consistency. Such is the case of the work by Vompe and Martynov~\cite{vompeBridgeFunctionExpansion1994},
+and the work by Tsednee and Luchko~\cite{tsedneeClosureOrnsteinZernikeEquation2019}, where
+the coefficients are found through a minimization problem when the thermodynamic consistency
+among differente routes has been achieved.
+
+After all, the insight of random polynomials might pave the way for a novel way of 
+computing coefficients by using neural networks, or related probabilistic methods.
+Even so, there is no way to enforce thermodynamic self-consistency when using such
+methods, it is interesting to see the striking resemblance with these approaches.
+And yet, one of the downsides of this is the fact that the probability
 distribution for the coefficients $a_0, a_1, \dots , a_n$ cannot be known even through the
 training dynamics of the neural network. A naive way of acquiring the underlying 
 probability distribution is to suppose there is
@@ -651,11 +672,13 @@ losing too much information from the learning dynamics.
 
 In order to use the physics of the problem to our advantage, a different optimization
 problem might be formulated, in which case a thermodynamic consistency cost function
-might be able to drive the learning dynamics. This proposal will try to minimize the 
-difference between two different routes to compute the pressure in the liquid, to
-mention just an example. A deficiency of such scheme is that the cost function will be
+might be able to drive the learning dynamics. In this framework, it is expected to minimize 
+the difference between two different routes that compute the pressure, or the isothermal
+compressibility. A deficiency of such scheme is that the cost function will be
 a highly nonlinear function, and possibly a \emph{black-box function}, in which case
 the gradient of the function might be hard or even impossible to compute in a timely manner.
+This affects not only the computation time but the ability to use gradient descent methods,
+or any other optimization method that uses gradients to find an extremum.
 Nevertheless, such approach could be a dramatic improvement over the methodology presented
 here, even more so if coupled with a dimensionality reduction technique.
 
@@ -665,6 +688,6 @@ is available. In the idea presented in this chapter, we wanted to investigate tw
 whether neural networks could solve for the OZ equation and their quality of approximation. 
 It was shown that, indeed, neural networks can solve for the OZ equation, but without more 
 information on the system itself, neural networks do not generalize well and their training 
-dynamics suffer greatly. The information that they gather is minimal, but their training 
-dynamics shed some light into the possibilities of using probability methods to approximate
-bridge functions in liquids.
+dynamics suffer greatly. The information that these models gather throughout the training 
+is minimal, but their training dynamics shed some light into the possibilities of using 
+probability methods to approximate bridge functions in liquids.
