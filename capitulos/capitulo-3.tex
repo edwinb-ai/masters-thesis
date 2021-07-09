@@ -13,18 +13,25 @@
 %----------------------------------------------------------------------------------------
 
 Neural networks can be used as \emph{universal approximators}~\cite{hornikMultilayerFeedforwardNetworks1989, hornikApproximationCapabilitiesMultilayer1991, cybenkoApproximationSuperpositionsSigmoidal1989},
-in other words, they can take the form of any continuous function for some specific
-types of architectures.
-In particular, it is hypothesized that a neural network might be useful as a bridge function
-parametrization in the closure expression for the Ornstein-Zernike equation. If this is true,
-then choosing a particular approximation can be avoided for a given interaction potential, 
-and leave the choice of the bridge function to the neural network itself, while
-simultaneously solving the Ornstein-Zernike equation.
-
-In this chapter, we show in detail the methodology created to achieve such a task, and
-the mathematical structure with which a neural network can be used to solve the
+i.e. they can take the form of any continuous function for some specific
+network topologies.
+The aim of this chapter is to investigate the hypothesis that a neural network might be 
+useful as a bridge function parametrization in the closure expression for the 
 Ornstein-Zernike equation.
-These results are compared to those obtained from computer simulations to assess the
+If this is true, then choosing a particular approximation can be avoided for a given 
+interaction potential, and leave the choice of the bridge function to the neural network 
+itself, while simultaneously solving for the Ornstein-Zernike equation. It is intended to
+explore the implications of two inquiries:
+
+\begin{enumerate}[(a)]
+    \item Is it possible to solve for the Ornstein-Zernike equation using a neural network?
+    \item If is is possible, how good is the quality of the approximation for the pseudo hard sphere potential?
+\end{enumerate}
+
+In this chapter, we show in detail the methodology created to answer these questions, and
+the mathematical structure with which a neural network can be used to solve for the
+Ornstein-Zernike equation.
+The results obtained are compared to those from computer simulations to assess the
 quality of the solution.
 In the appendices (\autoref{AppendixA}, \autoref{AppendixB}), the numerical algorithm used 
 to solve the Ornstein-Zernike equation
@@ -99,23 +106,21 @@ is \emph{close enough} to the previous one. This can be translated into the foll
 cost function
 
 \begin{equation}
-    J(\theta) = \left[\gamma_{n}(\vecr; \theta) - \gamma_{n-1}(\vecr; \theta) \right]^2
+    J(\theta) = \left[\gamma_{n}(\vecr, \theta) - \gamma_{n-1}(\vecr, \theta) \right]^2
     \label{eq:costo}
 \end{equation}
 
-where $\gamma_{n}(\vecr; \theta)$ is the $n$-th approximation of the indirect
+where $\gamma_{n}(\vecr, \theta)$ is the $n$-th approximation of the indirect
 correlation function, $\gamma(\vecr)$.
-The notation $\gamma(\vecr; \theta)$ indicates that the function now depends implicitly
+The notation $\gamma(\vecr, \theta)$ indicates that the function now depends
 on the weights of the neural network, as seen in \autoref{eq:parametrizacion}.
 This means that, if the weights of $\nnet$ change, we should expect a change in the output
-from the $\gamma$ function. Nevertheless, this does not mean that the indirect
-correlation function itself depends explicitly, nor directly, on the weights of
-$\nnet$.
+from the $\gamma$ function.
 
 Another way of looking at \autoref{eq:costo} is that we require that the last 
 two approximations of the $\gamma$ function in each iteration from the numerical scheme to 
-be as equal as possible. This will enforce a change on the weights every time both 
-approximations deviate between them.
+be equal within a tolerance value, or upper bound. This will enforce a change on the 
+weights every time both approximations deviate between them.
 
 \subsection{Optimization problem}
 With a cost function at hand, an optimization problem can be defined such that the
