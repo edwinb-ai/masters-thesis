@@ -332,18 +332,18 @@ low and high density regimes.
 
 \subsection{Low densities}
 In this section we will deal with the low 
-density values of $\phi=\numlist[list-pair-separator={\enspace\text{and}\enspace}]{0.15;0.25}$, which are shown in \autoref{fig:rdf15} and \autoref{fig:rdf25}, respectively.
+density values ranging from $\phi=\numlist[list-pair-separator={\enspace\text{to}\enspace}]{0.15;0.25}$, which are shown in \autoref{fig:rdf15} and \autoref{fig:rdf25}, respectively.
 The results show that, at low densities, the HNC and neural network approximations are
 more precise than the modified Verlet approximation. Although at first glance, all
 approximations seem to fall short compared to computer simulations. This is particularly 
 noticeable in the neighborhood around the second peak, which is shown in the insets 
-from \autoref{fig:rdf15} and \autoref{fig:rdf25}.
-Additionally as important is to note that the neural network approximation is slightly
+of \autoref{fig:rdf15} and \autoref{fig:rdf25}.
+Additionally, it is important to note that the neural network approximation is slightly
 more precise than the HNC approximation, which can be qualitatively appraised by observing 
 the estimation of the main peak in the radial distribution function. This peak can be found 
 in the vicinity of $r^* = 1$. Nevertheless, it is still overestimated, which is the 
 same case for the HNC approximation. However, this is not the case for the modified Verlet 
-approximation, which undervalues the main peak.
+approximation, which underestimates the main peak.
 
 In like manner, the functional form of $g(r^*)$ is important to study closely.
 For the HNC and neural network approximations, it appears to have the same form between 
@@ -358,20 +358,20 @@ to the one seen from computer simulations, and that the modified Verlet approxim
 closer to the form found in the computer simulations results.
 
 \subsection{High densities}
-We now turn our attention to the high density values of
+We now turn our attention to the high density values, namely,
 $\phi=\numlist[list-pair-separator={\enspace\text{and}\enspace}]{0.35; 0.45}$,
 represented in \autoref{fig:rdf35} and \ref{fig:rdf45}.
 In the same spirit as before with the low densities, the HNC and neural network 
 approximations are not precise when compared to computer simulations. In this case,
 the modified Verlet bridge function approximation is even more precise, which was expected.
 This is because the HNC approximation is a very good approximation for long range
-interaction potentials (Ref faltante), whereas the modified Verlet is better suited for 
-short range potentials, such as the one studied here.
+interaction potentials (\textcolor{red}{Ref faltante}), whereas the modified Verlet is 
+better suited for short range potentials, such as the one studied here.
 In this case, modified Verlet is the most precise of the approximations used, which
 can be inpsected in \autoref{fig:rdf35} and \autoref{fig:rdf45}, where the 
-main peak is accurately estimated by the approximation when compared to the computer 
-simulation results. However, the HNC and neural network approximation overestimate this 
-quantity.
+main peak is accurately estimated by the approximation when compared to Monte Carlo 
+computer simulation results. However, both HNC and neural network approximations 
+overestimate this quantity.
 
 Further, the functional form of $g(r^*)$ computed with the neural network approximation 
 is substantially different to the one obtained with computer simulations. Indeed, the result
@@ -390,11 +390,11 @@ the results obtained from computer simulations, which are almost identical.
 \begin{figure}[t]
     \centering
     \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.15.pdf}
-    \caption[Radial distribution function, $\phi=0.15$.]{The radial distribution function for density value $\phi=0.15$ obtained from computer simulations, and three different approximations:
+    \caption[Radial distribution function, $\phi=0.15$.]{Radial distribution function for $\phi=0.15$ obtained from Monte Carlo simulations, and three different approximations:
     \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item \emph{mV}, modified Verlet
-        \item \emph{HNC}, Hypernetted Chain
-        \item \emph{Neural network}, neural network approximation.
+        \item \emph{mV}, (modified Verlet)
+        \item \emph{HNC}, (Hypernetted Chain)
+        \item \emph{NN}, (neural network approximation).
     \end{enumerate*}
     Inset shows the region close to the peak about $r^{*}=2$.
     }
@@ -404,11 +404,11 @@ the results obtained from computer simulations, which are almost identical.
 \begin{figure}[t]
     \centering
     \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.25.pdf}
-    \caption[Radial distribution function, $\phi=0.25$.]{The radial distribution function for density value $\phi=0.25$ obtained from computer simulations, and three different approximations:
+    \caption[Radial distribution function, $\phi=0.25$.]{Radial distribution function for $\phi=0.25$ obtained from Monte Carlo simulations, and three different approximations:
     \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item \emph{mV}, modified Verlet
-        \item \emph{HNC}, Hypernetted Chain
-        \item \emph{Neural network}, neural network approximation.
+        \item \emph{mV}, (modified Verlet)
+        \item \emph{HNC}, (Hypernetted Chain)
+        \item \emph{NN}, (neural network approximation).
     \end{enumerate*}
     Inset shows the region close to the peak about $r^{*}=2$.
     }
@@ -418,11 +418,11 @@ the results obtained from computer simulations, which are almost identical.
 \begin{figure}[t]
     \centering
     \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.35.pdf}
-    \caption[Radial distribution function, $\phi=0.35$.]{The radial distribution function for density value $\phi=0.35$ obtained from computer simulations, and three different approximations:
+    \caption[Radial distribution function, $\phi=0.35$.]{Radial distribution function for $\phi=0.35$ obtained from Monte Carlo simulations, and three different approximations:
     \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item \emph{mV}, modified Verlet
-        \item \emph{HNC}, Hypernetted Chain
-        \item \emph{Neural network}, neural network approximation.
+        \item \emph{mV}, (modified Verlet)
+        \item \emph{HNC}, (Hypernetted Chain)
+        \item \emph{NN}, (neural network approximation).
     \end{enumerate*}
     Inset shows the region close to the peak about $r^{*}=2$.
     }
@@ -432,11 +432,11 @@ the results obtained from computer simulations, which are almost identical.
 \begin{figure}[t]
     \centering
     \includegraphics[width=\textwidth]{figuras/capitulo-3/comparison_p=0.45.pdf}
-    \caption[Radial distribution function, $\phi=0.45$.]{The radial distribution function for density value $\phi=0.45$ obtained from computer simulations, and three different approximations:
+    \caption[Radial distribution function, $\phi=0.45$.]{Radial distribution function for $\phi=0.45$ obtained from Monte Carlo simulations, and three different approximations:
     \begin{enumerate*}[label=(\alph*),itemjoin={,\enspace}]
-        \item \emph{mV}, modified Verlet
-        \item \emph{HNC}, Hypernetted Chain
-        \item \emph{Neural network}, neural network approximation.
+        \item \emph{mV}, (modified Verlet)
+        \item \emph{HNC}, (Hypernetted Chain)
+        \item \emph{NN}, (neural network approximation).
     \end{enumerate*}
     Inset shows the region close to the peak about $r^{*}=2$.
     }
@@ -456,7 +456,7 @@ result as the HNC approximation.
 
 \begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.15.pdf}
-    \caption[Comparison between weights, $\phi=0.15$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.15$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.} 
+    \caption[Comparison between weights, $\phi=0.15$.]{Relation between the trained weights and the initial weights of $\nnet$ for $\phi=0.15$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.} 
     \label{fig:pesos15}
 \end{figure}
 
@@ -481,14 +481,14 @@ the variance turns out to be. If we observe the variance for the density
 $\phi=0.15$ in \autoref{fig:pesos15}
 we see that the variance is small due to the fact that the blue shaded region around
 the diagonal is close to it. If we now see the same \autoref{fig:pesos45} for the 
-density value of $\phi=0.45$ we see that this shaded region is significantly larger.
+density value of $\phi=0.45$ we observe that this shaded region is significantly larger.
 This would mean that, at higher densities, the weights of $\nnet$ are more spread out
 from the mean, and the neural network might have adjusted its weights to account for
 different computations of the bridge function.
 
 The most interesting part of this is the fact that the weights from initialization
 do not change much throughout the training scheme, which would imply that a local minimum
-has already been found. This might be the case, because the HNC is actually a solution to
+has already been found. This might be the case, because HNC is actually a solution of
 the OZ equation, and solutions around this particular approximation might as well be
 solutions themselves.
 This, however, does not answer the question of why the spread is larger when
@@ -496,7 +496,7 @@ higher densities are inspected.
 
 \begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.25.pdf}
-    \caption[Comparison between weights, $\phi=0.25$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.25$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
+    \caption[Comparison between weights, $\phi=0.25$.]{Relation between the trained weights and the initial weights of $\nnet$ for $\phi=0.25$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
     \label{fig:pesos25}
 \end{figure}
 
@@ -514,11 +514,11 @@ Because if we have already found a minimum, the optimization algorithm might end
 oscillating in the proximity of this value.
 
 On the other hand, this idea could also give answer to the question of why the spread
-is large for higher density values. If we pay close attention to the neural network bridge
+is larger for higher density values. If we pay close attention to the neural network bridge
 approximation results for the \emph{low density} values in \autoref{fig:rdf15}, we can see 
 that although all the bridge functions give a low accuracy estimation of the second peak as shown in the inset within the figure. However, for the main peak the neural network 
 approximation is accurate.
-If we now observe the \autoref{fig:rdf45} which refers to the \emph{high density} value
+If we now observe \autoref{fig:rdf45}, which refers to the \emph{high density} value,
 we can see that the estimation is a poor one.
 
 Let us now relate this to the weight evolution. For the \emph{low density} regime, the 
@@ -540,7 +540,7 @@ a particular minima is used.
 
 \begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.35.pdf}
-    \caption[Comparison between weights, $\phi=0.35$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.35$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
+    \caption[Comparison between weights, $\phi=0.35$.]{Relation between the trained weights and the initial weights of $\nnet$ for $\phi=0.35$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
     \label{fig:pesos35}
 \end{figure}
 
@@ -575,7 +575,7 @@ network might actually be \emph{more precise} than it is in its current form.
 
 \begin{figure}[t]
     \includegraphics[width=\textwidth]{figuras/capitulo-3/weights_phi=0.45.pdf}
-    \caption[Comparison between weights, $\phi=0.45$.]{Relation between the trained weights and the initial weights of $\nnet$ for the density value $\phi=0.45$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
+    \caption[Comparison between weights, $\phi=0.45$.]{Relation between the trained weights and the initial weights of $\nnet$ for $\phi=0.45$. The scale on the right-hand side represents the total number of instances for the trained-initial pair of weights.}
     \label{fig:pesos45}
 \end{figure}
 
