@@ -218,37 +218,44 @@ method unstable and convergence was almost never achieved.
 
 To solve this issue, the \emph{Adam}~\cite{kingmaAdamMethodStochastic2017} optimization 
 method was chosen. This optimization method is an excellent choice for the training
-of neural networks, even more so when the gradient is expected to be \emph{sparse}, i.e.
+of neural networks, even more when the gradient is expected to be \emph{sparse}, i.e.
 most of the elements of the gradient itself are zeros.
 The \emph{Adam} method uses several rules to adjust the descent direction of the gradient,
 as well as the hyperparameters related to the acceleration mechanism of the method.
-Notably, there are two important hyperparameters used by the method; $\beta_1$,
+Notably, there are two important hyperparameters used in the method; $\beta_1$,
 which controls the moving average of the computed gradient; and $\beta_2$, which controls
-the value of the gradient squared. Both parameters are necessary for the optimal 
-convergence of the algorithm.
+the value of the gradient squared~\cite{kingmaAdamMethodStochastic2017}. Both parameters 
+are necessary for the optimal convergence of the algorithm.
 
 The equations that define the optimization method are the following
-
-\begin{align}
-    m &= \beta_1 m - (1 - \beta_1) \nabla_{\theta} J(\theta) \nonumber \\
-    s &= \beta_2 s + (1 - \beta_2) \nabla_{\theta} J(\theta) \odot \nabla_{\theta} J(\theta) \nonumber \\
-    \hat{m} &= \frac{m}{1 - \beta_1^t} \nonumber \\
-    \hat{s} &= \frac{s}{1 - \beta_2^t} \nonumber \\
-    \theta &= \theta + \eta \hat{m} \oslash \sqrt{\hat{s} + \varepsilon}
+\begin{equation}
+    \begin{aligned}
+        m_{t} &= \beta_1 m_{t-1} - (1 - \beta_1) \nabla_{\theta_{t-1}} J(\theta_{t-1}) \\
+        s_{t} &= \beta_2 s_{t-1} + (1 - \beta_2) \nabla_{\theta_{t-1}} J(\theta_{t-1}) \odot \nabla_{\theta_{t-1}} J(\theta_{t-1}) \\
+        \hat{m}_{t} &= \frac{m_{t}}{1 - \beta_1^t} \\
+        \hat{s}_{t} &= \frac{s_{t}}{1 - \beta_2^t} \\
+        \theta_{t} &= \theta_{t-1} + \eta \hat{m}_{t} \oslash \sqrt{\hat{s}_{t} + \varepsilon}
+    \end{aligned}
     \label{eq:adam}
-\end{align}
-
-where $\odot$ is the elementwise multiplication, or Hadamard product; $\oslash$
-is the elementwise division, or Hadamard division; and $\varepsilon$ is a smoothing
-value to prevent division by zero.
+\end{equation}
+where $\odot$ is the elementwise multiplication, or Hadamard product;
+$\oslash$
+is the elementwise division, or Hadamard division;
+and $\varepsilon$ is a smoothing value to prevent division by zero~\cite{hornMatrixAnalysis2012}.
+The index $t$ represents each of the updates, or iterations, done by the algorithm.
 
 In the results presented in this chapter, the parameters were fixed to the ones reported
-as optimal in the original work~\cite{kingmaAdamMethodStochastic2017}, which are
+as optimal in the original work of the \emph{Adam}
+method~\cite{kingmaAdamMethodStochastic2017}, which are
 $\beta_1=\num{0.9}$ and $\beta_2=\num{0.999}$. It is important to note that this method
 has its own mechanisms to control and modify the gradients, as well as the hyperparameters.
 This makes it a \emph{hands-off} method, without the need to tune the hyperparameters.
 The \emph{learning rate}, $\eta$ in \autoref{eq:gradiente}, was fixed to
-$\eta=\num{1e-4}$ for all the experiments.
+$\eta=\num{1e-4}$ for all the experiments because when a larger value was used the 
+optimization method did not converge properly, and the results were not useful to be 
+presented here. In a more practical situation, the best
+way to choose the value of $\eta$ is to employ \emph{grid search} and look for the value
+that minimizes the error the most~\cite{hastieElementsStatisticalLearning2009}.
 
 \subsection{Neural network topology}
 
@@ -260,12 +267,12 @@ $\eta=\num{1e-4}$ for all the experiments.
 \end{figure}
 
 The neural network topology used in all the experiments is identical to the one
-shown in \autoref{fig:nn-esquema}, with the exception of the number of nodes in all the
-layers.
-Particularly, the neural network is made of \emph{three layers}, all connected among them.
+shown in \autoref{fig:nn-esquema}, with the exception of the number of nodes in each layer.
+In particular, the neural network is made of \emph{three layers} fully connected between 
+them.
 There is an \emph{input} layer, one \emph{hidden} layer, and a final \emph{output} layer.
 All layers have the same number of nodes, which is 4096. Additional nodes are added to the
-final two layers that serve as the \emph{bias}.
+final two layers that serve as the \emph{bias} terms.
 
 All the weights must be initialized appropiately, and in this case the Glorot uniform
 distribution was used~\cite{glorotUnderstandingDifficultyTraining2010}, which has proven
@@ -280,8 +287,7 @@ $in$ represents the number of units in the input layer; and $out$ the number of
 units in the output layer. All bias nodes were initialized to be zero.
 
 The activation function used was the \emph{ReLU}~\cite{glorotDeepSparseRectifier2011}
-function which has the form
-
+function, which has the form
 \begin{equation*}
     \text{ReLU}(x) = \max{(0, x)} .
 \end{equation*}
@@ -289,14 +295,14 @@ function which has the form
 This activation function is applied to all the nodes in the layers, with the exception
 of the input layer. This function was chosen due to the fact that the other most common
 functions ($\tanh, \text{softmax}$, etc.) were numerically unstable in the training process 
-of the neural network.
+of the neural network (data not shown).
 
 \subsection{Physical parameters and simulations}
 
 To solve the OZ equation a cutoff radius of $r_c=7\sigma$ was used, where $\sigma$ is the
 particle diameter and it was fixed to be $\sigma=1$.
-The interaction potential used was the pseudo hard sphere potential (Ref a ec.), both
-for the solution of the OZ equation as well as the results obtained from computer simulations.
+The interaction potential used was the pseudo hard sphere potential (\textcolor{red}{Ref a ec.}), both
+for the solution of the OZ equation, as well as the results obtained from computer simulations.
 
 Seven different densities were explored in the range $\phi \in [\num{0.15}, \num{0.45}]$, 
 with $\Delta \phi = \num{0.05}$.
@@ -305,14 +311,15 @@ algorithm when solving for the OZ equation. This was not the case for the comput
 simulations, where such partition is not needed.
 
 Computer simulations results were obtained using the traditional Monte Carlo simulation
-method for the NVT ensemble (Ref a marco teórico). The total number of particles was 2197,
+method within the Metropolis scheme for the $NVT$ ensemble (\textcolor{red}{Ref a marco teórico}). In every experiment, the total number of particles was 2197,
 the system was equilibrated for a total of 10 million Monte Carlo steps, and the radial
-distribution functions were obtained from the sampling of 7 million steps, after
+distribution functions were obtained from the sampling of 7 million Monte Carlo steps, after
 the system was equilibrated. To reduce the number of computations, a cutoff radius of
 half the size of the simulation box was used for the evaluation of the interaction 
-potential. Periodic boundary conditions were used accordingly. The same pseudo hard 
-sphere potential (Ref a ecuación) was used, instead of the true hard sphere potential, for 
-a fair comparison with the results obtained from the OZ equation.
+potential. Periodic boundary conditions in all spatial dimensions were used accordingly. 
+The same pseudo hard sphere potential (\textcolor{red}{Ref a ecuación}) was used, instead
+of the true hard sphere potential, for a fair comparison with the results obtained from the 
+OZ equation.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 4
