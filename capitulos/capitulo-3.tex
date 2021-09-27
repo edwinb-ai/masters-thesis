@@ -555,7 +555,7 @@ by any means possible that the neural network reduces to the HNC approximation.
 We only possess \emph{statistical evidence} from the training dynamics that the neural
 network weights do not change much throughout its training.
 
-This observation might shed the light into possibilities of changing the way the neural
+This observation might shed light into possibilities of changing the way the neural
 network propagates its values and return an output. For example, a modification to the
 neural network topology might be in order, such that introducing important 
 nonlinearities that are consistent with the physical properties of the system can yield
@@ -603,19 +603,22 @@ clear.
 
 To understand the significance of this, we must recall that the bridge function can, in 
 fact, be understood as a
-power series in density~\cite{hansenTheorySimpleLiquids2013}
-
+power series in density~\cite{hansenTheorySimpleLiquids2013},
 \begin{equation}
-    b(\vecr) = b^{(2)}(\vecr) \rho^2 + b^{(3)}(\vecr) \rho^3 + \cdots
+    b(\vecr) = b^{(2)}(\vecr) \rho^2 + b^{(3)}(\vecr) \rho^3 + \cdots ,
     \label{eq:expansion-densidad}
 \end{equation}
-
 where the notation $b^{(n)}(\vecr)$ indicates the $n$-particle bridge function, i.e. the
 estimation of the bridge function for $n$ interacting particles. It is specially
 important to note that the coefficients $b^{(n)}(\vecr)$ are, in general, high-dimensional
 integrals that are mostly \emph{intractable}. Almost always, for a given bridge function
 approximation, numerical methods are in order if these coefficients are to be determined.
-Only for special cases can these coefficients be determined in closed form, e.g.
+For instance, the work by Kwak and Kofke~\cite{kwakEvaluationBridgefunctionDiagrams2005}
+uses a Monte Carlo sampling numerical method to evaluate up to $b^{(4)}(\vecr)$ 
+for the hard-sphere fluid. They report that even if the numerical computation is
+possible, convergence is slow and computationally costly.
+
+Only for special cases, these coefficients can be determined in closed form, e.g.
 for the Percus-Yevick approximation the value of
 \[
 b^{(2)}(\vecr) = -\frac{1}{2}{\left[ g_{1}(\vecr) \right]}^2
@@ -623,25 +626,23 @@ b^{(2)}(\vecr) = -\frac{1}{2}{\left[ g_{1}(\vecr) \right]}^2
 is known from diagrammatic methods~\cite{hansenTheorySimpleLiquids2013}. In this
 expression, $g_{1}(\vecr)$ represents the single-particle radial distribution function.
 
-Let us now understand the role of random polynomials and their relation to the neural
+Let us now understand the role of \emph{random polynomials} and their relation to the neural
 network bridge function approximation used in this investigation.
 Let $p_n$ be an algebraic polynomial of the form
-
 \begin{equation}
     p_n(z) = a_0 + a_1 z + a_2 z^2 + a_3 z^3 + \cdots + a_n z^n, \quad
     z \in \mathbb{C}
     \label{eq:random-poly}
 \end{equation}
-
 where the coefficients $a_0, a_1, \dots , a_n$ are independent real-valued random variables
-with finite mean and finite variance. These kind of polynomials have found successful
+with finite mean and finite variance. This kind of polynomials have found successful
 applications in some areas of physics~\cite{houghZerosGaussianAnalytic2009}.
 These polynomials have also been the interest of mathematical research~\cite{edelmanHowManyZeros1995}.
 
 Now, by means of the universal approximation theorem, we can regard the neural network
 as a power series similar to \autoref{eq:random-poly}. To see this more clearly, we
 can think of the weights of the neural network as some coefficients of a power series,
-obtained under some transformation that take in the weights and return the coefficients
+obtained under some transformation that takes in the weights and return the coefficients
 needed to build a power series.
 Further, if we compare directly \autoref{eq:random-poly}
 and \autoref{eq:expansion-densidad}, we can see that these expressions
@@ -678,9 +679,9 @@ polynomials and probability theory.
 Even though neural networks can approximate any continuous function,
 it is up to the implementation that uses them
 to benefit from the underlying domain knowledge of the problem to be solved. In this case,
-even if the methodology created is \emph{theoretically possible} it raises the question of
+even if the methodology created is \emph{theoretically possible}, it raises the question of
 whether the neural networks are the most suitable solution for the OZ equation.
-Such might be the case for the methodology presented here. After all, the results shown
+Such might be the case for the methodology presented here. After all, the results
 seem to \emph{strongly suggest} that a neural network reduces to one of the classic 
 approximations,
 the Hypernetted Chain approximation, which is not the best approximation for all kinds
@@ -688,7 +689,7 @@ of interaction potentials, and most certainly is not the case of the pseudo hard
 and hard sphere potentials.
 At any rate, these results show a promising application of such models, in the form of
 understanding how or why certain bridge function approximations provide a solution to the 
-OZ equation. Unlike the use of fully data-driven methodologies like the one from
+OZ equation. Unlike the use of fully data-driven methodologies, like the one from
 Goodall and Lee~\cite{a.goodallDatadrivenApproximationsBridge2021},
 the proposed methodology might somehow be able to provide intuition into what is happening
 with the bridge function itself without the need of other theoretical methods.
@@ -705,7 +706,9 @@ In order to use the physics of the problem to our advantage, a different optimiz
 problem might be formulated, in which case a thermodynamic consistency cost function
 might be able to drive the learning dynamics. In this framework, it is expected to minimize 
 the difference between two different routes that compute the pressure, or the isothermal
-compressibility. A deficiency of such scheme is that the cost function will be
+compressibility, similar to the approaches by Zerah and Hansen~\cite{zerahSelfConsistentIntegral1986}, 
+as well as Rogers and Young~\cite{rogersNewThermodynamicallyConsistent1984}.
+A deficiency of such scheme is that the cost function will be
 a highly nonlinear function, and possibly a \emph{black-box function}, in which case
 the gradient of the function might be hard or even impossible to compute in a timely manner.
 This affects not only the computation time but the ability to use gradient descent methods,
@@ -715,9 +718,9 @@ here, even more so if coupled with a dimensionality reduction technique.
 
 In closing, neural networks are capable models for the approximation of any continuous function, 
 but domain knowledge of the problem is needed for these models to succeed when no data set 
-is available. In the idea presented in this chapter, we wanted to investigate two things, 
-whether neural networks could solve for the OZ equation and their quality of approximation. 
-It was shown that, indeed, neural networks can solve for the OZ equation, but without more 
+is available. In the proposal presented in this chapter, we wanted to investigate two things, 
+whether neural networks could solve the OZ equation and their quality of approximation. 
+It was shown that, indeed, neural networks can solve the OZ equation, but without more 
 information on the system itself, neural networks do not generalize well and their training 
 dynamics suffer greatly. The bridge function approximation that these models provide is
 implied to be as accurate as the Hypernetted Chain bridge function.
