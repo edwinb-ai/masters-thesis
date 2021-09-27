@@ -73,17 +73,19 @@ headsepline, % Uncomment to get a line under the header
 %----------------------------------------------------------------------------------------
 
 \thesistitle{Using Computational Intelligence to solve the Ornstein-Zernike equation} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
-\supervisor{Dr. James \textsc{Smith}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+\supervisor{Dr. Luis Carlos \textsc{Padierna García}\\
+	Dr. Ramón \textsc{Castañeda Priego}
+} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
-\degree{Master in Science} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
+\degree{Master in Applied Science} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
 \author{Edwin Armando Bedolla Montiel} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
 \addresses{} % Your address, this is not currently used anywhere in the template, print it elsewhere with \addressname
 
 \subject{Physical Sciences} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
 \keywords{} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
 \university{\href{https://ugto.mx}{Universidad de Guanajuato}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
-\department{\href{}{Department of Physical Engineering}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
-\group{\href{}{Soft Matter Group}} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
+\department{\href{}{University of Guanajuato}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+\group{\href{}{Science and Engineering Division}} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
 \faculty{\href{}{Science and Engineering Division}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
 
 \AtBeginDocument{
@@ -157,7 +159,8 @@ headsepline, % Uncomment to get a line under the header
 
 \begin{abstract}
 \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
+This thesis is an exploration of \textit{Machine Learning} techniques to study the numerical solution of the Ornstein-Zernike equation for simple liquids. In particular, a continuous model of the hard sphere fluid is studied. There are two main proposals in this thesis. First, the use of \emph{nueral networks} as a way to choose the best \emph{closure relation} when solving the Ornstein-Zernike equation. It is shown that in the case of the hard sphere fluid, the neural network approach reduces to the Hypernetted Chain closure.
+Second, if more physics is incorporated to the closure relation, a better estimate can be obtained with the use of \emph{evoluationary optimization} techniques. When choosing the modified Verlet closure relation, and leaving a couple of free parameter to be adjusted, the results are as good as those obtained from molecular simulations. The exploration is then closed with outlooks to different way to improve the proposals presented in the current work, as well as new ways to solve the problem using other Machine Learning techniques.
 \end{abstract}
 
 %----------------------------------------------------------------------------------------
