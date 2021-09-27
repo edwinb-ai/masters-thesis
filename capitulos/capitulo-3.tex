@@ -15,26 +15,26 @@
 %----------------------------------------------------------------------------------------
 
 Neural networks can be used as \emph{universal approximators}~\cite{hornikMultilayerFeedforwardNetworks1989, hornikApproximationCapabilitiesMultilayer1991, cybenkoApproximationSuperpositionsSigmoidal1989},
-i.e. they can take the form of any continuous function if and only if the conditions of the
+i.e., they can take the form of any continuous function if and only if the conditions of the
 \emph{universal approximation theorem} hold~\cite{parkMinimumWidthUniversal2020,zhouUniversalityDeepConvolutional2020}.
-The aim of this chapter is to investigate the hypothesis that a neural network might be 
+The aim of this chapter is to explore the hypothesis that a neural network might be 
 useful as a bridge function parametrization in the closure expression for the 
-Ornstein-Zernike equation.
+Ornstein-Zernike equation~\cite{hansenTheorySimpleLiquids2013}.
 If this is true, then choosing a particular approximation can be avoided for a given 
 interaction potential, and leave the choice of the bridge function to the neural network 
 itself, while simultaneously solving for the Ornstein-Zernike equation. It is intended to
 explore the implications of two inquiries:
 
 \begin{enumerate}[(a)]
-    \item Is it possible to solve for the Ornstein-Zernike equation using a neural network?
-    \item If it is indeed possible, how good is the quality of the approximation for the pseudo hard sphere potential?
+    \item Is it possible to solve the Ornstein-Zernike equation using a neural network?
+    \item If it is indeed possible, how good is the quality of the approximation for the pseudo hard sphere potential~\cite{baezUsingSecondVirial2018}?
 \end{enumerate}
 
 In this chapter, we show in detail the methodology created to answer these questions, and
-the mathematical structure with which a neural network can be used to solve for the
+the mathematical structure with which a neural network can be used to solve the
 Ornstein-Zernike equation.
-The results obtained are compared to those from computer simulations to assess the
-quality of the solution.
+The results obtained are compared to those from Monte Carlo computer simulations to assess 
+the quality of the solution.
 In the appendices (\autoref{AppendixA}, \autoref{AppendixB}), the numerical algorithm used 
 to solve the Ornstein-Zernike equation
 is presented, along with a detailed computation of the gradients used for the
@@ -43,15 +43,14 @@ in general.
 
 \section{Parametrization of the bridge function}
 
-The Ornstein-Zernike equation is given by the following coupled equations
-
-\begin{subequations}
-    \begin{align*}
+The Ornstein-Zernike formalism is given by the following coupled equations~\cite{hansenTheorySimpleLiquids2013}
+\begin{equation}
+    \begin{aligned}
          & h(\vecr) = c(\vecr) +
         n \int_{V}
         c(\vecr^{\prime})
         h(\lvert \vecr - \vecr^{\prime} \rvert)
-        d\vecr^{\prime} \label{eq:oz1} \\
+        d\vecr^{\prime} \\
          & c(\vecr)
         = \exp{\left[
                 -  \beta u(\vecr)
@@ -59,11 +58,11 @@ The Ornstein-Zernike equation is given by the following coupled equations
                 + B(\vecr)
                 \right]} -
         \gamma(\vecr)
-        - 1
-    \end{align*}
-\end{subequations}
-
-with the already known notation for each quantity (Ref a marco teórico).
+        - 1 ,
+    \end{aligned}
+    \label{eq:oz1}
+\end{equation}
+with the already known notation for each quantity (\textcolor{red}{Ref a marco teórico}).
 
 Let $\nnet$ be a neural network with weights $\theta$. The main hypothesis
 of this chapter is that $\nnet$ can replace the bridge function $B(\vecr)$
@@ -95,23 +94,21 @@ be devised. This new numerical scheme must also be able to solve the OZ equation
 simultaneously finding the appropiate weights for $\nnet$.
 
 \subsection{Cost function}
-It was mentioned previously that the main problem to solve is to find the weights of
+It was mentioned previously that the main problem is to find the weights of
 $\nnet$ that can successfully solve the Ornstein-Zernike equation
 for a given interaction potential.
-To solve such problem, a \textbf{cost function} must be defined, and be used as part of
+To solve such a problem, a \textbf{cost function} must be defined, and be used as part of
 a \emph{minimization} problem.
 
 To define such a function, we consider the successive approximations obtained from the
-iterative Piccard scheme to solve the OZ equation, $\{\gamma_1(\vecr), \gamma_2(\vecr), \dots, \gamma_n(\vecr)\}$.
+iterative Piccard scheme to solve the OZ equation, $\left\{\gamma_1(\vecr), \gamma_2(\vecr), \dots, \gamma_n(\vecr)\right\}$.
 From this, we expect to have found a solution when each approximation
 is \emph{close enough} to the previous one. This can be translated into the following
 cost function
-
 \begin{equation}
-    J(\theta) = \left[\gamma_{n}(\vecr, \theta) - \gamma_{n-1}(\vecr, \theta) \right]^2
+    J(\theta) = \left[\gamma_{n}(\vecr, \theta) - \gamma_{n-1}(\vecr, \theta) \right]^2 ,
     \label{eq:costo}
 \end{equation}
-
 where $\gamma_{n}(\vecr, \theta)$ is the $n$-th approximation of the indirect
 correlation function, $\gamma(\vecr)$.
 The notation $\gamma(\vecr, \theta)$ indicates that the function now depends
@@ -133,10 +130,9 @@ and it is defined simply as
 
 \begin{equation}
     \begin{aligned}
-         & \underset{\theta}{\text{min}}
-         & & J(\theta)
+         & \underset{\theta \in \mathbb{R}^n}{\text{min}}
+         & & J(\theta) .
     \end{aligned}
-    .
     \label{eq:optimizacion}
 \end{equation}
 
@@ -144,18 +140,16 @@ This formulation is just a search for the best values of the weights that minimi
 the squared difference between successive approximations. We denote these optimal values
 as the \emph{minimizer}, or $\theta^{*}$, such that $J(\theta^{*})$ is a minimum.
 This optimization problem can be solved iteratively, along with the solution of the
-OZ equation, which is also an iterative process.
+OZ equation, whose procedure to get a solution is also through an iterative process.
 
 \subsection{Weight updates}
 The iterative method employed to adjust the weights of $\nnet$ is based on the
 \emph{gradient descent} method~\cite{nocedalNumericalOptimization2006}.
-The most general update rule for a method based on gradient descent reads
-
+The most general update rule for a method based on gradient descent reads~\cite{goodfellowDeepLearning2016}
 \begin{equation}
-    \theta_{n+1} = \theta_n - \eta \nabla_{\theta} J(\theta) .
+    \theta_{n+1} = \theta_n - \eta \nabla_{\theta} J(\theta) ,
     \label{eq:gradiente}
 \end{equation}
-
 where $\eta$ is known as the \emph{learning rate}, and it is a hyperparameter
 that controls the step size at each iteration while moving toward the minimum
 of a cost function. This value needs to be \emph{tuned} accordingly, so
@@ -163,7 +157,7 @@ that the method converges properly. By tuning the parameter we mean that this va
 should change until the numerical scheme is stable enough, or provides the best
 possible answer to the optimization problem.
 
-Regardless of the particular expression for the weight updates, every method
+Regardless the particular expression for the weight updates, every method
 based on the gradient descent method \emph{requires} the gradient information from
 the cost function with respect to the weights, $\nabla_{\theta} J(\theta)$.
 In this particular case, the detailed computation of the gradient is described in
@@ -175,13 +169,13 @@ can correctly use this training scheme and solve the OZ equation.
 Having described all the necessary elements needed, a general layout for the solution
 of the Ornstein-Zernike using neural networks is now presented.
 
-Thus, we propose the following steps to solve the OZ using the parametrization
+Thus, we propose the following steps to solve the OZ equation using the parametrization
 described by \autoref{eq:parametrizacion}:
 
 \begin{enumerate}
-    \item Given a particular interaction potential $\beta u(\vecr)$, \autoref{eq:parametrizacion} is used to obtain the value of the direct correlation function $c(\vecr)$. In this step, an initial value for $\gamma_{n}(\vecr)$ is needed, which is initialized based on the five-point Ng methodology shown in \autoref{AppendixB}.
+    \item Given a particular interaction potential $\beta u(\vecr)$, \autoref{eq:parametrizacion} is used to obtain the value of the direct correlation function $c(\vecr)$. In this step, an initial value for $\gamma_{n}(\vecr)$ is needed, which is initialized based on the five-point Ng methodology shown in \autoref{AppendixB}. The weights of the neural network $\nnet$ are initialized randomly. The initialization method is discussed in detail in the next section.
     \item The newly found function $c(\vecr)$ is transformed to a reciprocal space by means of the Fourier transform yielding the new function $\hat{c}(\veck)$.
-    \item Then, the full OZ equation(Ref a ec marco teórico) is Fourier transformed. Using the information from the previous step, a new estimation of the indirect correlation function is obtained, $\hat{\gamma}_{n+1}(\veck, \theta)$.
+    \item Then, the full OZ equation(\textcolor{red}{Ref a ec marco teórico}) is Fourier transformed. Using the information from the previous step, a new estimation of the indirect correlation function is obtained, $\hat{\gamma}_{n+1}(\veck, \theta)$.
     \item The Fourier transform is applied once again to return all the functions to real space. With this operation, a new estimation $\gamma_{n+1}(\vecr, \theta)$ is computed from the transformed function, $\hat{\gamma}_{n+1}(\veck, \theta)$.
     \item Both estimations, $\gamma_{n}$ and $\gamma_{n+1}$, are used to evaluate \autoref{eq:costo}. In this step, the gradient $\nabla_{\theta} J(\theta)$ is computed as well.
     \item The weights $\theta$ are updated using a gradient descent rule, similar to \autoref{eq:gradiente}, and the process is repeated from step 1. In the next iteration, the initial value for the indirect correlation function will be $\gamma_{n+1}$, and a new estimation $\gamma_{n+2}$ will be obtained. This process is repeated until convergence.
@@ -198,13 +192,15 @@ is achieved. This convergence criterion is defined as follows
 
 This expression is also known as the \emph{mean squared error}~\cite{goodfellowDeepLearning2016}.
 Here, we sum all the $N$ elements of the squared difference between estimates $\gamma_{n+1}$
-and $\gamma_{n}$. The paramater $\epsilon \in [0,1]$ is a tolerance value that indicates an 
+and $\gamma_{n}$. The paramater $\epsilon$ is a tolerance value that indicates an 
 upper bound for the error between estimations. When the computed error is below this 
-tolerance value, we consider the algorithm to have converged to a particular minimum.
-Specifically, the numerical tolerance in all the experiments was fixed to be
-$\epsilon = \num{1e-5}$.
+tolerance value, we consider the algorithm to \emph{have converged to a particular minimum}.
 This means that the weights are adjusted until the successive estimations of the $\gamma$
 functions are equal between them, up to the defined tolerance $\epsilon$.
+Specifically, the numerical tolerance in all the experiments was fixed to be
+$\epsilon = \num{1e-5}$ to allow for a robust exploration of the search space, without being
+too restrictive. When using a lower value of $\epsilon,$ it was observed that the results 
+were not improving at all (data not shown).
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
