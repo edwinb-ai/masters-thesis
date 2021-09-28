@@ -4,33 +4,33 @@
 In \autoref{Cap3} a training scheme was developed to adjust the weights of a neural
 network while simultaneously solving for the OZ equation. A crucial part of
 this algorithm is the \emph{gradient computation}. In this section, we shall work
-out the details of this computation.
+out the details of this computation. It is important to note that the method proposed
+here is merely numerical, but we also provide a more theoretical method based on
+iterative methods for linear systems.
 
+\section{Mathematical development}
 Recall that we want a neural network $\nnet$ with weights $\theta$ to work as a
 parametrization in the closure expression of the OZ equation, as defined in
 \autoref{eq:parametrizacion}. To find the weights of the neural network, an
 unconstrained optimization problem was presented, which was meant to be solved with
 an iterative procedure known as \emph{gradient descent}, which has the following
 general rule
-
 \[
 \theta_{n+1} = \theta_{n} - \eta \nabla_{\theta} J(\theta)
 \]
-
 where the cost function $J(\theta)$ is defined in \autoref{eq:costo}; $\nabla_{\theta}$
 is the gradient of $J(\theta)$ with respect to the weights, $\theta$; and $\eta$ is known
 as the learning rate, which controls the length of the step taken by the gradient
-towards a minimum.
+towards a minimum. The iteration step is accounted for with the index $n$, which runs until
+convergence has been achieved.
 
 We are now interested in the closed form of $\nabla_{\theta} J(\theta)$. If we now use the
 definition of the cost function as defined in \autoref{eq:costo}, we have for the
 gradient
-
 \begin{equation}
     \nabla_{\theta} J(\theta) = \nabla_{\theta} \left[\gamma_{n}(\vecr, \theta) - \gamma_{n-1}(\vecr, \theta) \right]^2
     \label{eq:grad1}
 \end{equation}
-
 where $\gamma_{n}(\vecr, \theta)$ is the $n$-th approximation of the indirect
 correlation function, $\gamma(\vecr)$.
 The notation $\gamma(\vecr, \theta)$ indicates that the function now depends
@@ -39,13 +39,11 @@ $\gamma(\vecr, \theta)$ must change as well.
 
 We now apply the gradient operation to \autoref{eq:grad1} to obtain the following
 expression
-
 \begin{equation}
     \nabla_{\theta} J(\theta) = 2 \left[\gamma_{n}(\vecr, \theta) - \gamma_{n-1}(\vecr, \theta) \right]
     \left[ \partial_{\theta} \gamma_{n}(\vecr, \theta) - \partial_{\theta} \gamma_{n-1}(\vecr, \theta) \right]
     \label{eq:grad2}
 \end{equation}
-
 which results from direct application of the chain rule. Now, an expression for
 $\partial_{\theta} \gamma_{n}(\vecr, \theta)$ needs to
 be found by some other route. Notably, this expression should be expressed in terms
@@ -55,7 +53,6 @@ network $\nnet$, which has a direct dependency on the weights.
 
 In order to find this new expression, we invoke \autoref{eq:parametrizacion} and
 differentiate it with respect to the weights
-
 \begin{equation}
     \frac{\partial c(\vecr)}{\partial \theta} = \frac{\partial}{\partial \theta}
     \left[ e^{p(\vecr, \theta)} - \gamma(\vecr, \theta) - 1 \right] =
@@ -63,87 +60,138 @@ differentiate it with respect to the weights
     ,
     \label{eq:grad3}
 \end{equation}
-
 here we have for $p(\vecr, \theta)$
-
 \begin{equation}
     p(\vecr, \theta) = -\beta u(\vecr) + \gamma(\vecr, \theta) + \nnet
     \label{eq:pr}    
 \end{equation}
-
 with derivative with respect to the weights
-
 \begin{equation}
     \partial_{\theta} p(\vecr, \theta) = \partial_{\theta} \gamma(\vecr, \theta) + \partial_{\theta} \nnet
     .
     \label{eq:grad-pr}
 \end{equation}
 
-Now, in \autoref{eq:grad3} we have the expression 
-$\frac{\partial c(\vecr)}{\partial \theta}$
-but the function $c(\vecr)$ does not depend explicitly on the weights, hence
-$\frac{\partial c(\vecr)}{\partial \theta} = 0$.
-
-Putting all this information together we are able to find an expression for
-$\partial_{\theta} \gamma_{n}(\vecr, \theta)$.
-We take \autoref{eq:grad3} together with \autoref{eq:grad-pr} to obtain the following
-expression
-
+We have now found a closed form for the value of
+$\partial_{\theta} \gamma_{n}(\vecr, \theta)$
+which is essentially the same as \autoref{eq:grad3}, but in a slightly different form,
+which reads
 \begin{equation}
-    \frac{\partial c(\vecr)}{\partial \theta} = 0 =
-    e^{p(\vecr, \theta)} \left[ \partial_{\theta} \gamma(\vecr, \theta) + \partial_{\theta} \nnet \right]
-    - \partial_{\theta} \gamma(\vecr, \theta)
+    \boxed{
+    \frac{\partial \gamma(\vecr, \theta)}{\partial \theta} =
+    e^{p(\vecr, \theta)} \partial_{\theta} p(\vecr, \theta) - \partial_{\theta} c(\vecr, \theta)
+    .
+    }
     \label{eq:grad4}
 \end{equation}
+Note, however, that this new expression depends on the value of
+$\partial_{\theta} c(\vecr, \theta)$
+which we do not readily have at this point. It is at this step that we propose
+to compute the value of $\partial_{\theta} c(\vecr, \theta)$ using numerical
+differentiation, which should be enough to get a good estimate of the derivative.
 
+\subsection{General solution scheme}
+In order to carry out the detailed explanation of the numerical approximation approach,
+we must recall the order in which the general solution to the OZ equation is achieved.
+We need to do this in order to understand how can we approximation the derivative
+of $c(\vecr, \theta)$.
+This is already described in detail in \autoref{subsec:oz-solution}, but
+we need to recall it here briefly.
+
+In short, the solution looks like this:
+
+\begin{itemize}
+    \item For the first part, we solve the OZ equation in a classical fashion, employing Fourier transforms in order to build a set of approximations for the $\gamma(\vecr, \theta)$ function. At this step we have found also an approximation for $c(\vecr, \theta)$, which is crucial to remember.
+    \item When we have found said approximations, we compute the gradient as shown in \autoref{eq:grad2}. Due to the fact that we have found previous approximations to the correlation functions, we can use them as part of our gradient computation.
+\end{itemize}
+
+As we can see, given the fact that the OZ solution scheme already provides numerical
+approximations for the correlation functions, we can use the value of $c(\vecr, \theta)$
+in other numerical schemes to find the value of \autoref{eq:grad4}.
+
+\section{Numerical differentiation approach}
+We will now outline the scheme used in the current work to find the value of 
+\autoref{eq:grad4} using a numerical differentiation scheme for
+$\partial_{\theta} c(\vecr, \theta)$.
+
+To achieve such goal, we must briefly outline the method of numerical differentiation
+for functions of several variables~\cite{hammingNumericalMethodsScientists2012}.
+We wish to work with the $c(\vecr, \theta)$ function, which is essentially a function of
+two variables. The first variable, $\vecr$ is the \emph{Euclidean distance}
+between two particles, or in other words $\vecr={\lvert \vecr_1 - \vecr_2 \rvert}^2$.
+For the second variable $\theta$, this represents the weights of $\nnet$, which is
+in fact a vector of its own of size $n$. The value of $n$ depends on the number of
+nodes in the neural network, but here we will use a more general approach instead of
+defining a specific value of $n$.
+
+So, with this in mind, we can define the function to be 
+$c(\vecr, \theta) : \mathbb{R} \times \mathbb{R}^{n} \to \mathbb{R}$.
+For a multivariable function, its partial derivative is computed numerically,
+for a particular value of $\bar{\vecr}$, as
+\begin{equation}
+    \frac{\partial c(\bar{\vecr}, \theta)}{\partial \theta} \approx
+    \frac{c(\bar{\vecr}, \theta + h) - c(\bar{\vecr}, \theta)}{h}
+    \label{eq:num-diff}
+\end{equation}
+with $h \in \mathbb{R}$ usually a small number. However, we already know the value
+of $c(\bar{\vecr}, \theta)$ from the approximation obtained with the solution of
+the OZ equation. We need only the value of $c(\bar{\vecr}, \theta + h)$ which can
+be easily obtained by modifying the weights of $\nnet$ by the value $h$ and evaluating
+the closure relation
+\[
+    c(\bar{\vecr}, \theta + h) = \exp{\left[-\beta u(\bar{\vecr}) + \gamma(\bar{\vecr}) + N_{\theta + h}(\bar{\vecr})\right] - \gamma(\bar{\vecr}) - 1} .
+\]
+It is important to point out that all operations are elementwise.
+
+From here, we simply compute the rest of \autoref{eq:grad4} using the numerical 
+approximation of $\partial_{\theta} c(\bar{\vecr}, \theta)$ and we use this information
+to compute the value of the gradient in \autoref{eq:grad2}. We can then continue with the
+development of the closed form of this gradient.
+Putting all this information together we are able to find an expression for
+$\partial_{\theta} \gamma_{n}(\vecr, \theta)$.
+We take \autoref{eq:grad4} together with \autoref{eq:grad-pr} to obtain the following
+expression
+\begin{equation}
+    \frac{\partial c(\vecr, \theta)}{\partial \theta} = 
+    e^{p(\vecr, \theta)} \left[ \partial_{\theta} \gamma(\vecr, \theta) + \partial_{\theta} \nnet \right]
+    - \partial_{\theta} \gamma(\vecr, \theta)
+    \label{eq:grad5}
+\end{equation}
 and now to find an expression for $\partial_{\theta} \gamma(\vecr, \theta)$ we perform
 the following steps:
-
 \begin{subequations}
     \begin{align*}
-        0 &=
+        \partial_{\theta} c(\vecr, \theta) &=
         e^{p(\vecr, \theta)} \left[ \partial_{\theta} \gamma(\vecr, \theta) + \partial_{\theta} \nnet \right]
         - \partial_{\theta} \gamma(\vecr, \theta) \\
-        0 &= e^{p(\vecr, \theta)} \partial_{\theta} \gamma(\vecr, \theta) + 
+        \partial_{\theta} c(\vecr, \theta) &= e^{p(\vecr, \theta)} \partial_{\theta} \gamma(\vecr, \theta) + 
         e^{p(\vecr, \theta)} \partial_{\theta} \nnet -
         \partial_{\theta} \gamma(\vecr, \theta) \\
         \partial_{\theta} \gamma(\vecr, \theta) \left[ 1 - e^{p(\vecr, \theta)} \right] &=
-        e^{p(\vecr, \theta)} \partial_{\theta} \nnet
+        e^{p(\vecr, \theta)} \partial_{\theta} \nnet - \partial_{\theta} c(\vecr, \theta)
     \end{align*}
     \begin{equation}
-        \boxed{\partial_{\theta} \gamma(\vecr, \theta) = \frac{e^{p(\vecr, \theta)} \partial_{\theta} \nnet}{1 - e^{p(\vecr, \theta)}}}
-        \label{eq:grad5}
+        \boxed{\partial_{\theta} \gamma(\vecr, \theta) = \frac{e^{p(\vecr, \theta)} \partial_{\theta} \nnet - \partial_{\theta} c(\vecr, \theta)}{1 - e^{p(\vecr, \theta)}}}
+        \label{eq:grad6}
     \end{equation}
 \end{subequations}
-
 An equation for the derivative $\partial_{\theta} \gamma(\vecr, \theta)$ has now been found 
-which does satisfy the conditions of being dependent on the weights explicitly by means of
-the derivative of $\nnet$ with respect to $\theta$.
+which does satisfy the conditions of being dependent on the weights explicitly, and with
+the numerical approximation of $\partial_{\theta} c(\vecr, \theta)$.
 
-Take \autoref{eq:grad2}
-
+To finish up the gradient expression, take \autoref{eq:grad2}
 \begin{equation*}
     \nabla_{\theta} J(\theta) = 2 \left[\gamma_{n}(\vecr, \theta) - \gamma_{n-1}(\vecr, \theta) \right]
     \left[ \partial_{\theta} \gamma_{n}(\vecr, \theta) - \partial_{\theta} \gamma_{n-1}(\vecr, \theta) \right] ,
 \end{equation*}
-
-and plug in \autoref{eq:grad5} to obtain a closed form of the gradient we seek
-
+and plug in \autoref{eq:grad6} to obtain a closed form of the gradient we seek
 \begin{equation}
     \boxed{
     \nabla_{\theta} J(\theta) = 2 \left[\gamma_{n}(\vecr, \theta) - \gamma_{n-1}(\vecr, \theta) \right]
-    \left[ \frac{e^{p_{n}(\vecr, \theta)} \partial_{\theta} \nnet}{1 - e^{p_{n}(\vecr, \theta)}} - \frac{e^{p_{n-1}(\vecr, \theta)} \partial_{\theta} \nnet}{1 - e^{p_{n-1}(\vecr, \theta)}} \right]
+    \left[ \frac{e^{p_{n}(\vecr, \theta)} \partial_{\theta} \nnet - \partial_{\theta} c(\vecr, \theta)}{1 - e^{p_{n}(\vecr, \theta)}} - \frac{e^{p_{n-1}(\vecr, \theta)} \partial_{\theta} \nnet - \partial_{\theta} c(\vecr, \theta)}{1 - e^{p_{n-1}(\vecr, \theta)}} \right] .
     }
     \label{eq:closed}
 \end{equation}
-
-with
-
-\[
-p_{n}(\vecr, \theta) = -\beta u(\vecr) + \gamma_{n}(\vecr, \theta) + \nnet .
-\]
-
 In practice, a smoothing factor of $\varepsilon=\num{1e-7}$ was used in the denominator of 
-the gradient expression from \autoref{eq:closed} to avoid division by zero. Also, the 
-multiplication and division in the same expression were the Hadamard product and division
-respectively, i.e. elementwise product and division.
+the gradient expression from \autoref{eq:closed} to avoid division by zero. Again, the 
+multiplication and division in the same expression are elementwise operations.
