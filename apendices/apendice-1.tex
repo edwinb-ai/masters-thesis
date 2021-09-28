@@ -4,9 +4,7 @@
 In \autoref{Cap3} a training scheme was developed to adjust the weights of a neural
 network while simultaneously solving for the OZ equation. A crucial part of
 this algorithm is the \emph{gradient computation}. In this section, we shall work
-out the details of this computation. It is important to note that the method proposed
-here is merely numerical, but we also provide a more theoretical method based on
-iterative methods for linear systems.
+out the details of this computation.
 
 \section{Mathematical development}
 Recall that we want a neural network $\nnet$ with weights $\theta$ to work as a
@@ -16,7 +14,7 @@ unconstrained optimization problem was presented, which was meant to be solved w
 an iterative procedure known as \emph{gradient descent}, which has the following
 general rule
 \[
-\theta_{n+1} = \theta_{n} - \eta \nabla_{\theta} J(\theta)
+\theta_{n+1} = \theta_{n} - \eta \nabla_{\theta_{n}} J(\theta_{n})
 \]
 where the cost function $J(\theta)$ is defined in \autoref{eq:costo}; $\nabla_{\theta}$
 is the gradient of $J(\theta)$ with respect to the weights, $\theta$; and $\eta$ is known
@@ -24,9 +22,9 @@ as the learning rate, which controls the length of the step taken by the gradien
 towards a minimum. The iteration step is accounted for with the index $n$, which runs until
 convergence has been achieved.
 
-We are now interested in the closed form of $\nabla_{\theta} J(\theta)$. If we now use the
+We are now interested in the closed form of $\nabla_{\theta} J(\theta)$. If we use the
 definition of the cost function as defined in \autoref{eq:costo}, we have for the
-gradient
+gradient the following expression
 \begin{equation}
     \nabla_{\theta} J(\theta) = \nabla_{\theta} \left[\gamma_{n}(\vecr, \theta) - \gamma_{n-1}(\vecr, \theta) \right]^2
     \label{eq:grad1}
@@ -93,16 +91,18 @@ differentiation, which should be enough to get a good estimate of the derivative
 \subsection{General solution scheme}
 In order to carry out the detailed explanation of the numerical approximation approach,
 we must recall the order in which the general solution to the OZ equation is achieved.
-We need to do this in order to understand how can we approximation the derivative
-of $c(\vecr, \theta)$.
+We need to do this in order to understand how the numerical approximation of the derivative
+for $c(\vecr, \theta)$ can be obtained.
 This is already described in detail in \autoref{subsec:oz-solution}, but
 we need to recall it here briefly.
 
-In short, the solution looks like this:
+In short, the general solution to the OZ equation with a neural network 
+parametrization looks like this:
 
 \begin{itemize}
     \item For the first part, we solve the OZ equation in a classical fashion, employing Fourier transforms in order to build a set of approximations for the $\gamma(\vecr, \theta)$ function. At this step we have found also an approximation for $c(\vecr, \theta)$, which is crucial to remember.
     \item When we have found said approximations, we compute the gradient as shown in \autoref{eq:grad2}. Due to the fact that we have found previous approximations to the correlation functions, we can use them as part of our gradient computation.
+    \item Finally, with the value of the gradient, we compute the loss function and adjust the weights $\theta$ for the neural network. We then repeat the process until convergence is reached.
 \end{itemize}
 
 As we can see, given the fact that the OZ solution scheme already provides numerical
@@ -127,7 +127,7 @@ defining a specific value of $n$.
 So, with this in mind, we can define the function to be 
 $c(\vecr, \theta) : \mathbb{R} \times \mathbb{R}^{n} \to \mathbb{R}$.
 For a multivariable function, its partial derivative is computed numerically,
-for a particular value of $\bar{\vecr}$, as
+for a particular value of distance $\bar{\vecr}$, as
 \begin{equation}
     \frac{\partial c(\bar{\vecr}, \theta)}{\partial \theta} \approx
     \frac{c(\bar{\vecr}, \theta + h) - c(\bar{\vecr}, \theta)}{h}
