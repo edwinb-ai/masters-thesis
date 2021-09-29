@@ -88,6 +88,36 @@
   language = {en}
 }
 
+@article{behlerGeneralizedNeuralNetworkRepresentation2007a,
+  title = {Generalized {{Neural}}-{{Network Representation}} of {{High}}-{{Dimensional Potential}}-{{Energy Surfaces}}},
+  author = {Behler, J{\"o}rg and Parrinello, Michele},
+  year = {2007},
+  month = apr,
+  journal = {Physical Review Letters},
+  volume = {98},
+  number = {14},
+  pages = {146401},
+  publisher = {{American Physical Society}},
+  doi = {10.1103/PhysRevLett.98.146401},
+  abstract = {The accurate description of chemical processes often requires the use of computationally demanding methods like density-functional theory (DFT), making long simulations of large systems unfeasible. In this Letter we introduce a new kind of neural-network representation of DFT potential-energy surfaces, which provides the energy and forces as a function of all atomic positions in systems of arbitrary size and is several orders of magnitude faster than DFT. The high accuracy of the method is demonstrated for bulk silicon and compared with empirical potentials and DFT. The method is general and can be applied to all types of periodic and nonperiodic systems.}
+}
+
+@article{behlerPerspectiveMachineLearning2016a,
+  title = {Perspective: {{Machine}} Learning Potentials for Atomistic Simulations},
+  shorttitle = {Perspective},
+  author = {Behler, J{\"o}rg},
+  year = {2016},
+  month = nov,
+  journal = {The Journal of Chemical Physics},
+  volume = {145},
+  number = {17},
+  pages = {170901},
+  publisher = {{American Institute of Physics}},
+  issn = {0021-9606},
+  doi = {10.1063/1.4966192},
+  abstract = {Nowadays, computer simulations have become a standard tool in essentially all fields of chemistry, condensed matter physics, and materials science. In order to keep up with state-of-the-art experiments and the ever growing complexity of the investigated problems, there is a constantly increasing need for simulations of more realistic, i.e., larger, model systems with improved accuracy. In many cases, the availability of sufficiently efficient interatomic potentials providing reliable energies and forces has become a serious bottleneck for performing these simulations. To address this problem, currently a paradigm change is taking place in the development of interatomic potentials. Since the early days of computer simulations simplified potentials have been derived using physical approximations whenever the direct application of electronic structure methods has been too demanding. Recent advances in machine learning (ML) now offer an alternative approach for the representation of potential-energy surfaces by fitting large data sets from electronic structure calculations. In this perspective, the central ideas underlying these ML potentials, solved problems and remaining challenges are reviewed along with a discussion of their current applicability and limitations.}
+}
+
 @article{bomontRenormalizationIndirectCorrelation2001,
   title = {Renormalization of the Indirect Correlation Function to Extract the Bridge Function of Simple Fluids},
   author = {Bomont, J. M. and Bretonnet, J. L.},
@@ -178,6 +208,24 @@
   doi = {10.1007/BF02551274},
   abstract = {In this paper we demonstrate that finite linear combinations of compositions of a fixed, univariate function and a set of affine functionals can uniformly approximate any continuous function ofn real variables with support in the unit hypercube; only mild conditions are imposed on the univariate function. Our results settle an open question about representability in the class of single hidden layer neural networks. In particular, we show that arbitrary decision regions can be arbitrarily well approximated by continuous feedforward neural networks with only a single internal, hidden layer and any continuous sigmoidal nonlinearity. The paper discusses approximation properties of other possible types of nonlinearities that might be implemented by artificial neural networks.},
   language = {en}
+}
+
+@article{dijkstraPredictiveModellingMachine2021a,
+  title = {From Predictive Modelling to Machine Learning and Reverse Engineering of Colloidal Self-Assembly},
+  author = {Dijkstra, Marjolein and Luijten, Erik},
+  year = {2021},
+  month = jun,
+  journal = {Nature Materials},
+  volume = {20},
+  number = {6},
+  pages = {762--773},
+  publisher = {{Nature Publishing Group}},
+  issn = {1476-4660},
+  doi = {10.1038/s41563-021-01014-2},
+  abstract = {An overwhelming diversity of colloidal building blocks with distinct sizes, materials and tunable interaction potentials are now available for colloidal self-assembly. The application space for materials composed of these building blocks is vast. To make progress in the rational design of new self-assembled materials, it is desirable to guide the experimental synthesis efforts by computational modelling. Here, we discuss computer simulation methods and strategies used for the design of soft materials created through bottom-up self-assembly of colloids and nanoparticles. We describe simulation techniques for investigating the self-assembly behaviour of colloidal suspensions, including crystal structure prediction methods, phase diagram calculations and enhanced sampling techniques, as well as their limitations. We also discuss the recent surge of interest in machine learning and reverse-engineering methods. Although their implementation in the colloidal realm is still in its infancy, we anticipate that these data-science tools offer new paradigms in understanding, predicting and (inverse) design of novel colloidal materials.},
+  copyright = {2021 Springer Nature Limited},
+  language = {en},
+  annotation = {Bandiera\_abtest: a Cg\_type: Nature Research Journals Primary\_atype: Reviews Subject\_term: Materials science;Nanoscale materials;Statistical physics, thermodynamics and nonlinear dynamics Subject\_term\_id: materials-science;nanoscale-materials;statistical-physics-thermodynamics-and-nonlinear-dynamics}
 }
 
 @article{dunjkoMachineLearningArtificial2018,
@@ -546,6 +594,20 @@
   annotation = {Bandiera\_abtest: a Cg\_type: Nature Research Journals Primary\_atype: Reviews Subject\_term: Genomics;Machine learning;Statistical methods Subject\_term\_id: genomics;machine-learning;statistical-methods}
 }
 
+@article{liMolecularDynamicsOntheFly2015,
+  title = {Molecular {{Dynamics}} with {{On}}-the-{{Fly Machine Learning}} of {{Quantum}}-{{Mechanical Forces}}},
+  author = {Li, Zhenwei and Kermode, James R. and De Vita, Alessandro},
+  year = {2015},
+  month = mar,
+  journal = {Physical Review Letters},
+  volume = {114},
+  number = {9},
+  pages = {096405},
+  publisher = {{American Physical Society}},
+  doi = {10.1103/PhysRevLett.114.096405},
+  abstract = {We present a molecular dynamics scheme which combines first-principles and machine-learning (ML) techniques in a single information-efficient approach. Forces on atoms are either predicted by Bayesian inference or, if necessary, computed by on-the-fly quantum-mechanical (QM) calculations and added to a growing ML database, whose completeness is, thus, never required. As a result, the scheme is accurate and general, while progressively fewer QM calls are needed when a new chemical process is encountered for the second and subsequent times, as demonstrated by tests on crystalline and molten silicon.}
+}
+
 @article{llano-restrepoBridgeFunctionCavity1992,
   title = {Bridge Function and Cavity Correlation Function for the {{Lennard}}-{{Jones}} Fluid from Simulation},
   author = {Llano-Restrepo, Mario and Chapman, Walter G.},
@@ -633,6 +695,11 @@
   abstract = {We introduce a robust and efficient methodology to solve the Ornstein-Zernike integral equation using the pseudoarc length (PAL) continuation method that reformulates the integral equation in an equivalent but nonstandard form. This enables the computation of solutions in regions where the compressibility experiences large changes or where the existence of multiple solutions and so-called branch points prevents Newton's method from converging. We illustrate the use of the algorithm with a difficult problem that arises in the numerical solution of integral equations, namely the evaluation of the so-called no-solution line of the Ornstein-Zernike hypernetted chain (HNC) integral equation for the Lennard-Jones potential. We are able to use the PAL algorithm to solve the integral equation along this line and to connect physical and nonphysical solution branches (both isotherms and isochores) where appropriate. We also show that PAL continuation can compute solutions within the no-solution region that cannot be computed when Newton and Picard methods are applied directly to the integral equation. While many solutions that we find are new, some correspond to states with negative compressibility and consequently are not physical.}
 }
 
+@misc{PhysRevLett,
+  title = {Phys. {{Rev}}. {{Lett}}. 98, 146401 (2007) - {{Generalized Neural}}-{{Network Representation}} of {{High}}-{{Dimensional Potential}}-{{Energy Surfaces}}},
+  howpublished = {https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.98.146401}
+}
+
 @article{radovicMachineLearningEnergy2018,
   title = {Machine Learning at the Energy and Intensity Frontiers of Particle Physics},
   author = {Radovic, Alexander and Williams, Mike and Rousseau, David and Kagan, Michael and Bonacorsi, Daniele and Himmel, Alexander and Aurisano, Adam and Terao, Kazuhiro and Wongjirad, Taritree},
@@ -715,6 +782,23 @@
   pmid = {19342586}
 }
 
+@article{schoenholzStructuralApproachRelaxation2016,
+  title = {A Structural Approach to Relaxation in Glassy Liquids},
+  author = {Schoenholz, S. S. and Cubuk, E. D. and Sussman, D. M. and Kaxiras, E. and Liu, A. J.},
+  year = {2016},
+  month = may,
+  journal = {Nature Physics},
+  volume = {12},
+  number = {5},
+  pages = {469--471},
+  publisher = {{Nature Publishing Group}},
+  issn = {1745-2481},
+  doi = {10.1038/nphys3644},
+  abstract = {The relation between structure and dynamics in glasses is not fully understood. A new approach based on machine learning now reveals a correlation between softness\textemdash a structural property\textemdash and glassy dynamics.},
+  copyright = {2016 Nature Publishing Group},
+  language = {en}
+}
+
 @article{scholl-paschingerSelfconsistentOrnsteinZernike2003,
   title = {Self-Consistent {{Ornstein}}\textendash{{Zernike}} Approximation for a Binary Symmetric Fluid Mixture},
   author = {{Sch{\"o}ll-Paschinger}, Elisabeth and Kahl, Gerhard},
@@ -727,6 +811,19 @@
   publisher = {{American Institute of Physics}},
   issn = {0021-9606},
   doi = {10.1063/1.1557053}
+}
+
+@book{steinwartSupportVectorMachines2008,
+  title = {Support {{Vector Machines}}},
+  author = {Steinwart, Ingo and Christmann, Andreas},
+  year = {2008},
+  month = sep,
+  publisher = {{Springer Science \& Business Media}},
+  abstract = {Every mathematical discipline goes through three periods of development: the naive, the formal, and the critical. David Hilbert The goal of this book is to explain the principles that made support vector machines (SVMs) a successful modeling and prediction tool for a variety of applications. We try to achieve this by presenting the basic ideas of SVMs together with the latest developments and current research questions in a uni?ed style. In a nutshell, we identify at least three reasons for the success of SVMs: their ability to learn well with only a very small number of free parameters, their robustness against several types of model violations and outliers, and last but not least their computational e?ciency compared with several other methods. Although there are several roots and precursors of SVMs, these methods gained particular momentum during the last 15 years since Vapnik (1995, 1998) published his well-known textbooks on statistical learning theory with aspecialemphasisonsupportvectormachines. Sincethen,the?eldofmachine learninghaswitnessedintenseactivityinthestudyofSVMs,whichhasspread moreandmoretootherdisciplinessuchasstatisticsandmathematics. Thusit seems fair to say that several communities are currently working on support vector machines and on related kernel-based methods. Although there are many interactions between these communities, we think that there is still roomforadditionalfruitfulinteractionandwouldbegladifthistextbookwere found helpful in stimulating further research. Many of the results presented in this book have previously been scattered in the journal literature or are still under review. As a consequence, these results have been accessible only to a relativelysmallnumberofspecialists,sometimesprobablyonlytopeoplefrom one community but not the others.},
+  googlebooks = {HUnqnrpYt4IC},
+  isbn = {978-0-387-77242-4},
+  language = {en},
+  keywords = {Computers / Artificial Intelligence / Computer Vision \& Pattern Recognition,Computers / Artificial Intelligence / General,Computers / Data Science / Data Analytics,Computers / Information Technology,Computers / Mathematical \& Statistical Software,Computers / Optical Data Processing,Mathematics / Discrete Mathematics,Technology \& Engineering / Electronics / General,Technology \& Engineering / Imaging Systems}
 }
 
 @article{tangAnalyticalSolutionOrnsteinZernike1995,
@@ -833,6 +930,21 @@
   abstract = {Deep learning has been widely applied and brought breakthroughs in speech recognition, computer vision, and many other domains. Deep neural network architectures and computational issues have been well studied in machine learning. But there lacks a theoretical foundation for understanding the approximation or generalization ability of deep learning methods generated by the network architectures such as deep convolutional neural networks. Here we show that a deep convolutional neural network (CNN) is universal, meaning that it can be used to approximate any continuous function to an arbitrary accuracy when the depth of the neural network is large enough. This answers an open question in learning theory. Our quantitative estimate, given tightly in terms of the number of free parameters to be computed, verifies the efficiency of deep CNNs in dealing with large dimensional data. Our study also demonstrates the role of convolutions in deep CNNs.},
   language = {en},
   keywords = {Approximation theory,Convolutional neural network,Deep learning,Universality}
+}
+
+@article{zhuPhysicsconstrainedDeepLearning2019,
+  title = {Physics-Constrained Deep Learning for High-Dimensional Surrogate Modeling and Uncertainty Quantification without Labeled Data},
+  author = {Zhu, Yinhao and Zabaras, Nicholas and Koutsourelakis, Phaedon-Stelios and Perdikaris, Paris},
+  year = {2019},
+  month = oct,
+  journal = {Journal of Computational Physics},
+  volume = {394},
+  pages = {56--81},
+  issn = {0021-9991},
+  doi = {10.1016/j.jcp.2019.05.024},
+  abstract = {Surrogate modeling and uncertainty quantification tasks for PDE systems are most often considered as supervised learning problems where input and output data pairs are used for training. The construction of such emulators is by definition a small data problem which poses challenges to deep learning approaches that have been developed to operate in the big data regime. Even in cases where such models have been shown to have good predictive capability in high dimensions, they fail to address constraints in the data implied by the PDE model. This paper provides a methodology that incorporates the governing equations of the physical model in the loss/likelihood functions. The resulting physics-constrained, deep learning models are trained without any labeled data (e.g. employing only input data) and provide comparable predictive responses with data-driven models while obeying the constraints of the problem at hand. This work employs a convolutional encoder-decoder neural network approach as well as a conditional flow-based generative model for the solution of PDEs, surrogate model construction, and uncertainty quantification tasks. The methodology is posed as a minimization problem of the reverse Kullback-Leibler (KL) divergence between the model predictive density and the reference conditional density, where the later is defined as the Boltzmann-Gibbs distribution at a given inverse temperature with the underlying potential relating to the PDE system of interest. The generalization capability of these models to out-of-distribution input is considered. Quantification and interpretation of the predictive uncertainty is provided for a number of problems.},
+  language = {en},
+  keywords = {Conditional generative model,Normalizing flow,Physics-constrained,Reverse KL divergence,Surrogate modeling,Uncertainty quantification}
 }
 
 

@@ -27,3 +27,56 @@ the problems the have been developed for.
 However, it turns out that not all ML techniques can be readily applied to they problem
 at hand, and one should instead try to use the Physics of the problem and use it along
 with the ML method to boost its usefulness and flexibility.
+
+Instead, scientists have preferred to incorporate most of the Physics into the ML
+method, and thus create a new form of \emph{physics-inspired machine learning}.
+One such example is the Behler-Parrinello neural network approach for energy surfaces
+in the Density Functional Theory framework~\cite{behlerGeneralizedNeuralNetworkRepresentation2007a}.
+Within such proposal, Behler and Parrinello chose to use some functions defined based
+on the properties of the system studied, which were atoms and their components,
+and use such information as input to a \emph{regression} scheme to approximate the
+energy surface of the studied system. At the moment of publication, this approach
+defined a new paradigm of ML application within the physical sciences. It was no longer
+the fact that simple learning tasks were used, but by including physical descriptors
+in the ML methods, new ways of obtaining the same results were found.
+Not only do ML methods provide mostly the same results as the physical framework they
+are modeling, they also provide solutions much faster and more efficiently~\cite{zhuPhysicsconstrainedDeepLearning2019}.
+
+Of all the research fields within Physics, in this thesis we would like to focus
+our attention to the field of \emph{condensed matter physics}, and in particular, to the
+field of Liquid State Theory and Soft Matter. Before we do that, however, we should
+mention briefly some of the precursors to the applications of ML to said fields.
+A great review by J\"{o}rg Behler~\cite{behlerPerspectiveMachineLearning2016a}
+describes in great detail some of these precursors. Most applications have dealt with
+materials science, computational chemistry and chemistry, and the computational aspect
+of condensed matter physics. It is within these fields that new ways of using ML methods
+have been developed from various needs in research. Another prime example is the coupling
+of computer simulations and ML methods, such as the work by Li \emph{et al}~\cite{liMolecularDynamicsOntheFly2015}.
+In this work, whenever the quantum-mechanical information is needed it is computed with
+first-principles calculations. These calculations are then added to a dataset to be used
+by ML methods, which in turn are used as approximators for the computer simulation.
+This approach not only efficiently uses Physics in its most pure form, but it also
+adopts the ML best attributes and uses them to its advantage.
+For a more complete overview of some of the most impactful applications, the
+review by Bedolla \emph{et al}~\cite{bedollaMachineLearningCondensed2020}
+covers these and some other important aspects of ML methods applied to
+condensed matter physics.
+
+Although these are a tiny subset of all the modified applications of ML techniques
+in physical sciences research, we should note that these show an important aspect
+in common between them. If we wish to assimilate the physics of the problem at hand,
+variations and modifications to the common ML methods and techniques. Exploration and
+testing, trial and error, are an important part of the search and application of
+ML methods to Physics research. In the case of Liquid State Theory and Soft Matter,
+we can consider that most research is still in the exploration and testing stage,
+although some applications have seen great success in specific scenarios.
+One of such successful applications was the use of \emph{Support Vector Machines}\textemdash
+an explicit method useful for classication and regression based on kernels and
+quadratic optimization~\cite{steinwartSupportVectorMachines2008}\textemdash
+in the description of the properties of glassy dynamics~\cite{schoenholzStructuralApproachRelaxation2016}.
+The reason for still being part of the exploration step is that Soft Matter and Liquid
+Theory is hard to find suitable descriptors that actually tell the information we
+want from the system~\cite{dijkstraPredictiveModellingMachine2021a}. As such, most of
+the time a descriptor-based approach might not be feasible for every possible
+system. Instead, we need to explore a diverse range of possibilities when using ML methods
+within the context of Soft Matter and Liquid Theory.
