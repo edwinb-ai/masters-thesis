@@ -28,6 +28,14 @@
   annotation = {\_eprint: https://doi.org/10.1080/00268979500100511}
 }
 
+@inproceedings{APSAPSMarcha,
+  title = {{{APS}} -{{APS March Meeting}} 2020 - {{Event}} - {{Inverse Design}} of {{Soft Materials}}: {{Crystals}}, {{Quasi Crystals}}, {{Liquid Crystals}}},
+  shorttitle = {{{APS}} -{{APS March Meeting}} 2020 - {{Event}} - {{Inverse Design}} of {{Soft Materials}}},
+  booktitle = {Bulletin of the {{American Physical Society}}},
+  volume = {Volume 65, Number 1},
+  publisher = {{American Physical Society}}
+}
+
 @article{asadyUtilizingArtificialNeural2014,
   title = {Utilizing Artificial Neural Network Approach for Solving Two-Dimensional Integral Equations},
   author = {Asady, B. and Hakimzadegan, F. and Nazarlue, R.},
@@ -118,6 +126,49 @@
   abstract = {Nowadays, computer simulations have become a standard tool in essentially all fields of chemistry, condensed matter physics, and materials science. In order to keep up with state-of-the-art experiments and the ever growing complexity of the investigated problems, there is a constantly increasing need for simulations of more realistic, i.e., larger, model systems with improved accuracy. In many cases, the availability of sufficiently efficient interatomic potentials providing reliable energies and forces has become a serious bottleneck for performing these simulations. To address this problem, currently a paradigm change is taking place in the development of interatomic potentials. Since the early days of computer simulations simplified potentials have been derived using physical approximations whenever the direct application of electronic structure methods has been too demanding. Recent advances in machine learning (ML) now offer an alternative approach for the representation of potential-energy surfaces by fitting large data sets from electronic structure calculations. In this perspective, the central ideas underlying these ML potentials, solved problems and remaining challenges are reviewed along with a discussion of their current applicability and limitations.}
 }
 
+@article{bianchiPredictingPatchyParticle2012,
+  title = {Predicting Patchy Particle Crystals: {{Variable}} Box Shape Simulations and Evolutionary Algorithms},
+  shorttitle = {Predicting Patchy Particle Crystals},
+  author = {Bianchi, Emanuela and Doppelbauer, G{\"u}nther and Filion, Laura and Dijkstra, Marjolein and Kahl, Gerhard},
+  year = {2012},
+  month = jun,
+  journal = {The Journal of Chemical Physics},
+  volume = {136},
+  number = {21},
+  pages = {214102},
+  publisher = {{American Institute of Physics}},
+  issn = {0021-9606},
+  doi = {10.1063/1.4722477}
+}
+
+@article{boattiniAveragingLocalStructure2021,
+  title = {Averaging {{Local Structure}} to {{Predict}} the {{Dynamic Propensity}} in {{Supercooled Liquids}}},
+  author = {Boattini, Emanuele and Smallenburg, Frank and Filion, Laura},
+  year = {2021},
+  month = aug,
+  journal = {Physical Review Letters},
+  volume = {127},
+  number = {8},
+  pages = {088007},
+  publisher = {{American Physical Society}},
+  doi = {10.1103/PhysRevLett.127.088007},
+  abstract = {Predicting the local dynamics of supercooled liquids based purely on local structure is a key challenge in our quest for understanding glassy materials. Recent years have seen an explosion of methods for making such a prediction, often via the application of increasingly complex machine learning techniques. The best predictions so far have involved so-called Graph Neural Networks (GNNs) whose accuracy comes at a cost of models that involve on the order of 105 fit parameters. In this Letter, we propose that the key structural ingredient to the GNN method is its ability to consider not only the local structure around a central particle, but also averaged structural features centered around nearby particles. We demonstrate that this insight can be exploited to design a significantly more efficient model that provides essentially the same predictive power at a fraction of the computational complexity (approximately 1000 fit parameters), and demonstrate its success by fitting the dynamic propensity of Kob-Andersen and binary hard-sphere mixtures. We then use this to make predictions regarding the importance of radial and angular descriptors in the dynamics of both models.}
+}
+
+@article{boattiniUnsupervisedLearningLocal2019a,
+  title = {Unsupervised Learning for Local Structure Detection in Colloidal Systems},
+  author = {Boattini, Emanuele and Dijkstra, Marjolein and Filion, Laura},
+  year = {2019},
+  month = oct,
+  journal = {The Journal of Chemical Physics},
+  volume = {151},
+  number = {15},
+  pages = {154901},
+  publisher = {{American Institute of Physics}},
+  issn = {0021-9606},
+  doi = {10.1063/1.5118867}
+}
+
 @article{bomontRenormalizationIndirectCorrelation2001,
   title = {Renormalization of the Indirect Correlation Function to Extract the Bridge Function of Simple Fluids},
   author = {Bomont, J. M. and Bretonnet, J. L.},
@@ -195,6 +246,20 @@
   language = {en}
 }
 
+@article{catsMachinelearningFreeenergyFunctionals2021,
+  title = {Machine-Learning Free-Energy Functionals Using Density Profiles from Simulations},
+  author = {Cats, Peter and Kuipers, Sander and {de Wind}, Sacha and {van Damme}, Robin and Coli, Gabriele M. and Dijkstra, Marjolein and {van Roij}, Ren{\'e}},
+  year = {2021},
+  month = mar,
+  journal = {APL Materials},
+  volume = {9},
+  number = {3},
+  pages = {031109},
+  publisher = {{American Institute of Physics}},
+  doi = {10.1063/5.0042558},
+  abstract = {The formally exact framework of equilibrium Density Functional Theory (DFT) is capable of simultaneously and consistently describing thermodynamic and structural properties of interacting many-body systems in arbitrary external potentials. In practice, however, DFT hinges on approximate (free-)energy functionals from which density profiles (and hence the thermodynamic potential) follow via an Euler\textendash Lagrange equation. Here, we explore a relatively simple Machine-Learning (ML) approach to improve the standard mean-field approximation of the excess Helmholtz free-energy functional of a 3D Lennard-Jones system at a supercritical temperature. The learning set consists of density profiles from grand-canonical Monte Carlo simulations of this system at varying chemical potentials and external potentials in a planar geometry only. Using the DFT formalism, we nevertheless can extract not only very accurate 3D bulk equations of state but also radial distribution functions using the Percus test-particle method. Unfortunately, our ML approach did not provide very reliable Ornstein\textendash Zernike direct correlation functions for small distances.}
+}
+
 @article{cybenkoApproximationSuperpositionsSigmoidal1989,
   title = {Approximation by Superpositions of a Sigmoidal Function},
   author = {Cybenko, G.},
@@ -208,6 +273,20 @@
   doi = {10.1007/BF02551274},
   abstract = {In this paper we demonstrate that finite linear combinations of compositions of a fixed, univariate function and a set of affine functionals can uniformly approximate any continuous function ofn real variables with support in the unit hypercube; only mild conditions are imposed on the univariate function. Our results settle an open question about representability in the class of single hidden layer neural networks. In particular, we show that arbitrary decision regions can be arbitrarily well approximated by continuous feedforward neural networks with only a single internal, hidden layer and any continuous sigmoidal nonlinearity. The paper discusses approximation properties of other possible types of nonlinearities that might be implemented by artificial neural networks.},
   language = {en}
+}
+
+@article{dijkstraPhaseDiagramHighly1999,
+  title = {Phase Diagram of Highly Asymmetric Binary Hard-Sphere Mixtures},
+  author = {Dijkstra, Marjolein and {van Roij}, Ren{\'e} and Evans, Robert},
+  year = {1999},
+  month = may,
+  journal = {Physical Review E},
+  volume = {59},
+  number = {5},
+  pages = {5744--5771},
+  publisher = {{American Physical Society}},
+  doi = {10.1103/PhysRevE.59.5744},
+  abstract = {We study the phase behavior and structure of highly asymmetric binary hard-sphere mixtures. By first integrating out the degrees of freedom of the small spheres in the partition function we derive a formal expression for the effective Hamiltonian of the large spheres. Then using an explicit pairwise (depletion) potential approximation to this effective Hamiltonian in computer simulations, we determine fluid-solid coexistence for size ratios q=0.033,0.05,0.1,0.2, and 1.0. The resulting two-phase region becomes very broad in packing fractions of the large spheres as q becomes very small. We find a stable, isostructural solid-solid transition for q{$<\sptilde$}0.05 and a fluid-fluid transition for q{$<\sptilde$}0.10. However, the latter remains metastable with respect to the fluid-solid transition for all size ratios we investigate. In the limit \textrightarrow q0 the phase diagram mimics that of the sticky-sphere system. As expected, the radial distribution function g(r) and the structure factor S(k) of the effective one-component system show no sharp signature of the onset of the freezing transition and we find that at most points on the fluid-solid boundary the value of S(k) at its first peak is much lower than the value given by the Hansen-Verlet freezing criterion. Direct simulations of the true binary mixture of hard spheres were performed for q{$>\sptilde$}0.05 in order to test the predictions from the effective Hamiltonian. For those packing fractions of the small spheres where direct simulations are possible, we find remarkably good agreement between the phase boundaries calculated from the two approaches\textemdash even up to the symmetric limit q=1 and for very high packings of the large spheres, where the solid-solid transition occurs. In both limits one might expect that an approximation which neglects higher-body terms should fail, but our results support the notion that the main features of the phase equilibria of asymmetric binary hard-sphere mixtures are accounted for by the effective pairwise depletion potential description. We also compare our results with those of other theoretical treatments and experiments on colloidal hard-sphere mixtures.}
 }
 
 @article{dijkstraPredictiveModellingMachine2021a,
@@ -576,6 +655,24 @@
   annotation = {Bandiera\_abtest: a Cg\_type: Nature Research Journals Primary\_atype: Reviews Subject\_term: Computer science;Mathematics and computing Subject\_term\_id: computer-science;mathematics-and-computing}
 }
 
+@article{leunissenIonicColloidalCrystals2005,
+  title = {Ionic Colloidal Crystals of Oppositely Charged Particles},
+  author = {Leunissen, Mirjam E. and Christova, Christina G. and Hynninen, Antti-Pekka and Royall, C. Patrick and Campbell, Andrew I. and Imhof, Arnout and Dijkstra, Marjolein and {van Roij}, Ren{\'e} and {van Blaaderen}, Alfons},
+  year = {2005},
+  month = sep,
+  journal = {Nature},
+  volume = {437},
+  number = {7056},
+  pages = {235--240},
+  publisher = {{Nature Publishing Group}},
+  issn = {1476-4687},
+  doi = {10.1038/nature03946},
+  abstract = {Colloidal suspensions are widely used to study processes such as melting, freezing1,2,3 and glass transitions4,5. This is because they display the same phase behaviour as atoms or molecules, with the nano- to micrometre size of the colloidal particles making it possible to observe them directly in real space3,4. Another attractive feature is that different types of colloidal interactions, such as long-range repulsive1,3, short-range attractive5, hard-sphere-like2,3,4 and dipolar3, can be realized and give rise to equilibrium phases. However, spherically symmetric, long-range attractions (that is, ionic interactions) have so far always resulted in irreversible colloidal aggregation6. Here we show that the electrostatic interaction between oppositely charged particles can be tuned such that large ionic colloidal crystals form readily, with our theory and simulations confirming the stability of these structures. We find that in contrast to atomic systems, the stoichiometry of our colloidal crystals is not dictated by charge neutrality; this allows us to obtain a remarkable diversity of new binary structures. An external electric field melts the crystals, confirming that the constituent particles are indeed oppositely charged. Colloidal model systems can thus be used to study the phase behaviour of ionic species. We also expect that our approach to controlling opposite-charge interactions will facilitate the production of binary crystals of micrometre-sized particles, which could find use as advanced materials for photonic applications7.},
+  copyright = {2005 Nature Publishing Group},
+  language = {en},
+  annotation = {Bandiera\_abtest: a Cg\_type: Nature Research Journals Primary\_atype: Research}
+}
+
 @article{libbrechtMachineLearningApplications2015,
   title = {Machine Learning Applications in Genetics and Genomics},
   author = {Libbrecht, Maxwell W. and Noble, William Stafford},
@@ -693,11 +790,6 @@
   publisher = {{American Physical Society}},
   doi = {10.1103/PhysRevE.74.046705},
   abstract = {We introduce a robust and efficient methodology to solve the Ornstein-Zernike integral equation using the pseudoarc length (PAL) continuation method that reformulates the integral equation in an equivalent but nonstandard form. This enables the computation of solutions in regions where the compressibility experiences large changes or where the existence of multiple solutions and so-called branch points prevents Newton's method from converging. We illustrate the use of the algorithm with a difficult problem that arises in the numerical solution of integral equations, namely the evaluation of the so-called no-solution line of the Ornstein-Zernike hypernetted chain (HNC) integral equation for the Lennard-Jones potential. We are able to use the PAL algorithm to solve the integral equation along this line and to connect physical and nonphysical solution branches (both isotherms and isochores) where appropriate. We also show that PAL continuation can compute solutions within the no-solution region that cannot be computed when Newton and Picard methods are applied directly to the integral equation. While many solutions that we find are new, some correspond to states with negative compressibility and consequently are not physical.}
-}
-
-@misc{PhysRevLett,
-  title = {Phys. {{Rev}}. {{Lett}}. 98, 146401 (2007) - {{Generalized Neural}}-{{Network Representation}} of {{High}}-{{Dimensional Potential}}-{{Energy Surfaces}}},
-  howpublished = {https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.98.146401}
 }
 
 @article{radovicMachineLearningEnergy2018,
@@ -872,6 +964,21 @@
   abstract = {The Ornstein-Zernike (OZ) integral equation theory is a powerful approach to simple liquids due to its low computational cost and the fact that, when combined with an appropriate closure equation, the theory is thermodynamically complete. However, approximate closures proposed to date exhibit pressure or free energy inconsistencies that produce inaccurate or ambiguous results, limiting the usefulness of the Ornstein-Zernike approach. To address this problem, we combine methods to enforce both pressure and free energy consistency to create a new closure approximation and test it for a single-component Lennard-Jones fluid. The closure is a simple power series in the direct and total correlation functions for which we have derived analytical formulas for the excess Helmholtz free energy and chemical potential. These expressions contain a partial molar volumelike term, similar to excess chemical potential correction terms recently developed. Using our bridge approximation, we have calculated the pressure, Helmholtz free energy, and chemical potential for the Lennard-Jones fluid using the Kirkwood charging, thermodynamic integration techniques, and analytic expressions. These results are compared with those from the hypernetted chain equation and the Verlet-modified closure against Monte Carlo and equations-of-state data for reduced densities of {$\rho{_\ast}<$}1 and temperatures of T{${_\ast}$}=1.5, 2.74, and 5. Our closure shows consistency among all thermodynamic paths, except for one expression of the Gibbs-Duhem relation, whereas the hypernetted chain equation and the Verlet-modified closure exhibit consistency between only a few relations. Accuracy of the closure is comparable to the Verlet-modified closure and a significant improvement to results obtained from the hypernetted chain equation.}
 }
 
+@article{vandammeClassifyingCrystalsRounded2020,
+  title = {Classifying {{Crystals}} of {{Rounded Tetrahedra}} and {{Determining Their Order Parameters Using Dimensionality Reduction}}},
+  author = {{van Damme}, Robin and Coli, Gabriele M. and {van Roij}, Ren{\'e} and Dijkstra, Marjolein},
+  year = {2020},
+  month = nov,
+  journal = {ACS Nano},
+  volume = {14},
+  number = {11},
+  pages = {15144--15153},
+  publisher = {{American Chemical Society}},
+  issn = {1936-0851},
+  doi = {10.1021/acsnano.0c05288},
+  abstract = {Using simulations we study the phase behavior of a family of hard spherotetrahedra, a shape that interpolates between tetrahedra and spheres. We identify 13 close-packed structures, some with packings that are significantly denser than previously reported. Twelve of these are crystals with unit cells of N = 2 or N = 4 particles, but in the shape regime of slightly rounded tetrahedra we find that the densest structure is a quasicrystal approximant with a unit cell of N = 82 particles. All 13 structures are also stable below close packing, together with an additional 14th plastic crystal phase at the sphere side of the phase diagram, and upon sufficient dilution to packing fractions below 50\textendash 60\% all structures melt. Interestingly, however, upon compressing the fluid phase, self-assembly takes place spontaneously only at the tetrahedron and the sphere side of the family but not in an intermediate regime of tetrahedra with rounded edges. We describe the local environment of each particle by a set of l-fold bond orientational order parameters {$\overline q$}l, which we use in an extensive principal component analysis. We find that the total packing fraction as well as several particular linear combinations of {$\overline q$}l rather than individual {$\overline q$}l's are optimally distinctive, specifically the differences {$\overline q$}4 \textendash{} {$\overline q$}6 for separating tetragonal from hexagonal structures and {$\overline q$}4\textendash{$\overline q$}8 for distinguishing tetragonal structures. We argue that these characteristic combinations are also useful as reliable order parameters in nucleation studies, enhanced sampling techniques, or inverse-design methods involving odd-shaped particles in general.}
+}
+
 @article{vompeBridgeFunctionExpansion1994,
   title = {The Bridge Function Expansion and the Self-consistency Problem of the {{Ornstein}}\textendash{{Zernike}} Equation Solution},
   author = {Vompe, A. G. and Martynov, G. A.},
@@ -884,6 +991,19 @@
   publisher = {{American Institute of Physics}},
   issn = {0021-9606},
   doi = {10.1063/1.467189}
+}
+
+@book{yuIntroductionEvolutionaryAlgorithms2010,
+  title = {Introduction to {{Evolutionary Algorithms}}},
+  author = {Yu, Xinjie and Gen, Mitsuo},
+  year = {2010},
+  month = jun,
+  publisher = {{Springer Science \& Business Media}},
+  abstract = {Evolutionary algorithms (EAs) are becoming increasingly attractive for researchers from various disciplines, such as operations research, computer science, industrial engineering, electrical engineering, social science, economics, etc. This book presents an insightful, comprehensive, and up-to-date treatment of EAs, such as genetic algorithms, differential evolution, evolution strategy, constraint optimization, multimodal optimization, multiobjective optimization, combinatorial optimization, evolvable hardware, estimation of distribution algorithms, ant colony optimization, particle swarm optimization, artificial immune systems, artificial life, genetic programming, etc. It emphasises the initiative ideas of the algorithm, contains discussions in the contexts, and suggests further readings and possible research projects. All the methods form a pedagogical way to make EAs easy and interesting. This textbook also introduces the applications of EAs as many as possible. At least one real-life application is introduced by the end of almost every chapter. The authors focus on the kernel part of applications, such as how to model real-life problems, how to encode and decode the individuals, how to design effective search operators according to the chromosome structures, etc. This textbook adopts pedagogical ways of making EAs easy and interesting. Its methods include an introduction at the beginning of each chapter, emphasising the initiative, discussions in the contexts, summaries at the end of every chapter, suggested further reading, exercises, and possible research projects. Introduction to Evolutionary Algorithms will enable students to: \textbullet{} establish a strong background on evolutionary algorithms; \textbullet{} appreciate the cutting edge of EAs; \textbullet{} perform their own research projects by simulating the application introduced in the book; and \textbullet{} apply their intuitive ideas to academic search. This book is aimed at senior undergraduate students or first-year graduate students as a textbook or self-study material.},
+  googlebooks = {rHQf\_2Dx2ucC},
+  isbn = {978-1-84996-129-5},
+  language = {en},
+  keywords = {Computers / Artificial Intelligence / General,Computers / Computer Simulation,Computers / Data Science / Data Modeling \& Design,Computers / Information Technology,Computers / Programming / Algorithms,Language Arts \& Disciplines / Library \& Information Science / General,Technology \& Engineering / Automation,Technology \& Engineering / Engineering (General)}
 }
 
 @article{zerahEfficientNewtonMethod1985,
