@@ -96,7 +96,7 @@ in the field of Colloidal Soft Matter~\cite{dijkstraPhaseDiagramHighly1999,leuni
 the group is now focusing on using all the research and knowledge built and trying to
 understand the best way to enforce the physics of the systems into ML techniques.
 The group has explored with \emph{evolutionary algorithms} and their uses in patchy
-colloids~\cite{bianchiPredictingPatchyParticle2012}; evolutionary algorithms are
+colloids~\cite{bianchiPredictingPatchyParticle2012}. We refer to evolutionary algorithms as
 derivative-free optimization algorithms that are useful for nonlinear optimization
 problems~\cite{yuIntroductionEvolutionaryAlgorithms2010}.
 Unsupervised methods, such as \emph{principal component analysis}~\cite{hastieElementsStatisticalLearning2009},
@@ -105,11 +105,39 @@ as well as the detection of local structure in colloidal systems~\cite{boattiniU
 All in all, these methods simplify the process of dealing with these research problems.
 ML methods make it simpler and easier to identify structure and attributes from a
 system. However, it is important to note that not only do these methods make it simpler,
-they can also contribute to find new things that were previously not as obvious or easy
+they can also contribute to finding new things that were previously not as obvious or easy
 to see.
-Another interesting use of ML methods is the classification of crystal phases using
-a mix of \emph{supervised} and \emph{unsupervised methods}~\cite{hastieElementsStatisticalLearning2009},
+Another work from the group is the use of classification methods 
+to identify different types of crystal phases using
+a mix of supervised and unsupervised methods~\cite{hastieElementsStatisticalLearning2009},
 such as in the work by van Damme \emph{et al}~\cite{vandammeClassifyingCrystalsRounded2020}.
+This work is quite interesting because it is a great example of using physical descriptors,
+such as bond order parameters~\cite{steinhardtBondorientationalOrderLiquids1983,lechnerAccurateDeterminationCrystal2008},
+along with ML methods that actively select and distinguish between the best descriptors
+for the system.
+
+Another important group that has done several advances in the use of ML within Soft Matter
+is the one lead by Thomas Truskett from the University of Texas.
+Their work on the use of ML methods for inverse desing of soft materials~\cite{shermanInverseMethodsDesign2020a}
+is in similar ways helping out the work by the group of Dijkstra in the same research
+problem~\cite{APSAPSMarcha}.
+However, the work by the Truskett group is in fact more focused on the definition and
+foundations of better descriptors for soft materials and off-lattice systems~\cite{jadrichUnsupervisedMachineLearning2018}.
+An important topic that the group explores is the inverse design of self-assembly
+systems. \emph{Self-assembly} is the property of soft materials to order their
+components, such as particles, atoms or cells, without any external interactions,
+into functional structures~\cite{grzybowskiSelfassemblyCrystalsCells2009}.
+In this direction, their interest is particularly focused in self-assembly and how this 
+phenomena can be dealt with ML methods.
+In a particular work by Lindquist \emph{et al} with the Truskett group~\cite{lindquistCommunicationInverseDesign2016},
+optimization-based methods were used along with standard molecular dynamics computer
+simulation methods to understand how certain materials can self-assemble.
+Instead of using optimization-based methods, another work from the Truskett group
+deals with probabilistic ML methods for some of the same phenomena~\cite{jadrichProbabilisticInverseDesign2017}.
+The difference between both these uses is that probabilistic methods are better at dealing
+with probability distributions that stem from the Statistical Mechanics description of the
+problem. With the use of specialized frameworks, handling these descriptors are easier
+and simpler.
 
 
 %% TODO: Continuar con el hilo de la exploración en materia blanda y teoría de líquidos. Mencionar algunos de los artículos de Boattini, Dijkstra, Truskett y otros sobre Materia Blanda. En un párrafo en particular hablar sobre el resultado de Goodall-Lee sobre la ecuación de OZ, y con esto comenzar la discusión de la tesis. Al final, mencionar cómo está distribuida la tesis, los capítulos y todo eso. (2 párrafos para los artículos, un párrafo para Goodall-Lee, y un párrafo para la distribución del texto)
