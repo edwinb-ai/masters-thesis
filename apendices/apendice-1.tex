@@ -52,7 +52,7 @@ network $\nnet$, which has a direct dependency on the weights.
 In order to find this new expression, we invoke \autoref{eq:parametrizacion} and
 differentiate it with respect to the weights
 \begin{equation}
-    \frac{\partial c(\vecr)}{\partial \theta} = \frac{\partial}{\partial \theta}
+    \frac{\partial c(\vecr, \theta)}{\partial \theta} = \frac{\partial}{\partial \theta}
     \left[ e^{p(\vecr, \theta)} - \gamma(\vecr, \theta) - 1 \right] =
     e^{p(\vecr, \theta)} \partial_{\theta} p(\vecr, \theta) - \partial_{\theta} \gamma(\vecr, \theta)
     ,

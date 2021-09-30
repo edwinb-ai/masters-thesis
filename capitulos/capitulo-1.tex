@@ -141,40 +141,49 @@ and more flexible.
 
 Up until this point, we have talked about Soft Matter and its interaction with machine
 learning methods, and most of all the way it has been disrupting this research field
-with novel way to do things. We also briefly mention Liquid State Theory, but we must
-first state the relation between both these research fields. Why talk about Liquid
-State Theory, or simple liquids, and Soft Matter?
+with novel ways to do things. Liquid State Theory was briefly mentioned before,
+but it is time to state the relation between both these research fields.
+Why talk about Liquid State Theory and Soft Matter as if these were related somehow?
 In a fascinating note by Evans, Frenkel and Dijkstra~\cite{evansSimpleLiquidsColloids2019}
 they talk about the precise relation between liquids, their theory, and how by studying
 such simple, but also complicated systems, soft matter research arises quite naturally.
-Liquids are not trivial systems, they are dense, disordered and spatially correlated
-but they exhibit peculiar characteristics that make them different from crystls, solids,
-and gases. The first attempt to understand and apply liquid theory was to study the
-classic Lennard-Jones system to model Argon. Computer simulation methods, theoretical
-frameworks, and experimental setups helped understand the true nature of liquids,
-given them a special place in Physics research. Physicists where building a rigorous
-framework which will later be used to further create new research fields.
-Such fields were created by the outstanding work of Nobel Laureate Pierre Gilles-de Gennes.
-In his Nobel Lecture~\cite{degennesSoftMatter1992} mentioned that by studying simple systems
-it was possible to extend what was known of such systems to new, different systems that
-exhibit similar properties. His work on liquid crystals and polymer physics opened up
-a whole new research field, which we now call Soft Matter. Then again, behind all the
-bewildering phenomena found in Soft Matter, and all the innovative research done to 
-understand it, there exists a solid theory of the most simple systems known as liquids.
+Liquids are non-trivial systems, that are also dense, disordered and spatially correlated
+but exhibit peculiar characteristics that make them different from crystals, solids,
+and gases. The first attempt to understand and apply liquid theory,
+along with computer simulations of liquids, was to study the
+classic Lennard-Jones system to model Argon~\cite{mcdonaldCalculationThermodynamicProperties1967,verletComputerExperimentsClassical1967a}. 
+Computer simulation methods, theoretical frameworks, and experimental setups helped 
+understand the true nature of liquids, given them a special place in Physics research. 
+Physicists were attempting to construct a rigorous framework which will later be used to 
+further create new research fields.
+Such fields were then created by the outstanding work of Nobel Laureate Pierre Gilles-de 
+Gennes. In his Nobel Lecture~\cite{degennesSoftMatter1992} he mentioned that by studying 
+simple systems it was possible to extend what was known of such systems to new, different 
+systems that exhibit similar properties. His work on liquid crystals and polymer physics 
+opened up a whole new research field, which we now call Soft Matter.
+Then again, behind all the bewildering phenomena found in Soft Matter, and all the 
+innovative research done to understand it, there exists a solid theory of the most simple 
+systems known as liquids. And yet, these systems are not \emph{simple} at all, they
+have evolved into active research fields such as ionic liquids~\cite{rogersIonicLiquidsSolvents2003}, complex fluids~\cite{gelbartNewScienceComplex1996},
+and many others.
 
-Despite all the research done in Liquid State Theory, must research has been focused on
+Despite all the research done in Liquid State Theory, most research has been focused on
 understanding it through computational and theoretical frameworks. There is not much
-interaction between Liquid State Theory and ML research. Yet, there seems to be an overlap
-that shows potential and should be explored more. Arguably, the first work to delve deep 
-into the intersection between Liquid State Theory and ML methods was the work done by
-Goodall and Lee~\cite{DatadrivenApproximationsBridge}.
-In this work, a dataset built from Molecular Dynamics computer simulations using several
+interaction between Liquid State Theory and ML research at this point.
+Yet, there seems to be an area of opportunity where Liquid State Theory can greatly
+benefit from all the current research in ML methods. Arguably, the first work to delve deep 
+into the intersection between Liquid State Theory and ML theory was the work done by
+Goodall and Lee.
+In this work, a dataset is built from Molecular Dynamics computer simulations using several
 interaction potentials. Then, a ML method was used to predict properties from a new,
-unknown system. The method worked great, but the precision was not the best. Granted, this
+unknown system, using most of the information available from the dataset.
+The method worked great, but the precision was not the best in some cases. Granted, this
 is just the first attempt to build a solution to the problem of closure relations
 for the theoretical framework of the Ornstein-Zernike equation~\cite{hansenTheorySimpleLiquids2013}.
-It was then extended, in the same work, to work on inverse design of liquids, which was
-quite good, but somewhat lacking in accuracy if compared to the works by the Truskett group.
+It was then extended, in the same work, to solve an inverse design problem of liquids, 
+which indeed solved the problem but was lacking in accuracy, and was not tested in
+more challenging problems, which would be interesting to see the generalization of
+such methods.
 After all, the attempt is a novel way to look at things, and most of all, a new way to
 look at Liquid State Theory and its intersection with ML theory.
 Exploring this area is the sole purpose of this thesis, and in particular, in the same
@@ -189,30 +198,35 @@ solutions or not.
 
 To achieve this goal, this thesis is organized as follows. In chapter 2, the next chapter,
 the theory of simple liquids will be outlined, focusing heavily on the Ornstein-Zernike
-formalism. A description of the reference system, the hard sphere fluid, will be discussed.
-The properties of simple liquids will also be described in full. Computer simulation
-methods will also be discussed as they are the standard tool for current research when
-a baseline result is needed. Computer simulation methods can provide similar results to 
-those obtained from experimental data, which is why they are used as a reference.
-After a lengthy discussion of the physics involved, we turn our attention to ML methods.
-In particular, to those methods used in the current thesis, namely neural networks and
+formalism, as well as the theory of integral equations.
+A description of the reference system\textemdash the hard sphere fluid\textemdash 
+will be discussed. The thermodynamical properties of simple liquids will also be described 
+in full. Computer simulation methods will also be discussed as they are the standard tool 
+for current research when a baseline result is needed. Computer simulation methods can 
+provide similar results to those obtained from experimental data, which is why they are 
+used as a reference.
+Then, in chapter 3, an overview of ML theory is presented.
+In particular, those methods used in the current thesis, namely neural networks and
 optimization methods. These methods have their mathematical frameworks, which will be
 outlined as well, without going into much mathematical rigor.
+The most common learning tasks such as supervised and unsupervised learning will be
+touched only slightly, in a manner that is consistent with the current presentation
+of the topics.
 After the theorical background, a discussion is carried out on the first proposal of using 
-ML methods in
-Liquid State Theory in chapter 3. The proposal is to use a neural network as a 
+ML methods in Liquid State Theory in chapter 4.
+The proposal is to use a neural network as a 
 parametrization for the closure relation within the Ornstein-Zernike formalism.
 It is shown that the proposal works, the method proposed to make it work, a training
 scheme, and the results obtained. It is found that the proposal works, but if the neural
 network is not given too much information or description about the system, the neural
 network training dynamics will reduce to a common closure relation.
-In chapter 4, an exploration of including physical information to the problem gives
+In chapter 5, an exploration of including physical information to the problem gives
 a more direct solution. Instead of using a neural network to parametrize the closure
 relation, a known approximation is used, and let an evoluationary algorithm find the
 best parameters for it. When using an approximation that is already shown to give
 accurate results, the ML method is better suited to work correctly, but not without
 its drawbacks, which are discussed in full.
-The thesis the closes in chapter 5, with important conclusions and future ideas
+The thesis the closes in chapter 6, with important conclusions and future ideas
 to amend the proposals presented here. A few other proposal are outlined, although
 not with results, or rigorous theoretical frameworks. These can be thought of
 suggestions that might somehow become new ways to use ML methods within Liquid
