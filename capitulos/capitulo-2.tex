@@ -56,3 +56,55 @@ a weight function for the averaging procedure and should be normalized,
     \sum_{\Gamma} \rho_{ens} (\Gamma) = 1 \, .
     \label{eq:normalized}
 \end{equation}
+With this information, it is now time to introduce the \emph{canonical ensemble}, which
+is the main ensemble used throughout this work.
+
+\subsection{Canonical ensemble}
+The canonical ensemble is established as a system of $N$ particles in a fixed volume $V$
+at temperature $T$ that can exchange energy with a heat bath. This ensemble has a
+probability density function associated with it,
+\begin{equation}
+    \rho_{NVT} = \frac{e^{-\beta \mathcal{H}(\Gamma)}}{\sum_{\Gamma} e^{-\beta \mathcal{H}(\Gamma)}}
+    \label{eq:canonical-density}
+\end{equation}
+where $\beta=1/k_{B} T$, with $k_{B}$ Boltzmann's constant. In the classical limit of
+continuous distribution functions the denominator from \autoref{eq:canonical-density}
+transform into
+\begin{equation}
+    Q(N,V,T) = \frac{1}{N! \, h^{3N}} \int d \vecp^{N} \, d \vecr^{N} \,
+    e^{- \beta \mathcal{H} \left( \vecr^N, \vecp^N \right)}
+    \label{eq:canonical-partition}
+\end{equation}
+which is known as the \emph{canonical partition function} or sum~\cite{huangStatisticalMechanics1987}.
+Here, $h$ is an arbitrary but predetermined constant with the units of energy $\times$
+time. As a side note, in the original formulation by Gibbs, the value of $h$ was set
+to $h=1$~\cite{gibbsElementaryPrinciplesStatistical2014}, however, since the advent
+of quantum mechanics, it is now taken to be Planck's constant~\cite{tolmanPrinciplesStatisticalMechanics1979}
+in order to show a correspondence between the classical and quantum formulations.
+Indeed, the integrals from \autoref{eq:canonical-partition} can be separated, and the
+integral over the momentum coordinates can be carried out analitically giving,
+\begin{equation}
+    Q(N,V,T) = \frac{1}{N! \, \Lambda^{3N}} \int d \vecr^{N} \,
+    e^{- \beta U \left( \vecr^N \right)}
+    \label{eq:canonical-partition-position}
+\end{equation}
+with $\Lambda=\sqrt{h^2 / 2 \pi m k_{B} T}$ the thermal wavelength, also known as the
+\emph{de Broglie} wavelength. This again shows a correspondence between classical
+and quantum formulations. The remaining integral over the positions is called the
+\emph{configuration integral},
+\begin{equation}
+    Z(N,V,T) = \int d \vecr^{N} \, e^{- \beta U \left( \vecr^N \right)} \, .
+    \label{eq:configuration-int}
+\end{equation}
+Finally, we arrive at the canonical ensemble density function in the continuum limit
+which is
+\begin{equation}
+    \rho_{NVT} = \frac{e^{- \beta U(\vecr^{N})}}{Z(N,V,T)} \, .
+    \label{eq:canonical-limit}
+\end{equation}
+Using this probability density function, the ensemble average for an observable $A$ is
+computed as
+\begin{equation}
+    \left< A \right> = \frac{\int e^{- \beta U(\vecr^{N})} \, A(\vecr^{N}) \, d \vecr^{N}}{Z(N,V,T)} \, .
+    \label{eq:average-canonical}
+\end{equation}
