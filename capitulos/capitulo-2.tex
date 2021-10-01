@@ -15,3 +15,23 @@ the system, and with this, to obtain all the physical properties of the fluid.
 \section{Equilibrium Statistical Mechanics}
 \label{sec:eq-statmech}
 
+Consider a system of $N$ spherical particles in three dimensions
+where each particle is characterized by its position $\vecr$ and momentum $\vecp$.
+The \emph{Hamiltonian} of the system is given by
+\begin{equation}
+    \mathcal{H} \left( \vecr, \vecp \right) = 
+    K \left( \vecp \right) + U \left( \vecr \right)
+    \label{eq:hamiltonian}
+\end{equation}
+with $K$ the kinetic energy and $U$ the potential energy of the system.
+All together, the 6$N$ variables define a \emph{phase point} in a 6$N$-dimensional
+\emph{phase space}. The state of the system is then described by a
+\emph{phase space vector} $\Gamma \left( \vecr, \vecp \right)$, however, considering that all
+6$N$ particles move according to Newton's equations of motion, $\Gamma$ is
+a function of time, or $\Gamma(t)$. Using this phase space vector, \emph{time averages}
+can be obtained for a given observable $A$ by means of the following expression
+\begin{equation}
+    \left< A \right> = \lim_{t \to \infty} \frac{1}{t} 
+    \int_{0}^{t} A \, \Gamma(t') \, dt'
+    \label{eq:time-average}
+\end{equation}
