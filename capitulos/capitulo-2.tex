@@ -108,3 +108,24 @@ computed as
     \left< A \right> = \frac{\int e^{- \beta U(\vecr^{N})} \, A(\vecr^{N}) \, d \vecr^{N}}{Z(N,V,T)} \, .
     \label{eq:average-canonical}
 \end{equation}
+
+\section{Distribution functions}
+
+Still, the probability density function in \autoref{eq:canonical-limit} provides far more
+information from the system than necessary for the calculation of thermodynamical functions
+and structure properties. Instead, a focus on a small set of particles $n \ll N$ is 
+preferred, in which case a \emph{reduced probability density} is defined,
+\begin{equation}
+    \rho^{(n)}_{N} (\vecr^{n}) = \frac{N!}{(N-n)!} \, \frac{1}{Z(N,V,T)}
+    \int e^{- \beta U(\vecr^{N})} \, d \vecr^{(N-n)} \, ,
+    \label{eq:reduced-canonical}
+\end{equation}
+where $\rho^{(n)}_{N} (\vecr^{n})$ is also known as the equilibrium 
+$n$\emph{-particle density}.
+The quantity $\rho^{(n)}_{N} (\vecr^{n}) \, d \vecr^{n}$ defines the probability of finding
+$n$ particles of the system with coordinates in a volume element $d \vecr^{n}$ from the
+phase space, regardless of the positions and momenta of the remaining particles.
+As a result of this contraction of the probability density function, it is now possible to
+provide a complete description of the \emph{structure} of a fluid, while the knowledge
+of low-order particle distribution functions is sufficient to calculate thermodynamic
+quantities~\cite{mcquarrieStatisticalMechanics2000}.
