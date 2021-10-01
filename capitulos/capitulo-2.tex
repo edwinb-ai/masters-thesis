@@ -217,3 +217,15 @@ and several others. The hard-sphere interaction potential will be discussed
 in a later section.
 In the current work, the two-particle interaction potential
 $u_{2} (\vecr_{i}^{N}, \vecr_{j}^{N})$ is referred to simply as $u(r)$.
+
+The \emph{pressure equation} is a relation between the thermodynamic pressure
+$P$ and the radial distribution function, defined as
+\begin{equation}
+    P=P_{ideal}+P_{excess}= \frac{\rho}{\beta} - \frac{2 \pi \beta \rho}{3}
+    \int_{0}^{\infty} u'(r) \, g(r) \, r^3 \, dr \, ,
+    \label{eq:pressure-equation}
+\end{equation}
+where $P_{ideal}$ is the contribution due the ideal gas, and $P_{excess}$,
+the excess pressure can be derived using classical mechanics through the
+virial equation~\cite{hansenTheorySimpleLiquids2013}.
+%% TODO: Trabajar en las ecuaciones de las compresibilidad isotérmica, y mencionar la relación entre las rutas del virial y de la compresibilidad. También mencionar que estas pueden ser usadas después para garantizar consistencia termodinámica parcial.
