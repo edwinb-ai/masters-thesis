@@ -114,9 +114,9 @@ computed as
 Still, the probability density function in \autoref{eq:canonical-limit} provides far more
 information from the system than necessary for the calculation of thermodynamical functions
 and structure properties. Instead, a focus on a small set of particles $n \ll N$ is 
-preferred, in which case a \emph{reduced probability density} is defined,
+preferred, in which case a \emph{reduced probability density} is defined as
 \begin{equation}
-    \rho^{(n)}_{N} (\vecr^{n}) = \frac{N!}{(N-n)!} \, \frac{1}{Z(N,V,T)}
+    \rho^{(n)}_{N} (\vecr^{n}) \coloneqq \frac{N!}{(N-n)!} \, \frac{1}{Z(N,V,T)}
     \int e^{- \beta U(\vecr^{N})} \, d \vecr^{(N-n)} \, ,
     \label{eq:reduced-canonical}
 \end{equation}
@@ -129,3 +129,35 @@ As a result of this contraction of the probability density function, it is now p
 provide a complete description of the \emph{structure} of a fluid, while the knowledge
 of low-order particle distribution functions is sufficient to calculate thermodynamic
 quantities~\cite{mcquarrieStatisticalMechanics2000}.
+
+From the definition of the $n$-particle density in \autoref{eq:reduced-canonical}, the
+normalization condition is
+\begin{equation}
+    \int \rho^{(n)}_{N} (\vecr^{n}) \, d \vecr^{n} = \frac{N!}{(N-n)!} \, ,
+    \label{eq:normalization-reduced}
+\end{equation}
+and in particular, the \emph{single-particle} density is
+\begin{equation}
+    \int \rho^{(1)}_{N} (\vecr) \, d \vecr = N ,
+    \label{eq:single-particle-density}
+\end{equation}
+For a homogeneous fluid, \autoref{eq:single-particle-density} is then simplified
+to the following expression
+\begin{equation}
+    \rho^{(1)}_{N} = N / V \equiv \rho
+    \label{eq:homogeneous-density}
+\end{equation}
+where $\rho$ is the \emph{particle number density}.
+
+The $n$-particle distribution function $g^{(n)}_{N} (\vecr^{(n)})$ is defined in terms
+of the particle densities by
+\begin{equation}
+    g^{(n)}_{N} (\vecr^{(n)}) \coloneqq \frac{\rho^{(n)}_{N} (\vecr_{1}, \dots , \vecr_{n})}
+    {\prod_{i=1}^{n} \rho^{(1)}_{N} (\vecr_{i})} \, ,
+    \label{eq:gr-def}
+\end{equation}
+which again for a homogeneous fluid it reduces to
+\begin{equation}
+    \rho^{n} g^{(n)}_{N} (\vecr^{(n)}) = \rho^{(n)}_{N} (\vecr^{n}) \, .
+    \label{eq:homogenous-gr}
+\end{equation}
