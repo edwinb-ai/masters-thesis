@@ -25,13 +25,34 @@ The \emph{Hamiltonian} of the system is given by
 \end{equation}
 with $K$ the kinetic energy and $U$ the potential energy of the system.
 All together, the 6$N$ variables define a \emph{phase point} in a 6$N$-dimensional
-\emph{phase space}. The state of the system is then described by a
+\emph{phase space}. The state point of the system is then described by a
 \emph{phase space vector} $\Gamma \left( \vecr, \vecp \right)$, however, considering that all
 6$N$ particles move according to Newton's equations of motion, $\Gamma$ is
 a function of time, or $\Gamma(t)$. Using this phase space vector, \emph{time averages}
 can be obtained for a given observable $A$ by means of the following expression
 \begin{equation}
     \left< A \right> = \lim_{t \to \infty} \frac{1}{t} 
-    \int_{0}^{t} A \, \Gamma(t') \, dt'
+    \int_{0}^{t} A \: \Gamma(t') \: dt'
     \label{eq:time-average}
+\end{equation}
+If instead the complete set of state points, also known as the \emph{ensemble} of state
+poitns, is considered then the average $\left< A \right>$ can then be rewritten in
+terms of this ensemble. First, we point out the following for the state point vectors.
+This ensemble of state points is distributed in phase space according to a probability 
+distribution that is specified by the \emph{thermodynamic ensemble.} Then, if the time 
+evolution of $\Gamma(t)$ is such that all states are visited eventually, irrespective of 
+its initial conditions, the system satisfies the weak ergodic
+theorem~\cite{kittelElementaryStatisticalPhysics2004},
+and we can now rewrite the time average in \autoref{eq:time-average} with
+an \emph{ensamble average} that reads
+\begin{equation}
+    \left< A \right> = \sum_{\Gamma} A(\Gamma) \: \rho_{ens} (\Gamma)
+    \label{eq:ensemble-average}
+\end{equation}
+where the sum is for all state point vectors $\Gamma$ and $\rho_{ens} (\Gamma)$
+is the probability density function for the ensemble. This probability function is
+a weight function for the averaging procedure and should be normalized,
+\begin{equation}
+    \sum_{\Gamma} \rho_{ens} (\Gamma) = 1 \, .
+    \label{eq:normalized}
 \end{equation}
