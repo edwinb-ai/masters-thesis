@@ -166,13 +166,54 @@ deviates from complete randomness~\cite{hansenTheorySimpleLiquids2013}.
 If the system is also isotropic, which it shall be the consideration henceforth,
 the pair distribution function $g^{(2)}_{N} (\vecr_{1}, \vecr_{2})$ is a function only
 of the separation $r = r_{12} = \lvert \vecr_{2} - \vecr_{1} \rvert$;
-this function is the so-called \emph{radial distribution function}, and it is referred
+this function is the \emph{radial distribution function}, and it is referred
 to as $g(r)$ for the rest of this work.
 This radial distribution function is of crucial importance in Liquid State Theory for
 several reasons. First, the radial distribution function can be obtained experimentally
 for liquids using X-ray diffraction, digital videomicroscopy, and light scattering
-experimental setups~\cite{mcquarrieStatisticalMechanics2000,hansenTheorySimpleLiquids2013}.
+experiments~\cite{mcquarrieStatisticalMechanics2000}.
 Second, thermodynamic properties of liquids can be determined using integrals that
 contain the radial distribution function. Lastly, the radial distribution function can
 be easily computed in computer simulations~\cite{allenComputerSimulationLiquids2017}, 
 which is the standard way to obtain these quantities.
+
+\section{Thermodynamic properties}
+
+It was mentioned before that thermodynamics properties can be defined in terms of
+distribution functions, and in particular, in terms of the radial distribution
+functions~\cite{hansenTheorySimpleLiquids2013}.
+It is now time to discuss such expression, and the relation between thermodynamical
+quantities and the radial distribution function.
+
+The \emph{total energy} $E$ of a system of $N$ particles can be defined in terms of the
+radial distribution function as
+\begin{equation}
+    E = E_{ideal} + E_{excess} = \frac{3 N k_{B} T}{2} +
+    \frac{N}{2} \int_{0}^{\infty} \rho \, u(r) \, g(r) \, 4 \pi r^2 \, dr
+    \, ,
+    \label{eq:total-energy-rdf}
+\end{equation}
+where $E_{ideal}$ is the ideal gas contribution, whose result comes directly from
+the energy equipartition theorem~\cite{mcquarrieStatisticalMechanics2000};
+$E_{excess}$ is an interaction or excess contribution that can be understood
+as the interaction energy between a central particle for all the $N$ particles,
+and all the neighbors located in a spherical shell of radius $r$ and thickness
+$dr$. The total number of neighbors is given by $4 \pi r^2 \rho g(r) \, dr$.
+The integration from $0$ to $\infty$ gives all the interaction energy, and
+the factor of $1/2$ accounts for double counting of particle pairs.
+The function $u(r)$ is the \emph{pairwise interaction potential} which comes
+from the fact that the total potential energy $U(\vecr^{N})$ can be expressed
+in terms of the individual particle interactions as follows
+\begin{equation}
+    U(\vecr^{N}) = \sum_{i} u_{1} (\vecr_{i}^{N}) +
+    \sum_{i} \sum_{j>i} u_{2} (\vecr_{i}^{N}, \vecr_{j}^{N}) +
+    \dots
+    \label{eq:pairwise-energy}
+\end{equation}
+These kind of interactions are the most commonly studied, given that most
+systems can be modeled after such interaction potentials, such as the
+hard-sphere, Lennard-Jones, Yukawa~\cite{huangStatisticalMechanics1987}
+and several others. The hard-sphere interaction potential will be discussed
+in a later section.
+In the current work, the two-particle interaction potential
+$u_{2} (\vecr_{i}^{N}, \vecr_{j}^{N})$ is referred to simply as $u(r)$.
