@@ -228,4 +228,23 @@ $P$ and the radial distribution function, defined as
 where $P_{ideal}$ is the contribution due the ideal gas, and $P_{excess}$,
 the excess pressure can be derived using classical mechanics through the
 virial equation~\cite{hansenTheorySimpleLiquids2013}.
-%% TODO: Trabajar en las ecuaciones de las compresibilidad isotérmica, y mencionar la relación entre las rutas del virial y de la compresibilidad. También mencionar que estas pueden ser usadas después para garantizar consistencia termodinámica parcial.
+
+Another important quantity that must be mentioned is the
+\emph{isothermal compressibility}. Its thermodynamic definition is
+\begin{equation}
+    \chi_{T} = - \, \frac{1}{V} { \left( \frac{\partial V}{\partial P} \right) }_{T} =
+    \frac{1}{\rho} { \left( \frac{\partial \rho}{\partial P} \right) }_{T}
+    \label{eq:isothermal-chi}
+\end{equation}
+and is a physical measure of the relative change in volume due to a change
+in pressure or stress.
+It can also be computed using the radial distribution function using the following
+expression~\cite{hansenTheorySimpleLiquids2013}
+\begin{equation}
+    \frac{\chi_{T} \, \beta}{\rho} = 1 + \rho \int d \vecr \, \left[ g(r) - 1 \right]
+    \, .
+    \label{eq:chi-rdf}
+\end{equation}
+We call this the \emph{compressibility equation}, and it is a standard way of computing
+the isothermal compressibility. There is an alternative definition based on integral 
+equation formalism, which will be discussed in a later section.
