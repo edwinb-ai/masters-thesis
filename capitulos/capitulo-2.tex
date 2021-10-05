@@ -321,3 +321,52 @@ with
 The value of $\lambda$ is fixed to $\lambda=50$, following the finding in of
 Báez \emph{et al}~\cite{baezUsingSecondVirial2018}; and the value of $\epsilon$ is
 not used, instead, the reduced potential is employed, i.e., $u^{*}=u_{CP} / \epsilon$.
+
+\section{Computer simulations of liquids}
+
+Liquid State Theory is always supplemented with results from computer simulations.
+There has been an extensive amount of research in these computer simulation methods,
+following the pioneering work of Alder and Wainwright~\cite{alderPhaseTransitionHard1957a}.
+There are two main computer simulations methods used in Liquid State Theory and
+Soft Matter research: \emph{Molecular Dynamics} and \emph{Monte Carlo methods}~\cite{allenComputerSimulationLiquids2017,frenkelUnderstandingMolecularSimulation2001}.
+These methods serve different purposes, and because of that, a brief description of each
+one will be outlined here. However, the main focus of this work is the use of
+the Monte Carlo simulation technique. \emph{Brownian dynamics} methods are
+equally as important to Soft Matter research, but they are beyond the scope of this work.
+The book by Jan Dhont~\cite{dhontIntroductionDynamicsColloids1996} provides a rigorous
+explanation of the Brownian dynamics framework.
+
+\subsection{Molecular dynamics}
+Molecular Dynamics simulations use the basic laws of Physics to understand the behavior
+of liquids. In particular, Newton's laws are used to evolve a system of particles through
+time and space. For a system of $N$ particles, each with mass $m_i$, $i=1,2,\dots,N$,
+the equations of motion are
+\begin{equation}
+    \mathbf{F}_i (t) = m_i \frac{d^2 \vecr_i}{dt^2}
+    \label{eq:newton}
+\end{equation}
+with
+\begin{equation}
+    \mathbf{F}_i (t) = \sum_{j} - \nabla_{\vecr_i} U(\lvert \vecr_i - \vecr_j \rvert)
+    \, ,
+    \label{eq:newton-potential}
+\end{equation}
+the force on particle $i$ with position $r_i$ exerted by particle $j$ with position
+$\vecr_j$, and $U$ the potential energy, which in the context of liquids this is the
+interaction potential of the particles.
+
+To integrate these equations of motion, different integration schemes have been developed.
+At first, Alder and Wainwright~\cite{alderPhaseTransitionHard1957a} used the simple
+Euler method to integrate these equations. It was later understood that such scheme
+does not yield stable results, i.e., the integration scheme is \emph{unstable}.
+Integration methods must conserve important physical quantities, such as energy,
+momentum and phase space properties~\cite{razafindralandyReviewGeometricIntegrators2018}.
+The Verlet method was later introduced, in 1967, by Loup Verlet~\cite{verletComputerExperimentsClassical1967a}
+to alleviate the drawback of the Euler method. These methods are crucial to obtain
+correct results from molecular dynamics computer simulations.
+
+The main appeal of molecular dynamics computer simulations is the fact that
+\emph{dynamical quantities} can be computed without effort. Physical observables such
+as the \emph{mean square displacement} and the \emph{dynamic structure factor}~\cite{dhontIntroductionDynamicsColloids1996,hansenTheorySimpleLiquids2013}
+are of great importance to the understanding of transport properties in liquids and
+more complex systems in Soft Matter.
