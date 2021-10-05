@@ -285,4 +285,39 @@ simulations~\cite{alderPhaseTransitionHard1957a}.
 The relationship between this simple model and colloid science was discovered
 experimentally by Pusey and van Megen~\cite{puseyPhaseBehaviourConcentrated1986},
 in dense colloidal suspensions of sterically stabilized particles in a solvent.
-%% TODO: Vincular estas ideas con el potencial de pseudo esferas duras, y cerrar la sección con una mención a las simulaciones por computadora, que será la siguiente sección.
+
+In this work a similar potential is used, though defined differently. Looking closely
+at \autoref{eq:hard-sphere}, it is straightforward to see that the potential is a
+discontinuous function. In mathematical proofs and statistical mechanics frameworks,
+this poses no problem. It might be hard to manipulate, mathematically speaking,
+but it is possible to do so. Yet, the problem lies with the use of computer simulations.
+The technical issues arise mostly in Molecular and Brownian Dynamics computer
+simulations~\cite{allenComputerSimulationLiquids2017}, so a different formulation
+must be employed. Computer simulations of liquids are presented in the next section.
+In 2018, Báez \emph{et al}~\cite{baezUsingSecondVirial2018} used the Extended Law
+of Corresponding States~\cite{valadez-perezReversibleAggregationColloidal2018}
+to map the second virial coefficient of the hard sphere model to a continuous
+model. By doing so, most of the dynamic and thermodynamic properties of the hard sphere
+model are "passed along" to the continuous function, which in turn is suited for all
+kinds of computer simulation algorithms. This new continuous function is used
+throughout this work, and it is defined as follows
+\begin{equation}
+    u_{CP} = 
+    \begin{cases}
+        A \, \epsilon \left[ {\left(\frac{\sigma}{r}\right)}^{\lambda} -
+        {\left(\frac{\sigma}{r}\right)}^{\lambda - 1} \right] + \epsilon \, , 
+        &r < \sigma \, B \, , \\
+        \hspace{1.5cm} 0 \, , &r \geq \sigma \, B \, ,
+    \end{cases}
+    \label{eq:cont-hs}
+\end{equation}
+with
+\begin{equation}
+    A = \lambda {\left(\frac{\lambda}{\lambda -1}\right)}^{\lambda - 1} \, ,
+    \quad
+    B = \left(\frac{\lambda}{\lambda -1}\right) \, .
+    \label{eq:ab-params}
+\end{equation}
+The value of $\lambda$ is fixed to $\lambda=50$, following the finding in of
+Báez \emph{et al}~\cite{baezUsingSecondVirial2018}; and the value of $\epsilon$ is
+not used, instead, the reduced potential is employed, i.e., $u^{*}=u_{CP} / \epsilon$.
