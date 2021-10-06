@@ -375,3 +375,80 @@ are of great importance to the understanding of transport properties in liquids 
 more complex systems in Soft Matter.
 
 \subsection{Monte Carlo methods}
+Monte Carlo methods make use of randomness to explore a possible solution to a
+given problem. The basic idea is to exploit specific but random possibilities
+to provide a solution. Monte Carlo methods have successfully been applied to
+three main problems: optimization, numerical integration, and probability density
+function estimation~\cite{kroeseWhyMonteCarlo2014}. It might seem odd that Statistical
+Physics is not mentioned here, but the reason for that is that it actually belong to
+the wider range of probability density function estimation techniques. It is the
+purpose of this section to explore Monte Carlo methods and their application to
+the simulation of liquids, mainly because this is the method used in this
+work, and because in this work there is no dynamical physical quantity involved,
+only statical ones, i.e., the radial distribution function.
+
+The basic idea of Monte Carlo methods in the computer simulation of liquids is to
+generate a sequence of configurations for a given system. The idea to arrive at a
+probability distribution function close to the ensemble probability distribution
+function which was chosen at the start of the simulation. For instance, if a system
+is under the $NVT$ ensemble, the sequence of Monte Carlo step are expected to converge
+to the distribution function in \autoref{eq:canonical-limit}. Having arrived at this
+estimation, observables can the be computed, as in \autoref{eq:average-canonical}.
+
+In general, Monte Carlo methods are completely random. However, liquids cannot be
+subject to complete randomness due to their intermolecular interactions. In the case
+of the hard sphere fluid, the denominator of \autoref{eq:canonical-limit} would be zero
+at least 50\% of the time, which would incur in numerical instabilities and observables
+would not get measured properly. So, a \emph{bias} must be introduced in order to
+\emph{guide} the sequence of configurations to a path which could avoid unnecessary
+configurations. This bias is called \emph{importance sampling}, and the most common rule,
+as well as the one used here, is the Metropolis rule~\cite{landauGuideMonteCarlo2021}.
+Nevertheless, when a bias is introduced, there is one important rule that must
+\emph{always} be obeyed: the condition of \emph{detailed balance}. Detailed balance
+is a strong condition stating that if there is a transition from a state $o$ to a
+state $n$, this should be balanced with the number of accepted trial moves that go
+from state $n$ to state $o$. This can also be summarized in mathematical form,
+\begin{equation}
+    p(o) \, T(o \Longrightarrow n) = p(n) \, T(n \Longrightarrow o) \, ,
+    \label{eq:detailed-balance}
+\end{equation}
+where $p(\alpha)$ is the probability to be at state $\alpha$, and 
+$T(\alpha \Longrightarrow \beta)$ denotes the probability to go from a state 
+$\alpha$ to a state $\beta$. It might look like a simple rule, but this condition
+is what guarantees the ergodicity of the computer
+simulation~\cite{landauGuideMonteCarlo2021}, i.e., that the phase space is explored
+correctly and with physical significance. If this condition is not met, the results
+do not represent the physical properties of the system, and the observables are not
+obtained from the correct thermodynamic ensemble.
+
+In the $NVT$ ensemble, the Metropolis rule that satisfies detailed balance is
+\begin{equation}
+    \frac{p(n)}{p(o)} = \frac{A(o \Longrightarrow n)}{A(n \Longrightarrow o)} =
+    \exp{ \left\{ -\beta \left[U(n) - U(o)\right] \right\} }
+    \label{eq:nvt-balance}
+\end{equation}
+with
+\begin{equation}
+    A(o \Longrightarrow n) = \min{ \left(1, \exp{ \left\{ -\beta \left[U(n) - U(o)\right] \right\} } \right)} 
+    \, .
+    \label{eq:nvt-acceptance}
+\end{equation}
+With this acceptance rule, it is guaranteed that the configurations that have the larger
+Boltzmann factor, i.e. $\exp{ \left\{ -\beta \left[U(n) - U(o)\right] \right\} }$, 
+will be visited more frequently rather than the configurations with a smaller
+Boltzmann factor, which will be avoided.
+In practice, the core of the method which is the Metropolis rule, is implemented as follows
+\newpage
+\begin{itemize}
+    \item Select a particle $i$ at random.
+    \item Calculate the energy $U_{i}(o)$ of particle $i$.
+    \item Move particle $i$ randomly.
+    \item Calculate the new energy $U_{i}(n)$ of particle $i$.
+    \item Accept or reject the move according to \autoref{eq:nvt-balance} and \autoref{eq:nvt-acceptance}.
+\end{itemize}
+Monte Carlo methods are efficient when stratic quantities, such as the radial distribution
+function, are computed. These methods can efficiently explore a large portion of the phase
+space due to their stochastic nature. Although the phase space might be large, it is often
+the case that a simple exploration of one, or two replicas of the system, are enough
+to obtain good estimations for a given observable. In this work, Monte Carlo computer 
+simulations were used for all the observables computed throughout.
