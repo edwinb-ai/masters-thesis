@@ -167,7 +167,7 @@ If the system is also isotropic, which it shall be the consideration henceforth,
 the pair distribution function $g^{(2)}_{N} (\vecr_{1}, \vecr_{2})$ is a function only
 of the separation $r = r_{12} = \lvert \vecr_{2} - \vecr_{1} \rvert$;
 this function is the \emph{radial distribution function}, and it is referred
-to as $g(r)$ for the rest of this work.
+to as \rdf for the rest of this work.
 This radial distribution function is of crucial importance in Liquid State Theory for
 several reasons. First, the radial distribution function can be obtained experimentally
 for liquids using X-ray diffraction, digital videomicroscopy, and light scattering
@@ -452,3 +452,34 @@ space due to their stochastic nature. Although the phase space might be large, i
 the case that a simple exploration of one, or two replicas of the system, are enough
 to obtain good estimations for a given observable. In this work, Monte Carlo computer 
 simulations were used for all the observables computed throughout.
+
+\subsection{On the computation of the radial distribution function}
+The procedure to obtain the radial distribution function from computer simulations is as
+follows. When a Monte Carlo step has been achieved, a particle $i$ is chosen at random.
+Then, all the particles that are a distance $\delta r$ from the particle $i$ are counted
+as a neighbor particle. After that, all the particle that are now at a distance
+$2 \delta r$ from the particle $i$ are counted. This is done after all the particles
+have been accounted for. If the interaction potential between the particles is truncated
+to a cutoff radius $r_c$, then this is the last value of the distance used to count
+for neighboring particles. When every particle has been counter, a histogram is built,
+which corresponds to a discrete distribution function. Now, this distribution function is
+not normalized, and the procedure to do so is as follows. A normalization constant is 
+obtained by dividing the total number of particles at position $r$ with the product
+of the total number of particles in the simulation, multiplied by the total number of
+configurations visited throughout the simulation, multiplied by the total volume of the
+spherical shell that lies between $r$ and $r + \delta r$.
+In mathematical form, this can be summarized as follows
+\begin{equation}
+    g(r)=\frac{1}{@r} \left< \frac{1}{N} \sum_{i=1}^{N} \sum_{i \neq j}^{N} 
+    \frac{1}{2 \pi r} \delta (r - \vecr_{ij}) \right>
+    \label{eq:rdf-simulation}
+\end{equation}
+with $\vecr_{ij}=\vecr_{i} - \vecr{j}$.
+
+\section{The Ornstein-Zernike Integral Equation}
+Up until this point, the presentation on Liquid State Theory has been driven by the
+possibility of calculating a given observable for a liquid. The method to compute such
+observables is to obtain a main quantity, the radial distribution function, and
+make use of any of the thermodynamic equations that relate \rdf with the needed
+thermodynamic observable. There has been a discussion of how the \rdf can be obtained
+through computer simulations.
