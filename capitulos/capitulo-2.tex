@@ -483,4 +483,52 @@ possibility of calculating a given observable for a liquid. The method to comput
 observables is to obtain a main quantity, the radial distribution function, and
 make use of any of the thermodynamic equations that relate \rdf with the needed
 thermodynamic observable. There has been a discussion of how the \rdf can be obtained
-through computer simulations.
+through computer simulations. And yet, there has not been a discussion of how the \rdf
+can be obtained analytically. This framework, the Ornstein-Zernike formalism,
+is the focus of the present section, and the sole focus of this thesis. Despite its
+importance, the formal derivation of the equation is too detailed to be the focus of
+this work, and shall leave most of the details to specific references~\cite{hansenTheorySimpleLiquids2013}.
+Nonetheless, the main results and physical interpretation shall be outlined here.
+
+To understand the Ornstein-Zernike equation, a physical interpretation is defined as
+follows. If there is a system of $N$ interacting particles, it happens that each of them
+are related to each other. There exists a \emph{direct} relation between particles and
+their neighbors, and an \emph{indirect} relation between particles and the rest that
+may be far away from them. This interaction begs the question,
+\emph{is there a way to relate the indirect and direct correlations between particles?}
+The answer is given recursively through the following definition. Let $h(r)$ be the
+\emph{indirect correlation function} that "measures" the direct correlations between
+particles; and let $c(r)$ be the \emph{indirect correlation function} that "measures"
+the indirect correlations between particles, then both $c(r)$ and $h(r)$ are related
+with each other through the \emph{Ornstein-Zernike equation} as follows
+\begin{equation}
+    \begin{aligned}
+        h(r) &= c(r) + \rho \int_{V} c(\vecr') \, c(\lvert \vecr - \vecr' \rvert) \, d \vecr' \\
+        &+ \rho^2 \int_{V} c(\vecr'') c(\lvert \vecr - \vecr' \rvert) c(\lvert \vecr' - \vecr'' \rvert) \, d \vecr' \, d \vecr'' \\
+        &+ \rho^3 \int_{V} c(\vecr''') c(\lvert \vecr - \vecr' \rvert) c(\lvert \vecr' - \vecr'' \rvert) c(\lvert \vecr'' - \vecr''' \rvert) \, d \vecr' \, d \vecr''
+        \, d \vecr''' \\
+        &+ \dots
+    \end{aligned}
+    \label{eq:hr-oz}
+\end{equation}
+\autoref{eq:hr-oz} can be rewritten recursively by noting the following factorization
+\begin{equation}
+    h(r) = c(r) + \rho \int_{V} c(\vecr') \left[
+    \begin{aligned}
+        & \hspace{1.6cm} c(\lvert \vecr - \vecr' \rvert) \\
+        &+ \rho \int_{V} c(\lvert \vecr - \vecr' \rvert) c(\lvert \vecr' - \vecr'' \rvert) \, d \vecr' \, d \vecr'' \\
+        &+ \rho^2 \int_{V} c(\lvert \vecr - \vecr' \rvert) c(\lvert \vecr' - \vecr'' \rvert) c(\lvert \vecr'' - \vecr''' \rvert) \, d \vecr' \, d \vecr''
+        \, d \vecr''' \\
+        &+ \hspace{1.6cm} \dots
+    \end{aligned}
+    \right] \, d \vecr'
+    \label{eq:oz-factorization}
+\end{equation}
+and thus arrive at the most common form of the Ornstein-Zernike equation, which for
+isotropic and uniform liquids reads
+\begin{equation}
+    h(r) = c(r) + \rho \int_{V} c(r') \, h(\lvert \vecr - \vecr' \rvert) \, d \vecr'
+    \, .
+    \label{eq:ornstein-zernike}
+\end{equation}
+%%TODO: Mencionar función puente, cerraduras y algunas soluciones analíticas, como Percus-Yevick. También mencionar la cerradura de Verlet modificada y Kinoshita, ya que son fundamentales para la tesis. Con esto debe cerrar este marco teórico.
