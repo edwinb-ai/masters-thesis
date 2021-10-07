@@ -265,30 +265,35 @@ expression~\cite{hansenTheorySimpleLiquids2013}
 We call this the \emph{compressibility equation}, and it is a standard way of computing
 the isothermal compressibility.
 
-\section{Intermolecular potentials and models}
+\section{The hard-sphere model}
+In order to describe the behavior of materials, pairwise interaction potentials are chosen 
+according to specific physical properties. These interaction potentials provide a 
+particular functional form for the potential energy $U$ of the system.
+With this information, all the theory described so far can be used to understand the
+properties of the system, and compute thermodynamic quantities.
 
-In order to model the behavior of materials, models are chosen according to specific
-physical properties. All of these models are proposals for the intermolecular potentials,
-and provide a particular functional form for the potential energy $U$ of the system.
 Out of all the possible interaction potentials, there is one that stands out for its
 simplicity and surprising ability to generalize to complex systems. This model is
 called the \emph{hard sphere model}, and shall be the topic of discussion for this
 section.
-
 The \emph{hard sphere model} is a simple pairwise interaction potential, defined as
 \begin{equation}
     u_{hs} = 
     \begin{cases}
         \infty \, , &r \leq \sigma \\
-        0 \, , &r > \sigma \, .
+        0 \, , &r > \sigma \; ,
     \end{cases}
     \label{eq:hard-sphere}
 \end{equation}
-This interaction is a model, an approximation of the intrinsic behavior of particles.
-It attempts to model the excluded volume interaction of particles, similar to what
-billiards balls in three dimensions. These particles seem to hit each other only to
-be separated at contact with each other. Hence, this model is by definition a
-\emph{repulsive model}.
+where $\sigma$ is the radius of the particles in the system, and $r$ is the distance
+between two particles, as previously stated.
+
+This interaction is a particular model; it is an approximation of the intrinsic
+behavior of particles.
+It attempts to describe the excluded volume interaction of particles, similar to what
+happens with billiards balls in three dimensions.
+These particles seem to hit each other only to be separated at the contact point, which
+is the value of $\sigma$. Hence, this model is by definition a \emph{repulsive model}.
 Apart from being a reference model system for the liquid
 state~\cite{hansenTheorySimpleLiquids2013}, hard spheres are extremely useful in
 colloid science, as mentioned in the introduction section. This is due to the fact
@@ -334,9 +339,10 @@ with
     B = \left(\frac{\lambda}{\lambda -1}\right) \, .
     \label{eq:ab-params}
 \end{equation}
-The value of $\lambda$ is fixed to $\lambda=50$, following the finding in of
+The value of $\lambda$ is fixed to $\lambda=50$, following the findings in the work of
 Báez \emph{et al}~\cite{baezUsingSecondVirial2018}; and the value of $\epsilon$ is
-not used, instead, the reduced potential is employed, i.e., $u^{*}=u_{CP} / \epsilon$.
+not fixed explicitly, instead the reduced potential is employed, 
+i.e., $u^{*}=u_{CP} / \epsilon$.
 
 \section{Computer simulations of liquids}
 
