@@ -191,11 +191,10 @@ function can be obtained analytically using integral equations such as the Ornst
 equation, which shall be discussed in a later section.
 
 \section{Thermodynamic properties}
-
-It was mentioned before that thermodynamics properties can be defined in terms of
+As mentioned in the previous section, thermodynamic properties can be defined in terms of
 distribution functions, and in particular, in terms of the radial distribution
-functions~\cite{hansenTheorySimpleLiquids2013}.
-It is now time to discuss such expression, and the relation between thermodynamical
+function~\cite{hansenTheorySimpleLiquids2013}.
+It is now time to discuss such expressions, and the relation between thermodynamical
 quantities and the radial distribution function.
 
 The \emph{total energy} $E$ of a system of $N$ particles can be defined in terms of the
@@ -223,13 +222,17 @@ in terms of the individual particle interactions as follows
     \dots
     \label{eq:pairwise-energy}
 \end{equation}
-These kind of interactions are the most commonly studied, given that most
+This kind of interactions are the most commonly researched and studied, given that most
 systems can be modeled after such interaction potentials, such as the
 hard-sphere, Lennard-Jones, Yukawa~\cite{huangStatisticalMechanics1987}
 and several others. The hard-sphere interaction potential will be discussed
 in a later section.
 In the current work, the two-particle interaction potential
 $u_{2} (\vecr_{i}^{N}, \vecr_{j}^{N})$ is referred to simply as $u(r)$.
+It is important to note that this is not the norm, and interaction potentials
+that are not pairwise additive are also studied. These many-body potentials are
+notoriously hard to study, but recent advances in Machine Learning have made it
+possible to do so~\cite{boattiniModelingManybodyInteractions2020}.
 
 The \emph{pressure equation} is a relation between the thermodynamic pressure
 $P$ and the radial distribution function, defined as
@@ -238,29 +241,29 @@ $P$ and the radial distribution function, defined as
     \int_{0}^{\infty} u'(r) \, g(r) \, r^3 \, dr \, ,
     \label{eq:pressure-equation}
 \end{equation}
-where $P_{ideal}$ is the contribution due the ideal gas, and $P_{excess}$,
-the excess pressure can be derived using classical mechanics through the
-virial equation~\cite{hansenTheorySimpleLiquids2013}.
+where $P_{ideal}$ is the kinetic pressure of an ideal gas, and $P_{excess}$
+is the excess pressure that can be derived using classical mechanics through the
+virial theorem~\cite{goldsteinClassicalMechanics2002}.
 
 Another important quantity that must be mentioned is the
 \emph{isothermal compressibility}. Its thermodynamic definition is
 \begin{equation}
     \chi_{T} = - \, \frac{1}{V} { \left( \frac{\partial V}{\partial P} \right) }_{T} =
     \frac{1}{\rho} { \left( \frac{\partial \rho}{\partial P} \right) }_{T}
+    \; ,
     \label{eq:isothermal-chi}
 \end{equation}
-and is a physical measure of the relative change in volume due to a change
+and it is a physical measure of the relative change in volume due to a change
 in pressure or stress.
 It can also be computed using the radial distribution function using the following
 expression~\cite{hansenTheorySimpleLiquids2013}
 \begin{equation}
     \frac{\chi_{T} \, \beta}{\rho} = 1 + \rho \int d \vecr \, \left[ g(r) - 1 \right]
-    \, .
+    \; .
     \label{eq:chi-rdf}
 \end{equation}
 We call this the \emph{compressibility equation}, and it is a standard way of computing
-the isothermal compressibility. There is an alternative definition based on integral 
-equation formalism, which will be discussed in a later section.
+the isothermal compressibility.
 
 \section{Intermolecular potentials and models}
 
