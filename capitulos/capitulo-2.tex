@@ -446,10 +446,12 @@ In practice, the core of the method which is the Metropolis rule, is implemented
     \item Calculate the new energy $U_{i}(n)$ of particle $i$.
     \item Accept or reject the move according to \autoref{eq:nvt-balance} and \autoref{eq:nvt-acceptance}.
 \end{itemize}
-Monte Carlo methods are efficient when stratic quantities, such as the radial distribution
-function, are computed. These methods can efficiently explore a large portion of the phase
+Monte Carlo methods are efficient when static quantities, such as the radial distribution
+function, are computed. This is because time is not part of the computer simulation method,
+unlike the previously discussed Molecular Dynamics method.
+These methods can efficiently explore a large portion of the phase
 space due to their stochastic nature. Although the phase space might be large, it is often
-the case that a simple exploration of one, or two replicas of the system, are enough
+the case that a simple exploration of one or two replicas of the system are enough
 to obtain good estimations for a given observable. In this work, Monte Carlo computer 
 simulations were used for all the observables computed throughout.
 
