@@ -349,7 +349,7 @@ i.e., $u^{*}=u_{CP} / \epsilon$.
 Liquid State Theory is always supplemented with results from computer simulations
 because these methods come from first-principles Physics and yield accurate estimations
 of the behavior of the physical systems. Also, given the availability of computational
-resources, these methods have become a standard tool for research.
+resources nowadays, these methods have become a standard tool for research.
 There has been an extensive amount of research in these computer simulation methods,
 following the pioneering work of Alder and Wainwright~\cite{alderPhaseTransitionHard1957a}.
 There are two main computer simulations methods used in Liquid State Theory and
@@ -367,13 +367,13 @@ of liquids. In particular, Newton's laws are used to evolve a system of particle
 time and space. For a system of $N$ particles, each with mass $m_i$, $i=1,2,\dots,N$,
 the equations of motion are
 \begin{equation}
-    \mathbf{F}_i (t) = m_i \frac{d^2 \vecr_i}{dt^2}
+    \mathbf{F}_i (t) = m_i \frac{d^2 \vecr_i}{dt^2} \; ,
     \label{eq:newton}
 \end{equation}
 with
 \begin{equation}
     \mathbf{F}_i (t) = \sum_{j} - \nabla_{\vecr_i} U(\lvert \vecr_i - \vecr_j \rvert)
-    \, ,
+    \; ,
     \label{eq:newton-potential}
 \end{equation}
 the force on particle $i$ with position $r_i$ exerted by particle $j$ with position
@@ -383,7 +383,8 @@ interaction potential between the particles.
 To integrate these equations of motion, different integration schemes have been developed.
 At first, Alder and Wainwright~\cite{alderPhaseTransitionHard1957a} used the simple
 Euler method to integrate these equations. It was later understood that such scheme
-does not yield stable results, i.e., the integration scheme is \emph{unstable}.
+does not yield \emph{stable} results, i.e., the integration scheme gives different results
+if used with different initial conditions each time.
 Integration methods must conserve important physical quantities, such as energy,
 momentum and phase space properties~\cite{razafindralandyReviewGeometricIntegrators2018}.
 The Verlet method was later introduced in 1967 by Loup Verlet~\cite{verletComputerExperimentsClassical1967a},
@@ -391,18 +392,19 @@ in order to alleviate the drawbacks of the Euler method. These methods are cruci
 correct results from molecular dynamics computer simulations.
 
 The main appeal of molecular dynamics computer simulations is the fact that
-\emph{dynamical quantities} can be computed without effort. Physical observables such
+\emph{dynamical quantities} can be computed effortlessly, given the temporal nature 
+of the formulation. Physical observables such
 as the \emph{mean square displacement} and the \emph{dynamic structure factor}~\cite{dhontIntroductionDynamicsColloids1996,hansenTheorySimpleLiquids2013}
 are of great importance to the understanding of transport properties in liquids and
 more complex systems in Soft Matter.
 
 \subsection{Monte Carlo methods}
 Monte Carlo methods make use of randomness to explore a possible solution to a
-given problem. The basic idea is to exploit specific but random possibilities
-to provide a solution. Monte Carlo methods have successfully been applied to
+given problem. The basic idea is to exploit random sampling to obtain numerical
+results. Monte Carlo methods have successfully been applied to
 three main problems: optimization, numerical integration, and probability density
 function estimation~\cite{kroeseWhyMonteCarlo2014}. It might seem odd that Statistical
-Physics is not mentioned here, but the reason for that is that it actually belong to
+Physics is not mentioned here, but the reason for that is that it actually belongs to
 the wider range of probability density function estimation techniques. It is the
 purpose of this section to explore Monte Carlo methods and their application to
 the simulation of liquids, mainly because this is the method used in this
@@ -410,12 +412,15 @@ work, and because in this work there is no dynamical physical quantity involved,
 only statical ones, i.e., the radial distribution function.
 
 The basic idea of Monte Carlo methods in the computer simulation of liquids is to
-generate a sequence of configurations for a given system. The idea to arrive at a
+generate a sequence of configurations for a given system. The idea is to arrive at a
 probability distribution function close to the ensemble probability distribution
-function which was chosen at the start of the simulation. For instance, if a system
-is under the $NVT$ ensemble, the sequence of Monte Carlo step are expected to converge
+function chosen to model the fluid. For instance, if a system
+is under the $NVT$ ensemble, the sequence of Monte Carlo steps are expected to converge
 to the distribution function in \autoref{eq:canonical-limit}. Having arrived at this
 estimation, observables can the be computed, as in \autoref{eq:average-canonical}.
+There is also other possibilities of ensemble distribution functions that can be
+used with Monte Carlo computer simulations, such as the isobaric-isothermal ensemble
+and the Gibbs ensemble~\cite{frenkelUnderstandingMolecularSimulation2001}.
 
 In general, Monte Carlo methods are completely random. However, liquids cannot be
 subject to complete randomness due to their intermolecular interactions. In the case
@@ -440,27 +445,30 @@ $\alpha$ to a state $\beta$. It might look like a simple rule, but this conditio
 is what guarantees the ergodicity of the computer
 simulation~\cite{landauGuideMonteCarlo2021}, i.e., that the phase space is explored
 correctly and with physical significance. If this condition is not met, the results
-do not represent the physical properties of the system, and the observables are not
-obtained from the correct thermodynamic ensemble.
+do not represent the physical properties of the system, and the observables cannot
+be computed properly.
 
 In the $NVT$ ensemble, the Metropolis rule that satisfies detailed balance is
 \begin{equation}
     \frac{p(n)}{p(o)} = \frac{A(o \Longrightarrow n)}{A(n \Longrightarrow o)} =
     \exp{ \left\{ -\beta \left[U(n) - U(o)\right] \right\} }
+    \; ,
     \label{eq:nvt-balance}
 \end{equation}
 with
 \begin{equation}
     A(o \Longrightarrow n) = \min{ \left(1, \exp{ \left\{ -\beta \left[U(n) - U(o)\right] \right\} } \right)} 
-    \, .
+    \; ,
     \label{eq:nvt-acceptance}
 \end{equation}
+the proof that this condition satisfies detailed balance is omitted here, but it can
+be found in the book by Frenkel~\cite{frenkelUnderstandingMolecularSimulation2001}.
 With this acceptance rule, it is guaranteed that the configurations that have the larger
 Boltzmann factor, i.e. $\exp{ \left\{ -\beta \left[U(n) - U(o)\right] \right\} }$, 
 will be visited more frequently rather than the configurations with a smaller
 Boltzmann factor, which will be avoided.
-In practice, the core of the method which is the Metropolis rule, is implemented as follows
-\newpage
+In practice, the core of the Monte Carlo method for the computer simulation of liquids, 
+which corresponds to the Metropolis rule, is implemented as follows:
 \begin{itemize}
     \item Select a particle $i$ at random.
     \item Calculate the energy $U_{i}(o)$ of particle $i$.
@@ -471,7 +479,7 @@ In practice, the core of the method which is the Metropolis rule, is implemented
 Monte Carlo methods are efficient when static quantities, such as the radial distribution
 function, are computed. This is because time is not part of the computer simulation method,
 unlike the previously discussed Molecular Dynamics method.
-These methods can efficiently explore a large portion of the phase
+Monte Carlo methods can efficiently explore a large portion of the phase
 space due to their stochastic nature. Although the phase space might be large, it is often
 the case that a simple exploration of one or two replicas of the system are enough
 to obtain good estimations for a given observable. In this work, Monte Carlo computer 
@@ -479,20 +487,20 @@ simulations were used for all the observables computed throughout.
 
 \subsection{On the computation of the radial distribution function}
 The procedure to obtain the radial distribution function from computer simulations is as
-follows. When a Monte Carlo step has been achieved, a particle $i$ is chosen at random.
+follows. For each Monte Carlo step a particle $i$ is chosen at random.
 Then, all the particles that are a distance $\delta r$ from the particle $i$ are counted
-as a neighbor particle. After that, all the particle that are now at a distance
+as a neighbor particle. After that, all the particles that are now at a distance
 $2 \delta r$ from the particle $i$ are counted. This is done after all the particles
 have been accounted for. If the interaction potential between the particles is truncated
 to a cutoff radius $r_c$, then this is the last value of the distance used to count
-for neighboring particles. When every particle has been counter, a histogram is built,
-which corresponds to a discrete distribution function. Now, this distribution function is
-not normalized, and the procedure to do so is as follows. A normalization constant is 
-obtained by dividing the total number of particles at position $r$ with the product
-of the total number of particles in the simulation, multiplied by the total number of
-configurations visited throughout the simulation, multiplied by the total volume of the
-spherical shell that lies between $r$ and $r + \delta r$.
-In mathematical form, this can be summarized as follows
+for neighboring particles. When every particle has been counted, a histogram is built,
+which corresponds to a discrete distribution function of the neighboring particles. 
+Now, this distribution function is not normalized, and the procedure to do so is as 
+follows. A normalization constant is obtained by dividing the total number of particles at 
+position $r$ with the product of the total number of particles in the simulation, 
+multiplied by the total number of configurations visited throughout the simulation, 
+multiplied by the total volume of the spherical shell that lies between $r$ and $r + \delta 
+r$. In mathematical form, this can be summarized as follows
 \begin{equation}
     g(r)=\frac{1}{\rho} \left\langle \frac{1}{N} \sum_{i=1}^{N} \sum_{i \neq j}^{N} 
     \frac{1}{2 \pi r} \delta (r - \vecr_{ij}) \right\rangle
