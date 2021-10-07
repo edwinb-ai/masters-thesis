@@ -516,15 +516,17 @@ observables is to obtain a main quantity, the radial distribution function, and
 make use of any of the thermodynamic equations that relate \rdf with the needed
 thermodynamic observable. There has been a discussion of how the \rdf can be obtained
 through computer simulations. And yet, there has not been a discussion of how the \rdf
-can be obtained analytically. This framework, the Ornstein-Zernike formalism,
-is the focus of the present section, and the sole focus of this thesis. Despite its
-importance, the formal derivation of the equation is too detailed to be the focus of
-this work, and shall leave most of the details to specific references~\cite{hansenTheorySimpleLiquids2013}.
-Nonetheless, the main results and physical interpretation shall be outlined here.
+can be obtained analytically. The Ornstein-Zernike formalism provides a way to obtain
+such analytical results, and it is the focus of the present section, as well as the main 
+focus of this thesis. Despite its importance, the formal derivation of the equation is too 
+rigorous to be presented here, so most of the details will be omitted here but left to 
+specific references on the subject~\cite{hansenTheorySimpleLiquids2013}. Nonetheless, the 
+main results and physical interpretation shall be outlined here.
 
 To understand the Ornstein-Zernike equation, a physical interpretation is defined as
 follows. If there is a system of $N$ interacting particles with an interaction potential
 defined by $u(r)$, then it so happens that each of them are related to each other.
+It might seem like an obvious statement, but this relation has in fact two contributions.
 There exists a \emph{direct} relation between particles and
 their neighbors, and an \emph{indirect} relation between particles and the rest that
 may be far away from them. This interaction begs the question,
@@ -574,7 +576,7 @@ As for the interaction potential, the information lies within $c(r)$ and $g(r)$.
 In the \emph{low density limit}, the radial distribution function has the following
 asymptotic behavior
 \begin{equation}
-    g(r) \to e^{- \beta u(r)} \, , \quad \rho \to 0
+    g(r) \to e^{- \beta u(r)} \, , \quad \rho \to 0 \; .
     \label{eq:gr-asymp}
 \end{equation}
 Also, when $r \to \infty$ then $g(r) \to 1$. 
@@ -584,6 +586,7 @@ This also means that, with \autoref{eq:gr-asymp}, $c(r)$ has the following
 limiting definition
 \begin{equation}
     c(r) \to h(r) = g(r) - 1 = e^{- \beta u(r)} - 1 \, , \quad \rho \to 0
+    \; ,
     \label{eq:cr-aysmp}
 \end{equation}
 where the function $f \coloneqq e^{- \beta u(r)} - 1$ is called the $f$-Mayer
@@ -595,7 +598,7 @@ Theory. Thus, it follows from \autoref{eq:cr-aysmp} that
     \label{eq:cr-r-asymp}
 \end{equation}
 An aditional important fact is that the compressibility equation, \autoref{eq:chi-rdf},
-can be defined in term of the $c(r)$ functions as follows
+can be defined in terms of the $c(r)$ functions as follows
 \begin{equation}
     \frac{\beta}{\rho \chi_{T}} = 1 - \rho \int_{0}^{\infty} 4 \pi r^2 c(r) \, dr
     \, ,
@@ -610,8 +613,9 @@ Now that it has been stated the relation between the three quantities,
 $c(r), \, g(r), \, \text{and} \, u(r)$, the solution to the Ornstein-Zernike equation
 must be discussed. Until now, the discussion of the functions $c(r)$ and $h(r)$ has been
 focused on their low density limit. Still, liquids are \emph{dense} systems and most of
-the time the purpose of studying them is to understand their properties given whatever
-possible value of the density. Furthermore, it is expected to study the phenomena that
+the time the purpose of studying them is to understand their properties for a wide range
+of density values, low and high density regimes. 
+Furthermore, it is expected to study the phenomena that
 arises when the density varies in ways that \emph{phase transitions} are induced.
 To provide a solution to this, \autoref{eq:ornstein-zernike} must be solved for all possible
 values of the density. However, if looked at closely, \autoref{eq:ornstein-zernike} has
@@ -619,20 +623,21 @@ two unknowns, $c(r)$ and $h(r)$, thus cannot be solved as it is. For this reason
 approximations must be introduced in the form of \emph{closure relations}.
 
 Closure relations come from diagrammatic expansions and density function theory~\cite{hansenTheorySimpleLiquids2013},
-and are not simple to summarize in this work. The most common closure relations will be
+and are not simple to summarize in this section. The most common closure relations will be
 stated, along those that are used in this work. One of the most important closure relations
-is the \emph{Percus-Yevick}~\cite{percusAnalysisClassicalStatistical1958}.
+is the \emph{Percus-Yevick}~\cite{percusAnalysisClassicalStatistical1958} approximation.
 The most important fact from this closure is that it provides an analytical solution to the 
 hard sphere model. The closure relation reads,
 \begin{equation}
-    c(r) = g(r) \, (1 - e^{\beta u(r)})
+    c(r) = g(r) \, \left[1 - e^{\beta u(r)}\right]
+    \; ,
     \label{eq:py-cr}
 \end{equation}
 and when used along the hard sphere potential found in \autoref{eq:hard-sphere}, it provides
 an exact solution for \rdf.
 Another common closure relation is the \emph{Hypernetted Chain} approximation, which reads,
 \begin{equation}
-    c(r) = h(r) - \beta u(r) - \ln{g(r)} \, .
+    c(r) = h(r) - \beta u(r) - \ln{g(r)} \; .
     \label{eq:hnc-cr}
 \end{equation}
 The appeal of this closure relation is that it works quite well for interaction potentials 
@@ -642,25 +647,28 @@ phase transition. Moreover, these closure relations suffer from
 \emph{thermodynamic inconsistency}. This is a phenomena that happens from the approximation
 nature of closure relations. Both these closure relations give different results for
 a given thermodynamic quantity if computed from different routes. For instance, if the 
-pressure is to be computer using the Ornstein-Zernike and the Percus-Yevick closure 
-relation, then, if \autoref{eq:pressure-equation} is used, a result will be obtained.
+thermodynamic pressure $P$ is to be computed using the Ornstein-Zernike and the 
+Percus-Yevick closure relation, then, if \autoref{eq:pressure-equation} is used, a 
+particular result will be obtained.
 But if \autoref{eq:chi-rdf} is used, and then \autoref{eq:isothermal-chi} to obtain the 
 thermodynamic pressure, a different result will be obtained with respect to the one
 computed before. Furthermore, if the energy equation is used
 \textemdash \autoref{eq:total-energy-rdf} \textemdash, 
 and then using thermodynamic relations to obtain the pressure, a new result will be 
 obtained, different from the previous two results. This constitutes a serious drawback of
-the Ornstein-Zernike formalism, but it comes from the nature of the approximation of
-closure relations.
+the Ornstein-Zernike formalism.
 
 To alleviate this main drawback, Rogers and Young~\cite{rogersNewThermodynamicallyConsistent1984b}
-proposed a new version of the closure relation, which in fact combines both closure 
+proposed a new version of the closure relation, which in fact combines two closure 
 relations, the Hypernetted Chain and the Percus-Yevick. With great success, this new
 and improved closure relation can reproduce the thermodynamics of the hard sphere model
 and related short-range interaction potentials. Another attempt at providing thermodynamic
 consistent closure relations were provided by Zerah and Hansen~\cite{zerahSelfConsistentIntegral1986},
 which combined different closure relations into one, in the same fashion as the Rogers-Young
-closure relation.
+closure relation. Both of these approaches work as follows. Two main routes to compute a 
+given thermodynamic quantity are chosen, and are forced to yield the same results through 
+the use of a fixed parameter, called the \emph{mixing parameter}. This value is obtained is 
+an optimization problem by enforcing equality of the thermodynamic routes.
 
 Another important closure relation is the one provided by Verlet and then modified by
 Kinoshita~\cite{kinoshitaInteractionSurfacesSolvophobicity2003}. It turns out that
@@ -668,7 +676,7 @@ when hard spheres are studied, there are better closure relations than the
 Percus-Yevick approximations for larger density values.
 The Kinoshita modification reads,
 \begin{equation}
-    B(r) = - 0.5 \frac{\gamma^2 (r)}{1 + 0.8 \lvert \gamma (r) \rvert} \, ,
+    B(r) = - 0.5 \frac{\gamma^2 (r)}{1 + 0.8 \lvert \gamma (r) \rvert} \; ,
     \label{eq:kinoshita}
 \end{equation}
 where $B(r)$ is the bridge function (see next section), and $\gamma(r)=h(r)-c(r)$.
@@ -682,7 +690,7 @@ But the Ornstein-Zernike formalism is an exact integral equation, thus there sho
 exact closure relation. Indeed, an exact relation exists which comes from diagrammatic
 expansions~\cite{hansenTheorySimpleLiquids2013} and reads,
 \begin{equation}
-    \ln{\left[h(r) - 1\right]} = \beta u(r) + B(r) + \gamma(r) \, .
+    \ln{\left[h(r) - 1\right]} = \beta u(r) + B(r) + \gamma(r) \; .
     \label{eq:exact-closure}
 \end{equation}
 Still, it introduces a new function and quantity, the so-called \emph{bridge function}.
@@ -692,7 +700,7 @@ equation? It turns out that if chosen correctly, the bridge function can make
 if $B(r)=0$, the Hypernetted Chain closure relation is recovered. If now the bridge
 function takes the value of $B(r)=\ln{ \{\gamma(r) + 1\} }-\gamma(r)$, then the 
 Percus-Yevick approximation is obtained. Given the true nature of the bridge function,
-physicists were drawn to understand the bridge function and propose approximations for
+physicists were drawn to understand the bridge function and proposed approximations for
 the bridge function, instead of a simple closure relation for the Ornstein-Zernike
 equation itself. Nevertheless, by approximating the bridge function, the same problems
 arise, i.e., thermodynamic consistency and defficient results for every possible
@@ -704,5 +712,5 @@ much understanding of the interaction potential, then several bridge function ap
 must be tested. However, most of the important interaction potentials have been
 extensively studied, and it is already known how these behave and their properties.
 But it is still cumbersome to attempt to use all possible bridge function approximations.
-It seems like a task that could be \emph{discovered} or \emph{automated} in a way, but
+It seems like a task that could be \emph{discovered} or \emph{automated} in a way, and
 fortunately this is what Machine Learning excels at.
