@@ -8,15 +8,15 @@ reach a general understanding of these tools, a brief description of learning me
 and numerical optimization is carried out.
 
 \section{Computational Intelligence}
-The first thing to address is the meaning and scope of both \emph{Computational 
-Intelligence} (CI) and \emph{Machine Learning} (ML); in particular, when does one start
-and the other end? With increasingly advancements in fundamental research in both areas,
-there seems to be a blurry definition, and there is no concrete one until now. For this 
-reason, in this work the definition of CI is an umbrella term for several other 
-applications. However, these applications are related to each other for the same reason
-that CI exists: to provide a computational solution to a problem using as inspiration
-the paradigms of nature-inspired intelligence. For instance, following the handbook
-by Kacprzyk and Pedrycz~\cite{kacprzykSpringerHandbookComputational2015},
+The first thing to address is the meaning and scope\emph{Computational 
+Intelligence} (CI). With increasingly advancements in fundamental research in this area
+and its sub-fields, there seems to be a blurry definition of what exactly is CI, and there 
+is no concrete one until now. For this reason, in this work the definition of CI is an 
+umbrella term for several other applications. However, these applications are related to 
+each other for the same reason that CI exists: to provide a computational solution to a 
+problem using as inspiration the paradigms of nature-inspired intelligence. For instance, 
+following the handbook by Kacprzyk and 
+Pedrycz~\cite{kacprzykSpringerHandbookComputational2015},
 the definition of CI is to be a collection of nature-inspired computational methods that
 provide solutions to problems where \emph{hard computing} is inefficient or it not even
 suited to provide a solution to a given problem. Here, there is an important distinction
@@ -30,4 +30,57 @@ In most cases, CI methods do not provide exact and accurate results, but this is
 It does not mean that CI is providing the ultimate, best solution to a problem. Rather, it 
 is providing an approximate solution that can be used later with more robust algorithms and
 methods. CI is not meant to be used as the sole method to solve a problem, but instead to
-help find a simple solution to a difficult problem.
+help find a simple solution to a difficult problem. That is why CI is considered an 
+umbrella term, because it comprises diverse fields that can be used to find such an 
+approximate solution. Indeed, in this work, two main field of CI are used:
+\emph{neural networks}, which is a part of ML, a sub-field of CI; and
+\emph{evolutionary algorithms}, which are stochastic optimization methods inspired by the 
+evolution mechanisms found in nature.
+
+\section{Machine Learning}
+In modern times, data is constantly being created and used to model the reality around us.
+However, traditional methods (hard computing) have not been enough to handle the large
+data sets created. So new ways to dealing with this information are needed. Most 
+importantly, the need for automated discovery and \emph{pattern recognition} within the
+data. Follwing Murphy~\cite{murphyMachineLearningProbabilistic2012}, ML is defined
+as the set of techniques that can automatically detect patterns in data, and use these
+patterns to create new predictions, or to perform other kinds of decision making.
+In other words, \emph{the data creates the ML algorithm}, not the other way around.
+It is with data that ML methods work, however, these methods are essentially
+\emph{function approximation} methods, which shall be discussed in a later section.
+For now, a brief overview of the different kinds of ML tasks and problems will be presented.
+
+\section{Supervised Learning}
+The most common kind of ML methods is that of \emph{predictive} learning. For a set of
+points $\mathcal{D}={ \{(\mathbf{x}_{i}, y_i)\} }_{i=1}^{N}$ with inputs $\mathbf{x}$
+and outputs $y$, the goal of \emph{supervised learning} is to learn a map between
+inputs and outputs. Here, $\mathcal{D}$ is the so-called \emph{training set} and $N$
+is the number of \emph{training samples}.
+
+In the most common cases, the inputs $\mathbf{x}$ are a set of $D$-dimensional vectors that
+represent information about a given applications. For instance, the height and weight of a
+person. These vectors are coloquially referred to as \emph{features} or \emph{attributes}.
+The general form of $\mathbf{x}$ is not defined, it can be anything from an image, a time 
+series, sentences from a text, graphs, molecules, and so on.
+
+In a similar fashion, the \emph{response} variables $y$ can be in general anything. However,
+there is a clear distinction given the forms that these variables can take. For instance,
+if the variable $y$ are \emph{categorical}, the supervised learning task is considered
+a \emph{classification} problem. Categorical values come from a finite set of possible 
+values, $y_{i} \in \{1, \dots, C\}$, and might represent any type of discrete or nominal
+value. For example, it might represent the colors in a clothing line, the gender between
+people, and so on. On the other hand, if the values of $y$ are real-valued, such that 
+$y_{i} \in \mathbb{R}$, then the learning task is dubbed a \emph{regression} problem.
+
+\subsection{Classification}
+\subsection{Regression}
+
+\section{Neural Networks}
+\subsection{Definition}
+\subsection{Universal Approximation}
+\subsection{Training}
+
+\section{Evolutionary Computation}
+\subsection{Overview of Optimization}
+\subsection{Black-box Optimization}
+\subsection{Natural Evolution Strategies}
