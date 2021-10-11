@@ -48,7 +48,10 @@ patterns to create new predictions, or to perform other kinds of decision making
 In other words, \emph{the data creates the ML algorithm}, not the other way around.
 It is with data that ML methods work, however, these methods are essentially
 \emph{function approximation} methods, which shall be discussed in a later section.
-For now, a brief overview of the different kinds of ML tasks and problems will be presented.
+For now, a brief overview of the different kinds of ML tasks and problems will be presented,
+focusing primarily on \emph{supervised learning}. Nonetheless, there exist other types
+of learning, such as \emph{unsupervised learning}~\cite{goodfellowDeepLearning2016,hastieElementsStatisticalLearning2009} and \emph{reinforcement learning}~\cite{suttonReinforcementLearningSecond2018,kaelblingReinforcementLearningSurvey1996},
+which are out of scope of this work, but remain an important part of modern ML theory.
 
 \section{Supervised Learning}
 The most common kind of ML methods is that of \emph{predictive} learning. For a set of
@@ -73,11 +76,40 @@ people, and so on. On the other hand, if the values of $y$ are real-valued, such
 $y_{i} \in \mathbb{R}$, then the learning task is dubbed a \emph{regression} problem.
 
 \subsection{Classification}
+In this section, the problem of classification is looked at with more detail, although 
+classification is not really used in this thesis, it helps understand the importance of 
+supervised learning, as well as a form of generalization to the problem of regression, 
+which is the topic of the next section.
+
+In the problem of classification, the computer algorithm is tasked with a data set $\mathcal
+{D}={ \{(\mathbf{x}_{i}, y_i)\} }_{i=1}^{N}$, and is asked to specify to which category 
+does the input belong to. Here, $\mathbf{x}_i$ is an $n$-dimensional feature vector. As 
+mentioned before, the idea is for the algorithm to learn a map, or more precisely, a \emph
+{function} such that $f \colon \mathbb{R}^n \mapsto \{1, \dots, k\}$, with $k$ the total 
+number of categories, or \emph{classes}, to which the input can be assigned to. More 
+specifically, when $y=f(\mathbf{x})$, the model assigns an input described by the 
+$n$-dimensional feature vector $\mathbf{x}$ to a particular categorical value of $y$.
+
+One of the most common uses of classification is object recognition. The goal of the object 
+recognition problem is to decode a particular image with a specific object in it, and label 
+it accordingly. An extremely popular and used data set for this kind of task is the MNIST 
+handwritten digits data set~\cite{lecunGradientbasedLearningApplied1998a}, with variations 
+such as the Fashion-MNIST~\cite{xiaoFashionMNISTNovelImage2017a}. These data sets are 
+comprised of several images and categories, and the goal is to \emph{classify} each of the 
+several categories. In the case of the handwritten digits, the goal is to specify which 
+digits is represented in the image; in the case of the Fashion-MNIST data set, the goal is 
+to specify the type of clothing. These data sets have become the standard benchmark data 
+sets in the ML community for a long time; they are used primarily to test whether a ML 
+algorithm is working properly, and if it is \emph{accurate} enough. The word 
+\emph{accuracy} means something quite specific in ML theory, and will be discussed in a 
+later section.
+
 \subsection{Regression}
+\subsection{Performance measure}
 
 \section{Neural Networks}
 \subsection{Definition}
-\subsection{Universal Approximation}
+\subsection{Universal Approximation Theorem}
 \subsection{Training}
 
 \section{Evolutionary Computation}
