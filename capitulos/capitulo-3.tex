@@ -105,6 +105,29 @@ algorithm is working properly, and if it is \emph{accurate} enough. The word
 later section.
 
 \subsection{Regression}
+In \emph{regression}, the goal is for the computer algorithm to learn a map, or 
+equivalently a function $f \colon \mathbb{R}^n \mapsto \mathbb{R}$, that predicts a 
+numerical or real-valued output. The resemblance to the classification task is quite 
+obvious: categories or classes can now be represented as a continuous value within the 
+reals and there is no restriction for the number of classes. In a sense, this is the most 
+general form of classification problem. So then, why make a distinction between the two 
+problems? Most of the time, regression tasks are created to \emph{predict}, \emph{forecast}
+, or even \emph{generate} outputs for a given data set $\mathcal{D}$.
+
+One of the major applications of regression is to \emph{time series forecasting}. This can 
+be found mostly in economical and financial contexts~\cite{bontempiMachineLearningStrategies2013,sezerFinancialTimeSeries2020}, but there are also 
+applications in bioengineering and medical situations~\cite{mccoyAssessmentTimeSeriesMachine2018}. The idea here is that, more than regression, the 
+goal is obtain a good approximation of the function $f$ in order to \emph{extrapolate} its 
+domain to new results. It is expected that ML methods, with their ability to find unseen 
+patterns, can effectively predict and forecast outputs that are not in the data set 
+$\mathcal{D}$. This is an extremely hard task, but one that has been finding a lot of 
+applications and many groups have done extensive research on the matter.
+
+Regression is an important task, and in \autoref{Cap4} it is the primary learning mechanism 
+used to solve a particular problem in Liquid State Theory. The problem of regression, as 
+stated before, is to learn a \emph{good} approximation of the function $f$. Yet, the 
+measure of \emph{good} is not clear enough, and shall be discussed in the next section.
+
 \subsection{Performance measure}
 
 \section{Neural Networks}
