@@ -8,8 +8,8 @@ reach a general understanding of these tools, a brief description of learning me
 and numerical optimization is carried out.
 
 \section{Computational Intelligence}
-The first thing to address is the meaning and scope\emph{Computational 
-Intelligence} (CI). With increasingly advancements in fundamental research in this area
+The first thing to address is the meaning and scope of \emph{Computational 
+Intelligence} (CI). With recent advancements in fundamental research in this area
 and its sub-fields, there seems to be a blurry definition of what exactly is CI, and there 
 is no concrete one until now. For this reason, in this work the definition of CI is an 
 umbrella term for several other applications. However, these applications are related to 
@@ -22,15 +22,15 @@ provide solutions to problems where \emph{hard computing} is inefficient or it n
 suited to provide a solution to a given problem. Here, there is an important distinction
 that should be carried throughout the remaining of the work: that there are problems for
 which traditional tools are insufficient for the traditional problems. In this work, this
-is the philosophy used to provide solutions: that the traditional forms of solutions might
-seem hard and unfitting to provide solutions to the problems presented, and therefore
-new way of approaching these solutions should be used.
+is the philosophy used to provide solutions: that the traditional methods might seem hard 
+and unfitting to provide solutions to the problems presented, and therefore new ways of 
+approaching these solutions should be used.
 
-In most cases, CI methods do not provide exact and accurate results, but this is expected.
+In general, CI methods do not provide exact and accurate results, but this is expected.
 It does not mean that CI is providing the ultimate, best solution to a problem. Rather, it 
 is providing an approximate solution that can be used later with more robust algorithms and
 methods. CI is not meant to be used as the sole method to solve a problem, but instead to
-help find a simple solution to a difficult problem. That is why CI is considered an 
+help find \emph{some} solution to a difficult problem. That is why CI is considered an 
 umbrella term, because it comprises diverse fields that can be used to find such an 
 approximate solution. Indeed, in this work, two main field of CI are used:
 \emph{neural networks}, which is a part of ML, a sub-field of CI; and
@@ -40,11 +40,11 @@ evolution mechanisms found in nature.
 \section{Machine Learning}
 In modern times, data is constantly being created and used to model the reality around us.
 However, traditional methods (hard computing) have not been enough to handle the large
-data sets created. So new ways to dealing with this information are needed. Most 
-importantly, the need for automated discovery and \emph{pattern recognition} within the
-data. Follwing Murphy~\cite{murphyMachineLearningProbabilistic2012}, ML is defined
-as the set of techniques that can automatically detect patterns in data, and use these
-patterns to create new predictions, or to perform other kinds of decision making.
+data sets created. For this reason, new ways of dealing with this information are needed. 
+Most importantly, the need for automated discovery and \emph{pattern recognition} within the
+data. Following Murphy~\cite{murphyMachineLearningProbabilistic2012}, ML 
+is defined as the set of techniques that can automatically detect patterns in data, and use 
+these patterns to create new predictions, or to perform other kinds of decision making.
 In other words, \emph{the data creates the ML algorithm}, not the other way around.
 It is with data that ML methods work, however, these methods are essentially
 \emph{function approximation} methods, which shall be discussed in a later section.
@@ -54,35 +54,36 @@ of learning, such as \emph{unsupervised learning}~\cite{goodfellowDeepLearning20
 which are out of scope of this work, but remain an important part of modern ML theory.
 
 \section{Supervised Learning}
-The most common kind of ML methods is that of \emph{predictive} learning. For a set of
-points $\mathcal{D}={ \{(\mathbf{x}_{i}, y_i)\} }_{i=1}^{N}$ with inputs $\mathbf{x}$
+The most common kind of ML methods is that of \emph{predictive} learning. For a set 
+\(\mathcal{D}={ \{(\mathbf{x}_{i}, y_i)\} }_{i=1}^{N}$ with inputs $\mathbf{x}\)
 and outputs $y$, the goal of \emph{supervised learning} is to learn a map between
 inputs and outputs. Here, $\mathcal{D}$ is the so-called \emph{training set} and $N$
 is the number of \emph{training samples}.
 
-In the most common cases, the inputs $\mathbf{x}$ are a set of $D$-dimensional vectors that
-represent information about a given applications. For instance, the height and weight of a
-person. These vectors are coloquially referred to as \emph{features} or \emph{attributes}.
+In most common cases, the inputs $\mathbf{x}$ are $D$-dimensional vectors that
+represent information about something. For instance, the height and weight of a
+person, or the evolution of the stock market throughout the years. 
+These vectors are colloquially referred to as \emph{features} or \emph{attributes}.
 The general form of $\mathbf{x}$ is not defined, it can be anything from an image, a time 
 series, sentences from a text, graphs, molecules, and so on.
 
-In a similar fashion, the \emph{response} variables $y$ can be in general anything. However,
-there is a clear distinction given the forms that these variables can take. For instance,
-if the variable $y$ are \emph{categorical}, the supervised learning task is considered
-a \emph{classification} problem. Categorical values come from a finite set of possible 
-values, $y_{i} \in \{1, \dots, C\}$, and might represent any type of discrete or nominal
-value. For example, it might represent the colors in a clothing line, the gender between
-people, and so on. On the other hand, if the values of $y$ are real-valued, such that 
-$y_{i} \in \mathbb{R}$, then the learning task is dubbed a \emph{regression} problem.
+In a similar fashion, the \emph{response} variables $y$ can be, in general, anything. 
+However, there is a clear distinction given the forms that these variables can take. For 
+instance, if the variable $y$ has \emph{categorical} values, the supervised learning task 
+is considered a \emph{classification} problem. Categorical values come from a finite set of 
+possible values, \(y_{i} \in \{1, \dots, C\}\), and might represent any type of discrete or 
+nominal value. For example, it might represent the colors in a clothing line, the gender 
+between people, and so on. On the other hand, if the values of $y$ are real-valued, such 
+that \(y_{i} \in \mathbb{R}\), then the learning task is dubbed a \emph{regression} problem.
 
 \subsection{Classification}
-In this section, the problem of classification is looked at with more detail, although 
-classification is not really used in this thesis, it helps understand the importance of 
-supervised learning, as well as a form of generalization to the problem of regression, 
-which is the topic of the next section.
+In this section, the problem of classification is looked at with more detail. Although 
+classification is not used at all in this thesis, it is helpful to discuss it as it makes
+it easier to understand the importance of supervised learning. It also creates a basis on 
+which the problem of regression can then be generalized from.
 
-In the problem of classification, the computer algorithm is tasked with a data set $\mathcal
-{D}={ \{(\mathbf{x}_{i}, y_i)\} }_{i=1}^{N}$, and is asked to specify to which category 
+In the problem of classification, the computer algorithm is given a data set \(\mathcal
+{D}={ \{(\mathbf{x}_{i}, y_i)\} }_{i=1}^{N}\), and is asked to specify to which category 
 does the input belong to. Here, $\mathbf{x}_i$ is an $n$-dimensional feature vector. As 
 mentioned before, the idea is for the algorithm to learn a map, or more precisely, a \emph
 {function} such that $f \colon \mathbb{R}^n \mapsto \{1, \dots, k\}$, with $k$ the total 
@@ -92,14 +93,15 @@ $n$-dimensional feature vector $\mathbf{x}$ to a particular categorical value of
 
 One of the most common uses of classification is object recognition. The goal of the object 
 recognition problem is to decode a particular image with a specific object in it, and label 
-it accordingly. An extremely popular and used data set for this kind of task is the MNIST 
-handwritten digits data set~\cite{lecunGradientbasedLearningApplied1998a}, with variations 
-such as the Fashion-MNIST~\cite{xiaoFashionMNISTNovelImage2017a}. These data sets are 
+it accordingly. An extremely popular data set for this kind of task is the MNIST 
+handwritten digits data set~\cite{lecunGradientbasedLearningApplied1998a}, and its most 
+common variation, the Fashion-MNIST~\cite{xiaoFashionMNISTNovelImage2017a}. 
+These data sets are 
 comprised of several images and categories, and the goal is to \emph{classify} each of the 
 several categories. In the case of the handwritten digits, the goal is to specify which 
-digits is represented in the image; in the case of the Fashion-MNIST data set, the goal is 
-to specify the type of clothing. These data sets have become the standard benchmark data 
-sets in the ML community for a long time; they are used primarily to test whether a ML 
+digit is represented in the image; in the case of the Fashion-MNIST data set, the goal is 
+to specify the type of clothing. These data sets have become the standard benchmarks 
+in the ML community for a long time. They are used primarily to test whether a ML 
 algorithm is working properly, and if it is \emph{accurate} enough. The word 
 \emph{accuracy} means something quite specific in ML theory, and will be discussed in a 
 later section.
@@ -114,23 +116,26 @@ general form of classification problem. So then, why make a distinction between 
 problems? Most of the time, regression tasks are created to \emph{predict}, \emph{forecast}
 , or even \emph{generate} outputs for a given data set $\mathcal{D}$.
 
-One of the major applications of regression is to \emph{time series forecasting}. This can 
+One of the major applications of regression is \emph{time series forecast}. This can 
 be found mostly in economical and financial contexts~\cite{bontempiMachineLearningStrategies2013,sezerFinancialTimeSeries2020}, but there are also 
-applications in bioengineering and medical situations~\cite{mccoyAssessmentTimeSeriesMachine2018}. The idea here is that, more than regression, the 
-goal is obtain a good approximation of the function $f$ in order to \emph{extrapolate} its 
-domain to new results. It is expected that ML methods, with their ability to find unseen 
+applications in bioengineering and medical situations~\cite{mccoyAssessmentTimeSeriesMachine2018}. The goal here is to obtain a good approximation of 
+the function $f$ in order to \emph{extrapolate} its 
+domain to obtain new, and unseen, results. It is expected that ML methods, with their 
+ability to find undiscovered 
 patterns, can effectively predict and forecast outputs that are not in the data set 
 $\mathcal{D}$. This is an extremely hard task, but one that has been finding a lot of 
 applications and many groups have done extensive research on the matter.
 
 Regression is an important task, and in \autoref{Cap4} it is the primary learning mechanism 
 used to solve a particular problem in Liquid State Theory. The problem of regression, as 
-stated before, is to learn a \emph{good} approximation of the function $f$. Yet, the 
-measure of \emph{good} is not clear enough, and shall be discussed in the next section.
+stated before, is to learn a \emph{good} approximation of the function $f$. Again, the 
+measure of \emph{good} is not clear enough, as was the case with \emph{accuracy}, and both 
+these concepts shall be discussed next.
 
 \subsection{Performance Measure}
 ML algorithms must be assessed on their abilities to perform a certain task $T$, either a 
-classification or regression problem. It is common practice to extract a subset of the 
+classification or regression problem in the current discussion. 
+It is common practice to extract a subset of the 
 training data set $\mathcal{D}$ as the \emph{testing set}, $\mathcal{T}$, to evaluate the 
 algorithm in the task $T$. The measure depends on the task $T$, as well as the type of data 
 used.
@@ -139,6 +144,7 @@ In classification tasks, the \emph{accuracy} is one of the most general performa
 measures. The accuracy is simply defined as the proportion of data points in $\mathcal{T}$ 
 for which the model produces the correct output. This measure is quite strict in the sense 
 that if there are examples that are \emph{mislabeled}, this is carried on to the ML model.
+
 Another common performance measure for classification tasks is the receiver operating 
 characteristic, also known as the ROC~\cite{hastieElementsStatisticalLearning2009}. More 
 specifically, the area under the ROC curve. This measure of performance is created by 
@@ -172,36 +178,37 @@ learned function $f$. This is the basis of the LASSO method~\cite{hastieElements
 prediction of the model; and \emph{regularization}, which is adding information in order to 
 solve a problem that might seem hard or impossible to solve, also known as an
 \emph{ill-posed} problem~\cite{goodfellowDeepLearning2016}.
-When generalizing these metrics to the full data set, they take in different names. For 
+When generalizing these metrics to the full data set, they take on different names. For 
 instance, the squared $L^2$ norm takes the name \emph{mean squared error}, defined as
 \begin{equation}
     MSE \left( y_i, \hat{y}_i \right) = \frac{1}{N} \sum_{i=1}^{N} { \left(y_i - \hat{y}_i \right) }^2
     \; ,
     \label{eq:mse} 
 \end{equation}
-where $N$ is the total number of examples used to compute the MSE. Similarly, the $L^1$ 
-norm can be generalized to the \emph{mean absolute error}, defined as
+where $N$ is the total number of examples used to compute the MSE.
+
+Similarly, the $L^1$ norm can be generalized to the \emph{mean absolute error}, defined as
 \begin{equation}
     MAE \left( y_i, \hat{y}_i \right) = \frac{1}{N} \sum_{i=1}^{N} \left\lvert y_i - \hat{y}_i \right\rvert
     \; .
     \label{eq:mae}
 \end{equation}
 These generalizations might seem trivial, but they allow for more general formulations, as 
-they are in fact \emph{estimators} that measure the average of the outputs. When measure 
+they are in fact \emph{estimators} that measure the average of the outputs. When measuring 
 the performance of regression models, the goal is to \emph{minimize} these errors, with 
 zero being the optimal value.
 
 \subsection{Approximation Theory}
 Before closing this brief overview on ML theory, a note on approximation theory is in 
 order. The link to ML has to do with the striking resemblance between both classification 
-and regression tasks. Both problems seem like the same problem, which is to learn a \emph{map} or \emph{function} that relates an input with an output. However, this problem is not 
+and regression tasks. Both problems seem to be, in a sense, the same exact problem which is to learn a \emph{map} or \emph{function} that relates an input with an output. However, this problem is not 
 new, and in fact, it has been extensively studied before, so much so that is has created a 
 branch within mathematics, called \emph{approximation theory}.
 
 The primary goal of approximation theory is simple: to understand how functions can be \emph{best} approximated with even simpler functions~\cite{trefethenApproximationTheoryApproximation2013}. This sounds analogous to the learning tasks, however, there was no mention of simpler functions in the previous discussion. This is because to see this more clearly, there has to be a detailed explanation of each of the models used. For instance, \emph{Gaussian Processes}~\cite{rasmussenGaussianProcessesMachine2006} can approximate an arbitrary function with Gaussian functions, or more precisely, with normal probability distributions. In any case, there is not enough space in this work to talk about all the possible methods and how these are formulated, even if they are formulated based on simpler functions or not.
 
 However, the discussion can be simplified by noting the following. If looked at closely,
-\autoref{eq:l1norm} and \autoref{eq:l2norm} look quite similar. Indeed, there is a generalization of this norm, called the $L^p$ norm,
+\autoref{eq:l2norm} and \autoref{eq:l1norm} look quite similar. Indeed, there is a generalization of this norm, called the $L^p$ norm,
 \begin{equation}
     { \left\lVert y - \hat{y} \right\rVert }_{p} = { \left( \sum_{i=1}^{N} { \left(y_i - \hat{y}_i \right) }^{p} \right) }^{1/p}
     \; ,
@@ -217,28 +224,44 @@ spaces is comprised of functions instead of vectors. There is, however, a partic
     \; ,
     \label{eq:linf-norm}
 \end{equation}
-also known as the $L^{\infty}$, and it is a function space that contains all the essentially bounded measurable functionss~\cite{taoIntroductionMeasureTheory2011}.
+also known as \(L^{\infty}\), and it is a function space that contains all the essentially bounded measurable functionss~\cite{taoIntroductionMeasureTheory2011}.
 
-Why is $L^{\infty}$ so important in this context? The answer is one simple, but outstandingly powerful theorem: the Stone-Weierstrass theorem~\cite{stoneApplicationsTheoryBoolean1937, stoneGeneralizedWeierstrassApproximation1948}. In 1885, Karl Weierstrass proved that any function can be approximated by a polynomial of a given degree. This result is so powerful that it created the field of approximation theory. And it is so powerfull, that it might be arguable that it is the fundamental theorem of ML theory. This is the reason for the $L^{\infty}$, and it will become clear once the theorem is presented.
+Why is $L^{\infty}$ so important in this context? The answer is one simple, but outstandingly powerful theorem: the Stone-Weierstrass theorem~\cite{stoneApplicationsTheoryBoolean1937, stoneGeneralizedWeierstrassApproximation1948}. In 
+1885, Karl Weierstrass proved that any function can be approximated by a polynomial of a 
+given degree. This result is so powerful that it created the field of approximation theory. 
+And it is so compelling, that it might arguably be the fundamental theorem of ML theory. 
+This is the reason for the \(L^{\infty}\), and its relation to the learning tasks should 
+become clear once the main theorem is stated.
 \begin{theorem}[\textbf{Weierstrass approximation theorem}]
-    If \(f\) is a continuous real-valued function on \([a, b]\), and if any \(\epsilon > 0\) is given, then there exists a \emph{polynomial} \(P\) on \([a, b]\) such that
+    If \(f\) is a continuous real-valued function on \([a, b]\), and if any \(\epsilon > 0\) is given, then there exists a polynomial \(P\) on \([a, b]\) such that
     \[
         { \left\lVert f(x) - P(x) \right\rVert }_{\infty} < \epsilon
-    \]
-    for all \(x \in [a, b]\) .
+        \]
+        for all \(x \in [a, b]\) .
+    \label{approx}
 \end{theorem}
 The proof is left for a specialized text on the subject, for instance the book by Richard 
-Beals~\cite{bealsAnalysisIntroduction2004}. With the presentation of the Weierstrass 
-approximation theorem it is now time to move on to the case of neural networks, which are 
-in fact a way to build a polynomial \(P\) with the help of data. If looked at closely, the 
-theorem only states that there is such polynomial, but does not specify how such a 
-polynomial is constructed. There are basically two ways: use mathematics, 
-and turn to the help of approximation theory; in this case orthogonal polynomials are used,
-such as Tchebyshev polynomials, to build such a polynomial $P$. On the other hand, turn to 
+Beals~\cite{bealsAnalysisIntroduction2004}. Nonetheless, it is important to see the striking resemblance between the kinds of learning discussed so far, and \autoref{approx}.
+On one hand, classification and regression both deal with finding the best mapping between 
+inputs and outputs. On the other hand, \autoref{approx} states that every function can be 
+approximated by another, simpler function. So, in a sense, these problems are related. One 
+seeks to find the best mapping, while the other guarantees that there is such a mapping. 
+\autoref{approx} helps visualize that the main problem of ML theory is to approximate the 
+underlying function between inputs and outputs in a data set. However, the question of how to find such polynomial \(P\) is still open.
+
+With the presentation of the Weierstrass approximation theorem it is now time to move on to 
+the case of neural networks, which are in fact a way to build a polynomial \(P\) with the 
+help of data. If looked at closely, the theorem only states that there is such polynomial, 
+but does not specify how it might be constructed or formulated. There are roughly two 
+ways: with pure mathematics or with the help of data. To use mathematics is to turn to the help of approximation theory; in this case 
+orthogonal polynomials are used, such as Tchebyshev polynomials, to build such a polynomial 
+\(P\). Of course, many other approximation methods can be used~\cite{trefethenApproximationTheoryApproximation2013}.
+On the other hand, turn to 
 statistics and data, and seek the help of ML theory, such that the data is used to construct
 such a polynomial. Before moving on, it should be pointed out that this is not a unique or 
 novel way of seeing the problem of learning. Indeed, a more general formulation is based on 
-probability theory, which use much more rigorous arguments to build the theory behind ML. 
+probability theory, which uses much more rigorous arguments to link the relation between ML 
+theory and approximation theory. 
 The book by Murphy~\cite{murphyMachineLearningProbabilistic2012} is a great reference for 
 that.
 
