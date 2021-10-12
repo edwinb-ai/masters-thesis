@@ -192,6 +192,55 @@ the performance of regression models, the goal is to \emph{minimize} these error
 zero being the optimal value.
 
 \subsection{Approximation Theory}
+Before closing this brief overview on ML theory, a note on approximation theory is in 
+order. The link to ML has to do with the striking resemblance between both classification 
+and regression tasks. Both problems seem like the same problem, which is to learn a \emph{map} or \emph{function} that relates an input with an output. However, this problem is not 
+new, and in fact, it has been extensively studied before, so much so that is has created a 
+branch within mathematics, called \emph{approximation theory}.
+
+The primary goal of approximation theory is simple: to understand how functions can be \emph{best} approximated with even simpler functions~\cite{trefethenApproximationTheoryApproximation2013}. This sounds analogous to the learning tasks, however, there was no mention of simpler functions in the previous discussion. This is because to see this more clearly, there has to be a detailed explanation of each of the models used. For instance, \emph{Gaussian Processes}~\cite{rasmussenGaussianProcessesMachine2006} can approximate an arbitrary function with Gaussian functions, or more precisely, with normal probability distributions. In any case, there is not enough space in this work to talk about all the possible methods and how these are formulated, even if they are formulated based on simpler functions or not.
+
+However, the discussion can be simplified by noting the following. If looked at closely,
+\autoref{eq:l1norm} and \autoref{eq:l2norm} look quite similar. Indeed, there is a generalization of this norm, called the $L^p$ norm,
+\begin{equation}
+    { \left\lVert y - \hat{y} \right\rVert }_{p} = { \left( \sum_{i=1}^{N} { \left(y_i - \hat{y}_i \right) }^{p} \right) }^{1/p}
+    \; ,
+    \label{eq:lp-norm}
+\end{equation}
+which generalizes the Euclidean norm to a more general norm, defined now in function spaces 
+called $L^p$ spaces~\cite{rudinPrinciplesMathematicalAnalysis2013}. These spaces are, 
+roughly speaking, a generalization of vector spaces where the basis that span the linear 
+spaces is comprised of functions instead of vectors. There is, however, a particular form of the $L^p$ norm called the \emph{supreme norm}, or equivalently, the \emph{infinity norm} defined as
+\begin{equation}
+    { \left\lVert y - \hat{y} \right\rVert }_{\infty} = 
+    \underset{i}{\max}{\left\lvert y_i - \hat{y}_{i} \right\rvert}
+    \; ,
+    \label{eq:linf-norm}
+\end{equation}
+also known as the $L^{\infty}$, and it is a function space that contains all the essentially bounded measurable functionss~\cite{taoIntroductionMeasureTheory2011}.
+
+Why is $L^{\infty}$ so important in this context? The answer is one simple, but outstandingly powerful theorem: the Stone-Weierstrass theorem~\cite{stoneApplicationsTheoryBoolean1937, stoneGeneralizedWeierstrassApproximation1948}. In 1885, Karl Weierstrass proved that any function can be approximated by a polynomial of a given degree. This result is so powerful that it created the field of approximation theory. And it is so powerfull, that it might be arguable that it is the fundamental theorem of ML theory. This is the reason for the $L^{\infty}$, and it will become clear once the theorem is presented.
+\begin{theorem}[\textbf{Weierstrass approximation theorem}]
+    If \(f\) is a continuous real-valued function on \([a, b]\), and if any \(\epsilon > 0\) is given, then there exists a \emph{polynomial} \(P\) on \([a, b]\) such that
+    \[
+        { \left\lVert f(x) - P(x) \right\rVert }_{\infty} < \epsilon
+    \]
+    for all \(x \in [a, b]\) .
+\end{theorem}
+The proof is left for a specialized text on the subject, for instance the book by Richard 
+Beals~\cite{bealsAnalysisIntroduction2004}. With the presentation of the Weierstrass 
+approximation theorem it is now time to move on to the case of neural networks, which are 
+in fact a way to build a polynomial \(P\) with the help of data. If looked at closely, the 
+theorem only states that there is such polynomial, but does not specify how such a 
+polynomial is constructed. There are basically two ways: use mathematics, 
+and turn to the help of approximation theory; in this case orthogonal polynomials are used,
+such as Tchebyshev polynomials, to build such a polynomial $P$. On the other hand, turn to 
+statistics and data, and seek the help of ML theory, such that the data is used to construct
+such a polynomial. Before moving on, it should be pointed out that this is not a unique or 
+novel way of seeing the problem of learning. Indeed, a more general formulation is based on 
+probability theory, which use much more rigorous arguments to build the theory behind ML. 
+The book by Murphy~\cite{murphyMachineLearningProbabilistic2012} is a great reference for 
+that.
 
 \section{Neural Networks}
 \subsection{Definition}
