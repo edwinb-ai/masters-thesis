@@ -128,7 +128,70 @@ used to solve a particular problem in Liquid State Theory. The problem of regres
 stated before, is to learn a \emph{good} approximation of the function $f$. Yet, the 
 measure of \emph{good} is not clear enough, and shall be discussed in the next section.
 
-\subsection{Performance measure}
+\subsection{Performance Measure}
+ML algorithms must be assessed on their abilities to perform a certain task $T$, either a 
+classification or regression problem. It is common practice to extract a subset of the 
+training data set $\mathcal{D}$ as the \emph{testing set}, $\mathcal{T}$, to evaluate the 
+algorithm in the task $T$. The measure depends on the task $T$, as well as the type of data 
+used.
+
+In classification tasks, the \emph{accuracy} is one of the most general performance 
+measures. The accuracy is simply defined as the proportion of data points in $\mathcal{T}$ 
+for which the model produces the correct output. This measure is quite strict in the sense 
+that if there are examples that are \emph{mislabeled}, this is carried on to the ML model.
+Another common performance measure for classification tasks is the receiver operating 
+characteristic, also known as the ROC~\cite{hastieElementsStatisticalLearning2009}. More 
+specifically, the area under the ROC curve. This measure of performance is created by 
+plotting the \emph{true positive rate} against the \emph{false positive rate}. This measure 
+is used because these rates are more permissive, since they stem from the well established 
+type I and II errors from statistical theory~\cite{riceMathematicalStatisticsData2006}. 
+Depending on the data set, other measures can 
+be used, such as the F1 score, the Jaccard index, Akaike information criterion, and 
+others~\cite{murphyMachineLearningProbabilistic2012}.
+
+Regression tasks are different when measuring performance since these methods attempt to 
+approximate continuous, real-valued functions. So in a sense, one can simply use \emph
+{metrics} in the mathematical analysis sense of the word. For instance, the use of the 
+$L^2$ norm, also known as the so-called Euclidean norm, defined as
+\begin{equation}
+    { \left\lVert y - \hat{y} \right\rVert }_{2} = \sqrt{ \sum_{i=1}^{N} { \left(y_i - \hat{y}_i \right) }^2 }
+    \; ,
+    \label{eq:l2norm}
+\end{equation}
+is extremely common in regression tasks. Here, the training examples $y$ are measured 
+against the output value from the ML model, $\hat{y}$. Another extremely common, and 
+profoundly useful metric, is the $L^1$ norm,
+\begin{equation}
+    { \left\lVert y - \hat{y} \right\rVert }_{1} = \sum_{i=1}^{N} \left\lvert y_i - \hat{y}_i \right\rvert
+    \; .
+    \label{eq:l1norm}
+\end{equation}
+The $L^1$ has the amazing property that it can create \emph{sparse} representations of the 
+learned function $f$. This is the basis of the LASSO method~\cite{hastieElementsStatisticalLearning2009}, a very useful and common ML method to do 
+\emph{variable selection}, the discrimination of variables that are useful or not to the 
+prediction of the model; and \emph{regularization}, which is adding information in order to 
+solve a problem that might seem hard or impossible to solve, also known as an
+\emph{ill-posed} problem~\cite{goodfellowDeepLearning2016}.
+When generalizing these metrics to the full data set, they take in different names. For 
+instance, the squared $L^2$ norm takes the name \emph{mean squared error}, defined as
+\begin{equation}
+    MSE \left( y_i, \hat{y}_i \right) = \frac{1}{N} \sum_{i=1}^{N} { \left(y_i - \hat{y}_i \right) }^2
+    \; ,
+    \label{eq:mse} 
+\end{equation}
+where $N$ is the total number of examples used to compute the MSE. Similarly, the $L^1$ 
+norm can be generalized to the \emph{mean absolute error}, defined as
+\begin{equation}
+    MAE \left( y_i, \hat{y}_i \right) = \frac{1}{N} \sum_{i=1}^{N} \left\lvert y_i - \hat{y}_i \right\rvert
+    \; .
+    \label{eq:mae}
+\end{equation}
+These generalizations might seem trivial, but they allow for more general formulations, as 
+they are in fact \emph{estimators} that measure the average of the outputs. When measure 
+the performance of regression models, the goal is to \emph{minimize} these errors, with 
+zero being the optimal value.
+
+\subsection{Approximation Theory}
 
 \section{Neural Networks}
 \subsection{Definition}
