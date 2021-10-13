@@ -266,7 +266,54 @@ The book by Murphy~\cite{murphyMachineLearningProbabilistic2012} is a great refe
 that.
 
 \section{Neural Networks}
-\subsection{Definition}
+In this section, neural networks (NN), their architectures, training and mathematical formulations are discussed. Although, this is just a short overview of the full theory of NN. In recent years, NN have been the most used, researched and applied method in modern ML. Up to this day, there are unmeasurable number of research articles and books devoted to NN. So this space is obviously quite small to fit all the information about them. It is for this reason that this section will focus primarily on how NN are trained and how they learn a mapping given a data set.
+For a more thorough understanding of NN, these references~\cite{mehligMachineLearningNeural2021,goodfellowDeepLearning2016,hastieElementsStatisticalLearning2009,bernerModernMathematicsDeep2021} should suffice.
+
+\subsection{Motivation}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.4]{figuras/capitulo-3/perceptron}
+    \caption{A representation of the original McCulloch-Pitts perceptron.}
+    \label{fig:perceptron}
+\end{figure}
+
+The basic idea of NN is to mimic the way the brain works, and more specifically, the way 
+neurons interact with each other. In the modern form of NN, this interaction is highly 
+idealized in the sense that the actual human brain does not follow the same form of 
+interaction, but it is somewhat a rough approximation. In 1947, Pitts and McCulloch~\cite{pittsHowWeKnow1947} devised the \emph{perceptron}, an idealized model of a neuron. This perceptron can be observed in \autoref{fig:perceptron}. Here, the middle circle is the perceptron or \emph{unit}, and it accepts three inputs \(x_1, x_2, x_3\), or equivalently \(\mathbf{x}=(x_1, x_2, x_3)\) with \(\mathbf{x}\) a \(3\)-dimensional input vector. The output of the McCulloch-Pitts perceptron is a single binary output, it can either return a \(0\) or a \(1\). Then, in 1958, Rosenblatt~\cite{rosenblattPerceptronProbabilisticModel1958} extended this idea and introduced a way to compute the output of the perceptron. He introduced what he called \emph{weights}, and gave a weight to each of the three inputs, \(w_1, w_2, w_3\). Later, he proposed to compute the output as a weighted sum of each of the three inputs, such that the output would have the following form,
+\begin{equation}
+    \text{output} = \begin{cases}
+        0 \quad \text{if} \quad \sum_{i} w_i x_i \leq \varepsilon \\
+        1 \quad \text{if} \quad \sum_{i} w_i x_i > \varepsilon
+    \end{cases}
+    \; ,
+    \label{eq:output-perceptron}
+\end{equation}
+where \(\varepsilon\) is a \emph{threshold} value. This model is simple, yet effective. If 
+one input would be more important than the other, the weight could be adjusted to reflect 
+this. As simple as the model is, it is a good approximation of how decision-making models 
+can be constructed efficiently. Furthermore, a more complex decision-making system can be built if several perceptrons are connected with each other. After all, the inputs and outputs of a single perceptron do not have limitations, and they can well be defined to be the inputs and outputs of other perceptrons as well. Instead of using a simple perceptron, a more complex structure can be built upon using several of them. If \emph{layers} of perceptrons are stacked between each other, a more complete model of decision-making is created. This is the case of the \emph{multilayer perceptron}, or MLP, shown in \autoref{fig:multi-perceptron}.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.4]{figuras/capitulo-3/multi-perceptron}
+    \caption{A representation of several perceptrons connected with each other.}
+    \label{fig:multi-perceptron}
+\end{figure}
+
+Despite this, the model has serious drawbacks. For one, 
+there is no clear understanding of the threshold value and what it is. On the other hand, 
+having the perceptron output just two values might make it inaccesible in the most general 
+case. After all, the idea of NN is to learn a mapping, a function that in general is 
+real-valued. Finally, how are the weights adjusted? Are these values picked randomly? Does 
+the user choose them? If in fact NN are learning models, then there is no real reason why 
+the user would likely pick the weights for each problem they need to solve. All of this 
+questions will be addressed in a later section, when training is discussed in more detail.
+For now, architectures and activations functions will be presented next. These topics will
+provide answers as to how the output of perceptrons can be modified to return other values,
+rather than just a \(0\) or \(1\).
+
+\subsection{Architectures}
 \subsection{Universal Approximation Theorem}
 \subsection{Training}
 
