@@ -315,16 +315,15 @@ rather than just a \(0\) or \(1\).
 
 \subsection{Architectures and Activation Functions}
 Now that a complete network of perceptrons has been defined, it is time to discuss one 
-important issue with them. First, it might seem easier to deal with a different notation 
-than just using threshold values. It is easier to deal with the language of Linear Algebra 
-and define the output expression shown in \autoref{eq:output-perceptron} using dot product 
-as follows,
+important issue with them. First, it might be easier to deal with a different notation 
+than just using threshold values. It is simpler to use the language of Linear Algebra 
+and define the output expression shown in \autoref{eq:output-perceptron} using the dot product as follows,
 \begin{equation}
     \text{output} = \begin{cases}
         0 \quad \text{if} \quad \mathbf{w} \cdot \mathbf{x} + b \leq 0 \\
         1 \quad \text{if} \quad \mathbf{w} \cdot \mathbf{x} + b > 0
     \end{cases}
-    \; ,
+    \, ,
     \label{eq:output-dot}
 \end{equation}
 where \(\mathbf{c} \cdot \mathbf{d} = \sum_{i}^{N} c_i \, d_i\) is the dot product between 
@@ -345,18 +344,18 @@ There is now the following issue to address, and that is that the output is only
 outputs, and if the weights are adjusted a minimal amount, for instance a value of 
 \(\Delta w\), then the output should change just a small amount, proportional to the change 
 in the weights. However, if the output is either a \(0\) or \(1\), then a small change will 
-trigger the a drastic change, and learning could not be entirely possible. A representation 
+trigger a drastic change, and learning will not be entirely possible. A representation 
 of this idea can be seen clearly in \autoref{fig:learning-weights}. The pertaining question 
 here is, is there a way to change this behavior? The answer is yes, but to do so, a new 
-type of perceptron, and NN \emph{architecture}, must be introduced.
+type of perceptron, as well as a NN \emph{architecture} must be introduced.
 
-The \emph{sigmoid} perceptron is a modification of the original perceptron which can provide a continuous value in the output by using a continuous function. This function, the \emph{sigmoid} function, is defined as
+The \emph{sigmoid} perceptron is a modification to the McCulloch-Pitts original perceptron which can provide a continuous value to the output by using a continuous function. This function, the \emph{sigmoid} function, is defined as
 \begin{equation}
-    \sigma(z) \coloneqq \frac{1}{1 + \exp{-z}}
+    \sigma(z) \coloneqq \frac{1}{1 + \exp{\left( -z \right)}}
     \; .
     \label{eq:sigmoid}
 \end{equation}
-Instead of the output being just \(0\) or \(1\), \autoref{eq:output-dot} is now replaced by the following equation
+Instead of the output being just \(0\) or \(1\), \autoref{eq:output-dot} is now replaced by the following equation, using now \autoref{eq:sigmoid},
 \begin{equation}
     \text{output} = \frac{1}{1 + \exp{\left(- \sum_{i} w_i x_i + b\right)}}
     \; .
@@ -364,13 +363,33 @@ Instead of the output being just \(0\) or \(1\), \autoref{eq:output-dot} is now 
 This function might seem to drastically change the behavior and original intention of the 
 McCulloch-Pitts perceptron. However, in reality, the sigmoid function is just a smoothed 
 version of the original perceptron. With this modification, when a small change is done in 
-the weights of the network, a small change will be expected in the output. The amount of change, and how this change happens, will be discussed in the next section when training is presented.
+the weights of the network, a small change will be expected in the output. The amount of 
+change, and how this change happens, will be discussed in the next section when training is presented.
 
-%% TODO: Buscar referencias sobre la investigación hecha sobre las funciones de activación hoy en día
-If different functions are used instead of the sigmoid function, the network is expected to behave differently with each one. The choice of the function is so important, that not only have these function taken in a particular name\textemdash \emph{activation functions}\textemdash, but there has been extensive research in this area~\cite{chenUniversalApproximationNonlinear1995}. It so happens that the choice of activation function can make a NN to perform better in certain classification tasks, e.g. object recognition, segmentation, and others; as well as in regression tasks.
+If different functions are used instead of the sigmoid function, the network is expected to 
+behave differently with each one. The choice of the function is so important, that not only 
+have these function taken in a particular name\textemdash \emph{activation functions}\textemdash, but there has been extensive research in this area~\cite{chenUniversalApproximationNonlinear1995,nwankpaActivationFunctionsComparison2018,agostinelliLearningActivationFunctions2015,ramachandranSearchingActivationFunctions2017}. 
+In practice, the choice of activation function can make a NN perform better in 
+certain classification tasks, e.g. object recognition, segmentation, and others; as well as 
+in regression tasks. Activation functions can also help the NN perform faster, which is 
+an important aspect of the training mechanisms and practicalities of
+NN~\cite{fengPerformanceAnalysisVarious2019,biswasTanhSoftDynamicTrainable2021}.
 
-%% TODO: Referencias de AlexNet y algunas otras, quizás sobre deep learning.
-Finally, it is important to mention that the form of the network has been subject to significant research in recent times. For instance, if more layers are added in between layers, the NN takes in a different name, a \emph{deep neural network}. Deep neural networks have been the subject of the useful and extremely popular field of \emph{deep learning}~\cite{goodfellowDeepLearning2016}. In deep learning, NN architectures are extended to be larger, deeper, and more complex than simple multi-layer perceptrons. Furthermore, deep learning attempts to generalize the simple percpetron model and introduce better model that can perform with greate accuracy in certain tasks. The explosion of deep learning came when \emph{convolutional neural networks} were applied successfuly in the AlexNet architecture.
+Finally, it is important to mention that the \emph{topology}, or \emph{architecture}, of 
+the network has been subject to significant research in recent times. For instance, if more 
+layers are added in between layers, the NN takes in a different name, a \emph{deep neural network}. Deep neural networks have been the quintessential model of the revolutionary and 
+extremely popular field of \emph{deep learning}~\cite{goodfellowDeepLearning2016}. In deep 
+learning, NN architectures are extended to be larger, deeper, and more complex than simple 
+multi-layer perceptrons. These new models can be thought of being several multi-layer 
+perceptrons, each stacked upon each other.
+Furthermore, deep learning attempts to generalize the simple percpetron model and introduce 
+better models that can perform with greater accuracy in certain tasks. The explosion of 
+deep learning came when \emph{convolutional neural networks} were applied successfuly in 
+the AlexNet architecture~\cite{krizhevskyImageNetClassificationDeep2012}. There other kinds 
+of important variations in the topology of the network, such as the u-shaped networks use 
+for medical image segementation~\cite{ronnebergerUNetConvolutionalNetworks2015}; v-shaped 
+networks used for remote sensing~\cite{abdollahiVNetEndtoEndFully2020}; and very deep 
+topologies that can track images in real time~\cite{redmonYOLOv3IncrementalImprovement2018}.
 
 \subsection{Training}
 \subsection{Universal Approximation Theorem}
