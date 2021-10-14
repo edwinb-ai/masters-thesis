@@ -397,17 +397,18 @@ Choosing the correct activation function and the appropiate topology is hard, an
 experimentation is needed. But even if these could be chosen automatically, there is still 
 a latent issue here: how weights can be adjusted. Up until this section, this issue has 
 been left aside and it is now time to address it. To do so, it is imperative to remember 
-the sole purpose of NN and ML methods in general: \emph{to learn a mapping or function}. 
+the sole purpose of NN and ML methods for classification and regression tasks: 
+\emph{to learn a mapping or function}. 
 Assuming it is possible to have a training set \(\mathcal{D}\) with enough examples, 
-containing both inputs and outpus, the function that determines the relationship between 
+containing both inputs and outputs, the function that determines the relationship between 
 them can be learned by a NN. In general, this is referred to as the 
 \emph{universal approximation theorem}, which shall be the topic of the next section.
 
 The topic for this section is to answer the question of how this learning is carried out in 
 the first place. And to do so, it is useful to recall the information from 
 \autoref{fig:learning-weights} in that, if the weights are modified then the output is 
-expected to change. Now, there are several questions that need an answer in this figure. 
-First, what is the proportion between the change in the weights to the change in the 
+expected to change. Now, there are several questions that need an answer in that figure. 
+For instance, what is the proportion between the change in the weights to the change in the 
 output? If the weights are changed by half, is the output expected to change in the same 
 amount? For the case of classification, there are only categorical outputs, so how are 
 changes to the weights passed on the output? It seems that there needs to be a quantity 
@@ -441,7 +442,9 @@ to the following expression,
 where some steps were skipped to avoid taking too much space. Recalling that the ouput from 
 the simoid perceptron is given by \autoref{eq:output-sigmoid}, together with \autoref{eq:dsigmoid}, 
 the partial derivatives from \autoref{eq:output-combination} can be obtained without much
-effort.
+effort. In more general cases when the perceptron uses a different activation function than 
+the sigmoid, the computation of derivatives is carried out using modern tooling known as 
+\emph{automatic differentiation}~\cite{baydinAutomaticDifferentiationMachine2018}.
 
 Now, the issue of addressing how the learning mechanism is informed can be solved by 
 introducing the \emph{cost function}. The cost function, also referred to sometimes as 
@@ -455,8 +458,71 @@ learn the mapping? For this, we turn to optimization and the powerful method of 
 in fact several research advancements have been carried out in this direction~\cite{fontenla-romeroNewConvexObjective2010,liDiversityPromotingObjectiveFunction2016}.
 
 Numerical optimization is a rigorous mathematical subject, and the use of gradient descent techniques can not be summarized in this section. For that, the great book by Nocedal and Wright is an excellent reference for this topic~\cite{nocedalNumericalOptimization2006}.
-Here, only the main results will be reproduced and mentioned. In optimization, specifically \emph{unconstrained optimization}, the task is to find the value of an input vector \(\mathbf{x}\) that \emph{minimizes the function} \(f\), such that \(f(\mathbf{x}) = 0\). The fact that it is unconstrained is because there is no restriction in the bounds of \(\mathbf{x}\), or in the form of \(f\), which in general is a non-linear function. In the context of optimization, \(f\) is referred to as a cost function, or objective function.
-Now, a relation between optimization and NN can be made by noting the following fact. The purpose of NN is to learn the function that relates inputs and outputs in a given data set. Or in the context of optimization: \emph{to minimze the error between the true values and the approximation values}. The \emph{true values} correspond to the outputs in the data set, and the \emph{approximation values} to the outputs from the NN. So, in essence, the task is to find \emph{the best values} of the weights, \(w_j\)
+Here, only the main results will be mentioned and used. In optimization, specifically \emph{unconstrained optimization}, the task is to find the value of an input vector \(\mathbf{x}\) that \emph{minimizes the function} \(f\), such that \(f(\mathbf{x}) = 0\). The fact that it is unconstrained is because there is no restriction in the bounds of \(\mathbf{x}\), or in the form of \(f\), which in general is a non-linear function. In the context of optimization, \(f\) is referred to as a cost function, or objective function.
+Now, a relation between optimization and NN can be made by noting the following fact. The 
+purpose of NN is to learn the function that relates inputs and outputs in a given data set. 
+Or in the context of optimization: \emph{to minimze the error between the true values and 
+the approximation values}. The \emph{true values} correspond to the outputs in the data 
+set, and the \emph{approximation values} to the outputs from the NN. So, in essence, the 
+task is to find the best weights \(w_j\), and the best bias \(b\), that minimize the 
+following cost function,
+\begin{equation}
+    C(\mathbf{w}, b) = \frac{1}{2 N} \sum_{i=1}^{N} { \left[y_i - \hat{y}_{i}(\mathbf{w}, b) \right] }^2
+    \; .
+    \label{eq:cost-nn}
+\end{equation}
+Here the sum goes over all $N$ training samples in the training data set, and the output 
+from the NN \(\hat{y}_{i}(\mathbf{w}, b)\) depends on the values of the weights
+\(\mathbf{w}\) and bias \(b\).
+
+There is now one step left for the training procedure to be completely characterized, and 
+that is to define a way to \emph{update} the weights and bias accordingly so that 
+\autoref{eq:cost-nn} is minimized. For this purpose, \emph{gradient descent} is used. 
+Gradient descent is an iterative optimization method based on first-order derivative 
+information. The idea is to use the information from the gradient of the objective function 
+to drive the minimization to minimum, which in general corresponds to a \emph{local minimum}. The derivation of the method is left for a specialized reference on the 
+matter~\cite{nocedalNumericalOptimization2006}, and the main results will be used here. In 
+the context of NN, the idea to update the weights and bias so as to minimize the cost 
+function. Thus, the gradient descent method is introduced, which follows the expression,
+\begin{equation}
+    \begin{aligned}
+        \mathbf{w}_{j+1} &= \mathbf{w}_{j} - \eta \frac{\partial C}{\partial \mathbf{w}_{j}} \\
+        b_{j+1} &= b_{j} - \eta \frac{\partial C}{\partial b}
+    \end{aligned}
+    \label{eq:gradient-descent-nn}
+\end{equation}
+where the index \(j\) represents each of the steps taken to update each value. These steps 
+are also sometimes referred to as iterations. Hopefully, by doing several updates of 
+\autoref{eq:gradient-descent-nn}, then \autoref{eq:cost-nn} can be minimized and the 
+appropiate value of the weights and bias would have been found.
+
+In practice, this simple rule is not actually followed for one simple reason. If looked at 
+closely, \autoref{eq:gradient-descent-nn} actually takes in all the information gathered so 
+far, and this includes the training examples, which are encoded in the cost function. But 
+if the data set contains thousands of examples, then the optimization can not be carried 
+out due to current limitations in modern hardware. So a simple modification is used, where 
+instead of choosing all the training examples at once, a small sub-set is chosen randomly 
+and then the gradient descent is used on this sub-set. 
+This procedure is repeated until all the 
+training examples have been selected. This is referred to as a 
+\emph{pass}. At the end of this pass, all the obtained values are averaged, and this 
+average is used to update the weights and bias. This can be repeated for as many 
+\emph{passes} as needed, or wanted. This simple modification is the actual 
+method use, and goes by very popular name of \emph{stochastic gradient descent}.
+Extensive research has been conducted in this area as well, from introducing simple
+accelerating terms to the gradient descent rule. For instance, the Nesterov momentum 
+gradient descent method~\cite{ruderOverviewGradientDescent2017}, or the Adam 
+method~\cite{kingmaAdamMethodStochastic2017}, which is in fact the method used in this work 
+and will be presented at a later part.
+
+To summarize, the training mechanism of NN is as follows. Assuming a training data set 
+\(\mathcal{D}\) is available, then a cost function is chosen. In practice, the most common 
+has the form of \autoref{eq:cost-nn} but it can be any other. Then, the weights and biases 
+are initialized at random. After that, the main loop of the algorithm is to repeat the 
+steps shown in \autoref{eq:gradient-descent-nn} while keeping track of the minimum. When a 
+certain minimum has been achieved, a performance measure can be used to check wheter the NN 
+has a good performance for the task given. This concludes, roughly speaking, the common 
+practice of modern ML.
 
 \subsection{Universal Approximation Theorem}
 

@@ -138,6 +138,19 @@
   keywords = {Artificial neural networks,Backpropagation,Growth curves,History,Modeling}
 }
 
+@article{baydinAutomaticDifferentiationMachine2018,
+  title = {Automatic {{Differentiation}} in {{Machine Learning}}: A {{Survey}}},
+  shorttitle = {Automatic {{Differentiation}} in {{Machine Learning}}},
+  author = {Baydin, Atilim Gunes and Pearlmutter, Barak A. and Radul, Alexey Andreyevich and Siskind, Jeffrey Mark},
+  year = {2018},
+  journal = {Journal of Machine Learning Research},
+  volume = {18},
+  number = {153},
+  pages = {1--43},
+  issn = {1533-7928},
+  abstract = {Derivatives, mostly in the form of gradients and Hessians, are ubiquitous in machine learning. Automatic differentiation (AD), also called algorithmic differentiation or simply \^aautodiff\^a, is a family of techniques similar to but more general than backpropagation for efficiently and accurately evaluating derivatives of numeric functions expressed as computer programs. AD is a small but established field with applications in areas including computational fluid dynamics, atmospheric sciences, and engineering design optimization. Until very recently, the fields of machine learning and AD have largely been unaware of each other and, in some cases, have independently discovered each other's results. Despite its relevance, general-purpose AD has been missing from the machine learning toolbox, a situation slowly changing with its ongoing adoption under the names \^adynamic computational graphs\^a and \^adifferentiable programming\^a. We survey the intersection of AD and machine learning, cover applications where AD has direct relevance, and address the main implementation techniques. By precisely defining the main differentiation techniques and their interrelationships, we aim to bring clarity to the usage of the terms \^aautodiff\^a, \^aautomatic differentiation\^a, and \^asymbolic differentiation\^a as these are encountered more and more in machine learning settings.}
+}
+
 @book{bealsAnalysisIntroduction2004,
   title = {Analysis: An {{Introduction}}},
   shorttitle = {Analysis},
@@ -1774,6 +1787,20 @@
   abstract = {Discrete event simulation systems (DESS) are widely used in many diverse areas such as computer-communication networks, flexible manufacturing systems, project evaluation and review techniques (PERT), and flow networks. Because of their complexity, such systems are typically analyzed via Monte Carlo simulation methods. This paper deals with optimization of complex computer simulation models involving rare events. A classic example is to find an optimal (s, S) policy in a multi-item, multicommodity inventory system, when quality standards require the backlog probability to be extremely small. Our approach is based on change of the probability measure techniques, also called likelihood ratio (LR) and importance sampling (IS) methods. Unfortunately, for arbitrary probability measures the LR estimators and the resulting optimal solution often tend to be unstable and may have large variances. Therefore, the choice of the corresponding importance sampling distribution and in particular its parameters in an optimal way is an important task. We consider the case where the IS distribution comes from the same parametric family as the original (true) one and use the stochastic counterpart method to handle simulation based optimization models. More specifically, we use a two-stage procedure: at the first stage we identify (estimate) the optimal parameter vector at the IS distribution, while at the second stage we estimate the optimal solution of the underlying constrained optimization problem. Particular emphasis will be placed on estimation of rare events and on integration of the associated performance function into stochastic optimization programs. Supporting numerical results are provided as well.},
   langid = {english},
   keywords = {Inventory,Optimization,Score function,Sensitivity analysis,Simulation}
+}
+
+@article{ruderOverviewGradientDescent2017,
+  title = {An Overview of Gradient Descent Optimization Algorithms},
+  author = {Ruder, Sebastian},
+  year = {2017},
+  month = jun,
+  journal = {arXiv:1609.04747 [cs]},
+  eprint = {1609.04747},
+  eprinttype = {arxiv},
+  primaryclass = {cs},
+  abstract = {Gradient descent optimization algorithms, while increasingly popular, are often used as black-box optimizers, as practical explanations of their strengths and weaknesses are hard to come by. This article aims to provide the reader with intuitions with regard to the behaviour of different algorithms that will allow her to put them to use. In the course of this overview, we look at different variants of gradient descent, summarize challenges, introduce the most common optimization algorithms, review architectures in a parallel and distributed setting, and investigate additional strategies for optimizing gradient descent.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Machine Learning}
 }
 
 @book{rudinPrinciplesMathematicalAnalysis2013,
