@@ -132,7 +132,7 @@ stated before, is to learn a \emph{good} approximation of the function $f$. Agai
 measure of \emph{good} is not clear enough, as was the case with \emph{accuracy}, and both 
 these concepts shall be discussed next.
 
-\subsection{Performance Measure}
+\subsection{Performance Measure} \label{sec:performance}
 ML algorithms must be assessed on their abilities to perform a certain task $T$, either a 
 classification or regression problem in the current discussion. 
 It is common practice to extract a subset of the 
@@ -359,6 +359,7 @@ Instead of the output being just \(0\) or \(1\), \autoref{eq:output-dot} is now 
 \begin{equation}
     \text{output} = \frac{1}{1 + \exp{\left(- \sum_{i} w_i x_i + b\right)}}
     \; .
+    \label{eq:output-sigmoid}
 \end{equation}
 This function might seem to drastically change the behavior and original intention of the 
 McCulloch-Pitts perceptron. However, in reality, the sigmoid function is just a smoothed 
@@ -392,6 +393,71 @@ networks used for remote sensing~\cite{abdollahiVNetEndtoEndFully2020}; and very
 topologies that can track images in real time~\cite{redmonYOLOv3IncrementalImprovement2018}.
 
 \subsection{Training}
+Choosing the correct activation function and the appropiate topology is hard, and a lot of 
+experimentation is needed. But even if these could be chosen automatically, there is still 
+a latent issue here: how weights can be adjusted. Up until this section, this issue has 
+been left aside and it is now time to address it. To do so, it is imperative to remember 
+the sole purpose of NN and ML methods in general: \emph{to learn a mapping or function}. 
+Assuming it is possible to have a training set \(\mathcal{D}\) with enough examples, 
+containing both inputs and outpus, the function that determines the relationship between 
+them can be learned by a NN. In general, this is referred to as the 
+\emph{universal approximation theorem}, which shall be the topic of the next section.
+
+The topic for this section is to answer the question of how this learning is carried out in 
+the first place. And to do so, it is useful to recall the information from 
+\autoref{fig:learning-weights} in that, if the weights are modified then the output is 
+expected to change. Now, there are several questions that need an answer in this figure. 
+First, what is the proportion between the change in the weights to the change in the 
+output? If the weights are changed by half, is the output expected to change in the same 
+amount? For the case of classification, there are only categorical outputs, so how are 
+changes to the weights passed on the output? It seems that there needs to be a quantity 
+that must inform the \emph{learning} mechanism how much should the weights change in order 
+to get the correct output from the network. 
+
+In order to address those questions, there needs to be a relationship between the output, the weights and the bias. Fortunately enough, calculus provides such information in the 
+following way,
+\begin{equation}
+    \Delta \ \text{output} \ \approx \sum_{j} \left[ \frac{\partial \ \text{output}}{\partial w_j} \Delta w_j \right] + \frac{\partial \ \text{output}}{\partial b} \Delta b
+    \; ,
+    \label{eq:output-combination}
+\end{equation}
+where the sum is over all the weights in the network, \(w_j\), and \(\partial \ \text{output} \, / \, \partial w_j\) and \(\partial \ \text{output} \, / \, \partial b\) denote 
+the partial derivatives of the output with respect to the weights and bias, respectively. 
+In other words, these derivatives represent \emph{by how much} the output changes if the 
+weights and bias are modified. Yet, there is still even more information from \autoref{eq:output-combination} 
+that is extremely useful. If looked at closely, \autoref{eq:output-combination} actually 
+represents a \emph{linear combination} of terms that, together, form the change to the 
+output. This means that both, the weights and the bias, must contribute to the change in 
+the output, and the amount is provided by the partial derivatives. So with just this much, 
+the answer to the question of \emph{how much} is now answered. But now there is the burning 
+question of how to compute the partial derivatives. Well, this question is easy to answer, 
+because assuming that the NN is using sigmoid neurons, then the derivative can be reduced 
+to the following expression,
+\begin{equation}
+    \frac{d}{dz} \sigma (z) = \sigma^{\prime} (z) = \frac{1}{1 + e^{-z}}  \cdot \left(1 - \frac{1}{1 + e^{-z}}\right) = \sigma (z) \, \left(1 - \sigma (z)\right)
+    \; ,
+    \label{eq:dsigmoid}
+\end{equation}
+where some steps were skipped to avoid taking too much space. Recalling that the ouput from 
+the simoid perceptron is given by \autoref{eq:output-sigmoid}, together with \autoref{eq:dsigmoid}, 
+the partial derivatives from \autoref{eq:output-combination} can be obtained without much
+effort.
+
+Now, the issue of addressing how the learning mechanism is informed can be solved by 
+introducing the \emph{cost function}. The cost function, also referred to sometimes as 
+\emph{loss} or \emph{objective}, is a function that measures how the NN is approximating 
+the underlying function. This is, in fact, the same concept as the performance measures 
+encountered in \autoref{sec:performance}. In fact, cost functions are metrics that address 
+how good the approximation of the NN is. And so this issue has also been addressed. 
+However, how is this cost function, and \autoref{eq:output-combination} used to make the NN 
+learn the mapping? For this, we turn to optimization and the powerful method of \emph{gradient descent}. To help illustrate the learning mechanism, the mean squared error in 
+\autoref{eq:mse} will be used. However, this is not the only metric that can be used, and 
+in fact several research advancements have been carried out in this direction~\cite{fontenla-romeroNewConvexObjective2010,liDiversityPromotingObjectiveFunction2016}.
+
+Numerical optimization is a rigorous mathematical subject, and the use of gradient descent techniques can not be summarized in this section. For that, the great book by Nocedal and Wright is an excellent reference for this topic~\cite{nocedalNumericalOptimization2006}.
+Here, only the main results will be reproduced and mentioned. In optimization, specifically \emph{unconstrained optimization}, the task is to find the value of an input vector \(\mathbf{x}\) that \emph{minimizes the function} \(f\), such that \(f(\mathbf{x}) = 0\). The fact that it is unconstrained is because there is no restriction in the bounds of \(\mathbf{x}\), or in the form of \(f\), which in general is a non-linear function. In the context of optimization, \(f\) is referred to as a cost function, or objective function.
+Now, a relation between optimization and NN can be made by noting the following fact. The purpose of NN is to learn the function that relates inputs and outputs in a given data set. Or in the context of optimization: \emph{to minimze the error between the true values and the approximation values}. The \emph{true values} correspond to the outputs in the data set, and the \emph{approximation values} to the outputs from the NN. So, in essence, the task is to find \emph{the best values} of the weights, \(w_j\)
+
 \subsection{Universal Approximation Theorem}
 
 \section{Evolutionary Computation}
