@@ -589,7 +589,13 @@ particular, for this work the focus will be \emph{evolution strategies}, which w
 address in a later section. However, there is also \emph{genetic algorithms}, 
 \emph{evolutionary algorithms}, and other~\cite{kacprzykSpringerHandbookComputational2015}.
 
-%TODO: Hacer diagrama simple de ciclo evolutivo
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.4]{figuras/capitulo-3/evolutionary-optimization.pdf}
+    \caption{Evolutionary algorithms always start by creating a population of solutions. New solutions are then created by varying those from the original population. Then, the solutions are measured with respect to how well they address the task. Finally, a selection criterion is applied extract the best solutions so far. The process is iterated using the selected set of solutions until a specific criterion is met.}
+    \label{fig:evolutionary-optimization}
+\end{figure}
+
 As mentioned before, there is a common procedure in evolution, and this has been translated 
 to computer science and its application in EC. The basic procedure is as follows: for a 
 given problem, an initial population of possible \emph{solution} is created; then, those 
@@ -603,15 +609,31 @@ find a solution, such as the famous traveling salesman
 problem~\cite{dorigoAntColonySystem1997}. Flexibility, adaptability and generalization are 
 the advantages of EC algorithms. When used in the popular StarCraft computer videogame, the 
 AlphaStar system~\cite{arulkumaranAlphaStarEvolutionaryComputation2019} performed 
-surprsingly better than the top players in the world. 
+surprisingly better than the top players in the world.
 
-However, the lack the general ease of use in some case, and their implementations might be 
-troublesome in some other cases. EC algorithms tend to have many parameters to adjust, for 
-instance the total number of solutions in the population, the number of offsprings, and so 
-on. In the case of EC algorithms, there is no \emph{one size fits all}, and so this can 
-make them hard to deal with. In the present work, EC algorithms will be used for non-linear 
-unconstrained optimization, and in particular, in the sub-field of 
-\emph{black-box optimization}, which will be presented next.
+However, the lack the general ease of use in some cases, as well as the difficulty to 
+implement them might be troublesome in some other cases. Also, EC algorithms tend to have 
+many parameters to adjust. For instance the total number of solutions in the population, 
+the number of offsprings, and so on. In the case of EC algorithms, there is no \emph{one 
+size fits all}, so this can make them hard to deal with. In the present work, EC algorithms 
+will be used for non-linear unconstrained optimization, and in particular, in the sub-field 
+of \emph{derivative-free optimization}. This will be discussed in the next section.
 
-\subsection{Black-box Optimization}
+EC algorithms have been used for optimization in cases where the objective function is not 
+\emph{smooth}, does not posses a \emph{continuous derivative}, or when it is too \emph{costly} to search for a solution in finite 
+time~\cite{kacprzykSpringerHandbookComputational2015}. The basic functionality of EC 
+algorithms for optimization follow the diagram from 
+\autoref{fig:evolutionary-optimization}. With EC algorithms, the idea is to form an initial 
+population of solutions, then to vary those solutions while keeping track of the fitness of 
+the objective function. By varying the possible solutions, it is expected that these will 
+\emph{follow an evolutionary process}, and eventually reach a minimum. In particular, EC 
+algorithms are best suited for \emph{global optimization}, which is the search for minima 
+in a large search space, without reaching any local minima along the way. The purpose 
+behind this is to \emph{explore} the search space and look for the values that best 
+minimize the function. After all, EC algorithms are \emph{approximation algorithms}, i.e. 
+this methods do not attempt to find the best solutions, but to 
+\emph{find a possible solution} to the problem.
+
+\subsection{Derivative-free Optimization}
+
 \subsection{Natural Evolution Strategies}
