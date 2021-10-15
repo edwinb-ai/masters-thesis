@@ -84,6 +84,34 @@
   keywords = {Computers / Computer Simulation,Science / Mechanics / Fluids,Science / Physics / General}
 }
 
+@article{amariNaturalGradientWorks1998,
+  title = {Natural {{Gradient Works Efficiently}} in {{Learning}}},
+  author = {Amari, Shun-ichi},
+  year = {1998},
+  month = feb,
+  journal = {Neural Computation},
+  volume = {10},
+  number = {2},
+  pages = {251--276},
+  issn = {0899-7667},
+  doi = {10.1162/089976698300017746},
+  abstract = {When a parameter space has a certain underlying structure, the ordinary gradient of a function does not represent its steepest direction, but the natural gradient does. Information geometry is used for calculating the natural gradients in the parameter space of perceptrons, the space of matrices (for blind source separation), and the space of linear dynamical systems (for blind source deconvolution). The dynamical behavior of natural gradient online learning is analyzed and is proved to be Fisher efficient, implying that it has asymptotically the same performance as the optimal batch estimation of parameters. This suggests that the plateau phenomenon, which appears in the backpropagation learning algorithm of multilayer perceptrons, might disappear or might not be so serious when the natural gradient is used. An adaptive method of updating the learning rate is proposed and analyzed.}
+}
+
+@inproceedings{amariWhyNaturalGradient1998,
+  title = {Why Natural Gradient?},
+  booktitle = {Proceedings of the 1998 {{IEEE International Conference}} on {{Acoustics}}, {{Speech}} and {{Signal Processing}}, {{ICASSP}} '98 ({{Cat}}. {{No}}.{{98CH36181}})},
+  author = {Amari, S. and Douglas, S.C.},
+  year = {1998},
+  month = may,
+  volume = {2},
+  pages = {1213-1216 vol.2},
+  issn = {1520-6149},
+  doi = {10.1109/ICASSP.1998.675489},
+  abstract = {Gradient adaptation is a useful technique for adjusting a set of parameters to minimize a cost function. While often easy to implement, the convergence speed of gradient adaptation can be slow when the slope of the cost function varies widely for small changes in the parameters. In this paper, we outline an alternative technique, termed natural gradient adaptation, that overcomes the poor convergence properties of gradient adaptation in many cases. The natural gradient is based on differential geometry and employs knowledge of the Riemannian structure of the parameter space to adjust the gradient search direction. Unlike Newton's method, natural gradient adaptation does not assume a locally-quadratic cost function. Moreover, for maximum likelihood estimation tasks, natural gradient adaptation is asymptotically Fisher-efficient. A simple example illustrates the desirable properties of natural gradient adaptation.},
+  keywords = {Adaptive filters,Cities and towns,Convergence,Cost function,Geometry,Information systems,Iterative methods,Newton method,Optimization methods,Parameter estimation}
+}
+
 @article{antaFastMethodSolving1995,
   title = {A Fast Method of Solving the Hypernetted-Chain Equation for Molecular {{Lennard}}-{{Jones}} Fluids},
   author = {Anta, J. A. and Lomba, E. and Mart{\'i}n, C. and Lombardero, M. and Lado, F.},
@@ -138,6 +166,16 @@
   doi = {10.1007/s40096-014-0117-6},
   abstract = {This paper surveys the artificial neural networks approach. Researchers believe that these networks have the wide range of applicability, they can treat complicated problems as well. The work described here discusses an efficient computational method that can treat complicated problems. The paper intends to introduce an efficient computational method which can be applied to approximate solution of the linear two-dimensional Fredholm integral equation of the second kind. For this aim, a perceptron model based on artificial neural networks is introduced. At first, the unknown bivariate function is replaced by a multilayer perceptron neural net and also a cost function to be minimized is defined. Then a famous learning technique, namely, the steepest descent method, is employed to adjust the parameters (the weights and biases) to optimize their behavior. The article also examines application of the method which turns to be so accurate and efficient. It concludes with a survey of an example in order to investigate the accuracy of the proposed method.},
   langid = {english}
+}
+
+@inproceedings{backSurveyEvolutionStrategies1991,
+  title = {A {{Survey}} of {{Evolution Strategies}}},
+  booktitle = {Proceedings of the {{Fourth International Conference}} on {{Genetic Algorithms}}},
+  author = {B{\"a}ck, Thomas and Hoffmeister, Frank and Schwefel, Hans-Paul},
+  year = {1991},
+  pages = {2--9},
+  publisher = {{Morgan Kaufmann}},
+  abstract = {Similar to Genetic Algorithms, Evolution Strategies (ESs) are algorithms which imitate the principles of natural evolution as a method to solve parameter optimization problems. The development of Evolution Strategies from the first mutation--selection scheme to the refined (\textasciimacron,)--ES including the general concept of self--adaptation of the strategy parameters for the mutation variances as well as their covariances are described. 1 Introduction  The idea to use principles of organic evolution processes as rules for optimum seeking procedures emerged independently on both sides of the Atlantic ocean more than two decades ago. Both approaches rely upon imitating the collective learning paradigm of natural populations, based upon Darwin's observations and the modern synthetic theory of evolution. In the USA Holland introduced Genetic Algorithms  in the 60ies, embedded into the general framework of adaptation [Hol75]. He also mentioned the applicability to parameter optimization which was fir...}
 }
 
 @article{baezUsingSecondVirial2018,
@@ -971,6 +1009,24 @@
   isbn = {978-0-486-13482-6},
   langid = {english},
   keywords = {Mathematics / Mathematical Analysis}
+}
+
+@incollection{hansenCMAEvolutionStrategy2006,
+  title = {The {{CMA Evolution Strategy}}: A {{Comparing Review}}},
+  shorttitle = {The {{CMA Evolution Strategy}}},
+  booktitle = {Towards a {{New Evolutionary Computation}}: Advances in the {{Estimation}} of {{Distribution Algorithms}}},
+  author = {Hansen, Nikolaus},
+  editor = {Lozano, Jose A. and Larra{\~n}aga, Pedro and Inza, I{\~n}aki and Bengoetxea, Endika},
+  year = {2006},
+  series = {Studies in {{Fuzziness}} and {{Soft Computing}}},
+  pages = {75--102},
+  publisher = {{Springer}},
+  address = {{Berlin, Heidelberg}},
+  doi = {10.1007/3-540-32494-1_4},
+  abstract = {SummaryDerived from the concept of self-adaptation in evolution strategies, the CMA (Covariance Matrix Adaptation) adapts the covariance matrix of a multi-variate normal search distribution. The CMA was originally designed to perform well with small populations. In this review, the argument starts out with large population sizes, reflecting recent extensions of the CMA algorithm. Commonalities and differences to continuous Estimation of Distribution Algorithms are analyzed. The aspects of reliability of the estimation, overall step size control, and independence from the coordinate system (invariance) become particularly important in small populations sizes. Consequently, performing the adaptation task with small populations is more intricate.},
+  isbn = {978-3-540-32494-2},
+  langid = {english},
+  keywords = {Covariance Matrix,Distribution Algorithm,Evolution Path,Search Point,Step Length}
 }
 
 @book{hansenTheorySimpleLiquids2013,

@@ -43,6 +43,7 @@ headsepline, % Uncomment to get a line under the header
 \usepackage[utf8]{inputenc} % Required for inputting international characters
 \usepackage{siunitx}
 \usepackage{mathtools,amsthm}
+\usepackage{bm}
 % \usepackage{thmtools}
 \usepackage{subfig}
 \usepackage{caption}
@@ -72,10 +73,10 @@ headsepline, % Uncomment to get a line under the header
 %-----------------------------
 %	Comandos especiales
 %-----------------------------
-\newcommand{\vecr}{\mathbf{r}} %% r vector
-\newcommand{\vecp}{\mathbf{p}} %% p vector (momento)
-\newcommand{\veck}{\mathbf{k}}
-\newcommand{\nnet}{N_{\theta}(\mathbf{r})}
+\newcommand{\vecr}{\bm{r}} %% r vector
+\newcommand{\vecp}{\bm{p}} %% p vector (momento)
+\newcommand{\veck}{\bm{k}}
+\newcommand{\nnet}{N_{\theta}(\bm{r})}
 \newcommand{\rdf}{$g(r) \ $}
 %%
 \def\Itemautorefname{Figure}

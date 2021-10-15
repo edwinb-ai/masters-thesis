@@ -55,16 +55,16 @@ which are out of scope of this work, but remain an important part of modern ML t
 
 \section{Supervised Learning}
 The most common kind of ML methods is that of \emph{predictive} learning. For a set 
-\(\mathcal{D}={ \{(\mathbf{x}_{i}, y_i)\} }_{i=1}^{N}$ with inputs $\mathbf{x}\)
+\(\mathcal{D}={ \{(\bm{x}_{i}, y_i)\} }_{i=1}^{N}$ with inputs $\bm{x}\)
 and outputs $y$, the goal of \emph{supervised learning} is to learn a map between
 inputs and outputs. Here, $\mathcal{D}$ is the so-called \emph{training set} and $N$
 is the number of \emph{training samples}.
 
-In most common cases, the inputs $\mathbf{x}$ are $D$-dimensional vectors that
+In most common cases, the inputs $\bm{x}$ are $D$-dimensional vectors that
 represent information about something. For instance, the height and weight of a
 person, or the evolution of the stock market throughout the years. 
 These vectors are colloquially referred to as \emph{features} or \emph{attributes}.
-The general form of $\mathbf{x}$ is not defined, it can be anything from an image, a time 
+The general form of $\bm{x}$ is not defined, it can be anything from an image, a time 
 series, sentences from a text, graphs, molecules, and so on.
 
 In a similar fashion, the \emph{response} variables $y$ can be, in general, anything. 
@@ -83,13 +83,13 @@ it easier to understand the importance of supervised learning. It also creates a
 which the problem of regression can then be generalized from.
 
 In the problem of classification, the computer algorithm is given a data set \(\mathcal
-{D}={ \{(\mathbf{x}_{i}, y_i)\} }_{i=1}^{N}\), and is asked to specify to which category 
-does the input belong to. Here, $\mathbf{x}_i$ is an $n$-dimensional feature vector. As 
+{D}={ \{(\bm{x}_{i}, y_i)\} }_{i=1}^{N}\), and is asked to specify to which category 
+does the input belong to. Here, $\bm{x}_i$ is an $n$-dimensional feature vector. As 
 mentioned before, the idea is for the algorithm to learn a map, or more precisely, a \emph
 {function} such that $f \colon \mathbb{R}^n \mapsto \{1, \dots, k\}$, with $k$ the total 
 number of categories, or \emph{classes}, to which the input can be assigned to. More 
-specifically, when $y=f(\mathbf{x})$, the model assigns an input described by the 
-$n$-dimensional feature vector $\mathbf{x}$ to a particular categorical value of $y$.
+specifically, when $y=f(\bm{x})$, the model assigns an input described by the 
+$n$-dimensional feature vector $\bm{x}$ to a particular categorical value of $y$.
 
 One of the most common uses of classification is object recognition. The goal of the object 
 recognition problem is to decode a particular image with a specific object in it, and label 
@@ -280,7 +280,7 @@ For a more thorough understanding of NN, these references~\cite{mehligMachineLea
 The basic idea of NN is to mimic the way the brain works, and more specifically, the way 
 neurons interact with each other. In the modern form of NN, this interaction is highly 
 idealized in the sense that the actual human brain does not follow the same form of 
-interaction, but it is somewhat a rough approximation. In 1947, Pitts and McCulloch~\cite{pittsHowWeKnow1947} devised the \emph{perceptron}, an idealized model of a neuron. This perceptron can be observed in \autoref{fig:perceptron}. Here, the middle circle is the perceptron or \emph{unit}, and it accepts three inputs \(x_1, x_2, x_3\), or equivalently \(\mathbf{x}=(x_1, x_2, x_3)\) with \(\mathbf{x}\) a \(3\)-dimensional input vector. The output of the McCulloch-Pitts perceptron is a single binary output, it can either return a \(0\) or a \(1\). Then, in 1958, Rosenblatt~\cite{rosenblattPerceptronProbabilisticModel1958} extended this idea and introduced a way to compute the output of the perceptron. He introduced what he called \emph{weights}, and gave a weight to each of the three inputs, \(w_1, w_2, w_3\). Later, he proposed to compute the output as a weighted sum of each of the three inputs, such that the output would have the following form,
+interaction, but it is somewhat a rough approximation. In 1947, Pitts and McCulloch~\cite{pittsHowWeKnow1947} devised the \emph{perceptron}, an idealized model of a neuron. This perceptron can be observed in \autoref{fig:perceptron}. Here, the middle circle is the perceptron or \emph{unit}, and it accepts three inputs \(x_1, x_2, x_3\), or equivalently \(\bm{x}=(x_1, x_2, x_3)\) with \(\bm{x}\) a \(3\)-dimensional input vector. The output of the McCulloch-Pitts perceptron is a single binary output, it can either return a \(0\) or a \(1\). Then, in 1958, Rosenblatt~\cite{rosenblattPerceptronProbabilisticModel1958} extended this idea and introduced a way to compute the output of the perceptron. He introduced what he called \emph{weights}, and gave a weight to each of the three inputs, \(w_1, w_2, w_3\). Later, he proposed to compute the output as a weighted sum of each of the three inputs, such that the output would have the following form,
 \begin{equation}
     \text{output} = \begin{cases}
         0 \quad \text{if} \quad \sum_{i} w_i x_i \leq \varepsilon \\
@@ -320,14 +320,14 @@ than just using threshold values. It is simpler to use the language of Linear Al
 and define the output expression shown in \autoref{eq:output-perceptron} using the dot product as follows,
 \begin{equation}
     \text{output} = \begin{cases}
-        0 \quad \text{if} \quad \mathbf{w} \cdot \mathbf{x} + b \leq 0 \\
-        1 \quad \text{if} \quad \mathbf{w} \cdot \mathbf{x} + b > 0
+        0 \quad \text{if} \quad \bm{w} \cdot \bm{x} + b \leq 0 \\
+        1 \quad \text{if} \quad \bm{w} \cdot \bm{x} + b > 0
     \end{cases}
     \, ,
     \label{eq:output-dot}
 \end{equation}
-where \(\mathbf{c} \cdot \mathbf{d} = \sum_{i}^{N} c_i \, d_i\) is the dot product between 
-the $N$-dimensional vectors \(\mathbf{c}\) and \(\mathbf{d}\). Now, there is a new value, 
+where \(\bm{c} \cdot \bm{d} = \sum_{i}^{N} c_i \, d_i\) is the dot product between 
+the $N$-dimensional vectors \(\bm{c}\) and \(\bm{d}\). Now, there is a new value, 
 called the \emph{bias} term, defined as \(b\) in \autoref{eq:output-dot}. This new term is 
 the value that is added to each perceptron and it can be interpreted as a measure of how 
 easy it is to get the perceptron to output a \(1\).
@@ -458,7 +458,7 @@ learn the mapping? For this, we turn to optimization and the powerful method of 
 in fact several research advancements have been carried out in this direction~\cite{fontenla-romeroNewConvexObjective2010,liDiversityPromotingObjectiveFunction2016}.
 
 Numerical optimization is a rigorous mathematical subject, and the use of gradient descent techniques can not be summarized in this section. For that, the great book by Nocedal and Wright is an excellent reference for this topic~\cite{nocedalNumericalOptimization2006}.
-Here, only the main results will be mentioned and used. In optimization, specifically \emph{unconstrained optimization}, the task is to find the value of an input vector \(\mathbf{x}\) that \emph{minimizes the function} \(f\), such that \(f(\mathbf{x}) = 0\). The fact that it is unconstrained is because there is no restriction in the bounds of \(\mathbf{x}\), or in the form of \(f\), which in general is a non-linear function. In the context of optimization, \(f\) is referred to as a cost function, or objective function.
+Here, only the main results will be mentioned and used. In optimization, specifically \emph{unconstrained optimization}, the task is to find the value of an input vector \(\bm{x}\) that \emph{minimizes the function} \(f\), such that \(f(\bm{x}) = 0\). The fact that it is unconstrained is because there is no restriction in the bounds of \(\bm{x}\), or in the form of \(f\), which in general is a non-linear function. In the context of optimization, \(f\) is referred to as a cost function, or objective function.
 Now, a relation between optimization and NN can be made by noting the following fact. The 
 purpose of NN is to learn the function that relates inputs and outputs in a given data set. 
 Or in the context of optimization: \emph{to minimze the error between the true values and 
@@ -467,13 +467,13 @@ set, and the \emph{approximation values} to the outputs from the NN. So, in esse
 task is to find the best weights \(w_j\), and the best bias \(b\), that minimize the 
 following cost function,
 \begin{equation}
-    C(\mathbf{w}, b) = \frac{1}{2 N} \sum_{i=1}^{N} { \left[y_i - \hat{y}_{i}(\mathbf{w}, b) \right] }^2
+    C(\bm{w}, b) = \frac{1}{2 N} \sum_{i=1}^{N} { \left[y_i - \hat{y}_{i}(\bm{w}, b) \right] }^2
     \; .
     \label{eq:cost-nn}
 \end{equation}
 Here the sum goes over all $N$ training samples in the training data set, and the output 
-from the NN \(\hat{y}_{i}(\mathbf{w}, b)\) depends on the values of the weights
-\(\mathbf{w}\) and bias \(b\).
+from the NN \(\hat{y}_{i}(\bm{w}, b)\) depends on the values of the weights
+\(\bm{w}\) and bias \(b\).
 
 There is now one step left for the training procedure to be completely characterized, and 
 that is to define a way to \emph{update} the weights and bias accordingly so that 
@@ -486,7 +486,7 @@ the context of NN, the idea to update the weights and bias so as to minimize the
 function. Thus, the gradient descent method is introduced, which follows the expression,
 \begin{equation}
     \begin{aligned}
-        \mathbf{w}_{j+1} &= \mathbf{w}_{j} - \eta \frac{\partial C}{\partial \mathbf{w}_{j}} \\
+        \bm{w}_{j+1} &= \bm{w}_{j} - \eta \frac{\partial C}{\partial \bm{w}_{j}} \\
         b_{j+1} &= b_{j} - \eta \frac{\partial C}{\partial b}
     \end{aligned}
     \label{eq:gradient-descent-nn}
@@ -671,7 +671,7 @@ tested against each other, given that there are enough computational resources t
 
 As mentioned before, sometimes there is not derivative information about the objective 
 function, but more than that, objective function evaluations are \emph{costly}. This means 
-that, for a given input \(\mathbf{x}\) and an objective function \(f \colon \mathbb{R}^n \mapsto \mathbb{R}\), the evaluation \(f(\mathbf{x})\) will take a long time. Further, in 
+that, for a given input \(\bm{x}\) and an objective function \(f \colon \mathbb{R}^n \mapsto \mathbb{R}\), the evaluation \(f(\bm{x})\) will take a long time. Further, in 
 most cases when this is true, the \emph{analytical or functional form} of the objective 
 function \emph{is not known}. When a particular objective function satisfies these 
 conditions, it is referred to as a \emph{black-box function}. When optimizing costly 
@@ -689,3 +689,112 @@ the next section, a particular EC, black-box optimization algorithm will be revi
 presented, which will be extensively in a later chapter of this thesis.
 
 \subsection{Natural Evolution Strategies}
+One algorithm that stands out for its robustness and flexibility in dealing with black-box 
+optimization tasks is the \emph{natural evolution strategy} algorithm (NES), presented in 
+2014 by Wierstra \emph{et al}~\cite{wierstraNaturalEvolutionStrategies2014a}. This 
+algorithm is a derivative of the Evolution Strategies (ES) family of algorithms, which 
+follow closely the principles of EC. In ES algorithms, the principal characteristics are 
+the ease of dealing with high-dimensional optimization problems, and low number of function 
+evaluations. Also, unlike other EC algorithms, ES methods evalute the fitness of the 
+functions in batch instead of individually, allowing for more efficient computation and 
+solution space search in general. The most prominent algorithm in the ES family of methods 
+is the CMA-ES, or Covariance Matrix Adaptation-Evolution 
+Strategy~\cite{hansenCMAEvolutionStrategy2006}.
+In general, ES methods do two main things. To perform \emph{variation}, multivariate normal 
+random vectors are used. To perform \emph{mutation}, these algorithms modify different 
+aspects of such multivariate normal distribution. The case of CMA-ES is to modify and adapt 
+the covariance matrix in order to perform better at each step.
+
+However, the method of NES is different. Instead of modifying the covariance directly, the 
+information on the \emph{natural gradient} is exploited. To understand this method more 
+clearly, let \(f \colon M \subseteq \mathbb{R}^n \mapsto \mathbb{R}\) be a black-box 
+function, and the problem of optimization is to search for a vector \(f(\hat{x}) \in M\) 
+such that a \emph{local minimum} is found, where the local minimum is defined as,
+\begin{equation}
+    \exists \; \epsilon > 0 \quad \forall x \in M \; \colon \; 
+    \lVert x - \hat{x} \rVert < \epsilon \Rightarrow f(\hat{x}) \leq f(x)
+    \: .
+    \label{eq:local-minimizer}
+\end{equation}
+Now, the goal is not to minimize the objective function directly, but to minimize an \emph{expected fitnesss} under a particular search distribution. This means that the parameters searched will be sampled from a continuous probability distribution. This cost function is now expressed as,
+\begin{equation}
+    J(\theta) = \mathcal{E}_{\theta} \left[ f(\bm{x}) \right] = 
+    \int f(\bm{x}) \, \pi (\bm{x} \, \vert \, \theta) \, d \bm{x}
+    \; ,
+    \label{eq:expected-fitness}
+\end{equation}
+and use this cost function, together with gradient descent, to find the best 
+\emph{probability distribution} that will eventually be sampled to obtain a minimizer for 
+the original objective function. In other words, the NES method is not looking for the 
+minimizer itself in a search space, but it is looking for the probability distribution 
+that, when sampled, will give in average the minimizer for a particular local minimum of 
+the objective function.
+
+Still, the gradient information is unknown, as well as the true form of the search distribution, \(\pi (\bm{x} \, \vert \, \theta)\). But it is also impossible to obtain a gradient estimation without explicit information about the probability distribution. Here is where the NES provides a novel way of dealing with this problem. First, the search distribution is fixed to be a multivariate normal distribution,
+\begin{equation}
+    \pi (\bm{x} \, \vert \, \theta) = 
+    \frac{1}{{(2 \pi)}^{d/2} \text{det} \; \bm{\Sigma} } 
+    \cdot
+    \exp{\left(- \frac{1}{2} {\left(\bm{x} - \bm{\mu}\right)}^{\top}
+    \bm{\Sigma}
+    \left(\bm{x} - \bm{\mu}\right) \right)}
+    \; ,
+    \label{eq:multivariate-gaussian}
+\end{equation}
+with \(\bm{\Sigma} \in \mathbb{R}^{d \times d}\) the covariance matrix and 
+\(\bm{\mu} \in \mathbb{R}^{d}\) 
+the mean vector of a multivariate normal distribution. The parametrization 
+\(\theta \coloneqq \left\langle \bm{\mu}, \bm{\Sigma} \right\rangle\) is the link between 
+these probability distributions. With this information, the gradient is obtained with some important mathematical manipulations, which is approximately,
+\begin{equation}
+    \nabla_{\theta} J(\theta) \approx \frac{1}{\lambda} \sum_{i=1}^{\lambda}
+    f(x_k) \, \nabla_{\theta} \log{\pi(x_k \, \vert \, \theta)}
+    \; ,
+    \label{eq:search-gradient}
+\end{equation}
+which is also known as the \emph{search gradient}, and the gradient descent rule is just
+\begin{equation*}
+    \theta_{j + 1} = \theta_{j} + \eta \nabla_{\theta} J(\theta)
+    \; .
+\end{equation*}
+The parameter \(\lambda\) in \autoref{eq:search-gradient} is the population size of the 
+method, which in general is a small number, \(\lambda \approx 20 - 35\).
+
+However, this is just the search gradient, and it has some serious disadvantages. One of 
+which is the fact that the gradient descent update rule is not independent of the 
+distribution, so the parameters can take different proportions. Another important aspect of 
+the gradient descent rule is that it might be slow in terms of convergence for black-box 
+objective functions. For this reason, the \emph{natural gradient}~\cite{amariNaturalGradientWorks1998,amariWhyNaturalGradient1998} is introduced, which only 
+modified the gradient descent rule to be,
+\begin{equation}
+    \theta_{j + 1} = \theta_{j} + \eta \cdot \bm{F}^{-1} \nabla_{\theta} J(\theta)
+    \; .
+    \label{eq:natural-gradient}
+\end{equation}
+Here, \(\bm{F}\) is the \emph{Fisher information matrix} defined as,
+\begin{equation}
+    \bm{F} = \int \pi(\bm{z} \, \vert \, \theta) \; 
+    \nabla_{\theta} \log{\pi(\bm{z} \, \vert \, \theta)} \;
+    {\nabla_{\theta} \log{\pi(\bm{z} \, \vert \, \theta)}}^{\top} \;
+    d \bm{z}
+    \: ,
+    \label{eq:fisher-matrix}
+\end{equation}
+but in practice it is estimated as,
+\begin{equation}
+    \bm{F} \approx \frac{1}{\lambda} \sum_{k=1}^{\lambda} 
+    \nabla_{\theta} \log{\pi(x_k \, \vert \, \theta)} \;
+    {\nabla_{\theta} \log{\pi(x_k \, \vert \, \theta)}}^{\top}
+    \; .
+    \label{eq:fisher-estimation}
+\end{equation}
+
+In summary, NES attempts to estimate the search distribution using the natural gradient 
+such that, when sampled, the search distribution will in average output the minimizer to 
+the objective function. Here, most of the details have been omitted for the sake of 
+brevity, but the original work~\cite{wierstraNaturalEvolutionStrategies2014a} provides all 
+the information needed to implement the method. In this work, though, a variant of the NES 
+method is used, the \emph{distance-weighted exponentital} 
+NES~\cite{fukushimaProposalDistanceweightedExponential2011,nomuraDistanceweightedExponentialNatural2021}. 
+This method is a variation on the way the natural gradient and Fisher information matrix 
+are sampled, but the core of the method remains the same.
