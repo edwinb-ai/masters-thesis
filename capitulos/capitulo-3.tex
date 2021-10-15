@@ -524,7 +524,53 @@ certain minimum has been achieved, a performance measure can be used to check wh
 has a good performance for the task given. This concludes, roughly speaking, the common 
 practice of modern ML.
 
-\subsection{Universal Approximation Theorem}
+\subsection{Universal Approximation Theorem} \label{sec:approximation-thm}
+To close this section on ML and NN, an overly important fact of NN must be stated. Before, 
+it was mentioned that the goal of tasks such as classification and regression is for the 
+model to learn or approximate the function that maps the input to the output for a given 
+data set. For this reason, NN were presented, along with their learning mechanism. However, 
+what \emph{guarantee} is there that NN \emph{will} approximate the function? Further, 
+\emph{can NN, in fact, approximate a function}? In a previous section, it was briefly 
+mentioned that NN can in fact \emph{learn} any function, and that will be the topic of this 
+section.
+
+Indeed, just as mentioned before in the section for Approximation Theory, there exists a 
+similar result for NN. This result, which are actually a series of results, come from the 
+mathematical research of NN. The results are known altogether as the \emph{universal 
+approximation theorem}. To really understand these results, advanced mathematical results 
+should be employed. However, there is no need to extend the current section to such 
+lengths. Instead, following the research from Hornik and Cybenko~\cite{hornikMultilayerFeedforwardNetworks1989, hornikApproximationCapabilitiesMultilayer1991, cybenkoApproximationSuperpositionsSigmoidal1989}, 
+the main results will be stated here to be interpreted.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.4]{figuras/capitulo-3/tres-capas.png}
+    \caption{A multi-layer perceptron with three layers: the first layer is the \emph{input layer}; the middle layer is known as the \emph{hidden layer}; and the last layer is known as the \emph{output layer}. From~\cite{nielsenNeuralNetworksDeep2015}.}
+    \label{fig:hidden-layer}
+\end{figure}
+
+In short, Hornik and Cybenko showed that, given the sigmoid function and a given topology, 
+there exists an arbitrary number of nodes that are needed to \emph{approximate} any 
+\emph{continuous} function. The topology is a three layer topology, similar to the one in 
+\autoref{fig:hidden-layer}, where there is an input, a hidden and an ouput layers. This 
+results is also similar to \autoref{approx}; however, in this case there is no polynomial 
+but a NN instead. The arguments that follow this result is beyond the scope of this work, 
+but the result remains valid. Then, as the research for the mathematical framework of NN 
+advanced, newer results have seen the light that extend these results even more. Now, there 
+is a clear understanding that not only the sigmoid function can be used, but any non-affine 
+continuous function that it continuously differentiable~\cite{parkMinimumWidthUniversal2020}. Furthermore, there is also no need to restrict the case to just width, but also depth, 
+from which the generalization to deep learning 
+follows~\cite{zhouUniversalityDeepConvolutional2020,bernerModernMathematicsDeep2021}.
+In this work, these guidelines are used to create simple topologies for NN that can 
+actually satisfy the conditions of the theorem. A toplogy similar to 
+\autoref{fig:hidden-layer} with a large amount of nodes for each layer, which should 
+suffice to satisfy the conditions of the theorem. However, in practice, it has been shown 
+that \emph{overparametrization}\textemdash when there are way more weights and bias to adjust than needed \textemdash is the key to generalization in 
+NN~\cite{neyshaburRoleOverparametrizationGeneralization2018,cohenLearningCurvesOverparametrized2021}.
+This means that most of the time, the common practice is to just use deep topologies, which 
+mean a large number of layers and a large number of nodes for each layer, and use this 
+overparametrization to leverage the generalization that this provides. So, in a sense, one 
+might say that the universal approximation theorem is always satisfied in moder ML practice.
 
 \section{Evolutionary Computation}
 \subsection{Overview of Optimization}
