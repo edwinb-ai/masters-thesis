@@ -695,7 +695,7 @@ optimization tasks is the \emph{natural evolution strategy} algorithm (NES), pre
 algorithm is a derivative of the Evolution Strategies (ES) family of algorithms, which 
 follow closely the principles of EC. In ES algorithms, the principal characteristics are 
 the ease of dealing with high-dimensional optimization problems, and low number of function 
-evaluations. Also, unlike other EC algorithms, ES methods evalute the fitness of the 
+evaluations. Also, unlike other EC algorithms, ES methods evaluate the fitness of the 
 functions in batch instead of individually, allowing for more efficient computation and 
 solution space search in general. The most prominent algorithm in the ES family of methods 
 is the CMA-ES, or Covariance Matrix Adaptation-Evolution 
@@ -716,14 +716,14 @@ such that a \emph{local minimum} is found, where the local minimum is defined as
     \: .
     \label{eq:local-minimizer}
 \end{equation}
-Now, the goal is not to minimize the objective function directly, but to minimize an \emph{expected fitnesss} under a particular search distribution. This means that the parameters searched will be sampled from a continuous probability distribution. This cost function is now expressed as,
+Now, the goal is not to minimize the objective function directly, but to minimize an \emph{expected fitnesss} under a particular search distribution. This means that the parameters searched will define a continuous probability distribution. This cost function is now expressed as,
 \begin{equation}
     J(\theta) = \mathcal{E}_{\theta} \left[ f(\bm{x}) \right] = 
     \int f(\bm{x}) \, \pi (\bm{x} \, \vert \, \theta) \, d \bm{x}
     \; ,
     \label{eq:expected-fitness}
 \end{equation}
-and use this cost function, together with gradient descent, to find the best 
+and using this cost function, together with a gradient descent-like rule, the purpose of NES is to find the best 
 \emph{probability distribution} that will eventually be sampled to obtain a minimizer for 
 the original objective function. In other words, the NES method is not looking for the 
 minimizer itself in a search space, but it is looking for the probability distribution 
@@ -752,7 +752,7 @@ these probability distributions. With this information, the gradient is obtained
     \; ,
     \label{eq:search-gradient}
 \end{equation}
-which is also known as the \emph{search gradient}, and the gradient descent rule is just
+and it is also known as the \emph{search gradient}, and the gradient descent rule is just
 \begin{equation*}
     \theta_{j + 1} = \theta_{j} + \eta \nabla_{\theta} J(\theta)
     \; .
@@ -764,8 +764,8 @@ However, this is just the search gradient, and it has some serious disadvantages
 which is the fact that the gradient descent update rule is not independent of the 
 distribution, so the parameters can take different proportions. Another important aspect of 
 the gradient descent rule is that it might be slow in terms of convergence for black-box 
-objective functions. For this reason, the \emph{natural gradient}~\cite{amariNaturalGradientWorks1998,amariWhyNaturalGradient1998} is introduced, which only 
-modified the gradient descent rule to be,
+objective functions. For this reason, the \emph{natural gradient}~\cite{amariNaturalGradientWorks1998,amariWhyNaturalGradient1998} is introduced, which 
+modifies the gradient descent rule to be,
 \begin{equation}
     \theta_{j + 1} = \theta_{j} + \eta \cdot \bm{F}^{-1} \nabla_{\theta} J(\theta)
     \; .
@@ -794,7 +794,7 @@ such that, when sampled, the search distribution will in average output the mini
 the objective function. Here, most of the details have been omitted for the sake of 
 brevity, but the original work~\cite{wierstraNaturalEvolutionStrategies2014a} provides all 
 the information needed to implement the method. In this work, though, a variant of the NES 
-method is used, the \emph{distance-weighted exponentital} 
+method is used, the \emph{distance-weighted exponentital} (DXNES)
 NES~\cite{fukushimaProposalDistanceweightedExponential2011,nomuraDistanceweightedExponentialNatural2021}. 
 This method is a variation on the way the natural gradient and Fisher information matrix 
-are sampled, but the core of the method remains the same.
+are obtained, but the core of the method remains the same.
