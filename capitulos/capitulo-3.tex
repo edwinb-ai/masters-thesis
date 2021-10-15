@@ -573,5 +573,45 @@ overparametrization to leverage the generalization that this provides. So, in a 
 might say that the universal approximation theorem is always satisfied in modern ML practice.
 
 \section{Evolutionary Computation}
+In this section, Evolutionary Computation (EC) is presented and discussed. Much like the 
+driving force of perceptron is to mimic the brain and its intelligence, the inspiration 
+behind EC is the way nature adapts itself through 
+evolution~\cite{fogelWhatEvolutionaryComputation2000}. Although, in reality, evolution 
+takes millions of years but it eventually creates variations that adapt and \emph{converge} 
+to a particular goal. This particular goal, as described by Darwin, is to be fit to its 
+surroundings and survive. The idea behind EC is to use this powerful mechanim of evolution 
+and apply it to complex problems, with the use of modern computational and mathematical 
+resources to facilitate and empower a simplified version of evolution. In the most general 
+case, evolution is roughly a two-step process: first comes \emph{variation} and then comes 
+\emph{selection}. Algorithms based of EC use these properties and, depending on how these 
+variations and selections occur, the algorithms are named and used differently. In 
+particular, for this work the focus will be \emph{evolution strategies}, which will be 
+address in a later section. However, there is also \emph{genetic algorithms}, 
+\emph{evolutionary algorithms}, and other~\cite{kacprzykSpringerHandbookComputational2015}.
+
+%TODO: Hacer diagrama simple de ciclo evolutivo
+As mentioned before, there is a common procedure in evolution, and this has been translated 
+to computer science and its application in EC. The basic procedure is as follows: for a 
+given problem, an initial population of possible \emph{solution} is created; then, those 
+solutions that are \emph{fit} or \emph{approximate} the solution are kept, those that not 
+are discarded; finally, the successful candidate are mixed, creating offsprings with 
+\emph{variations} of all the other possible solutions. With these steps, a common EC 
+algorithm can be constructed, and in general this is case. The advantage of using EC is 
+that of \emph{adaptability}. Many of these algorithms are suited for hard problems, some of 
+which are impossible to solve with traditional methods, or at least take a long time to 
+find a solution, such as the famous traveling salesman 
+problem~\cite{dorigoAntColonySystem1997}. Flexibility, adaptability and generalization are 
+the advantages of EC algorithms. When used in the popular StarCraft computer videogame, the 
+AlphaStar system~\cite{arulkumaranAlphaStarEvolutionaryComputation2019} performed 
+surprsingly better than the top players in the world. 
+
+However, the lack the general ease of use in some case, and their implementations might be 
+troublesome in some other cases. EC algorithms tend to have many parameters to adjust, for 
+instance the total number of solutions in the population, the number of offsprings, and so 
+on. In the case of EC algorithms, there is no \emph{one size fits all}, and so this can 
+make them hard to deal with. In the present work, EC algorithms will be used for non-linear 
+unconstrained optimization, and in particular, in the sub-field of 
+\emph{black-box optimization}, which will be presented next.
+
 \subsection{Black-box Optimization}
 \subsection{Natural Evolution Strategies}
