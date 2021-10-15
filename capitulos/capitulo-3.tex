@@ -620,7 +620,8 @@ will be used for non-linear unconstrained optimization, and in particular, in th
 of \emph{derivative-free optimization}. This will be discussed in the next section.
 
 EC algorithms have been used for optimization in cases where the objective function is not 
-\emph{smooth}, does not posses a \emph{continuous derivative}, or when it is too \emph{costly} to search for a solution in finite 
+\emph{smooth}, does not posses a \emph{continuous derivative}, or when it is too 
+\emph{costly} to search for a solution in finite 
 time~\cite{kacprzykSpringerHandbookComputational2015}. The basic functionality of EC 
 algorithms for optimization follow the diagram from 
 \autoref{fig:evolutionary-optimization}. With EC algorithms, the idea is to form an initial 
@@ -634,6 +635,57 @@ minimize the function. After all, EC algorithms are \emph{approximation algorith
 this methods do not attempt to find the best solutions, but to 
 \emph{find a possible solution} to the problem.
 
-\subsection{Derivative-free Optimization}
+\subsection{Derivative-free and Black-box Optimization}
+In optimization tasks, the best algorithms are those that include some kind of information 
+about \emph{derivatives}. For instance, the Newton method, and Newton-like methods such as 
+BFGS~\cite{nocedalNumericalOptimization2006}, are some of the best for their speed, 
+accuracy and convergence properties. Mathematically rigorous frameworks can be used to 
+understand these algorithms, and can also be used to understand their convergence 
+properties. Another similar optimization method was encountered before, the gradient 
+descent method, which by leveraging the gradient information of the objective function a 
+local minimum could be found by iterative steps.
+
+However, the derivative information is not always available. When such cases are 
+encountered, the only methods capable of providing solutions are known as 
+\emph{derivative-free} methods. These methods try to search the best solution, using 
+different kinds of strategies, such as the 
+trust-region~\cite{byrdTrustRegionAlgorithm1987}, quadratic polynomial 
+approximation~\cite{powellUOBYQAUnconstrainedOptimization2002}, and the most recent and 
+interesting approach is that of surrogate model 
+optimization~\cite{forresterRecentAdvancesSurrogatebased2009}. In each case, the objective 
+function is approximated using some form of interpolation, or surrogate model, and the 
+original search space is projected onto a new search space where the approximation can be 
+optimized efficiently. With this approach, derivatives are no longer needed and 
+optimization can be performed, but not without its drawbacks. First and foremost, the 
+method relies entirely on function evaluations. If the function is \emph{costly} to 
+evaluate, then this methods will take a long time to find a suitable solution. Further, the 
+search space will be explored, and this can considerably slow down the optimization 
+procedure. After all, these methods try to explore and map the whole search space, but if 
+the search space is quite large, the optimization procedure will suffer greatly in terms of 
+performance. Finally, the \emph{no free lunch} theorem states that, averaged over all 
+optimization problems, all optimization methods perform equally 
+well~\cite{adamNoFreeLunch2019}. This means that if a particular derivative-free method is 
+not providing sufficiently good results, then there must exist another optimization method 
+that should give sufficiently good solutions. In other words, several algorithms must be 
+tested against each other, given that there are enough computational resources to do so.
+
+As mentioned before, sometimes there is not derivative information about the objective 
+function, but more than that, objective function evaluations are \emph{costly}. This means 
+that, for a given input \(\mathbf{x}\) and an objective function \(f \colon \mathbb{R}^n \mapsto \mathbb{R}\), the evaluation \(f(\mathbf{x})\) will take a long time. Further, in 
+most cases when this is true, the \emph{analytical or functional form} of the objective 
+function \emph{is not known}. When a particular objective function satisfies these 
+conditions, it is referred to as a \emph{black-box function}. When optimizing costly 
+black-box function, the main goal is to \emph{minimize} the number of evaluations of the 
+function. This is done by sampling the search space \emph{intelligently} so as to not 
+evaluate the objective function where there is no sign of a minimum.
+
+Black-box functions can, in general, be any type of function, either mathematical or 
+computational. When the function is computational, this can represent code that performs 
+several tasks, each of which might take considerable amount of time and computing 
+resources. In such cases, black-box optimization algorithms are the key to solving the 
+problem. Or maybe the black-box function is not too costly, but instead the true form of 
+the function is not known. Again, black-box optimization algorithms are the best choice. In 
+the next section, a particular EC, black-box optimization algorithm will be reviewed and 
+presented, which will be extensively in a later chapter of this thesis.
 
 \subsection{Natural Evolution Strategies}

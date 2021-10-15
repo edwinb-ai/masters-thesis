@@ -26,6 +26,23 @@
   keywords = {CEDL,Convolutional neural networks,Data mining,Feature extraction,Image segmentation,remote sensing,Remote sensing,road extraction,Roads,Training,VNet network}
 }
 
+@incollection{adamNoFreeLunch2019,
+  title = {No {{Free Lunch Theorem}}: A {{Review}}},
+  shorttitle = {No {{Free Lunch Theorem}}},
+  booktitle = {Approximation and {{Optimization}} : Algorithms, {{Complexity}} and {{Applications}}},
+  author = {Adam, Stavros P. and Alexandropoulos, Stamatios-Aggelos N. and Pardalos, Panos M. and Vrahatis, Michael N.},
+  editor = {Demetriou, Ioannis C. and Pardalos, Panos M.},
+  year = {2019},
+  series = {Springer {{Optimization}} and {{Its Applications}}},
+  pages = {57--82},
+  publisher = {{Springer International Publishing}},
+  address = {{Cham}},
+  doi = {10.1007/978-3-030-12767-1_5},
+  abstract = {The ``No Free Lunch'' theorem states that, averaged over all optimization problems, without re-sampling, all optimization algorithms perform equally well. Optimization, search, and supervised learning are the areas that have benefited more from this important theoretical concept. Formulation of the initial No Free Lunch theorem, very soon, gave rise to a number of research works which resulted in a suite of theorems that define an entire research field with significant results in other scientific areas where successfully exploring a search space is an essential and critical task. The objective of this paper is to go through the main research efforts that contributed to this research field, reveal the main issues, and disclose those points that are helpful in understanding the hypotheses, the restrictions, or even the inability of applying No Free Lunch theorems.},
+  isbn = {978-3-030-12767-1},
+  langid = {english}
+}
+
 @article{agostinelliLearningActivationFunctions2015,
   title = {Learning {{Activation Functions}} to {{Improve Deep Neural Networks}}},
   author = {Agostinelli, Forest and Hoffman, Matthew and Sadowski, Peter and Baldi, Pierre},
@@ -374,6 +391,22 @@
   keywords = {GMRES,Inhomogeneous fluids,Krylov,Newton,Nonlinear integral equation,Numerical solution,Ornstein,Raphson,Zernike}
 }
 
+@article{byrdTrustRegionAlgorithm1987,
+  title = {A {{Trust Region Algorithm}} for {{Nonlinearly Constrained Optimization}}},
+  author = {Byrd, Richard H. and Schnabel, Robert B. and Shultz, Gerald A.},
+  year = {1987},
+  month = oct,
+  journal = {SIAM Journal on Numerical Analysis},
+  volume = {24},
+  number = {5},
+  pages = {1152--1170},
+  publisher = {{Society for Industrial and Applied Mathematics}},
+  issn = {0036-1429},
+  doi = {10.1137/0724076},
+  abstract = {We present a trust region-based method for the general nonlinearly equality constrained optimization problem. The method works by iteratively minimizing a quadratic model of the Lagrangian subject to a possibly relaxed linearization of the problem constraints and a trust region constraint. The model minimization may be done approximately with a dogleg-type approach. We show that this method is globally convergent even if singular or indefinite Hessian approximations are made. A second order correction step that brings the iterates closer to the feasible set is described. If sufficiently precise Hessian information is used, this correction step allows us to prove that the method is also locally quadratically convergent, and that the limit satisfies the second order necessary conditions for constrained optimization. An example is given to show that, without this correction, a situation similar to the Maratos effect may occur where the iteration is unable to move away from a saddle point.},
+  keywords = {49D37,65K05,constrained optimization,trust region}
+}
+
 @article{carleoMachineLearningPhysical2019a,
   title = {Machine Learning and the Physical Sciences},
   author = {Carleo, Giuseppe and Cirac, Ignacio and Cranmer, Kyle and Daudet, Laurent and Schuld, Maria and Tishby, Naftali and {Vogt-Maranto}, Leslie and Zdeborov{\'a}, Lenka},
@@ -673,6 +706,21 @@
   abstract = {This paper proposes a novel supervised learning method for single-layer feedforward neural networks. This approach uses an alternative objective function to that based on the MSE, which measures the errors before the neuron's nonlinear activation functions instead of after them. In this case, the solution can be easily obtained solving systems of linear equations, i.e., requiring much less computational power than the one associated with the regular methods. A theoretical study is included to proof the approximated equivalence between the global optimum of the objective function based on the regular MSE criterion and the one of the proposed alternative MSE function. Furthermore, it is shown that the presented method has the capability of allowing incremental and distributed learning. An exhaustive experimental study is also presented to verify the soundness and efficiency of the method. This study contains 10 classification and 16 regression problems. In addition, a comparison with other high performance learning algorithms shows that the proposed method exhibits, in average, the highest performance and low-demanding computational requirements.},
   langid = {english},
   keywords = {Convex optimization,Global optimum,Incremental learning,Least squares,Single-layer neural networks,Supervised learning method}
+}
+
+@article{forresterRecentAdvancesSurrogatebased2009,
+  title = {Recent Advances in Surrogate-Based Optimization},
+  author = {Forrester, Alexander I. J. and Keane, Andy J.},
+  year = {2009},
+  month = jan,
+  journal = {Progress in Aerospace Sciences},
+  volume = {45},
+  number = {1},
+  pages = {50--79},
+  issn = {0376-0421},
+  doi = {10.1016/j.paerosci.2008.11.001},
+  abstract = {The evaluation of aerospace designs is synonymous with the use of long running and computationally intensive simulations. This fuels the desire to harness the efficiency of surrogate-based methods in aerospace design optimization. Recent advances in surrogate-based design methodology bring the promise of efficient global optimization closer to reality. We review the present state of the art of constructing surrogate models and their use in optimization strategies. We make extensive use of pictorial examples and, since no method is truly universal, give guidance as to each method's strengths and weaknesses.},
+  langid = {english}
 }
 
 @book{frenkelUnderstandingMolecularSimulation2001,
@@ -1697,6 +1745,22 @@
   langid = {english}
 }
 
+@article{powellUOBYQAUnconstrainedOptimization2002,
+  title = {{{UOBYQA}}: Unconstrained Optimization by Quadratic Approximation},
+  shorttitle = {{{UOBYQA}}},
+  author = {Powell, M.J.D.},
+  year = {2002},
+  month = may,
+  journal = {Mathematical Programming},
+  volume = {92},
+  number = {3},
+  pages = {555--582},
+  issn = {1436-4646},
+  doi = {10.1007/s101070100290},
+  abstract = {UOBYQA is a new algorithm for general unconstrained optimization calculations, that takes account of the curvature of the objective function, F say, by forming quadratic models by interpolation. Therefore, because no first derivatives are required, each model is defined by {$\frac{1}{2}$}(n+1)(n+2) values of F, where n is the number of variables, and the interpolation points must have the property that no nonzero quadratic polynomial vanishes at all of them. A typical iteration of the algorithm generates a new vector of variables, \$\textbackslash widetilde\{\textbackslash underline\{x\}\}\$tsay, either by minimizing the quadratic model subject to a trust region bound, or by a procedure that should improve the accuracy of the model. Then usually F(\$\textbackslash widetilde\{\textbackslash underline\{x\}\}\$t) is obtained, and one of the interpolation points is replaced by \$\textbackslash widetilde\{\textbackslash underline\{x\}\}\$t. Therefore the paper addresses the initial positions of the interpolation points, the adjustment of trust region radii, the calculation of \$\textbackslash widetilde\{\textbackslash underline\{x\}\}\$tin the two cases that have been mentioned, and the selection of the point to be replaced. Further, UOBYQA works with the Lagrange functions of the interpolation equations explicitly, so their coefficients are updated when an interpolation point is moved. The Lagrange functions assist the procedure that improves the model, and also they provide an estimate of the error of the quadratic approximation to F, which allows the algorithm to achieve a fast rate of convergence. These features are discussed and a summary of the algorithm is given. Finally, a Fortran implementation of UOBYQA is applied to several choices of F, in order to investigate accuracy, robustness in the presence of rounding errors, the effects of first derivative discontinuities, and the amount of work. The numerical results are very promising for n{$\leq$}20, but larger values are problematical, because the routine work of an iteration is of fourth order in the number of variables.},
+  langid = {english}
+}
+
 @article{puseyPhaseBehaviourConcentrated1986,
   title = {Phase Behaviour of Concentrated Suspensions of Nearly Hard Colloidal Spheres},
   author = {Pusey, P. N. and {van Megen}, W.},
@@ -2225,6 +2289,23 @@
   issn = {1936-0851},
   doi = {10.1021/acsnano.0c05288},
   abstract = {Using simulations we study the phase behavior of a family of hard spherotetrahedra, a shape that interpolates between tetrahedra and spheres. We identify 13 close-packed structures, some with packings that are significantly denser than previously reported. Twelve of these are crystals with unit cells of N = 2 or N = 4 particles, but in the shape regime of slightly rounded tetrahedra we find that the densest structure is a quasicrystal approximant with a unit cell of N = 82 particles. All 13 structures are also stable below close packing, together with an additional 14th plastic crystal phase at the sphere side of the phase diagram, and upon sufficient dilution to packing fractions below 50\textendash 60\% all structures melt. Interestingly, however, upon compressing the fluid phase, self-assembly takes place spontaneously only at the tetrahedron and the sphere side of the family but not in an intermediate regime of tetrahedra with rounded edges. We describe the local environment of each particle by a set of l-fold bond orientational order parameters {$\overline q$}l, which we use in an extensive principal component analysis. We find that the total packing fraction as well as several particular linear combinations of {$\overline q$}l rather than individual {$\overline q$}l's are optimally distinctive, specifically the differences {$\overline q$}4 \textendash{} {$\overline q$}6 for separating tetragonal from hexagonal structures and {$\overline q$}4\textendash{$\overline q$}8 for distinguishing tetragonal structures. We argue that these characteristic combinations are also useful as reliable order parameters in nucleation studies, enhanced sampling techniques, or inverse-design methods involving odd-shaped particles in general.}
+}
+
+@article{vandenberghenCONDORNewParallel2005,
+  title = {{{CONDOR}}, a New Parallel, Constrained Extension of {{Powell}}'s {{UOBYQA}} Algorithm: Experimental Results and Comparison with the {{DFO}} Algorithm},
+  shorttitle = {{{CONDOR}}, a New Parallel, Constrained Extension of {{Powell}}'s {{UOBYQA}} Algorithm},
+  author = {Vanden Berghen, Frank and Bersini, Hugues},
+  year = {2005},
+  month = sep,
+  journal = {Journal of Computational and Applied Mathematics},
+  volume = {181},
+  number = {1},
+  pages = {157--175},
+  issn = {0377-0427},
+  doi = {10.1016/j.cam.2004.11.029},
+  abstract = {This paper presents an algorithmic extension of Powell's UOBYQA algorithm (Unconstrained Optimization BY Quadratical Approximation). We start by summarizing the original algorithm of Powell and by presenting it in a more comprehensible form. Thereafter, we report comparative numerical results between UOBYQA, DFO and a parallel, constrained extension of UOBYQA that will be called in the paper CONDOR (COnstrained, Non-linear, Direct, parallel Optimization using trust Region method for high-computing load function). The experimental results are very encouraging and validate the approach. They open wide possibilities in the field of noisy and high-computing-load objective functions optimization (from 2min to several days) like, for instance, industrial shape optimization based on computation fluid dynamic codes or partial differential equations solvers. Finally, we present a new, easily comprehensible and fully stand-alone implementation in C++ of the parallel algorithm.},
+  langid = {english},
+  keywords = {High-computing-load,Lagrange interpolation,Noisy optimization,Nonlinear,Optimal shape design,Parallel computing,Trust region method}
 }
 
 @article{verletComputerExperimentsClassical1967a,
