@@ -1,4 +1,49 @@
-\chapter{Numerical solution to the OZ equation}
+\chapter{Numerical solution to the Ornstein-Zernike equation}
 \label{AppendixB}
 
-Some equations.
+The Ornstein-Zernike (OZ) equation is usually solved using a particular closure for a given 
+interaction potential. In this thesis, two closures were explored and discussed. However, 
+the solution to the OZ equation remained the same. The solution is based on using the Fast 
+Fourier Transform and the convolution theorem to solve algebraic equations instead of an 
+integral equation. In this appendix, the complete numerical scheme used in this thesis will 
+be described in detail, for the particular case of \(3\)-dimensional space.
+
+The method used is a derivative of the so-called \emph{Piccard iterative} methods, with a 
+variation due to Ng~\cite{ngHypernettedChainSolutions1974}, referred to in this work as the 
+\emph{five-point method} of Ng. A slight variation was implemented in practice, which is 
+just a straightforward extension to the Ng method.
+
+\section{Fourier Transform of the Ornstein-Zernike equation}
+The OZ for an isotropic fluid is, recalling from \autoref{eq:ornstein-zernike},
+\begin{equation}
+    h(r) = c(r) + \rho \int_{V} c(r') \, h(\lvert \vecr - \vecr' \rvert) \, d \vecr'
+    \; ,
+    \label{eq:oz-appendix}
+\end{equation}
+with \(\rho\) the particle number density, and \(h(r), c(r)\) are the total and direct correlation functions, respectively.
+
+The \emph{Fourier transform} defined as,
+\begin{equation}
+    \hat{f}(k) = \int_{- \infty}^{\infty} f(x) \, e^{-2 \pi \, i k x} \, dx
+    \; ,
+    \label{eq:fourier-transform}
+\end{equation}
+and the \emph{inverse Fourier transform} is defined as,
+\begin{equation}
+    f(x) = \int_{- \infty}^{\infty} \hat{f}(k) \, e^{2 \pi \, i k x} \, dk
+    \; .
+    \label{eq:inv-fourier-transform}
+\end{equation}
+
+When using \autoref{eq:fourier-transform} in \autoref{eq:oz-appendix}, and using the 
+\emph{convolution theorem}~\cite{kornerFourierAnalysis1989}, the result is the following 
+algebraic equation,
+\begin{equation}
+    \hat{h}(k) = \hat{c}(k) + \rho \, \hat{c}(k) \, \hat{h}(k)
+    \; .
+    \label{eq:algebraic-oz}
+\end{equation}
+As is the case when dealing with Fourier transforms, solving \autoref{eq:algebraic-oz} is 
+much easier than solving \autoref{eq:oz-appendix} directly. Not only because the equation 
+is now an algebraic equation, but because there exist efficient numerical methods that can 
+compute the Fourier transform in its discrete form.
