@@ -126,7 +126,7 @@ hence,
 \end{equation}
 where
 \begin{equation}
-    d_{0i} = d_n - d_{n-1} \quad i=1,2,3,4,5
+    d_{0i} = d_n - d_{n-i} \quad i=1,2,3,4,5
     \; .
     \label{eq:dzeros}
 \end{equation}
@@ -156,3 +156,50 @@ function}, \(f_{n+1}\),
     \label{eq:best-input}
 \end{equation}
 is the best approximation to solve \autoref{eq:linear-operator}.
+
+\section{Numerical algorithm for solving the Ornstein-Zernike equation}
+The numerical algorithm to solve the OZ equation will now be described, which uses the Ng 
+method. For this, it is assumed that there is a \emph{closure relation} available that 
+relates \(c(r)\) and \(\gamma(r) = h(r) - c(r)\) through a bridge function \(B(r)\). With 
+this information, the numerical algorithm in \autoref{alg:cap} is used to solve the OZ equation.
+\begin{algorithm}
+    \caption{Piccard method for the OZ equation}\label{alg:cap}
+    \begin{algorithmic}
+        \State \(c(r) \gets \exp{\left[\beta u(r) + B(r) + \gamma(r)\right]} - \gamma(r) - 1\) \Comment{Using the bridge function} \\
+        \State \(\mathcal{F} \left[c(r)\right] \gets \hat{c}(k)\) \\
+        \State \(\hat{\gamma}(k) \gets \frac{\rho \, \hat{c}^{2}(k)}{1 - \rho \, \hat{c}(k)}\) \\
+        \State \(\mathcal{F}^{-1} \left[\hat{\gamma}(k)\right] \gets \gamma^{\prime}(r)\) \\
+        \State \(c^{\prime}(r) \gets \exp{\left[\beta u(r) + B(r) + \gamma^{\prime}(r)\right]} - \gamma(r) - 1\) \Comment{New \(c^{\prime}(r)\) using previous value of \(\gamma(r)\)}
+    \end{algorithmic}
+\end{algorithm}
+
+In \autoref{alg:cap}, the symbol \(\mathcal{F} [f(x)]\) represents the Fourier transform of \(f(x)\), while \(\mathcal{F}^{-1} [\hat{f}(k)]\) represents the inverse Fourier transform of \(\hat{f}(k)\).
+However, the solution to the OZ equation is quite sensible to the density of the system, 
+which is why it makes it hard for the iterative method to converge properly, specially at 
+high densities. A useful way of solving this issue is by constructing a grid of density 
+values, and to solve the OZ equation at each intermediate value, until the target density 
+is reached. This makes the method convergent, but at the cost of high computational 
+resources, which stem from performing \autoref{alg:cap} as many times as there are density 
+values in the grid. With this information, the complete algorithm will now be described 
+next.
+
+\begin{enumerate}
+    \item \label{item:1} A grid of density values is built, \(\{\rho_i\} \, , i=1,2,\dots,M\); where \(\rho_{M}\) is the target density of the system, and \(\Delta n = n_{i+1} - n_{i}\).
+    \item \label{item:2} Using the first density value \(n_1\) and \(\gamma_0 = 0\), \autoref{alg:cap} is used to obtain the functions \(\gamma_i (r) \, , i=1,2,3,4,5,6\). These functions are then mapped, \(\gamma_6 \mapsto g_n\), \(\gamma_5 \mapsto g_{n-1}\), \(\gamma_4 \mapsto g_{n-2}\), \(\gamma_3 \mapsto g_{n-3}\), \(\gamma_2 \mapsto g_{n-4}\), \(\gamma_1 \mapsto g_{n-5}\).
+    \item \label{item:3} Then, using \autoref{eq:linear-system}, all the coefficients \(c_i\) are then computed, such that \autoref{eq:best-input} can then be obtained.
+    \item \label{item:4} Using \autoref{eq:dn}, expression \(d_n = f_{n+1} - g_n\) is evaluated. If \(\lVert d_n \rVert > \num{1e-3}\), then the functions are updated as \(f_{n+1} \mapsto \gamma_6 \, , g_5 \mapsto \gamma_4 \, , g_4 \mapsto \gamma_3 \, , g_3 \mapsto \gamma_2 \, , g_2 \mapsto \gamma_1\). Then, the previous two steps are repeated until \(\lVert d_n \rVert \leq \num{1e-3}\).
+    \item \label{item:5} Finally, once the condition \(\lVert d_n \rVert \leq \num{1e-3}\) is met, a new density value is taken \(n_2 = n_1 + \Delta n\), and the steps \ref{item:2} to \ref{item:4} are repeated. However, this time around, the initial \emph{input} is updated as \(\gamma_{0} \mapsto \gamma_6\), which resulted from the previous step. From here on, this process is repetead until convergence, which usually means until all the density values in the grid are used. However, the function update \(\gamma_{0} \mapsto \gamma_6\) is changed to be a linear extrapolation between the previous two results.
+\end{enumerate}
+
+\section{Extensions to the method}
+In the actual method used in this work, the method of Ng is extended to use not only five 
+input functions, but an arbitrary \(m\) number of functions. However, it turns out that 
+this extension does not provide more accurate results, at least for the case of the hard 
+sphere fluid. It does make is more stable for some density values.
+
+To solve the linear system in \autoref{eq:linear-system}, the common way of doing this is 
+through the use of the LU decomposition~\cite{trefethenNumericalLinearAlgebra1997}. The 
+problem with the LU decomposition method is that is it slow, and can be unstable. So 
+instead, in this work a faster method was employed which is based on the Krylov sub-space 
+iterative methods. This method, called DIOM~\cite{saadPracticalUseKrylov1984a}, is an 
+upgrade to the basic LU method, and can be used with ill-conditioned, symmetric matrices.

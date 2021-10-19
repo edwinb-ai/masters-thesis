@@ -44,7 +44,8 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{siunitx}
 \usepackage{mathtools,amsthm}
 \usepackage{bm}
-% \usepackage{thmtools}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \usepackage{subfig}
 \usepackage{caption}
 \usepackage{float}
@@ -80,6 +81,9 @@ headsepline, % Uncomment to get a line under the header
 \newcommand{\rdf}{$g(r) \ $}
 %%
 \def\Itemautorefname{Figure}
+%% For algorithm environments
+\newcommand{\algorithmautorefname}{Algorithm}
+%% For theorems
 \newtheorem{theorem}{Theorem}
 % \def\theoremautorefname{Theorem}
 %%
