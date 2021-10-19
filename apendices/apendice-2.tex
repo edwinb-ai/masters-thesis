@@ -47,3 +47,112 @@ As is the case when dealing with Fourier transforms, solving \autoref{eq:algebra
 much easier than solving \autoref{eq:oz-appendix} directly. Not only because the equation 
 is now an algebraic equation, but because there exist efficient numerical methods that can 
 compute the Fourier transform in its discrete form.
+
+\section{Piccard method}
+The Piccard method is an iterative numerical method that can provide solutions to a 
+\emph{linear system} based on previous iterations. The idea is to build a set of possible 
+solutions that, when measured against each other, the error is minimized.
+
+To see this more clearly, the OZ equation can be regarded as the linear system,
+\begin{equation}
+    A \, f = f
+    \; ,
+    \label{eq:linear-operator}
+\end{equation}
+with \(f \colon \mathbb{C} \mapsto \mathbb{C}\) is in general a complex-valued function, 
+and \(A\) is a generic \emph{linear operator} defined on some functional space that acts on 
+\(f\). In order to find the solutions to \autoref{eq:linear-operator}, the Piccard 
+iterative method provides the following iterative algorithm,
+\begin{equation}
+    A \, f_{n+1} = f_{n}
+    \; ,
+    \label{eq:piccard}
+\end{equation}
+with \(n \in \mathbb{Z}\). When an initial function \(f_1\) is provided and plugged into
+\autoref{eq:piccard}, several other functions are generated \(f_2, f_3, \dots\). If this 
+sequence of functions converge to a particular limiting function \(g\), then that is 
+defined as the solution to \autoref{eq:linear-operator}. However, in the case of fluids, 
+and particularly liquids, the Piccard method often oscillates and diverges, thus no 
+solutions is found. The method of Ng provides stability to the numerical method, and it 
+shall be described next.
+
+\section{The method of Ng}
+Let \(g_n\) be defined as,
+\begin{equation}
+    g_n \coloneqq A \, f_n
+    \: ,
+    \label{eq:gn}
+\end{equation}
+and let \(d_n\) be defined as,
+\begin{equation}
+    d_n \coloneqq g_n - f_n = (A - 1) f_n
+    \; .
+    \label{eq:dn}
+\end{equation}
+In the numerical analysis jargon, function \(f_n\) is usually referred to as the 
+\emph{input}, and function \(g_n\) is referred to as the \emph{output}. In both cases, 
+\(n\) is the \(n\)-th iteration of the method. Further, \(d_n\) is usually employed as a 
+\emph{metric} to measure the accuracy of the solution when obtaining its \(L^2\) norm in 
+functional space, that is,
+\begin{equation}
+    {\left\lVert d_n \right\rVert}^{2} = \int {\left\lvert d_n (x) \right\rvert}^{2} \, dx
+    \; .
+    \label{eq:precision}
+\end{equation}
+
+Now, for the method of Ng, suppose that the following functions are known, for \(n \geq 6\),
+\(f_{n-i}, g_{n-i}\) with \(i = 0,1,2,3,4,5 \, .\) The goal is to use all of these 
+functions to generate a good estimation for the \emph{input} function to the iterative 
+method, thus the following function is used,
+\begin{equation}
+    f=(1-c_{1}-c_{2}-c_{3}-c_{4}-c_{5}) f_n + \sum_{i=1}^{5} c_i f_{n-i}
+    \; ,
+    \label{eq:finit}
+\end{equation}
+with \(c_i\), \(i = 1,2,3,4,5\), arbitrary constants. Here, the goal is to find the values 
+that will make \autoref{eq:finit} a good solution to \autoref{eq:linear-operator}.
+Thus, pluggin \autoref{eq:finit} into \autoref{eq:linear-operator},
+\begin{equation}
+    A \, f = (1-c_{1}-c_{2}-c_{3}-c_{4}-c_{5}) g_n + \sum_{i=1}^{5} c_i g_{n-i}
+    \; ,
+    \label{eq:ginit}
+\end{equation}
+hence,
+\begin{equation}
+    \Delta \coloneqq \left\lVert A \, f - f \right\rVert =
+    \left\lVert d_n - \sum_{i=1}^{5} c_i d_{0i} \right\rVert
+    \; ,
+    \label{eq:deltas}
+\end{equation}
+where
+\begin{equation}
+    d_{0i} = d_n - d_{n-1} \quad i=1,2,3,4,5
+    \; .
+    \label{eq:dzeros}
+\end{equation}
+
+Now, to find the best set of coefficients \(c_i\), the error \(\Delta^2\) must be minimized 
+with respect to the coefficients \(c_i\), which gives,
+\begin{equation}
+    D_{ij} \cdot c_j = \left(d_n, d_{0i}\right)
+    \; ,
+    \label{eq:linear-system}
+\end{equation}
+where \(D_{ij} = \left(d_{0i}, d_{0j}\right)\) are the elements of the \(5 \times 5\) 
+matrix, and the indices take the values \(i=j=1,2,3,4,5\). Here, \(\left(u, v\right)\) 
+determines the \emph{inner product} defined to be,
+\begin{equation}
+    \left(u, v\right) = \int u(x) \, v(x) \, dx
+    \: .
+    \label{eq:inner-product}
+\end{equation}
+
+With this, the Ng method is now complete. The goal is to find the best values of \(c_i\) 
+using \autoref{eq:linear-system} such that the \(n+1\)-th iteration of the \emph{input 
+function}, \(f_{n+1}\),
+\begin{equation}
+    f_{n+1} = (1-c_{1}-c_{2}-c_{3}-c_{4}-c_{5}) g_n + \sum_{i=1}^{5} c_i g_{n-i}
+    \; ,
+    \label{eq:best-input}
+\end{equation}
+is the best approximation to solve \autoref{eq:linear-operator}.
