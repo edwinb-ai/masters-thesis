@@ -19,6 +19,74 @@ incoporating more Physics into the modeling, instead of relying on the neural ne
 learn something by its own.
 
 \section{The Kinoshita closure and its parametrization}
+The proposal in this chapter deals with the modified Verlet closure and a variation of 
+this, the Kinoshita modification. Both of these closure relations have been formulated to 
+deal with the hard-sphere fluid, for low and large density values. The purpose of this 
+section is to look at these closure relations more closely, as well as to define the 
+parametrization to be used in later computations and results.
+
+\subsection{The modified Verlet bridge function approximation}
+Between 1980 and 1981, Loup Verlet published two papers were he introduced what is now 
+called the \emph{modified Verlet} bridge 
+function~\cite{verletIntegralEquationsClassical1980,verletIntegralEquationsClassical1981}. 
+The idea behind his bridge function approximation was to derive a good approximation based 
+on reproducing the exact first five virial coefficients of the hard sphere equation of 
+state. The original proposition for the bridge function by Verlet was,
+\begin{equation}
+    B(r) = - \frac{A \, \gamma^{2}(r) \, / 2}{1 + B \, \gamma(r) \, / 2}
+    \; .
+    \label{eq:verlet-params}
+\end{equation}
+By fitting the exact values of the virial coefficients, Verlet reached the conclusion that 
+the values for \(A, B\) that could reproduce the results for the hard-sphere fluid up to 
+the fluid-solid transition where the values of,
+\begin{equation}
+    A = 1 \, , \quad B = \frac{4}{5}
+    \; ,
+    \label{eq:ab-verlet}
+\end{equation}
+which turns the original closure relation in \autoref{eq:verlet-params} into,
+\begin{equation}
+    B(r) = - \frac{0.5 \, \gamma^{2}(r)}{1 + 0.8 \, \gamma(r)}
+    \; .
+    \label{eq:mVerlet}
+\end{equation}
+This turned out to be an accurate bridge function approximation for the case of the 
+hard-sphere fluid, even when hard sphere mixtures are 
+considered~\cite{lopez-sanchezDemixingTransitionStructure2013a}.
+Some of the advantages of this approximation is the fact that it is simple, efficient and 
+there are no free parameters to be fixed, as is the case in the 
+Rogers-Young~\cite{rogersNewThermodynamicallyConsistent1984b} and the 
+Zerah-Hansen~\cite{zerahSelfConsistentIntegral1986} closure relations. The problem lies, as 
+with other closure relations, with the fact that the bridge function in 
+\autoref{eq:mVerlet} is not thermodynamically consistent. There are other closure relations 
+which are already thermodynamically consistent, as is the case of the reference Hypernetted 
+Chain approximation~\cite{ladoSolutionsReferencehypernettedchainEquation1983}. This 
+approximation comes from first principles, and the thermodynamic consistency comes from the 
+fact that the reference potential is chosen such that the free energy of the fluid is 
+minimized. Still, the problem with this closure relation, although accurate, is that is 
+might be hard to implement and use in several different scenarios.
+
+\subsection{The Kinoshita variation}
+For this reason, the idea of this chapter is to use the modified Verlet approximation, and instead of using the fixed parameters found from theoretical arguments, to let an evolutionary algorithm find the best ones that can also establish thermodynamic consistency. For this reason, the Kinoshita variation~\cite{kinoshitaInteractionSurfacesSolvophobicity2003} to the modified Verlet closure relation is introduced. This variation reads,
+\begin{equation}
+    B(r) = - \frac{0.5 \, \gamma^{2}(r)}{1 + 0.8 \, \left\lvert \gamma(r) \right\rvert}
+    \; ,
+    \label{eq:kinoshita}
+\end{equation}
+and introduces the absolute value \(\left\lvert \cdot \right\rvert\) in the denominator, 
+which increases the numerical stability of the closure relation for the case when there are 
+very large and negative values of \(\gamma(r)\). However, in this case, the idea is to leave the original form of the closure relation, that is with two free paramaters,
+\begin{equation}
+    B(r) = \frac{\alpha \, \gamma^{2}(r)}{1 + \beta \, \left\lvert \gamma(r) \right\rvert}
+    \; ,
+    \label{eq:kinoshita-params}
+\end{equation}
+and instead look for the best values of both \(\alpha, \beta\) that yield an accurate 
+result for the case of the isotropic hard sphere fluid in three dimensions.
+To find these values, partial thermodynamic consistency will be enforced through the use of 
+the pressure equations, which shall be discussed next.
+
 \section{Thermodynamic consistency}
 \section{Black-box optimization problem implementation}
 \section{Results}
