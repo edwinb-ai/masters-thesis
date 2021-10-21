@@ -1,4 +1,26 @@
 \chapter{Evolutionary optimization for the Kinoshita closure}
 \label{Cap5}
 
-Some text\dots
+In the previous chapter, a neural network was used to approximate the bridge function in 
+the solution to the Ornstein-Zernike (OZ) equation. From the results obtained, it was 
+implied that, without any more physical information, the neural network reduced its 
+approximation to the well-known Hypernetted Chain closure relation. In this chapter, the 
+modified Verlet bridge function is introduced, along with its variation, the Kinoshita 
+closure. This bridge function contains more information in terms of the indirect 
+correlation function, \(\gamma(r)\), which provides a more accurate solution when dealing 
+with the hard-sphere fluid. Still, the Kinoshita closure is not thermodynamically 
+consistent. Thus, in this chapter, the proposal of parametrizing the Kinoshita is 
+introduced. These parameters are then fitted using Evolutionary Computation (EC) method for 
+derivative-free optimization tasks. This is in the same spirit as with the 
+Rogers-Young~\cite{rogersNewThermodynamicallyConsistent1984b} and the 
+Zerah-Hansen~\cite{zerahSelfConsistentIntegral1986} closure relations. The goal of this 
+proposal is to alleviate the problems that using a neural network has, in terms of 
+incoporating more Physics into the modeling, instead of relying on the neural network to 
+learn something by its own.
+
+\section{The Kinoshita closure and its parametrization}
+\section{Thermodynamic consistency}
+\section{Black-box optimization problem implementation}
+\section{Results}
+\section{Discussion}
+\section{Concluding remarks}
