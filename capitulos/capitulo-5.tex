@@ -88,6 +88,89 @@ To find these values, partial thermodynamic consistency will be enforced through
 the pressure equations, which shall be discussed next.
 
 \section{Thermodynamic consistency}
+An important part of the results from this chapter is the notion of 
+\emph{thermodynamic consistency}, the way it works and how it is implemented numerically. 
+This is the goal of the present section.
+
+When approximations to the bridge function are used, together with the OZ equation, most of 
+the time the solution show a phenomenon where, if a thermodynamic observable is computed 
+through two or more \emph{routes}, the results may vary drastically. This is not wanted 
+behavior from the closure relations. Rather, it is expected that the closure relations 
+could, in fact, provide accurate results regardless of the route they are computed with.
+In section \autoref{sec:thermodynamics}, some of the ways to compute thermodynamic 
+quantities using the radial distribution function, \(g(r)\), were presented. These will be 
+presented here once more for the sake of clarity. Specialy, it is important to mention the 
+two main routes that will be used later, the \emph{virial route} and the 
+\emph{compressibility route}.
+
+From \autoref{eq:pressure-equation}, the pressure equation for a $3$-dimensional fluid is,
+\begin{equation}
+    P = \frac{\rho}{\beta} - \frac{2 \pi \beta \rho}{3} \int_{0}^{\infty} u'(r) \, g(r) \, r^3 \, dr \, ,
+    \label{eq:pressure-gr}
+\end{equation}
+this equation is also known as the \emph{virial equation} because it can be derived 
+formally with the virial theorem (see \autoref{sec:thermodynamics}). Henceforth, 
+this equation shall be known as the \emph{virial pressure equation}.
+
+Another quantity of interest is the \emph{isothermal compressibility}, which was already 
+introduced in \autoref{sec:thermodynamics}, and can be computed using the \(c(r)\) function 
+as follows~\cite{hansenTheorySimpleLiquids2013},
+\begin{equation}
+    \frac{\beta}{\left( \chi_{T} \,  \rho \right)} = 1 - \rho \int d \vecr \, c(r)
+    \; .
+    \label{eq:compress-gr}
+\end{equation}
+For this reason, this equation shall be known throughout the rest of this thesis as the 
+\emph{compressibility equation}. Using Thermodynamics, one can relate the pressure \(P\) of the system to the isothermal compressibility using the expression,
+\begin{equation}
+    \chi_{T} = - \, \frac{1}{V} { \left( \frac{\partial V}{\partial P} \right) }_{T} =
+    \frac{1}{\rho} { \left( \frac{\partial \rho}{\partial P} \right) }_{T}
+    \; ,
+    \label{eq:chi-thermo}
+\end{equation}
+which is the same as in \autoref{eq:isothermal-chi}, again from 
+\autoref{sec:thermodynamics}.
+
+By enforcing that the pressure computed from \autoref{eq:pressure-gr} and the pressure 
+computed from \autoref{eq:compress-gr} and then using \autoref{eq:chi-thermo}, closure 
+relations can be \emph{thermodynamically consistent}. This would mean that both routes will 
+yield the same value. In reality, not many closure relations can do this, except for some 
+special cases, which were already mentioned in the previous section. Thus, the standard way 
+of alleviating the problem of thermodynamic inconsistency is to compute both of this routes 
+and adjust some parameter, or function, such that both routes provide the same result. It 
+need not be just the pressure equations, also the energy equations can be used, as well as 
+other thermodynamic quantities, such as the Helmholtz free energy or the chemical 
+potential~\cite{tsedneeClosureOrnsteinZernikeEquation2019}.
+
+\subsection{Numerical implementation}
+In order to be able to compute the pressure from both routes, the \emph{virial} route and the \emph{compressibility} route, the following approach was followed.
+
+For the case of the \emph{virial} route, \autoref{eq:pressure-gr} was computed as is, using 
+the Romberg method for computing the integral~\cite{hammingNumericalMethodsScientists2012}. 
+Due to the fact that the interaction potential is a continuous function (see 
+\autoref{eq:cont-hs}), the exact derivative was computed and implemented. Then, to compute 
+the isothermal compressibility from \emph{eq:chi-thermo}, the derivative was approximated 
+using a finite central difference scheme,
+\begin{equation}
+    \chi_{T}^{-1} = \rho { \left( \frac{\partial P}{\partial \rho} \right) }_{T}
+    \approx \frac{1}{\rho} \lim_{h \to \Delta \rho} \frac{P(\rho + \Delta \rho) - P(\rho - h)}{2 \, \Delta \rho}
+    \; ,
+    \label{eq:central-difference}
+\end{equation}
+where \(\chi_{T}^{-1}\) is the inverse isothermal compressibility. The notation 
+\(P(\rho + \Delta \rho)\) means that, for a particular value of density given by 
+\(\rho^{\prime}=\rho + \Delta \rho\), \autoref{eq:pressure-gr} was used to compute the 
+pressure through the virial route. Here, \(\Delta \rho\) is a small value, fixed to be
+\(\Delta \rho=\num{1e-10}\) in the results presented in this chapter. Other central 
+differences were explored, such as the five stencil 
+approximation~\cite{hammingNumericalMethodsScientists2012}, however, the results obtained 
+were as accurate as those obtained with \autoref{eq:central-difference}, so there was no 
+reason to justify the extra computational resources needed to do a five stencil difference 
+scheme.
+
+For the case of the \emph{compressibility} route, \autoref{eq:compress-gr} was computed as 
+is, using once again the Romberg method for computing the integral.
+
 \section{Black-box optimization problem implementation}
 \section{Results}
 \section{Discussion}
