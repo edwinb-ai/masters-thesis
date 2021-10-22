@@ -176,13 +176,97 @@ is, using once again the Romberg method for computing the integral.
 \section{Black-box optimization problem implementation}
 \begin{figure}
     \centering
-    \includegraphics[scale=0.35]{figuras/capitulo-5/black-box-function.pdf}
-    \caption{A diagram.}
+    \vspace{-2cm}
+    \includegraphics[scale=0.3]{figuras/capitulo-5/black-box-function.png}
+    \vspace{-3cm}
+    \caption{Schematics of the black-box function implementation. The function takes in two parameters, \(\alpha, \beta\), and yield the output given by the squared difference of the inverse isothermal compressibility through the virial and compressibility routes.}
     \label{fig:black-box-function}
 \end{figure}
 
-\subsection{Problem setup}
+In order to solve the problem of finding the best set of values \(\alpha, \beta\) in 
+\autoref{eq:kinoshita-params} that would provide thermodynamic consistency, a special type 
+of setup must be implemented. It must be recalled that the main objective is for the virial 
+and compressibility routes to provide the same value, thus, an \emph{optimization problem} 
+can be setup. The problem can be formulated as an \emph{unconstrained optimization} problem,
+\begin{equation}
+    \underset{\alpha \, , \beta}{\text{minimize}} \: {\left[
+        {\left(\chi_{T}^{c} \left(\alpha, \beta\right) \right)}^{-1} - {\left(\chi_{T}^{v} \left(\alpha, \beta\right) \right)}^{-1} \right]}^2
+    \; ,
+    \label{eq:optimiziation-chi}
+\end{equation}
+where \({\left(\chi_{T}^{c}\right)}^{-1}\) is the inverse isothermal compressibility 
+computed through the \emph{compressibility} route; \({\left(\chi_{T}^{v}\right)}^{-1}\) is 
+the inverse isothermal compressibility computed through the \emph{virial} route; and the 
+notation \({\left(\chi_{T}^{c, v} \left(\alpha, \beta\right) \right)}^{-1}\) represents the 
+dependency of the parameters \(\alpha, \beta\) that would yield such value of the 
+compressibility. In other words, for a fixed set of paramaters \(\alpha, \beta\), the 
+inverse isothermal compressibility is computed via both routes, and its difference squared 
+is computed. The goal of the optimization problem is to \emph{minimize} this difference. If 
+a good set of parameters is found, the the difference will be, ideally, zero or close to 
+zero, which in turn would mean that both routes are providing the same results, up to an 
+arbitrary numerical tolerance.
+
+In order to perform the optimization procedure, all the necessary computation must be bundled together into a single \emph{black-box function}. This function, which is modeled in \autoref{fig:black-box-function}, will take as input two values and will output the difference between the inverse isothermal compressibility values computed using both routes. Thus, the function will perform the following steps:
+\begin{enumerate}
+    \item Take as input two fixed values, \(\alpha^{\prime}, \beta^{\prime}\), and use them to define the Kinoshita closure in \autoref{eq:kinoshita-params}.
+    \item Solve the OZ equation (see \autoref{AppendixB}) with the closure relation provided in the previous step. This will output two important quantities, the radial distribution function, \(g(r)\), and the direct correlation function, \(c(r)\).
+    \item Using \autoref{eq:pressure-gr} and the details presented in the previous section, \({\left(\chi_{T}^{v}\right)}^{-1}\) is computed.
+    \item Then, using \autoref{eq:compress-gr} and the details presented in the previous section, \({\left(\chi_{T}^{c}\right)}^{-1}\) is computed.
+    \item After both routes have been computed, its squared difference is computed, i.e., \({\left[ {\left(\chi_{T}^{c} \left(\alpha, \beta\right) \right)}^{-1} - {\left(\chi_{T}^{v} \left(\alpha, \beta\right) \right)}^{-1} \right]}^2 \).
+\end{enumerate}
+Thus, the previous steps comprise the \emph{black-box function} shown in 
+\autoref{fig:black-box-function}, which will later be minimized.
+
 \subsection{Optimization procedure}
+To solve the optimization problem in \autoref{eq:optimiziation-chi}, Evolutionary 
+Comptuation methods were employed. However, there are two parts to the solution of this 
+problem. First off, the function is treated as a \emph{black-box function}, which means 
+that no derivatives can be computed, and that it is assumed that each function evaluation 
+is costly. Although the numerical methods are quite optimized, it is safe to assume that 
+each function evaluation is costly, and use this argument to select a good optimization 
+method that can effectively reduce the number of function evaluations.
+
+For this reason, Evolution Strategy methods were employed, in particular, Natural Evolution 
+Strategies (NES) (see \autoref{Cap3}). These methods are robust, albeit slow to reach a 
+minimum. 
+Furthermore, these methods are \emph{global optimization methods}, meaning that these 
+method will only look for global values throughout the function lanspace, and if any minima 
+is found, it will not look deeper into that particular set of parameters. For this reason,
+\emph{local optimization methods} are used, to perform a more exhaustive search into the 
+previously found global minima. Thus, the optimization procedure looks like the following,
+\begin{enumerate}
+    \item Select an initial search space of \(\left[-75, 75\right]\) for each parameter, and choose an initial set of parameters randomly from within the search space.
+    \item Using the DXNES global optimization method~\cite{nomuraDistanceweightedExponentialNatural2021}, perform a search for all the global minima in the interval \(\rm{x} \in \left[a, b\right]\).
+    \item Keep the minima that satisfy the condition \(\rm{x} \leq 0.5\).
+    \item Using a local optimization method, the BOBYQA method~\cite{powellUOBYQAUnconstrainedOptimization2002}, take as input the parameters found by the previous two steps, \(\rm{x}^{\prime}\). Use these within a shorter interval of \(\pm 5\) for each parameter, and look for a new set of parameters.
+    \item Stop the optimization procedure when the new set of parameters satisfy the condition \(\rm{x}^{*} \leq \num{1e-7}\).
+\end{enumerate}
+
+To see this more clearly, an example is worked out now. First, a density value is fixed, 
+\(\phi = 0.4\), and all the necessary parameters to solve the OZ equation are fixed as 
+well. Then, the search is space is fixed to be \(\rm{x} = \left(\alpha, \beta\right) \in \left[-75, 75\right]\). 
+An initial set of parameters is chosen randomly from within this search space, for 
+instance, \(\rm{x} = \left(-10, 42\right)\). These pair of values are then fixed to be the 
+value of \(\alpha, \beta\) in \autoref{eq:kinoshita-params}. With these new values, the 
+closure relation is fixed and the OZ equation is solved. If the OZ equation can be solved 
+using these values, then the result of the OZ equation is the pair of functions 
+\(g(r), c(r)\). Using these values, and the details from the previous section, the squared 
+difference 
+\[
+    \Delta \chi^{-1}_{T} = {\left[ {\left(\chi_{T}^{c} \left(\alpha, \beta\right) \right)}^{-1} - {\left(\chi_{T}^{v} \left(\alpha, \beta\right) \right)}^{-1} \right]}^2 
+\; ,
+\] 
+is computed, and the global optimization method registers this value. If the value 
+\(\Delta \chi^{-1}_{T}\) satisfies the condition \(\Delta \chi^{-1}_{T} \leq 0.5\), then 
+the set of values \(\rm{x} = \left(-10, 42\right)\) is used for the local optimization 
+method. However, in this case, the search space is bounded about these values by a factor 
+of \(5\). In this example, that would mean that the new search space for the local 
+optimization method would be \(\alpha \in [-15, -5]\) for the first parameter, and 
+\(\beta \in [37, 47]\) for the second parameter. Then, the local optimization method would 
+start looking for the minimum in this search space, and when a set of values satisfy the 
+condition \(\rm{x}^{*} \leq \num{1e-7}\), then the optimization procedure has converged, 
+and the set of values are regarded as the best values that provide thermodynamic 
+consistency.
 
 \section{Results}
 
