@@ -132,14 +132,15 @@ which is the same as in \autoref{eq:isothermal-chi}, again from
 \autoref{sec:thermodynamics}.
 
 By enforcing that the pressure computed from \autoref{eq:pressure-gr} and the pressure 
-computed from \autoref{eq:compress-gr} and then using \autoref{eq:chi-thermo}, closure 
-relations can be \emph{thermodynamically consistent}. This would mean that both routes will 
-yield the same value. In reality, not many closure relations can do this, except for some 
-special cases, which were already mentioned in the previous section. Thus, the standard way 
-of alleviating the problem of thermodynamic inconsistency is to compute both of this routes 
-and adjust some parameter, or function, such that both routes provide the same result. It 
-need not be just the pressure equations, also the energy equations can be used, as well as 
-other thermodynamic quantities, such as the Helmholtz free energy or the chemical 
+computed from \autoref{eq:compress-gr} and then using \autoref{eq:chi-thermo}, are equal to 
+some arbitrary precision, closure relations can be \emph{thermodynamically consistent}. 
+This would mean that both routes will yield the same value. In reality, not many closure 
+relations can do this, except for some special cases, which were already mentioned in the 
+previous section. Thus, the standard way of alleviating the problem of thermodynamic 
+inconsistency is to compute both these routes and adjust some parameter, or function, 
+such that both routes provide the same result. It need not be just the pressure equations, 
+also the energy equations can be used, as well as other thermodynamic quantities, such as 
+the Helmholtz free energy or the chemical 
 potential~\cite{tsedneeClosureOrnsteinZernikeEquation2019}.
 
 \subsection{Numerical implementation}
@@ -149,17 +150,18 @@ For the case of the \emph{virial} route, \autoref{eq:pressure-gr} was computed a
 the Romberg method for computing the integral~\cite{hammingNumericalMethodsScientists2012}. 
 Due to the fact that the interaction potential is a continuous function (see 
 \autoref{eq:cont-hs}), the exact derivative was computed and implemented. Then, to compute 
-the isothermal compressibility from \emph{eq:chi-thermo}, the derivative was approximated 
-using a finite central difference scheme,
+the isothermal compressibility from \autoref{eq:chi-thermo}, the derivative was 
+approximated using a finite central difference scheme,
 \begin{equation}
     \chi_{T}^{-1} = \rho { \left( \frac{\partial P}{\partial \rho} \right) }_{T}
-    \approx \frac{1}{\rho} \lim_{h \to \Delta \rho} \frac{P(\rho + \Delta \rho) - P(\rho - h)}{2 \, \Delta \rho}
+    \approx \rho \lim_{\Delta \rho \to 0} \frac{P(\rho + \Delta \rho) - P(\rho - \Delta \rho)}{2 \, \Delta \rho}
     \; ,
     \label{eq:central-difference}
 \end{equation}
 where \(\chi_{T}^{-1}\) is the inverse isothermal compressibility. The notation 
 \(P(\rho + \Delta \rho)\) means that, for a particular value of density given by 
-\(\rho^{\prime}=\rho + \Delta \rho\), \autoref{eq:pressure-gr} was used to compute the 
+\(\rho^{\prime}=\rho + \Delta \rho\), as well as for a fixed temperature \(T\), 
+\autoref{eq:pressure-gr} was used to compute the 
 pressure through the virial route. Here, \(\Delta \rho\) is a small value, fixed to be
 \(\Delta \rho=\num{1e-10}\) in the results presented in this chapter. Other central 
 differences were explored, such as the five stencil 
