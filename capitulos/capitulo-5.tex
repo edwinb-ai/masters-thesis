@@ -269,6 +269,41 @@ and the set of values are regarded as the best values that provide thermodynamic
 consistency.
 
 \section{Results}
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \(\phi\)  & Parameters \(\left(\alpha, \beta\right)\)  & Fitness (minimum)    \\ \hline
+    0.10 & {[}5.05, 7.89{]}    & 0.11          \\ \hline
+    0.15 & {[}-1.74, 17.87{]}   & 0.02          \\ \hline
+    0.20 & {[}-1.15, 5.16{]}    & 0.02   \\ \hline
+    0.25 & {[}-6.43, 39.74{]}   & 0.45  \\ \hline
+    0.30 & {[}-12.65, 39.23{]} & 0.1  \\ \hline
+    0.35 & {[}-16.91, 47.15{]}    & 0.21  \\ \hline
+    0.40 & {[}-27.44, 74.81{]}  & 0.08  \\ \hline
+    0.45 & {[}-28.99, 71.32{]}  & 0.03 \\ \hline
+    \end{tabular}%
+    \caption{Results obtained directly from the optimization procedure for different values of density, \(\phi\). Here, the fitness or minimum represents the best value of \(\Delta \chi^{-1}_{T}\) that satisfies the condition \(\Delta \chi^{-1}_{T} \leq 0.5\).}
+    \label{tab:global-opt}
+\end{table}
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \(\phi\)  & Parameters \(\left(\alpha, \beta\right)\)     & Minimum & \({\chi^{v}_{T}}^{-1}\) (Virial)  & \({\chi^{c}_{T}}^{-1}\) (Compressibility)  \\ \hline
+    0.10 & [-1.39, 9.82]   & \num{4.26e-11}  & 2.19777  & 2.19778 \\ \hline
+    0.15 & [-3.14, 18.08]  & \num{3.11e-11}  & 3.262042 & 3.262047  \\ \hline
+    0.20 & [-1.30, 4.84]   & \num{2.60e-10}  & 4.7968  & 4.7969  \\ \hline
+    0.25 & [-8.99, 35.01]  & \num{3.71e-11}  & 7.27501   & 7.27502 \\ \hline
+    0.30 & [-12.32, 41.06] & \num{3.71e-9}   & 10.9657 & 10.9658 \\ \hline
+    0.35 & [-16.88, 49.74] & \num{1.19e-8}   & 16.6411 & 16.6410 \\ \hline
+    0.40 & [-27.37, 73.14] & \num{1.91e-8}   & 25.4916 & 25.4914 \\ \hline
+    0.45 & [-28.81, 71.35] & \num{2.94e-7}   & 39.0226  & 39.0221  \\ \hline
+    \end{tabular}
+    \caption{Results obtained from the local optimization procedure. The last two columns represent the inverse isothermal compressibility, from the virial and compressibility routes respectively.}
+    \label{tab:local-opt}
+\end{table}
 
 \section{Discussion}
 
