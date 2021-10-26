@@ -264,11 +264,14 @@ of \(5\). In this example, that would mean that the new search space for the loc
 optimization method would be \(\alpha \in [-15, -5]\) for the first parameter, and 
 \(\beta \in [37, 47]\) for the second parameter. Then, the local optimization method would 
 start looking for the minimum in this search space, and when a set of values satisfy the 
-condition \(\rm{x}^{*} \leq \num{1e-7}\), then the optimization procedure has converged, 
+condition \(\rm{x}^{*} \leq \num{1e-8}\), then the optimization procedure has converged, 
 and the set of values are regarded as the best values that provide thermodynamic 
 consistency.
 
 \section{Results}
+In this section, the results obtained are presented; these results are also summarized in \autoref{tab:global-opt} and \autoref{tab:local-opt}. The results obtained are the two parameters computed through the optimization procedure described in the previous section, as well as the values of the isothermal compressibility computed using both routes.
+
+\subsection{Kinoshita paramaters}
 \begin{table}
     \centering
     \begin{tabular}{|c|c|c|}
@@ -305,12 +308,185 @@ consistency.
     \label{tab:local-opt}
 \end{table}
 
+For the parameters \(\alpha, \beta\), the optimization procedure of the previous section 
+was followed, first using a global optimizer, and then a local optimizer, until the 
+precision for the minimum was at least \(\leq \num{1e-8} .\) 
+In \autoref{tab:global-opt}, the values for the global optimization procedure are shown. 
+There, the minimum is at least less or equal than \(0.5\). 
+Up to this point, the results betwen the virial and compressibility routes were not distant 
+from each other, numerically speaking. However, when the parameters found were used to 
+search for more accurate minima, the results were promising. This can be seen in 
+\autoref{tab:local-opt}, where the results using the local optimizer are shown. It is now 
+clear that both routes give the same results, which shows that the Kinoshita closure is now 
+thermodynamically consistent, at least partially through the pressure equations.
+
+\subsection{Isothermal compressibility of the hard sphere fluid}
 \begin{figure}
     \centering
-    \includegraphics[scale=0.35]{figuras/capitulo-5/chi-eta.pdf}
+    \includegraphics[scale=0.32]{figuras/capitulo-5/chi-eta.pdf}
     \caption{Isothermal compressibility of the hard sphere fluid for different density values, expressed in terms of the volume fraction, \(\eta .\) The solid line is the isothermal compressibility obtained from the Kolafa equation of state (Kolafa EOS)~\cite{kolafaAccurateEquationState2004}. The squares are obtained from the optimization procedure, reported in \autoref{tab:local-opt}.}
+    \label{fig:isothermal-results}
 \end{figure}
 
+To showcase the results obtained, a direct comparison of the isothermal compressibility 
+values are plotted against the Kolafa equation of state (Kolafa EOS) in 
+\autoref{fig:isothermal-results}. To obtain this plot, the isothermal compressibility was 
+computed in its reduced form,
+\begin{equation}
+    \chi_{T}^{*} =  \frac{\chi_{T}}{\beta \, \sigma^3}
+    \; ,
+    \label{eq:reduced-chi}
+\end{equation}
+and also the results from \autoref{tab:local-opt} were multiplied by the reduced particle 
+number density, \(\rho^{*} = \rho / \sigma^3 .\)
+
+In the case of the Kolafa EOS, the equation reads,
+\begin{equation}
+    Z = \frac{P V \beta}{\rho} = \frac{1 + \eta + \eta^2 - \frac{2}{3} (\eta^3 + \eta^4)}{{\left(1 - \eta\right)}^{3}}
+    \label{eq:kolafa}
+\end{equation}
+with \(\eta = \frac{\pi}{6} \rho^{*} .\) This is an important fact about hard sphere 
+fluids; in general their equation of state can always be represented in terms of the 
+geometry of the system, i.e., its volume fraction.
+Then, to compute the isothermal compressibility, the equation of state needs to be 
+differentiated, and the expression is~\cite{liuCarnahanStarlingTypeEquations2021},
+\begin{equation}
+    \chi_{T}^{*} = {\left[\left(\eta \, \frac{\partial Z}{\partial \eta} + Z\right) \cdot \rho^{*}\right]}^{-1}
+    \; .
+    \label{eq:chi-eos}
+\end{equation}
+Using \autoref{eq:chi-eos}, the solid line in \autoref{fig:isothermal-results} was 
+computed, along with the results from \autoref{tab:local-opt}. It is simple to see that the 
+results are in excellent agreement with the results obtained from the Kolafa EOS, which is 
+considered to be a very accurate equation of state for the hard sphere fluid.
+
 \section{Discussion}
+It seems that, with the results shown in \autoref{fig:isothermal-results}, this approach is 
+a great proposal for alleviating the thermodynamic consistency problem that permeates the 
+bridge function literature. Indeed, the results show a lot of promise for the
+\emph{optimization procedure} itself, but there are some important aspects that need to be 
+pointed out.
+
+\subsection{Thermodynamic consistency as an optimization problem}
+The proposal of this chapter is to extend the Kinoshita closure in 
+\autoref{eq:kinoshita-params}, and find the best values for the closure that can provide 
+partial thermodynamic consistency. However, this proposal is not a new one, and in fact, 
+Verlet himself established a proposal quite similar using his own bridge function 
+approximation~\cite{verletIntegralEquationsClassical1981}. Still, in his proposal there 
+are \emph{three free parameters} to adjust, and the optimization procedure is quite 
+different. Rogers-Young~\cite{rogersNewThermodynamicallyConsistent1984b} and 
+Zerah-Hansen~\cite{zerahSelfConsistentIntegral1986} are two of the fundamental proposals 
+using the same idea, with just one free parameter two adjust, and interpolating between two 
+well-established bridge functions. Further, the recent contribution by Tsednee and 
+Luchko~\cite{tsedneeClosureOrnsteinZernikeEquation2019} of fixing the parameters of a 
+series expansion was also posed as an optimization problem. However, in their work, there 
+is no clear expression of how or why the optimization problem is handled, and just a hint 
+of the local optimizer used is mentioned, which was the \verb|fmin| function in the 
+MATLAB programming language.
+
+In this thesis, the idea is simply to free up the fixed parameters in the Kinoshita bridge 
+function approximation, which has shown the potential to be extended to mixtures of hard 
+sphere fluids and other more complex systems. Further, the idea of an optimization 
+problem based on black-box modeling seems to be a great way of thinking about the problem 
+itself, given that the consistency enforced here is just partial, there are a lot more 
+thermodynamic quantities that \emph{should} be adjusted as well, such as the chemical 
+potential or the free energy. This is because more advanced techniques can be used, such as 
+surrogate-base optimization~\cite{forresterRecentAdvancesSurrogatebased2009}, which 
+attempts to build a surrogate, or substitute, model of the original black-box function, 
+which can now be differentiable and more easily optimized. But this leads to another 
+important point of discussion.
+
+\subsection{The search space and the solution of the Ornstein-Zernike equation}
+Although the results seem promising, one of the drawbacks encountered in this chapter when 
+computing the results was the \emph{definition of the search space}, and the solution of 
+the OZ equation in such a search space. Evolutionary Computation 
+methods are \emph{population-based}, meaning that these methods generate a fixed set of 
+possible solutions, and all solutions are tested and tried out by the optimization method. 
+Though, it turns out that the OZ equation is \emph{not solvable} for a lot of parameters 
+\(\alpha, \beta\) that are searched and sampled by the optimization method. In fact, at 
+least 40\% of the parameters searched that were tried as possible solutions for the 
+optimization problem in \autoref{eq:optimiziation-chi}, rendered the numerical solution of 
+the OZ equation impossible. The data for this argument is not shown here, because there is 
+not much to show regarding numerical errors and numerical instabilities.
+
+This finding is quite important, because it shows that the OZ equation is only solvable for 
+certain value of the parameters \(\alpha, \beta\), but no clear pattern is shown or easy to 
+see. The only clue to this phenomenon is that the actual problem, which are just numerical 
+instabilities of the numerical scheme. This would mean that, as in the previous chapter, a 
+different numerical scheme could be used, maybe based of Krylov sub-space methods, 
+following the original proposal by Gilles Zerah~\cite{zerahEfficientNewtonMethod1985}. Or 
+it could also mean that there are several values and search subspaces for which the 
+parameters \(\alpha, \beta\) do not provide a good bridge function approximation. But it is 
+not clear \emph{how} or \emph{why} the bridge function approximation would not provide at 
+least a solution to the OZ equation.
+
+The search space is another important part of the problem. A large search space means that 
+the optimization procedure must look into very different places until a particular minima 
+has been found. This could be solved by restricting the bounds to particular bounds in both 
+\(\alpha, \beta\), instead of using a single large search space for both paramaters. 
+However, this is not simple to see, or to define. One way to do this would be rely on the 
+same argument used by Verlet~\cite{verletIntegralEquationsClassical1980}, and inform the 
+optimization procedure of the virial coefficients for the hard sphere fluid.
+
+\subsection{On the use of Natural Evolution Strategies}
+Another drawback of the proposed method is the fact that Evolutionary Computation methods 
+are slow. This has already been said in previous sections, but in this case this is 
+important to mention briefly. Natural Evolution Strategies have to sample distribution 
+probabilities, and this is costly. Not to mention that the actual black-box function might 
+be costly as well. The method itself should just find some minima in a small period of 
+time, but in this case, a large portion of the time was spent with failed solutions of the 
+OZ equation. Indeed, several restarts of the numerical method were 
+needed in order to find values whithin the search space, and most of the time, numerical 
+instabilities were encountered. These methods are good enough for simple problems, such as 
+smooth and analytical high-dimensional functions, but other methods might be able to solve 
+the problem more quickly and efficiently, such as Differential 
+Evolution~\cite{dasDifferentialEvolutionSurvey2011} methods, also part of the 
+Evolutionary Computation family of methods.
+
+However, a strong metric to compare different methods in this will be needed, specially 
+when dealing with the Physics of the problem. This is because it might be possible that not 
+\emph{all} the minima found will have Physical meaning, or it might just be that there are 
+some local minima for which the bridge function yields accurate results. However, these 
+methods will not discriminate between either of those, so a metric that could drive the 
+optimization problem to Physical meaning would be a novel way to solve the problem of 
+bridge function approximations.
 
 \section{Concluding remarks}
+The results shown here are clearly better than those shown in the previous chapter. Indeed, 
+incorporating more information about the Physics of the system provides more robustness to 
+the Computational Intelligence method. There needs to be a reformulation as well, but in 
+general it is safe to say that this method is better in terms of accuracy, as is shown in
+\autoref{fig:isothermal-results}, which would not be the case if the radial distribution 
+functions were not estimated correctly.
+In a sense, it is expected to see these results, because it is known that the Verlet bridge 
+function, as well as the Kinoshita variation, are good functions for the hard sphere fluid.
+What might not be too obvious, and a novel way of seeing the problem, is the fact that the
+Kinoshita closure relation can be, in fact, thermodynamically consistent.
+
+However, the results shown here are just a minimal working example of what can be done. 
+An important aspect to study is the fact that the Neural Network approach of the previous 
+chapter could be \emph{informed}, or combined, with the Kinoshita bridge function 
+approximation, and instead of reducing to the Hypernetted Chain, it could potentially 
+reduce to the Kinoshita closure relation. And yet, this seems like more work to do, because 
+the Kinoshita closure only has two free paramaters, compared to the thousands of parameters 
+that appear in a Neural Network. Still, the Neural Network is faster to fit and solve than 
+using Evolutionary Computation methods, which could be extended to other systems as well.
+
+The results here show great promise to be extended to other dimensions and systems. 
+For instance, in highly asymmetric mixtures~\cite{zhouLocalStructureThermodynamics2019}, 
+where several parameters could be found. The method shown here would not change at all, due 
+to the fact that Evolutionary Computation methods naturally handle high-dimensional 
+optimization problems. The only thing that would need to change is the solution to the OZ 
+equation. Another aspect that could be explored is the study of hard disks and their 
+mixtures, which is the generalization of the hard sphere fluid to a \(2\)-dimensional 
+space. It would be interesting to see if the method itself holds, or if there are a lot 
+more numerical instabilities that might show when different dimensions are handled.
+An extension to other interaction potentials might be possible with this method as well. 
+The study of the Lennard-Jones fluid, the Yukawa fluid, and many others, could be studied 
+using this method, just to showcase the true robustness of the method.
+
+Finally, another line of future research could be the comparison of different optimization 
+algorithms for this kind of problems. A robust implementation that could be translated into 
+a highly efficient code package could serve well the community of Liquid Theory and Soft 
+Matter in general. Different optimization methods could yield better or worse results, or 
+it could shed some light into what might be happening to the search space itself.
