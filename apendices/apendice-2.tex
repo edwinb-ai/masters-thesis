@@ -193,13 +193,17 @@ next.
 
 \section{Extensions to the method}
 In the actual method used in this work, the method of Ng is extended to use not only five 
-input functions, but an arbitrary \(m\) number of functions. However, it turns out that 
+input functions, but an arbitrary \(m\) number of functions. It turns out that 
 this extension does not provide more accurate results, at least for the case of the hard 
-sphere fluid. It does make is more stable for some density values.
+sphere fluid. It does make it more stable for some high density values, numerically 
+speaking. It would be interesting to see if the actual extension makes sense for other 
+types of interaction potentials.
 
 To solve the linear system in \autoref{eq:linear-system}, the common way of doing this is 
 through the use of the LU decomposition~\cite{trefethenNumericalLinearAlgebra1997}. The 
-problem with the LU decomposition method is that is it slow, and can be unstable. So 
-instead, in this work a faster method was employed which is based on the Krylov sub-space 
-iterative methods. This method, called DIOM~\cite{saadPracticalUseKrylov1984a}, is an 
-upgrade to the basic LU method, and can be used with ill-conditioned, symmetric matrices.
+main issue with the LU decomposition method is that is it slow, i.e., it needs a lot of 
+floating point operations, and can also be numerically unstable when dealing with 
+ill-conditioned matrices. Instead, in this work a faster method was employed which is based 
+on the Krylov sub-space iterative family of methods. This method, called 
+DIOM~\cite{saadPracticalUseKrylov1984a}, is an upgrade to the basic LU method, and can be 
+used with ill-conditioned, symmetric matrices.
