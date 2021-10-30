@@ -1,4 +1,124 @@
 \chapter{Conclusions}
 \label{Cap6}
 
-Some conclusions \dots
+Liquid State Theory is at the core of most modern Soft Matter research fields. As such, it 
+seems important to clearly understand the underlying theoretical frameworks and its main 
+results. Also, it is important to have a clear understanding of the methods used to provide 
+accurate solutions to given problems. Without the exact theoretical framework of the 
+Ornstein-Zernike equation, most Colloidal Soft Matter research fields would struggle with 
+other theories which are more complicated and hard to implement. Rather, the 
+Ornstein-Zernike equation is simple, effective, and has the outstanding ability to be able 
+to generalize well, beyond its original goal, which was the description of simple liquids. 
+It it the purpose of this thesis to showcase the richness of the Ornstein-Zernike 
+formalism, and to inject novel ways of thinking about it, using it, and most importantly, 
+to solve it.
+
+In the course of this thesis, the Ornstein-Zernike formalism was introduced as an integral 
+equation theory that is capable of describing the structure of a simple liquid, in 
+particular the hard sphere fluid. Using Statistical Physics theory, the Ornstein-Zernike 
+equation was described, along with the important quantity, the \emph{bridge function}. This 
+function plays a fundamental role in trying to solve the Ornstein-Zernike equation, because 
+it provides an approximation to the system that is the subject of study. However, the 
+reality is that this function is still an approximation, and to correctly describe a 
+particular fluid, this approximation must be chosen arbitrarily, based on experience and 
+previous research. But this seems cumbersome, and although lots of literature reflect this, 
+it is still used based on experience and common knowledge. This is because finding an exact 
+bridge function is very hard, it cannot be done either numerically or analytically, thus 
+approximations are needed if a solution is wanted for the fluid under scrutiny.
+
+For this reason, Computational Intelligence methods are introduced in this thesis. First, 
+instead of trying to approximate the bridge function, a more general approximation is 
+presented in the form of a Neural Network. Due to the 
+\emph{Universal Approximation Theorem}~\cite{hornikMultilayerFeedforwardNetworks1989,hornikApproximationCapabilitiesMultilayer1991,cybenkoApproximationSuperpositionsSigmoidal1989}, 
+Neural Networks can approximate any continuous and well-defined, smooth function. Using 
+this knowledge, instead of defining a particular approximation for the bridge function, a 
+new way of solving the Ornstein-Zernike equation is devised, that attempts to use the 
+Neural Network to find the best approximation for the hard sphere fluid. The results show 
+that the Neural Network reduces to a particular bridge function approximation, the 
+Hypernetted Chain solution, for the case of the hard sphere fluid. This points to the 
+direction that without any more information from the system, the Neural Network tries to 
+stay in a particular minimum, which in this case corresponds to the Hypernetted Chain 
+solution. However, this also means that if there is more information about the underlying 
+Physics of the systems, more information can be used along with the Neural Network, 
+potentially given a better solution to the problem.
+
+Instead of relying on a universal approximator, one can effectively use the underlying 
+Physics of the problem, and use different Computational Intelligence methods that can solve 
+the same problem. This proposal is shown in this thesis, using the Verlet bridge function 
+approximation, together with the Kinoshita variation, to provide more information to the 
+Ornstein-Zernike equation. Nevertheless, instead of using these bridge functions as they 
+are, the whole problem was turned into a black-box optimization problem that attempts to 
+find the best variation of the Kinoshita bridge function that can also provide partial 
+thermodynamic consistency to the problem. It seems that thermodynamic consistency is a 
+better way of dealing with the problem, and the results show this. The black-box 
+optimization problem was solved using Natural Evolution Strategies, a type of optimization 
+method that comes directly from the family of Evolutionary Computation optimization 
+algorithms. When computing the isothermal compressibility for different density values of 
+the hard sphere fluid, the results obtained from these optimization methods provides 
+excellent agreement with the theoretical results. This means that, by reformulating the 
+problem to an optimization problem with less parameters to find, the solution is better and 
+more accurate. One of the drawbacks of this method is that it is slow and computationally 
+expensive. Nonetheless, the method can be extended to other systems and interaction 
+potentials.
+
+\section{Future work}
+To close this thesis, a few ideas will be presented which can serve as future work that can 
+carry on from the main proposals presented in this work. Some of these ideas serve to close 
+off the points made in the results presented, and others are just food for 
+thought that might serve as inspiration for the reader interested in such topics.
+
+\subsection{A functional approach to the bridge function}
+In \autoref{Cap4}, the bridge function was presented as a series expansion on the density 
+in \autoref{eq:expansion-densidad}. A different idea, related to this one, is that the 
+approximation can be worked out from a series expansion where the terms are themselves 
+neural networks. This would look like,
+\begin{equation}
+    b \left[r, N_{\theta}(r)\right] = \sum_{i=1}^{\infty} a_{i} \, N_{\theta \, , i} (r)
+    \; ,
+    \label{eq:functional-bridge}
+\end{equation}
+where the notation \(N_{\theta,i}(r)\) represents a different neural network for each 
+\(i\) in the expansion. In other words, instead of having just a polynomial series 
+expansion in the bridge function, the terms themselves would be constructed from 
+\emph{functions}, thus providing a \emph{functional approach} to the bridge function. This 
+would have all the mathematical power and generalization of simple neural networks, and 
+provide more information to the bridge function itself. However, this is not a simple 
+proposal and the mathematical framework to work this out might be daunting and difficult to 
+use.
+
+\subsection{Surrogate-based modeling}
+The Ornstein-Zernike equation can be solved efficiently using the Fast Fourier 
+Transform~\cite{hammingNumericalMethodsScientists2012}. But sometimes the solution is 
+difficult to obtain using the same iterative Piccard scheme. Further, if the black-box 
+optimization method is implemented to enforce partial thermodynamic consistency, then the 
+solution can become difficult to obtain. A solution to this problem is to propose a 
+\emph{surrogate-based modeling} approach. Surrogate 
+models~\cite{forresterRecentAdvancesSurrogatebased2009} as substitute models that 
+\emph{cleverly} interpolate between the input and output of difficult-to-evaluate 
+functions. The meaning of clever here means that most of these substitute models rely on 
+modern Machine Learning techniques, such as Neural Networks, Gaussian Processes, and many 
+others.
+
+What would happen if, instead of solving the Ornstein-Zernike equation directly, a 
+surrogate model could be built from previous known answers? At least for simple state 
+points, the surrogate model could be expected to perform well. But when difficult phenomena 
+arise, such as phase transitions, spinodal lines and others, it might be unreasonable to 
+expect too much from the surrogates. For this, additional information based on the 
+underlying Physics might serve helpful in defining better surrogate models. This can also 
+help in the optimization process of finding better parameters for the bridge function 
+approximation.
+
+\subsection{Closing remarks}
+Finally, it is important to note that the use of Computational Intelligence methods in 
+Liquid State Theory is novel, and is still in its exploration phase. Modern Soft Matter 
+research has been constantly adopting new methods brought from the Machine Learning and 
+Deep Learning comunities, and this is creating a trend in this research field. This is 
+good, because Machine Learning methods, and in general Computational Intelligence methods, 
+have proven useful in cases where one can use all the previous Physics together with more 
+powerful and robust methods, such that new ways of dealing with the same problems arise. 
+These new ways can be better, more efficient, or simply put, easier to understand and 
+implement. It is the main purpose of this thesis to showcase this important idea: that new 
+Computational Intelligence methods and technologies can help boost modern Soft Matter and 
+Liquid State Research, as long as the elemental Physics of the system are used 
+appropiately. Hopefully, in years to come, these ideas will become the standard way of 
+dealing with the fantastic research in Liquid State Theory and Soft Matter Physics.
