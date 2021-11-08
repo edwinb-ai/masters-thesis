@@ -20,13 +20,13 @@ Consider a system of $N$ spherical particles in three dimensions
 where each particle is characterized by its position $\vecr$ and momentum $\vecp$.
 The \emph{Hamiltonian} of the system is given by
 \begin{equation}
-    \mathcal{H} \left( \vecr, \vecp \right) = 
+    \mathcal{H} \left( \vecr^{N}, \vecp^{N} \right) = 
     K \left( \vecp \right) + U \left( \vecr \right)
     \label{eq:hamiltonian}
 \end{equation}
 with $K$ the kinetic energy and $U$ the potential energy of the system.
 All together, the 6$N$ variables define a \emph{phase point} in a 6$N$-dimensional
-\emph{phase space}. The state point of the system is then described by a
+\emph{phase space}. The state point is then described by a
 \emph{phase space vector} $\Gamma \left( \vecr, \vecp \right)$, however, considering that all
 $N$ particles move according to Newton's equations of motion, $\Gamma$ is
 a function of time, or $\Gamma(t)$. Using this phase space vector, \emph{time averages}
@@ -72,10 +72,9 @@ probability density function associated with it,
     \: ,
     \label{eq:canonical-density}
 \end{equation}
-where $\beta=1/k_{B} T$, and with $k_{B}$ being Boltzmann's constant. 
-In the classical limit of
-continuous distribution functions the denominator from \autoref{eq:canonical-density}
-transforms into
+where $\beta=1/k_{B} T$, and with $k_{B}$ being the Boltzmann's constant. 
+In the classical limit of continuous distribution functions, the denominator from 
+\autoref{eq:canonical-density} transforms into
 \begin{equation}
     Q(N,V,T) = \frac{1}{N! \, h^{3N}} \int d \vecp^{N} \, d \vecr^{N} \,
     e^{- \beta \mathcal{H} \left( \vecr^N, \vecp^N \right)}
@@ -124,7 +123,7 @@ information from the system than necessary for the calculation of thermodynamica
 and structure properties. Instead, a focus on a small set of particles $n \ll N$ is 
 preferred, in which case a \emph{reduced probability density} is defined as
 \begin{equation}
-    \rho^{(n)}_{N} (\vecr^{n}) \coloneqq \frac{N!}{(N-n)!} \, \frac{1}{Z(N,V,T)}
+    \rho^{(n)}_{N} (\vecr^{n}) \coloneqq \frac{N!}{(N-n)!} \frac{1}{Z(N,V,T)}
     \int e^{- \beta U(\vecr^{N})} \, d \vecr^{(N-n)} \; ,
     \label{eq:reduced-canonical}
 \end{equation}
@@ -132,7 +131,7 @@ where $\rho^{(n)}_{N} (\vecr^{n})$ is also known as the equilibrium
 $n$\emph{-particle density}.
 The quantity $\rho^{(n)}_{N} (\vecr^{n}) \, d \vecr^{n}$ defines the probability of finding
 $n$ particles of the system with coordinates in a volume element $d \vecr^{n}$ from the
-phase space, regardless of the positions and momenta of the remaining particles.
+phase space, regardless the positions and momenta of the remaining particles.
 As a result of this contraction of the probability density function, it is now possible to
 provide a complete description of the \emph{structure} of a fluid, while the knowledge
 of low-order particle distribution functions is sufficient to calculate thermodynamic
@@ -197,8 +196,8 @@ function~\cite{hansenTheorySimpleLiquids2013}.
 It is now time to discuss such expressions, and the relation between thermodynamical
 quantities and the radial distribution function.
 
-The \emph{total energy} $E$ of a system of $N$ particles can be defined in terms of the
-radial distribution function as
+The \emph{total energy} $E$ of a three-dimensional system of $N$ particles can be defined 
+in terms of the radial distribution function as
 \begin{equation}
     E = E_{ideal} + E_{excess} = \frac{3 N k_{B} T}{2} +
     \frac{N}{2} \int_{0}^{\infty} \rho \, u(r) \, g(r) \, 4 \pi r^2 \, dr
@@ -222,7 +221,7 @@ in terms of the individual particle interactions as follows
     \dots
     \label{eq:pairwise-energy}
 \end{equation}
-This kind of interactions are the most commonly researched and studied, given that most
+These kind of interactions are the most commonly researched and studied, given that most
 systems can be modeled after such interaction potentials, such as the
 hard-sphere, Lennard-Jones, Yukawa~\cite{huangStatisticalMechanics1987}
 and several others. The hard-sphere interaction potential will be discussed
@@ -235,7 +234,7 @@ notoriously hard to study, but recent advances in Machine Learning have made it
 possible to do so~\cite{boattiniModelingManybodyInteractions2020}.
 
 The \emph{pressure equation} is a relation between the thermodynamic pressure
-$P$ and the radial distribution function, defined as
+$P$ and the radial distribution function, defined for a three-dimensional system as:
 \begin{equation}
     P=P_{ideal}+P_{excess}= \frac{\rho}{\beta} - \frac{2 \pi \beta \rho}{3}
     \int_{0}^{\infty} u'(r) \, g(r) \, r^3 \, dr \, ,
@@ -246,7 +245,8 @@ is the excess pressure that can be derived using classical mechanics through the
 virial theorem~\cite{goldsteinClassicalMechanics2002}.
 
 Another important quantity that must be mentioned is the
-\emph{isothermal compressibility}. Its thermodynamic definition is
+\emph{isothermal compressibility}. Its thermodynamic definition
+is~\cite{mcquarrieStatisticalMechanics2000}
 \begin{equation}
     \chi_{T} = - \, \frac{1}{V} { \left( \frac{\partial V}{\partial P} \right) }_{T} =
     \frac{1}{\rho} { \left( \frac{\partial \rho}{\partial P} \right) }_{T}
@@ -270,7 +270,7 @@ In order to describe the behavior of materials, pairwise interaction potentials 
 according to specific physical properties. These interaction potentials provide a 
 particular functional form for the potential energy $U$ of the system.
 With this information, all the theory described so far can be used to understand the
-properties of the system, and compute thermodynamic quantities.
+physical properties of the system, and compute thermodynamic quantities.
 
 Out of all the possible interaction potentials, there is one that stands out for its
 simplicity and surprising ability to generalize to complex systems. This model is
@@ -280,13 +280,13 @@ The \emph{hard sphere model} is a simple pairwise interaction potential, defined
 \begin{equation}
     u_{hs} = 
     \begin{cases}
-        \infty \, , &r \leq \sigma \\
-        0 \, , &r > \sigma \; ,
+        \infty \, , &r < \sigma \\
+        0 \, , &r \geq \sigma \; ,
     \end{cases}
     \label{eq:hard-sphere}
 \end{equation}
-where $\sigma$ is the radius of the particles in the system, and $r$ is the distance
-between two particles, as previously stated.
+where $\sigma$ is the diameter of the particles in the system, and $r$ is the distance
+between the centers of two particles, as previously stated.
 
 This interaction is a particular model; it is an approximation of the intrinsic
 behavior of particles.
@@ -297,7 +297,7 @@ is the value of $\sigma$. Hence, this model is by definition a \emph{repulsive m
 Apart from being a reference model system for the liquid
 state~\cite{hansenTheorySimpleLiquids2013}, hard spheres are extremely useful in
 colloid science, as mentioned in the introduction section. This is due to the fact
-that is has been demonstrated that the hard sphere interaction gives rise to a
+that it has been demonstrated that the hard sphere interaction gives rise to a
 fluid-crystal phase transition around a volume fraction of 50\% of hard 
 spheres~\cite{hooverMeltingTransitionCommunal1968a,gastSimpleOrderingComplex1998,roblesNoteEquationState2014a}.
 This phase transition was the subject of an extensive discussion in the early
@@ -307,7 +307,7 @@ The relationship between this simple model and colloid science was discovered
 experimentally by Pusey and van Megen~\cite{puseyPhaseBehaviourConcentrated1986},
 in dense colloidal suspensions of sterically stabilized particles in a solvent.
 
-In this work a similar potential is used, though defined differently. Looking closely
+In this work, a similar potential is used, though defined differently. Looking closely
 at \autoref{eq:hard-sphere}, it is straightforward to see that the potential is a
 discontinuous function. In mathematical proofs and statistical mechanics frameworks,
 this poses no problem. It might be hard to manipulate, mathematically speaking,
@@ -342,7 +342,15 @@ with
 The value of $\lambda$ is fixed to $\lambda=50$, following the findings in the work of
 Báez \emph{et al}~\cite{baezUsingSecondVirial2018}; and the value of $\epsilon$ is
 not fixed explicitly, instead the reduced potential is employed, 
-i.e., $u^{*}=u_{CP} / \epsilon$.
+i.e., $u^{*}=u_{CP} / \epsilon$. It is also important to define a particular quantity,
+the reduced temperature \(T^{*}=k_{B} T \, / \epsilon\), which used in the original work
+by Báez \emph{et al} to ensure that the second virial coefficient is accurately reproduced.
+This quantity is defined as,
+\begin{equation}
+    T^{*} = a + \frac{b}{\lambda^c}
+    \label{eq:t-star}
+\end{equation}
+and for a three-dimensional system the parameters used are \(a=1.4543, b=1.199, 1.0545 .\)
 
 \section{Computer simulations of liquids}
 
@@ -372,13 +380,14 @@ the equations of motion are
 \end{equation}
 with
 \begin{equation}
-    \bm{F}_i (t) = \sum_{j} - \nabla_{\vecr_i} U(\lvert \vecr_i - \vecr_j \rvert)
-    \; ,
+    \bm{F}_i (t) = - \nabla_{\vecr_i} U(\lvert \vecr_i - \vecr_j \rvert)
+    , \quad U = \sum_{i} \sum_{j} u(\lvert \vecr_i - \vecr_j \rvert)
     \label{eq:newton-potential}
 \end{equation}
 the force on particle $i$ with position $r_i$ exerted by particle $j$ with position
 $\vecr_j$, and $U$ the potential energy, which in the context of liquids this is the
-interaction potential between the particles.
+interaction potential between the particles. In most cases, this interaction potential
+can be modeled as the pairwise interaction between two particles.
 
 To integrate these equations of motion, different integration schemes have been developed.
 At first, Alder and Wainwright~\cite{alderPhaseTransitionHard1957a} used the simple
@@ -416,14 +425,14 @@ generate a sequence of configurations for a given system. The idea is to arrive 
 probability distribution function close to the ensemble probability distribution
 function chosen to model the fluid. For instance, if a system
 is under the $NVT$ ensemble, the sequence of Monte Carlo steps are expected to converge
-to the distribution function in \autoref{eq:canonical-limit}. Having arrived at this
+to the distribution function given by \autoref{eq:canonical-limit}. Having arrived at this
 estimation, observables can the be computed, as in \autoref{eq:average-canonical}.
 There is also other possibilities of ensemble distribution functions that can be
 used with Monte Carlo computer simulations, such as the isobaric-isothermal ensemble
 and the Gibbs ensemble~\cite{frenkelUnderstandingMolecularSimulation2001}.
 
 In general, Monte Carlo methods are completely random. However, liquids cannot be
-subject to complete randomness due to their intermolecular interactions. In the case
+subjected to complete randomness due to their intermolecular interactions. In the case
 of the hard sphere fluid, the denominator of \autoref{eq:canonical-limit} would be zero
 at least 50\% of the time, which would incur in numerical instabilities and observables
 would not get measured properly. So, a \emph{bias} must be introduced in order to
@@ -471,10 +480,11 @@ In practice, the core of the Monte Carlo method for the computer simulation of l
 which corresponds to the Metropolis rule, is implemented as follows:
 \begin{itemize}
     \item Select a particle $i$ at random.
-    \item Calculate the energy $U_{i}(o)$ of particle $i$.
+    \item Calculate the energy cost to move particle $i$.
     \item Move particle $i$ randomly.
-    \item Calculate the new energy $U_{i}(n)$ of particle $i$.
+    \item Calculate the new energy cost for having displaced a particle.
     \item Accept or reject the move according to \autoref{eq:nvt-balance} and \autoref{eq:nvt-acceptance}.
+    \item Update the total energy configuration.
 \end{itemize}
 Monte Carlo methods are efficient when static quantities, such as the radial distribution
 function, are computed. This is because time is not part of the computer simulation method,
@@ -487,13 +497,13 @@ simulations were used for all the observables computed throughout.
 
 \subsection{On the computation of the radial distribution function}
 The procedure to obtain the radial distribution function from computer simulations is as
-follows. For each Monte Carlo step a particle $i$ is chosen at random.
+follows. For each Monte Carlo step a particle $i$ is chosen randomly.
 Then, all the particles that are a distance $\delta r$ from the particle $i$ are counted
 as a neighbor particle. After that, all the particles that are now at a distance
 $2 \delta r$ from the particle $i$ are counted. This is done after all the particles
-have been accounted for. If the interaction potential between the particles is truncated
+have been counted. If the interaction potential between the particles is truncated
 to a cutoff radius $r_c$, then this is the last value of the distance used to count
-for neighboring particles. When every particle has been counted, a histogram is built,
+neighboring particles. When every particle has been counted, a histogram is built,
 which corresponds to a discrete distribution function of the neighboring particles. 
 Now, this distribution function is not normalized, and the procedure to do so is as 
 follows. A normalization constant is obtained by dividing the total number of particles at 
@@ -503,11 +513,12 @@ multiplied by the total volume of the spherical shell that lies between $r$ and 
 r$. In mathematical form, this can be summarized as follows
 \begin{equation}
     g(r)=\frac{1}{\rho} \left\langle \frac{1}{N} \sum_{i=1}^{N} \sum_{i \neq j}^{N} 
-    \frac{1}{2 \pi r} \delta (r - \vecr_{ij}) \right\rangle
+    \delta (r - \vecr_{ij}) \right\rangle
     \, , \quad
-    \vecr_{ij}=\vecr_{i} - \vecr_{j} \: .
+    \vecr_{ij}=\vecr_{i} - \vecr_{j} \; ,
     \label{eq:rdf-simulation}
 \end{equation}
+where \(\left\langle \dots \right\rangle\) denotes an ensemble average.
 
 \section{The Ornstein-Zernike Integral Equation}
 Up until this point, the presentation on Liquid State Theory has been driven by the
@@ -532,9 +543,9 @@ their neighbors, and an \emph{indirect} relation between particles and the rest 
 may be far away from them. This interaction begs the question,
 \emph{is there a way to relate the indirect and direct correlations between particles?}
 The answer is given recursively through the following definition. Let $h(r)$ be the
-\emph{direct correlation function} that "measures" the direct correlations between
-particles; and let $c(r)$ be the \emph{indirect correlation function} that "measures"
-the indirect correlations between particles, then both $c(r)$ and $h(r)$ are related
+\emph{total correlation function} that "measures" the total correlations between
+particles; and let $c(r)$ be the \emph{direct correlation function} that "measures"
+the direct correlations between particles, then both $c(r)$ and $h(r)$ are related
 with each other through the \emph{Ornstein-Zernike equation} as follows
 \begin{equation}
     \begin{aligned}
@@ -542,10 +553,11 @@ with each other through the \emph{Ornstein-Zernike equation} as follows
         &+ \rho^2 \int_{V} c(\vecr'') c(\lvert \vecr - \vecr' \rvert) c(\lvert \vecr' - \vecr'' \rvert) \, d \vecr' \, d \vecr'' \\
         &+ \rho^3 \int_{V} c(\vecr''') c(\lvert \vecr - \vecr' \rvert) c(\lvert \vecr' - \vecr'' \rvert) c(\lvert \vecr'' - \vecr''' \rvert) \, d \vecr' \, d \vecr''
         \, d \vecr''' \\
-        &+ \dots
+        &+ \dots \; ,
     \end{aligned}
     \label{eq:hr-oz}
 \end{equation}
+with \(\rho \coloneqq N / V .\)
 \autoref{eq:hr-oz} can be rewritten recursively by noting the following factorization
 \begin{equation}
     h(r) = c(r) + \rho \int_{V} c(\vecr') \left[
@@ -571,7 +583,7 @@ The Ornstein-Zernike integral equation provides an analytical way to obtain the 
 provided an interaction potential. Yet, in \autoref{eq:ornstein-zernike} there is no 
 mention or sign of any of such quantities. So how is it possible to obtain an estimate
 of \rdf? It turns out that the definition of $h(r)$ is key to answering this question,
-for the actual mathematical definition is $h(r) \coloneqq g(r) - 1$.
+for the actual mathematical definition is $h(r) \coloneqq g(r) - 1$~\cite{hansenTheorySimpleLiquids2013}.
 As for the interaction potential, the information lies within $c(r)$ and $g(r)$.
 In the \emph{low density limit}, the radial distribution function has the following
 asymptotic behavior
@@ -619,15 +631,15 @@ Furthermore, it is expected to study the phenomena that
 arises when the density varies in ways that \emph{phase transitions} are induced.
 To provide a solution to this, \autoref{eq:ornstein-zernike} must be solved for all possible
 values of the density. However, if looked at closely, \autoref{eq:ornstein-zernike} has
-two unknowns, $c(r)$ and $h(r)$, thus cannot be solved as it is. For this reason,
+two unknown functions, $c(r)$ and $h(r)$, thus cannot be solved as it is. For this reason,
 approximations must be introduced in the form of \emph{closure relations}.
 
 Closure relations come from diagrammatic expansions and density function theory~\cite{hansenTheorySimpleLiquids2013},
 and are not simple to summarize in this section. The most common closure relations will be
 stated, along those that are used in this work. One of the most important closure relations
-is the \emph{Percus-Yevick}~\cite{percusAnalysisClassicalStatistical1958} approximation.
+is the \emph{Percus-Yevick} approximation.
 The most important fact from this closure is that it provides an analytical solution to the 
-hard sphere model. The closure relation reads,
+hard sphere model. The closure relation reads~\cite{percusAnalysisClassicalStatistical1958},
 \begin{equation}
     c(r) = g(r) \, \left[1 - e^{\beta u(r)}\right]
     \; ,
@@ -635,7 +647,8 @@ hard sphere model. The closure relation reads,
 \end{equation}
 and when used along the hard sphere potential found in \autoref{eq:hard-sphere}, it provides
 an exact solution for \rdf.
-Another common closure relation is the \emph{Hypernetted Chain} approximation, which reads,
+Another common closure relation is the \emph{Hypernetted Chain} approximation,
+which reads~\cite{hansenTheorySimpleLiquids2013},
 \begin{equation}
     c(r) = h(r) - \beta u(r) - \ln{g(r)} \; .
     \label{eq:hnc-cr}
@@ -644,10 +657,10 @@ The appeal of this closure relation is that it works quite well for interaction 
 with long-range repulsive behavior, such as the Yukawa or Lennard-Jones potentials~\cite{hansenTheorySimpleLiquids2013}.
 Despite this, both closure relations have deficiencies when attempting to predict a
 phase transition. Moreover, these closure relations suffer from
-\emph{thermodynamic inconsistency}. This is a phenomena that happens from the approximation
-nature of closure relations. Both these closure relations give different results for
+\emph{thermodynamic inconsistency}. This is a phenomenon that happens from the approximation
+nature of closure relations. Both closure relations give different results for
 a given thermodynamic quantity if computed from different routes. For instance, if the 
-thermodynamic pressure $P$ is to be computed using the Ornstein-Zernike and the 
+thermodynamic pressure $P$ is computed using the Ornstein-Zernike and the 
 Percus-Yevick closure relation, then, if \autoref{eq:pressure-equation} is used, a 
 particular result will be obtained.
 But if \autoref{eq:chi-rdf} is used, and then \autoref{eq:isothermal-chi} to obtain the 
@@ -667,7 +680,7 @@ consistent closure relations were provided by Zerah and Hansen~\cite{zerahSelfCo
 which combined different closure relations into one, in the same fashion as the Rogers-Young
 closure relation. Both of these approaches work as follows. Two main routes to compute a 
 given thermodynamic quantity are chosen, and are forced to yield the same results through 
-the use of a fixed parameter, called the \emph{mixing parameter}. This value is obtained is 
+the use of a fixed parameter, called the \emph{mixing parameter}. This value is obtained as 
 an optimization problem by enforcing equality of the thermodynamic routes.
 
 Another important closure relation is the one provided by Verlet and then modified by
@@ -679,7 +692,8 @@ The Kinoshita modification reads,
     B(r) = - 0.5 \frac{\gamma^2 (r)}{1 + 0.8 \lvert \gamma (r) \rvert} \; ,
     \label{eq:kinoshita}
 \end{equation}
-where $B(r)$ is the bridge function (see next section), and $\gamma(r)=h(r)-c(r)$.
+where $B(r)$ is the bridge function (see next section), and $\gamma(r)=h(r)-c(r)$,
+and \(\lvert \cdot \rvert\) stands for the absolute value.
 This closure relation is not thermodynamically consistent, but in this work this
 consistency will be explored in detail.
 
@@ -704,7 +718,7 @@ physicists were drawn to understand the bridge function and proposed approximati
 the bridge function, instead of a simple closure relation for the Ornstein-Zernike
 equation itself. Nevertheless, by approximating the bridge function, the same problems
 arise, i.e., thermodynamic consistency and defficient results for every possible
-interaction potential. So the most common way to solve the Ornstein-Zernike is through
+interaction potential. So the most common way to solve the Ornstein-Zernike equation is through
 experience: knowing the properties of $u(r)$, a given bridge function is chosen,
 then with this approximation the Ornstein-Zernike equation is solved, and a solution is
 obtained. Most of the time, the solution is extremely precise. But if there is not
