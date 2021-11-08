@@ -53,7 +53,7 @@ The Ornstein-Zernike formalism is given by the following coupled equations~\cite
     \end{aligned}
     \label{eq:oz1}
 \end{equation}
-with the already known notation for each quantity (\textcolor{red}{Ref a marco teórico}).
+with the already known notation for each quantity (see~\autoref{sec:ornstein-zernike}).
 
 Let $\nnet$ be a neural network with weights $\theta$. The main hypothesis
 of this chapter is that $\nnet$ can replace the bridge function $B(\vecr)$
@@ -168,7 +168,7 @@ described by \autoref{eq:parametrizacion}:
 \begin{enumerate}
     \item Given a particular interaction potential $\beta u(\vecr)$, \autoref{eq:parametrizacion} is used to obtain the value of the direct correlation function $c(\vecr)$. In this step, an initial value for $\gamma_{n}(\vecr)$ is needed, which is initialized based on the five-point Ng methodology shown in \autoref{AppendixB}. The weights of the neural network $\nnet$ are initialized randomly. The initialization method is discussed in detail in the next section.
     \item The newly found function $c(\vecr)$ is transformed to a reciprocal space by means of the Fourier transform yielding the new function $\hat{c}(\veck)$.
-    \item Then, the full OZ equation(\textcolor{red}{Ref a ec marco teórico}) is Fourier transformed. Using the information from the previous step, a new estimation of the indirect correlation function is obtained, $\hat{\gamma}_{n+1}(\veck, \theta)$.
+    \item Then, the full OZ equation, \autoref{eq:ornstein-zernike}, is Fourier transformed. Using the information from the previous step, a new estimation of the indirect correlation function is obtained, $\hat{\gamma}_{n+1}(\veck, \theta)$.
     \item The Fourier transform is applied once again to return all the functions to real space. With this operation, a new estimation $\gamma_{n+1}(\vecr, \theta)$ is computed from the transformed function, $\hat{\gamma}_{n+1}(\veck, \theta)$.
     \item Both estimations, $\gamma_{n}$ and $\gamma_{n+1}$, are used to evaluate \autoref{eq:costo}. In this step, the gradient $\nabla_{\theta} J(\theta)$ is computed as well.
     \item The weights $\theta$ are updated using a gradient descent rule, similar to \autoref{eq:gradiente}, and the process is repeated from step 1. In the next iteration, the initial value for the indirect correlation function will be $\gamma_{n+1}$, and a new estimation $\gamma_{n+2}$ will be obtained. This process is repeated until convergence.
@@ -264,8 +264,10 @@ shown in \autoref{fig:nn-esquema}, with the exception of the number of nodes in 
 In particular, the neural network is made of \emph{three layers} fully connected between 
 them.
 There is an \emph{input} layer, one \emph{hidden} layer, and a final \emph{output} layer.
-All layers have the same number of nodes, which is 4096. Additional nodes are added to the
-final two layers that serve as the \emph{bias} terms.
+All layers have the same number of nodes, which is 4096. This size is set to be the same 
+size as the number of points in the discretized distribution functions computed from the OZ 
+equation. Additional nodes are added to the final two layers that serve as the \emph{bias} 
+terms.
 
 All the weights must be initialized appropiately, and in this case the Glorot uniform
 distribution was used~\cite{glorotUnderstandingDifficultyTraining2010}, which has proven
@@ -294,8 +296,9 @@ of the neural network (data not shown).
 
 To solve the OZ equation a cutoff radius of $r_c=7\sigma$ was used, where $\sigma$ is the
 particle diameter and it was fixed to be $\sigma=1$.
-The interaction potential used was the pseudo hard sphere potential (\textcolor{red}{Ref a ec.}), both
-for the solution of the OZ equation, as well as the results obtained from computer simulations.
+The interaction potential used was the pseudo hard sphere potential as defined 
+in~\autoref{eq:cont-hs}, both for the solution of the OZ equation, as well as the results 
+obtained from computer simulations.
 
 Seven different densities were explored in the range $\phi \in [\num{0.15}, \num{0.45}]$, 
 with $\Delta \phi = \num{0.05}$.
@@ -304,13 +307,14 @@ algorithm when solving for the OZ equation. This was not the case for the comput
 simulations, where such partition is not needed.
 
 Computer simulations results were obtained using the traditional Monte Carlo simulation
-method within the Metropolis scheme for the $NVT$ ensemble (\textcolor{red}{Ref a marco teórico}). In every experiment, the total number of particles was 2197,
+method within the Metropolis scheme for the $NVT$ ensemble. In every experiment, the total 
+number of particles was 2197,
 the system was equilibrated for a total of 10 million Monte Carlo steps, and the radial
 distribution functions were obtained from the sampling of 7 million Monte Carlo steps, after
 the system was equilibrated. To reduce the number of computations, a cutoff radius of
 half the size of the simulation box was used for the evaluation of the interaction 
 potential. Periodic boundary conditions in all spatial dimensions were used accordingly. 
-The same pseudo hard sphere potential (\textcolor{red}{Ref a ecuación}) was used, instead
+The same pseudo hard sphere potential, \autoref{eq:cont-hs}, was used instead
 of the true hard sphere potential, for a fair comparison with the results obtained from the 
 OZ equation.
 
@@ -358,7 +362,7 @@ In the same spirit as before with the low densities, the HNC and neural network
 approximations are not precise when compared to computer simulations. In this case,
 the modified Verlet bridge function approximation is even more precise, which was expected.
 This is because the HNC approximation is a very good approximation for long range
-interaction potentials (\textcolor{red}{Ref faltante}), whereas the modified Verlet is 
+interaction potentials~\cite{hansenTheorySimpleLiquids2013}, whereas the modified Verlet is 
 better suited for short range potentials, such as the one studied here.
 In this case, modified Verlet is the most precise of the approximations used, which
 can be inpsected in \autoref{fig:rdf35} and \autoref{fig:rdf45}, where the 
