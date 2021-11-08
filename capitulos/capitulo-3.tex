@@ -63,7 +63,7 @@ is the number of \emph{training samples}.
 In most common cases, the inputs $\bm{x}$ are $D$-dimensional vectors that
 represent information about something. For instance, the height and weight of a
 person, or the evolution of the stock market throughout the years. 
-These vectors are colloquially referred to as \emph{features} or \emph{attributes}.
+The components of these vectors are referred to as \emph{features} or \emph{attributes}.
 The general form of $\bm{x}$ is not defined, it can be anything from an image, a time 
 series, sentences from a text, graphs, molecules, and so on.
 
@@ -330,7 +330,7 @@ where \(\bm{c} \cdot \bm{d} = \sum_{i}^{N} c_i \, d_i\) is the dot product betwe
 the $N$-dimensional vectors \(\bm{c}\) and \(\bm{d}\). Now, there is a new value, 
 called the \emph{bias} term, defined as \(b\) in \autoref{eq:output-dot}. This new term is 
 the value that is added to each perceptron and it can be interpreted as a measure of how 
-easy it is to get the perceptron to output a \(1\).
+easy it is to get the perceptron to output \(1\).
 
 \begin{figure}
     \centering
@@ -591,7 +591,7 @@ address in a later section. However, there is also \emph{genetic algorithms},
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.4]{figuras/capitulo-3/evolutionary-optimization.pdf}
+    \includegraphics[scale=0.67]{figuras/capitulo-3/evolutionary-optimization.pdf}
     \caption{Evolutionary algorithms always start by creating a population of solutions. New solutions are then created by varying those from the original population. Then, the solutions are measured with respect to how well they address the task. Finally, a selection criterion is applied extract the best solutions so far. The process is iterated using the selected set of solutions until a specific criterion is met.}
     \label{fig:evolutionary-optimization}
 \end{figure}
@@ -681,12 +681,13 @@ evaluate the objective function where there is no sign of a minimum.
 
 Black-box functions can, in general, be any type of function, either mathematical or 
 computational. When the function is computational, this can represent code that performs 
-several tasks, each of which might take considerable amount of time and computing 
+several tasks, each of which might take a considerable amount of time and computing 
 resources. In such cases, black-box optimization algorithms are the key to solving the 
 problem. Or maybe the black-box function is not too costly, but instead the true form of 
-the function is not known. Again, black-box optimization algorithms are the best choice. In 
-the next section, a particular EC, black-box optimization algorithm will be reviewed and 
-presented, which will be extensively in a later chapter of this thesis.
+the function is not known. Again, black-box optimization algorithms are the best choice
+in that scenario. In the next section, a particular black-box optimization algorithm 
+derived from EC methods will be reviewed and presented, which will be extensively used in 
+chapter 5 of this thesis.
 
 \subsection{Natural Evolution Strategies}
 One algorithm that stands out for its robustness and flexibility in dealing with black-box 
