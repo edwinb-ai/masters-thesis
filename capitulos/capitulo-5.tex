@@ -1,12 +1,12 @@
 \chapter{Evolutionary optimization for the Kinoshita closure}
 \label{Cap5}
 
-In the previous chapter, a neural network was used to approximate the bridge function in 
-the solution to the Ornstein-Zernike (OZ) equation. From the results obtained, it was 
-implied that, without any more physical information, the neural network reduced its 
-approximation to the well-known Hypernetted Chain closure relation. In this chapter, the 
-modified Verlet bridge function is introduced, along with its variation, the Kinoshita 
-closure. This bridge function contains more information in terms of the indirect 
+In the previous chapter, a neural network was used to approximate the bridge function and 
+use it in the solution of the Ornstein-Zernike (OZ) equation. From the corresponding 
+results, it was implied that, without any more physical information, the neural network 
+reduced its approximation to the well-known Hypernetted Chain closure relation. In this 
+chapter, the modified Verlet bridge function is introduced, along with its variation, the 
+Kinoshita closure. This bridge function contains more information in terms of the indirect 
 correlation function, \(\gamma(r)\), which provides a more accurate solution when dealing 
 with the hard-sphere fluid. Still, the Kinoshita closure is not thermodynamically 
 consistent. Thus, in this chapter, the proposal of parametrizing the Kinoshita is 
@@ -18,19 +18,19 @@ proposal is to alleviate the problems that using a neural network has, in terms 
 incoporating more Physics into the modeling, instead of relying on the neural network to 
 learn something by its own.
 
-\section{The Kinoshita closure and its parametrization}
-The proposal in this chapter deals with the modified Verlet closure and a variation of 
-this, the Kinoshita modification. Both of these closure relations have been formulated to 
+\section{Kinoshita closure and its parametrization}
+The main goal in this chapter is to deal with the modified Verlet closure and a variation 
+of it, the Kinoshita modification. Both of these closure relations have been formulated to 
 deal with the hard-sphere fluid, for low and large density values. The purpose of this 
 section is to look at these closure relations more closely, as well as to define the 
 parametrization to be used in later computations and results.
 
-\subsection{The modified Verlet bridge function approximation}
-Between 1980 and 1981, Loup Verlet published two papers were he introduced what is now 
+\subsection{Modified Verlet bridge function approximation}
+Between 1980 and 1981, Loup Verlet published two papers where he introduced what is now 
 called the \emph{modified Verlet} bridge 
 function~\cite{verletIntegralEquationsClassical1980,verletIntegralEquationsClassical1981}. 
 The idea behind his bridge function approximation was to derive a good approximation based 
-on reproducing the exact first five virial coefficients of the hard sphere equation of 
+on reproducing the exact first five virial coefficients of the hard-sphere equation of 
 state. The original proposition for the bridge function by Verlet was,
 \begin{equation}
     B(r) = - \frac{A \, \gamma^{2}(r) \, / 2}{1 + B \, \gamma(r) \, / 2}
@@ -38,8 +38,9 @@ state. The original proposition for the bridge function by Verlet was,
     \label{eq:verlet-params}
 \end{equation}
 By fitting the exact values of the virial coefficients, Verlet reached the conclusion that 
-the values for \(A, B\) that could reproduce the results for the hard-sphere fluid up to 
-the fluid-solid transition where the values of,
+the values for \(A\) and \(B\) 
+that could reproduce the results for the hard-sphere fluid up to the fluid-solid transition 
+were the values,
 \begin{equation}
     A = 1 \, , \quad B = \frac{4}{5}
     \; ,
@@ -54,7 +55,7 @@ which turns the original closure relation in \autoref{eq:verlet-params} into,
 This turned out to be an accurate bridge function approximation for the case of the 
 hard-sphere fluid, even when hard sphere mixtures are 
 considered~\cite{lopez-sanchezDemixingTransitionStructure2013a}.
-Some of the advantages of this approximation is the fact that it is simple, efficient and 
+Some of the advantages of this approximation are the fact that it is simple, efficient and 
 there are no free parameters to be fixed, as is the case in the 
 Rogers-Young~\cite{rogersNewThermodynamicallyConsistent1984b} and the 
 Zerah-Hansen~\cite{zerahSelfConsistentIntegral1986} closure relations. The problem lies, as 
@@ -64,7 +65,7 @@ which are already thermodynamically consistent, as is the case of the reference 
 Chain approximation~\cite{ladoSolutionsReferencehypernettedchainEquation1983}. This 
 approximation comes from first principles, and the thermodynamic consistency comes from the 
 fact that the reference potential is chosen such that the free energy of the fluid is 
-minimized. Still, the problem with this closure relation, although accurate, is that is 
+minimized. Still, the problem with this closure relation, although accurate, is that it 
 might be hard to implement and use in several different scenarios.
 
 \subsection{The Kinoshita variation}
@@ -82,10 +83,17 @@ very large and negative values of \(\gamma(r)\). However, in this case, the idea
     \; ,
     \label{eq:kinoshita-params}
 \end{equation}
-and instead look for the best values of both \(\alpha, \beta\) that yield an accurate 
+and instead looking for the best values of both \(\alpha, \beta\) that yield an accurate 
 result for the case of the isotropic hard sphere fluid in three dimensions.
 To find these values, partial thermodynamic consistency will be enforced through the use of 
 the pressure equations, which shall be discussed next.
+
+It is important to note that even though this approach seems to be a good approximation for
+the particular case of the hard-sphere fluid, in general a virial expansion based on the
+evaluation of the virial coefficients does not lead to a proper equation of state. The 
+reason for this is that the virial expansion is an infinite series, but computationally 
+only truncated series can be dealt with, and so the series has to be truncated somewhere, 
+dropping accuracy and physical relevance for higher order terms in the expansion.
 
 \section{Thermodynamic consistency}
 An important part of the results from this chapter is the notion of 
@@ -93,23 +101,24 @@ An important part of the results from this chapter is the notion of
 This is the goal of the present section.
 
 When approximations to the bridge function are used, together with the OZ equation, most of 
-the time the solution show a phenomenon where, if a thermodynamic observable is computed 
-through two or more \emph{routes}, the results may vary drastically. This is not wanted 
+the time the solution shows a phenomenon where, if a thermodynamic observable is computed 
+through two or more \emph{routes}, the results may vary drastically. This is not a wanted 
 behavior from the closure relations. Rather, it is expected that the closure relations 
-could, in fact, provide accurate results regardless of the route they are computed with.
+could, in fact, provide accurate results regardless the route they are computed with.
 In section \autoref{sec:thermodynamics}, some of the ways to compute thermodynamic 
 quantities using the radial distribution function, \(g(r)\), were presented. These will be 
-presented here once more for the sake of clarity. Specialy, it is important to mention the 
+presented here once more for the sake of clarity. Particularly, 
+it is important to mention the 
 two main routes that will be used later, the \emph{virial route} and the 
 \emph{compressibility route}.
 
 From \autoref{eq:pressure-equation}, the pressure equation for a $3$-dimensional fluid is,
 \begin{equation}
-    P = \frac{\rho}{\beta} - \frac{2 \pi \beta \rho}{3} \int_{0}^{\infty} u'(r) \, g(r) \, r^3 \, dr \, ,
+    \beta P = \rho - \frac{2 \pi \rho}{3} \int_{0}^{\infty} \beta u'(r) \, g(r) \, r^3 \, dr \, .
     \label{eq:pressure-gr}
 \end{equation}
-this equation is also known as the \emph{virial equation} because it can be derived 
-formally with the virial theorem (see \autoref{sec:thermodynamics}). Henceforth, 
+This equation is also known as the \emph{virial equation} because it can be derived 
+formally from the virial theorem (see \autoref{sec:thermodynamics}). Henceforth, 
 this equation shall be known as the \emph{virial pressure equation}.
 
 Another quantity of interest is the \emph{isothermal compressibility}, which was already 
@@ -137,21 +146,22 @@ some arbitrary precision, closure relations can be \emph{thermodynamically consi
 This would mean that both routes will yield the same value. In reality, not many closure 
 relations can do this, except for some special cases, which were already mentioned in the 
 previous section. Thus, the standard way of alleviating the problem of thermodynamic 
-inconsistency is to compute both these routes and adjust some parameter, or function, 
+inconsistency is to compute both routes and adjust some parameter, or function, 
 such that both routes provide the same result. It need not be just the pressure equations, 
 also the energy equations can be used, as well as other thermodynamic quantities, such as 
 the Helmholtz free energy or the chemical 
 potential~\cite{tsedneeClosureOrnsteinZernikeEquation2019}.
 
 \subsection{Numerical implementation}
-In order to be able to compute the pressure from both routes, the \emph{virial} route and the \emph{compressibility} route, the following approach was followed.
+In order to compute the pressure from both routes, the \emph{virial} route and the \emph{compressibility} route, the following approach was followed.
 
 For the case of the \emph{virial} route, \autoref{eq:pressure-gr} was computed as is, using 
 the Romberg method for computing the integral~\cite{hammingNumericalMethodsScientists2012}. 
 Due to the fact that the interaction potential is a continuous function (see 
 \autoref{eq:cont-hs}), the exact derivative was computed and implemented. Then, to compute 
 the isothermal compressibility from \autoref{eq:chi-thermo}, the derivative was 
-approximated using a finite central difference scheme,
+approximated using a finite central difference 
+scheme~\cite{hammingNumericalMethodsScientists2012},
 \begin{equation}
     \chi_{T}^{-1} = \rho { \left( \frac{\partial P}{\partial \rho} \right) }_{T}
     \approx \rho \lim_{\Delta \rho \to 0} \frac{P(\rho + \Delta \rho) - P(\rho - \Delta \rho)}{2 \, \Delta \rho}
@@ -179,7 +189,7 @@ is, using once again the Romberg method for computing the integral.
     \vspace{-2cm}
     \includegraphics[scale=0.3]{figuras/capitulo-5/black-box-function.png}
     \vspace{-3cm}
-    \caption{Schematics of the black-box function implementation. The function takes in two parameters, \(\alpha, \beta\), and yield the output given by the squared difference of the inverse isothermal compressibility through the virial and compressibility routes.}
+    \caption{Schematics of the black-box function implementation. The function takes two parameters, \(\alpha, \beta\) as input, and yields the output given by the squared difference of the inverse isothermal compressibility through the virial and compressibility routes.}
     \label{fig:black-box-function}
 \end{figure}
 
@@ -202,8 +212,8 @@ dependency of the parameters \(\alpha, \beta\) that would yield such value of th
 compressibility. In other words, for a fixed set of paramaters \(\alpha, \beta\), the 
 inverse isothermal compressibility is computed via both routes, and its difference squared 
 is computed. The goal of the optimization problem is to \emph{minimize} this difference. If 
-a good set of parameters is found, the the difference will be, ideally, zero or close to 
-zero, which in turn would mean that both routes are providing the same results, up to an 
+a good set of parameters is found, then the difference will be, ideally zero or close to 
+zero, which in turn would mean that both routes are providing the same result, up to an 
 arbitrary numerical tolerance.
 
 In order to perform the optimization procedure, all the necessary computation must be bundled together into a single \emph{black-box function}. This function, which is modeled in \autoref{fig:black-box-function}, will take as input two values and will output the difference between the inverse isothermal compressibility values computed using both routes. Thus, the function will perform the following steps:
@@ -220,7 +230,7 @@ Thus, the previous steps comprise the \emph{black-box function} shown in
 \subsection{Optimization procedure}
 To solve the optimization problem in \autoref{eq:optimiziation-chi}, Evolutionary 
 Comptuation methods were employed. However, there are two parts to the solution of this 
-problem. First off, the function is treated as a \emph{black-box function}, which means 
+problem. First, the function is treated as a \emph{black-box function}, which means 
 that no derivatives can be computed, and that it is assumed that each function evaluation 
 is costly. Although the numerical methods are quite optimized, it is safe to assume that 
 each function evaluation is costly, and use this argument to select a good optimization 
@@ -230,10 +240,11 @@ For this reason, Evolution Strategy methods were employed, in particular, Natura
 Strategies (NES) (see \autoref{Cap3}). These methods are robust, albeit slow to reach a 
 minimum. 
 Furthermore, these methods are \emph{global optimization methods}, meaning that these 
-method will only look for global values throughout the function lanspace, and if any minima 
-is found, it will not look deeper into that particular set of parameters. For this reason,
-\emph{local optimization methods} are used, to perform a more exhaustive search into the 
-previously found global minima. Thus, the optimization procedure looks like the following,
+methods will only look for global values throughout the function lanspace, and if any 
+minima is found, it will not look deeper into that particular set of parameters. For this 
+reason, \emph{local optimization methods} are used, to perform a more exhaustive search 
+into the previously found global minima. Thus, the optimization procedure looks like the 
+following,
 \begin{enumerate}
     \item Select an initial search space of \(\left[-75, 75\right]\) for each parameter, and choose an initial set of parameters randomly from within the search space.
     \item Using the DXNES global optimization method~\cite{nomuraDistanceweightedExponentialNatural2021}, perform a search for all the global minima in the interval \(\rm{x} \in \left[a, b\right]\).
@@ -244,7 +255,7 @@ previously found global minima. Thus, the optimization procedure looks like the 
 
 To see this more clearly, an example is worked out now. First, a density value is fixed, 
 \(\phi = 0.4\), and all the necessary parameters to solve the OZ equation are fixed as 
-well. Then, the search is space is fixed to be \(\rm{x} = \left(\alpha, \beta\right) \in \left[-75, 75\right]\). 
+well. Then, the search space is fixed to be \(\rm{x} = \left(\alpha, \beta\right) \in \left[-75, 75\right]\). 
 An initial set of parameters is chosen randomly from within this search space, for 
 instance, \(\rm{x} = \left(-10, 42\right)\). These pair of values are then fixed to be the 
 value of \(\alpha, \beta\) in \autoref{eq:kinoshita-params}. With these new values, the 
@@ -421,7 +432,7 @@ not clear \emph{how} or \emph{why} the bridge function approximation would not p
 least a solution to the OZ equation.
 
 The search space is another important part of the problem. A large search space means that 
-the optimization procedure must look into very different places until a particular minima 
+the optimization procedure must look into very different places until a particular minimum 
 has been found. This could be solved by restricting the bounds to particular bounds in both 
 \(\alpha, \beta\), instead of using a single large search space for both paramaters. 
 However, this is not simple to see, or to define. One way to do this would be rely on the 
@@ -472,7 +483,7 @@ the Kinoshita closure only has two free paramaters, compared to the thousands of
 that appear in a Neural Network. Still, the Neural Network is faster to fit and solve than 
 using Evolutionary Computation methods, which could be extended to other systems as well.
 
-The results here show great promise to be extended to other dimensions and systems. 
+The results here show great promise to be extended to other spatial dimensions and systems. 
 For instance, in highly asymmetric mixtures~\cite{zhouLocalStructureThermodynamics2019}, 
 where several parameters could be found. The method shown here would not change at all, due 
 to the fact that Evolutionary Computation methods naturally handle high-dimensional 
@@ -488,5 +499,5 @@ using this method, just to showcase the true robustness of the method.
 Finally, another line of future research could be the comparison of different optimization 
 algorithms for this kind of problems. A robust implementation that could be translated into 
 a highly efficient code package could serve well the community of Liquid Theory and Soft 
-Matter in general. Different optimization methods could yield better or worse results, or 
+Matter, in general. Different optimization methods could yield better or worse results, or 
 it could shed some light into what might be happening to the search space itself.
