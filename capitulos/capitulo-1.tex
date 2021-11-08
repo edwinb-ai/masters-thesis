@@ -45,17 +45,17 @@ in the ML methods, new ways of obtaining the same results were found.
 Not only do ML methods provide mostly the same results as the physical framework they
 are modeling, they also provide solutions much faster and more efficiently~\cite{zhuPhysicsconstrainedDeepLearning2019}.
 
-Of all the research fields within Physics, in this thesis we would like to focus
-our attention to the field of \emph{condensed matter physics}, and in particular, to the
+Of all the research fields within Physics, in this thesis we focus
+our attention to the field of \emph{Condensed Matter Physics}, and in particular, to the
 field of Liquid State Theory and Soft Matter. Before we do that, however, we should
-mention briefly some of the precursors to the applications of ML to said fields.
-A great review by J\"{o}rg Behler~\cite{behlerPerspectiveMachineLearning2016a}
+mention briefly some of the precursors to the applications of ML to those fields.
+A review by J\"{o}rg Behler~\cite{behlerPerspectiveMachineLearning2016a}
 describes in great detail some of these precursors. Most applications have dealt with
 materials science, computational chemistry and chemistry, and the computational aspect
 of condensed matter physics. It is within these fields that new ways of using ML methods
 have been developed from various needs in research. Another prime example is the coupling
 of computer simulations and ML methods, such as the work by Li \emph{et al}~\cite{liMolecularDynamicsOntheFly2015}.
-In this work, whenever the quantum-mechanical information is needed it is computed with
+In that work, whenever the quantum-mechanical information is needed it is computed with
 first-principles calculations. These calculations are then added to a dataset to be used
 by ML methods, which in turn are used as approximators for the computer simulation.
 This approach not only efficiently uses Physics in its most pure form, but it also
@@ -65,11 +65,11 @@ review by Bedolla \emph{et al}~\cite{bedollaMachineLearningCondensed2020}
 covers these and some other important aspects of ML methods applied to
 condensed matter physics.
 
-Although these are a tiny subset of all the modified applications of ML techniques
-in physical sciences research, we should note that these show an important aspect
-in common between them. If we wish to assimilate the physics of the problem at hand,
-variations and modifications to the common ML methods and techniques are needed. 
-Exploration and testing, trial and error, are an important part of the search and 
+Although these applicate form a tiny subset of all the modified applications of ML 
+techniques in physical sciences research, we should note that these applications show an 
+important aspect in common between them. If we wish to assimilate the physics of the 
+problem at hand, variations and modifications to the common ML methods and techniques are 
+needed. Exploration and testing, trial and error, are an important part of the search and 
 application of ML methods to Physics research. In the case of Liquid State Theory and Soft 
 Matter, we can consider that most research is still in the exploration and testing stage,
 although some applications have seen great success in specific scenarios.
@@ -79,7 +79,7 @@ quadratic optimization~\cite{steinwartSupportVectorMachines2008}\textemdash
 in the description of the properties of glassy dynamics~\cite{schoenholzStructuralApproachRelaxation2016}.
 The reason for research in Soft Matter and ML still being part of the exploration step is 
 that in Soft Matter and Liquid Theory it is hard to find suitable descriptors that 
-actually tell useful information from the system or phenomena~\cite{dijkstraPredictiveModellingMachine2021a}.
+actually tell us useful information from the system or phenomena~\cite{dijkstraPredictiveModellingMachine2021a}.
 As such, most of the time a descriptor-based approach might not be feasible for every 
 possible system. Instead, we need to explore a diverse range of possibilities when using ML 
 methods within the context of Soft Matter and Liquid Theory.
@@ -127,8 +127,8 @@ An important topic that the group explores is the inverse design of self-assembl
 systems. \emph{Self-assembly} is the property of soft materials to order their
 components, such as particles, atoms or cells, without any external interactions,
 into functional structures~\cite{grzybowskiSelfassemblyCrystalsCells2009}.
-In this direction, their interest is particularly focused in self-assembly and how this 
-phenomena can be dealt with ML methods.
+In this direction, their interest is particularly focused on self-assembly and how these 
+phenomena can be dealt with using ML methods.
 In a particular work by Lindquist \emph{et al} with the Truskett group~\cite{lindquistCommunicationInverseDesign2016},
 optimization-based methods were used along with standard molecular dynamics computer
 simulation methods to understand how certain materials can self-assemble.
@@ -142,7 +142,7 @@ and more flexible.
 Up until this point, we have talked about Soft Matter and its interaction with machine
 learning methods, and most of all the way it has been disrupting this research field
 with novel ways to do things. Liquid State Theory was briefly mentioned before,
-but it is time to state the relation between both these research fields.
+but it is time to state the relation between both research fields.
 Why talk about Liquid State Theory and Soft Matter as if these were related somehow?
 In a fascinating note by Evans, Frenkel and Dijkstra~\cite{evansSimpleLiquidsColloids2019}
 they talk about the precise relation between liquids, their theory, and how by studying
@@ -153,8 +153,8 @@ and gases. The first attempt to understand and apply liquid theory,
 along with computer simulations of liquids, was to study the
 classic Lennard-Jones system to model Argon~\cite{mcdonaldCalculationThermodynamicProperties1967,verletComputerExperimentsClassical1967a}. 
 Computer simulation methods, theoretical frameworks, and experimental setups helped 
-understand the true nature of liquids, given them a special place in Physics research. 
-Physicists were attempting to construct a rigorous framework which will later be used to 
+understanding the true nature of liquids, giving them a special place in Physics research. 
+Physicists were attempting to construct a rigorous framework which were used to 
 further create new research fields.
 Such fields were then created by the outstanding work of Nobel Laureate Pierre Gilles-de 
 Gennes. In his Nobel Lecture~\cite{degennesSoftMatter1992} he mentioned that by studying 
@@ -174,7 +174,7 @@ Yet, there seems to be an area of opportunity where Liquid State Theory can grea
 benefit from all the current research in ML methods. Arguably, the first work to delve deep 
 into the intersection between Liquid State Theory and ML theory was the work done by
 Goodall and Lee.
-In this work, a dataset is built from Molecular Dynamics computer simulations using several
+In their work, a dataset is built from Molecular Dynamics computer simulations using several
 interaction potentials. Then, a ML method was used to predict properties from a new,
 unknown system, using most of the information available from the dataset.
 The method worked great, but the precision was not the best in some cases. Granted, this
@@ -193,10 +193,10 @@ way to streamline the methods used so far in Liquid State Theory. This is the ba
 this work, to explore the use of ML methods in the theoretical formalism of the
 Ornstein-Zernike equation, a rigorous framework that provides all the information from
 a simple liquid system. We wish to understand if some of the most common ML methods
-can be used, how can they be used, if they can even provide physically-relevant
+can be used, how they can be used, if they can even provide physically-relevant
 solutions or not.
 
-To achieve this goal, this thesis is organized as follows. In chapter 2, the next chapter,
+To achieve this goal, this thesis is organized as follows. In chapter 2, 
 the theory of simple liquids will be outlined, focusing heavily on the Ornstein-Zernike
 formalism, as well as the theory of integral equations.
 A description of the reference system\textemdash the hard sphere fluid\textemdash 
@@ -219,14 +219,15 @@ parametrization for the closure relation within the Ornstein-Zernike formalism.
 It is shown that the proposal works, the method proposed to make it work, a training
 scheme, and the results obtained. It is found that the proposal works, but if the neural
 network is not given too much information or description about the system, the neural
-network training dynamics will reduce to a common closure relation.
+network training dynamics will reduce to a common closure relation, which is not
+thermodynamically self-consistent.
 In chapter 5, an exploration of including physical information to the problem gives
 a more direct solution. Instead of using a neural network to parametrize the closure
 relation, a known approximation is used, and let an evoluationary algorithm find the
 best parameters for it. When using an approximation that is already shown to give
 accurate results, the ML method is better suited to work correctly, but not without
-its drawbacks, which are discussed in full.
-The thesis the closes in chapter 6, with important conclusions and future ideas
+its drawbacks, which are discussed in detail.
+The thesis then closes in chapter 6, with important conclusions and future ideas
 to amend the proposals presented here. A few other proposal are outlined, although
 not with results, or rigorous theoretical frameworks. These can be thought of
 suggestions that might somehow become new ways to use ML methods within Liquid
