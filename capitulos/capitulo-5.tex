@@ -24,6 +24,8 @@ of it, the Kinoshita modification. Both of these closure relations have been for
 deal with the hard-sphere fluid, for low and large density values. The purpose of this 
 section is to look at these closure relations more closely, as well as to define the 
 parametrization to be used in later computations and results.
+The pseudo hard-sphere model from~\autoref{eq:cont-hs} is used for all the computations 
+done in this chapter.
 
 \subsection{Modified Verlet bridge function approximation}
 Between 1980 and 1981, Loup Verlet published two papers where he introduced what is now 
@@ -371,6 +373,39 @@ computed, along with the results from \autoref{tab:local-opt}. It is simple to s
 results are in excellent agreement with the results obtained from the Kolafa EOS, which is 
 considered to be a very accurate equation of state for the hard sphere fluid.
 
+\subsection{Radial distribution functions}
+The radial distribution functions are now presented, but only for a small subset of 
+densities, namely 
+\(\phi=\numlist[list-final-separator={\enspace\text{and}\enspace}]{0.25; 0.35; 0.45} .\)
+In these figures,~\autoref{fig:rdf-kinoshita-025},~\autoref{fig:rdf-kinoshita-035}, 
+and~\autoref{fig:rdf-kinoshita-045}, the radial distribution functions found using the 
+optimization procedure are compared directly with the ones found by means of Monte Carlo 
+computer simulations, and using the original parameters for the Kinoshita closure 
+in~\autoref{eq:kinoshita-eq}. One important aspect that is clear is that, at higher 
+densities, the radial distribution function does not seem to follow the same form as that 
+found via computer simulations.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.35]{figuras/capitulo-5/rdf_phi=0.25.pdf}
+    \caption{Radial distribution function comparison between the Kinoshita parameters found by optimization, \emph{Optimized Kinoshita}, the original parameters from~\autoref{eq:kinoshita-eq}, \emph{Original Kinoshita}, and Monte Carlo simulations, \emph{Simulation}, for the density value of \(\phi=0.25 .\)}
+    \label{fig:rdf-kinoshita-025}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.35]{figuras/capitulo-5/rdf_phi=0.35.pdf}
+    \caption{Radial distribution function comparison between the Kinoshita parameters found by optimization, \emph{Optimized Kinoshita}, the original parameters from~\autoref{eq:kinoshita-eq}, \emph{Original Kinoshita}, and Monte Carlo simulations, \emph{Simulation}, for the density value of \(\phi=0.35 .\)}
+    \label{fig:rdf-kinoshita-035}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.35]{figuras/capitulo-5/rdf_phi=0.45.pdf}
+    \caption{Radial distribution function comparison between the Kinoshita parameters found by optimization, \emph{Optimized Kinoshita}, the original parameters from~\autoref{eq:kinoshita-eq}, \emph{Original Kinoshita}, and Monte Carlo simulations, \emph{Simulation}, for the density value of \(\phi=0.45 .\)}
+    \label{fig:rdf-kinoshita-045}
+\end{figure}
+
 \section{Discussion}
 It seems that, with the results shown in \autoref{fig:isothermal-results}, this approach is 
 a great proposal for alleviating the thermodynamic consistency problem that permeates the 
@@ -438,6 +473,24 @@ has been found. This could be solved by restricting the bounds to particular bou
 However, this is not simple to see, or to define. One way to do this would be rely on the 
 same argument used by Verlet~\cite{verletIntegralEquationsClassical1980}, and inform the 
 optimization procedure of the virial coefficients for the hard sphere fluid.
+However, as it was previously stated, this definition does not lead to a correct bridge 
+function, because a virial expansion needs to be truncated due to its infinite nature.
+
+The problem of the seach space can be further explored with the radial distribution 
+functions found, and the differences between the densities used. For instance, for a low 
+density of \(\phi=0.25\) volume fraction, the results agree quite well with the Monte Carlo 
+computer simulations and the original parameters from the Kinoshita closure. This result 
+can be clearly seen in~\autoref{fig:rdf-kinoshita-025}. Here, the search space is enough for 
+the optimization procedure to find a correct value of the parameters, and it is easily seen 
+that the result is quite good as well in~\autoref{fig:isothermal-results}. But when the 
+density starts to rise, then the local minima found is not the best, and a the search space 
+is then implied to change. This can be clearly seen in the radial distribution functions 
+for \(\phi=0.35\) in~\autoref{fig:rdf-kinoshita-035}, and for \(\phi=0.45\) 
+in~\autoref{fig:rdf-kinoshita-045}. It is now clear that, as the density starts to get 
+higher, the search space for the optimization procedure becomes extremely important. One 
+aspect of this is that the radial distribution functions do not match the results obtained 
+from Monte Carlo computer simulations, nor they match the results from the original 
+Kinoshita parameters.
 
 \subsection{On the use of Natural Evolution Strategies}
 Another drawback of the proposed method is the fact that Evolutionary Computation methods 
@@ -460,7 +513,16 @@ when dealing with the Physics of the problem. This is because it might be possib
 some local minima for which the bridge function yields accurate results. However, these 
 methods will not discriminate between either of those, so a metric that could drive the 
 optimization problem to Physical meaning would be a novel way to solve the problem of 
-bridge function approximations.
+bridge function approximations. This is needed as well given the results obtained from the 
+radial distribution functions in~\autoref{fig:rdf-kinoshita-025},~\autoref{fig:rdf-kinoshita-035}, 
+and~\autoref{fig:rdf-kinoshita-045}. For small density values, there seems to be no need to 
+drive the optimization method with more Physics information about the system. But at higher 
+density values, it seems that the radial distribution function start to distort and does 
+not seem to match the results from Monte Carlo computer simulations. A way to deal with 
+this problem might be to incorporate more information into the loss function 
+in~\autoref{eq:optimiziation-chi} in terms of the radial distribution function, maybe 
+regarding the principal peaks, or even more information from the solution of the OZ 
+equation itself.
 
 \section{Concluding remarks}
 The results shown here are clearly better than those shown in the previous chapter. Indeed, 
