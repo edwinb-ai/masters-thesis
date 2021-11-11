@@ -2,9 +2,9 @@
 \label{Cap6}
 
 Liquid State Theory is at the core of most modern Soft Matter research fields. As such, it 
-seems important to clearly understand the underlying theoretical frameworks and its main 
+seems important to clearly understand its underlying theoretical frameworks and their main 
 results. Also, it is important to have a clear understanding of the methods used to provide 
-accurate solutions to given problems. Without the exact theoretical framework of the 
+accurate solutions to specific problems. Without the exact theoretical framework of the 
 Ornstein-Zernike equation, most Colloidal Soft Matter research fields would struggle with 
 other theories which are more complicated and harder to implement. Rather, the 
 Ornstein-Zernike equation is simple, effective, and has the outstanding ability to be able 
@@ -15,17 +15,19 @@ of solving it.
 
 Throughout this thesis, the Ornstein-Zernike formalism was introduced as an integral 
 equation theory that is capable of describing the structure of a simple liquid, in 
-particular the hard-sphere fluid. Using the theory of equilibrium Statistical Mechanics, 
-the Ornstein-Zernike equation was described, along with the important quantity, the 
-\emph{bridge function}. This function plays a fundamental role in trying to solve the 
-Ornstein-Zernike equation, because it provides an approximation to the system that is the 
-subject of study. However, the reality is that this function is still an approximation, and 
-to correctly describe a particular fluid, this approximation must be chosen arbitrarily, 
-based on experience and previous research. But this seems cumbersome, and although lots of 
-literature reflect this, it is still used based on experience and common knowledge. This is 
-because finding an exact bridge function is very hard, it cannot be done either numerically 
-or analytically, thus approximations are needed if a solution is wanted for the fluid under 
-scrutiny.
+particular we focused on the fluid model that results the cornstone of the Statistical 
+Mechanics of fluids,  namely,  the hard-sphere fluid. Using the theory of equilibrium 
+Statistical Mechanics, the Ornstein-Zernike equation was described, along with the 
+important quantity, the \emph{bridge function}. This function plays a fundamental role in 
+trying to solve the Ornstein-Zernike equation, because it provides a closed expression  for 
+the indirect correlations between particles the system that is the subject of study. 
+However, the reality is that this function is still an approximation, and to correctly 
+describe a particular fluid, this approximation must be chosen arbitrarily, based primarily 
+on computer simulations and previous research. But this seems cumbersome, 
+and although lots of literature reflect this, it is still used based on experience and 
+common knowledge. This is because finding an exact bridge function is very hard, it cannot 
+be done either numerically or analytically, thus approximations are needed if a solution is 
+wanted for the fluid under scrutiny.
 
 For this reason, Computational Intelligence methods are introduced in this thesis. First, 
 instead of trying to approximate the bridge function, a more general approximation is 
@@ -36,9 +38,9 @@ this knowledge, instead of defining a particular approximation for the bridge fu
 new way of solving the Ornstein-Zernike equation is devised, that attempts to use the 
 Neural Network to find the best approximation for the hard sphere fluid. The results show 
 that the Neural Network reduces to a particular bridge function approximation, the 
-Hypernetted Chain solution, for the case of the hard sphere fluid. This points to the 
-direction that without any more information from the system, the Neural Network tries to 
-stay in a particular minimum, which in this case corresponds to the Hypernetted Chain 
+Hypernetted Chain solution, for the case of the hard sphere fluid. This points toward to 
+the direction that without any more information from the system, the Neural Network tries 
+to stay in a particular minimum, which in this case corresponds to the Hypernetted Chain 
 solution. However, this also means that if there is more information about the underlying 
 Physics of the systems, more information can be used along with the Neural Network, 
 potentially given a better solution to the problem.
