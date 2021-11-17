@@ -11,7 +11,6 @@
 *.toc
 
 ## Latex bibliography files
-*.bbl
 *.blg
 main-blx.bib
 
