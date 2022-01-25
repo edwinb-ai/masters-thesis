@@ -74,7 +74,7 @@ application of ML methods to Physics research. In the case of Liquid State Theor
 Matter, we can consider that most research is still in the exploration and testing stage,
 although some applications have seen great success in specific scenarios.
 One such successful application is the use of \emph{Support Vector Machines}\textemdash
-an explicit method useful for classication and regression based on kernels and
+an explicit method useful for classification and regression based on kernels and
 quadratic optimization~\cite{steinwartSupportVectorMachines2008}\textemdash
 in the description of the properties of glassy dynamics~\cite{schoenholzStructuralApproachRelaxation2016}.
 The reason for research in Soft Matter and ML still being part of the exploration step is 
@@ -119,7 +119,7 @@ for the system.
 
 Another important group that has done several advances in the use of ML within Soft Matter
 is the one lead by Thomas Truskett from the University of Texas.
-Their work on the use of ML methods for inverse desing of soft materials~\cite{shermanInverseMethodsDesign2020a}
+Their work on the use of ML methods for inverse design of soft materials~\cite{shermanInverseMethodsDesign2020a}
 is in similar ways helping out the work by the group of Dijkstra in the same research
 problem~\cite{APSAPSMarcha}.
 However, the work by the Truskett group is in fact more focused on the definition and
@@ -190,17 +190,17 @@ After all, the attempt is a novel way to look at things, and most of all, a new 
 look at Liquid State Theory and its intersection with ML theory.
 Exploring this area is the sole purpose of this thesis, and in particular, in the same
 line of understanding how can ML methods be used in theoretical frameworks that model
-simple liquids. It seems like a worthwile task to test various approaches and look for a
+simple liquids. It seems like a worthwhile task to test various approaches and look for a
 way to streamline the methods used so far in Liquid State Theory. This is the basis for
 this work, to explore the use of ML methods in the theoretical formalism of the
-Ornstein-Zernike equation, a rigorous framework that provides all the information from
+Ornstein-Zernike equation, a rigorous framework that provides most of the structural and thermodynamical information from
 a simple liquid system. We wish to understand if some of the most common ML methods
 can be used, how they can be used, if they can even provide physically-relevant
 solutions or not.
 
 \section{Thesis outline}
 To achieve this goal, this thesis is organized as follows. In chapter 2, 
-the theory of simple liquids will be outlined, focusing heavily on the Ornstein-Zernike
+the theory of simple liquids will be outlined, focusing primarily on the Ornstein-Zernike
 formalism, as well as the theory of integral equations.
 A description of the reference system\textemdash the hard sphere fluid\textemdash 
 will be discussed. The thermodynamical properties of simple liquids will also be described 
@@ -215,23 +215,22 @@ outlined as well, without going into much mathematical rigor.
 The most common learning tasks such as supervised and unsupervised learning will be
 touched only slightly, in a manner that is consistent with the current presentation
 of the topics.
-After the theorical background, a discussion is carried out on the first proposal of using 
+After the theoretical background, a discussion is carried out on the first proposal of using 
 ML methods in Liquid State Theory in chapter 4.
 The proposal is to use a neural network as a 
 parametrization for the closure relation within the Ornstein-Zernike formalism.
-It is shown that the proposal works, the method proposed to make it work, a training
-scheme, and the results obtained. It is found that the proposal works, but if the neural
+It is found that the proposal works, but if the neural
 network is not given too much information or description about the system, the neural
 network training dynamics will reduce to a common closure relation, which is not
 thermodynamically self-consistent.
 In chapter 5, an exploration of including physical information to the problem gives
 a more direct solution. Instead of using a neural network to parametrize the closure
-relation, a known approximation is used, and let an evoluationary algorithm find the
+relation, a known approximation is used, and let an evolutionary algorithm find the
 best parameters for it. When using an approximation that is already shown to give
 accurate results, the ML method is better suited to work correctly, but not without
 its drawbacks, which are discussed in detail.
-The thesis then closes in chapter 6, with important conclusions and future ideas
-to amend the proposals presented here. A few other proposal are outlined, although
-not with results, or rigorous theoretical frameworks. These can be thought of
+The thesis closes in chapter 6, with important conclusions and future ideas
+to improve the proposals presented here. A few other proposal are outlined, although
+not with results, or rigorous theoretical frameworks. These can be thought as
 suggestions that might somehow become new ways to use ML methods within Liquid
 State Theory.
