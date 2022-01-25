@@ -82,7 +82,7 @@ for a given interaction potential, $\beta u(\vecr)$.
 \section{Training scheme}
 Now that a parametrization is defined, a way to fit the weights of the neural network must
 be devised. This new numerical scheme must also be able to solve the OZ equation, while
-simultaneously finding the appropiate weights for $\nnet$.
+simultaneously finding the appropriate weights for $\nnet$.
 
 \subsection{Cost function}
 It was mentioned previously that the main problem is to find the weights of
@@ -175,7 +175,7 @@ described by \autoref{eq:parametrizacion}:
 \end{enumerate}
 
 \subsection{Convergence criterion}
-The procedure described in the previous section is repeated indefinetely until convergence
+The procedure described in the previous section is repeated indefinitely until convergence
 is achieved. This convergence criterion is defined as follows
 
 \begin{equation}
@@ -185,7 +185,7 @@ is achieved. This convergence criterion is defined as follows
 
 This expression is also known as the \emph{mean squared error}~\cite{goodfellowDeepLearning2016}.
 Here, we sum all the $N$ elements of the squared difference between estimates $\gamma_{n+1}$
-and $\gamma_{n}$. The paramater $\epsilon$ is a tolerance value that indicates an 
+and $\gamma_{n}$. The parameter $\epsilon$ is a tolerance value that indicates an 
 upper bound for the error between estimations. When the computed error is below this 
 tolerance value, we consider the algorithm to \emph{have converged to a particular minimum}.
 This means that the weights are adjusted until the successive estimations of the $\gamma$
@@ -269,7 +269,7 @@ size as the number of points in the discretized distribution functions computed 
 equation. Additional nodes are added to the final two layers that serve as the \emph{bias} 
 terms.
 
-All the weights must be initialized appropiately, and in this case the Glorot uniform
+All the weights must be initialized appropriately, and in this case the Glorot uniform
 distribution was used~\cite{glorotUnderstandingDifficultyTraining2010}, which has proven
 to be an excellent way to help the convergence of neural networks.
 When using the Glorot uniform distribution, the weights are initialized as
@@ -365,7 +365,7 @@ This is because the HNC approximation is a very good approximation for long rang
 interaction potentials~\cite{hansenTheorySimpleLiquids2013}, whereas the modified Verlet is 
 better suited for short range potentials, such as the one studied here.
 In this case, modified Verlet is the most precise of the approximations used, which
-can be inpsected in \autoref{fig:rdf35} and \autoref{fig:rdf45}, where the 
+can be inspected in \autoref{fig:rdf35} and \autoref{fig:rdf45}, where the 
 main peak is accurately estimated by the approximation when compared to Monte Carlo 
 computer simulation results. However, both HNC and neural network approximations 
 overestimate this quantity.
@@ -563,7 +563,7 @@ be consolidated within the neural network structure and investigate if the neura
 weights change considerably.
 From this, one might expect two outcomes. Firstly, the case where the \emph{weights change},
 which would indicate that adding nonlinearities according to some aspect of the interaction 
-potential prove benefitial for the weight update and training dynamics.
+potential prove beneficial for the weight update and training dynamics.
 Secondly, the case where the \emph{weights do not change}, in which case we might
 be able the have stronger evidence that, regardless of the neural network structure,
 this kind of approximation will have a high chance of reproducing the HNC results.
