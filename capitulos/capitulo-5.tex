@@ -15,7 +15,7 @@ derivative-free optimization tasks. This is in the same spirit as with the
 Rogers-Young~\cite{rogersNewThermodynamicallyConsistent1984b} and the 
 Zerah-Hansen~\cite{zerahSelfConsistentIntegral1986} closure relations. The goal of this 
 proposal is to alleviate the problems that using a neural network has, in terms of 
-incoporating more Physics into the modeling, instead of relying on the neural network to 
+incorporating more Physics into the modeling, instead of relying on the neural network to 
 learn something by its own.
 
 \section{Kinoshita closure and its parametrization}
@@ -79,7 +79,7 @@ For this reason, the idea of this chapter is to use the modified Verlet approxim
 \end{equation}
 and introduces the absolute value \(\left\lvert \cdot \right\rvert\) in the denominator, 
 which increases the numerical stability of the closure relation for the case when there are 
-very large and negative values of \(\gamma(r)\). However, in this case, the idea is to leave the original form of the closure relation, that is with two free paramaters,
+very large and negative values of \(\gamma(r)\). However, in this case, the idea is to leave the original form of the closure relation, that is with two free parameters,
 \begin{equation}
     B(r) = \frac{\alpha \, \gamma^{2}(r)}{1 + \beta \, \left\lvert \gamma(r) \right\rvert}
     \; ,
@@ -211,7 +211,7 @@ computed through the \emph{compressibility} route; \({\left(\chi_{T}^{v}\right)}
 the inverse isothermal compressibility computed through the \emph{virial} route; and the 
 notation \({\left(\chi_{T}^{c, v} \left(\alpha, \beta\right) \right)}^{-1}\) represents the 
 dependency of the parameters \(\alpha, \beta\) that would yield such value of the 
-compressibility. In other words, for a fixed set of paramaters \(\alpha, \beta\), the 
+compressibility. In other words, for a fixed set of parameters \(\alpha, \beta\), the 
 inverse isothermal compressibility is computed via both routes, and its difference squared 
 is computed. The goal of the optimization problem is to \emph{minimize} this difference. If 
 a good set of parameters is found, then the difference will be, ideally zero or close to 
@@ -231,7 +231,7 @@ Thus, the previous steps comprise the \emph{black-box function} shown in
 
 \subsection{Optimization procedure}
 To solve the optimization problem in \autoref{eq:optimiziation-chi}, Evolutionary 
-Comptuation methods were employed. However, there are two parts to the solution of this 
+Computation methods were employed. However, there are two parts to the solution of this 
 problem. First, the function is treated as a \emph{black-box function}, which means 
 that no derivatives can be computed, and that it is assumed that each function evaluation 
 is costly. Although the numerical methods are quite optimized, it is safe to assume that 
@@ -242,7 +242,7 @@ For this reason, Evolution Strategy methods were employed, in particular, Natura
 Strategies (NES) (see \autoref{Cap3}). These methods are robust, albeit slow to reach a 
 minimum. 
 Furthermore, these methods are \emph{global optimization methods}, meaning that these 
-methods will only look for global values throughout the function lanspace, and if any 
+methods will only look for global values throughout the function landscape, and if any 
 minima is found, it will not look deeper into that particular set of parameters. For this 
 reason, \emph{local optimization methods} are used, to perform a more exhaustive search 
 into the previously found global minima. Thus, the optimization procedure looks like the 
@@ -284,7 +284,7 @@ consistency.
 \section{Results}
 In this section, the results obtained are presented; these results are also summarized in \autoref{tab:global-opt} and \autoref{tab:local-opt}. The results obtained are the two parameters computed through the optimization procedure described in the previous section, as well as the values of the isothermal compressibility computed using both routes.
 
-\subsection{Kinoshita paramaters}
+\subsection{Kinoshita parameters}
 \begin{table}
     \centering
     \begin{tabular}{|c|c|c|}
@@ -326,7 +326,7 @@ was followed, first using a global optimizer, and then a local optimizer, until 
 precision for the minimum was at least \(\leq \num{1e-8} .\) 
 In \autoref{tab:global-opt}, the values for the global optimization procedure are shown. 
 There, the minimum is at least less or equal than \(0.5\). 
-Up to this point, the results betwen the virial and compressibility routes were not distant 
+Up to this point, the results between the virial and compressibility routes were not distant 
 from each other, numerically speaking. However, when the parameters found were used to 
 search for more accurate minima, the results were promising. This can be seen in 
 \autoref{tab:local-opt}, where the results using the local optimizer are shown. It is now 
@@ -351,7 +351,7 @@ computed in its reduced form,
     \label{eq:reduced-chi}
 \end{equation}
 and also the results from \autoref{tab:local-opt} were multiplied by the reduced particle 
-number density, \(\rho^{*} = \rho / \sigma^3 .\)
+number density, \(\rho^{*} = \rho \, \sigma^3 .\)
 
 In the case of the Kolafa EOS, the equation reads,
 \begin{equation}
@@ -469,14 +469,14 @@ least a solution to the OZ equation.
 The search space is another important part of the problem. A large search space means that 
 the optimization procedure must look into very different places until a particular minimum 
 has been found. This could be solved by restricting the bounds to particular bounds in both 
-\(\alpha, \beta\), instead of using a single large search space for both paramaters. 
+\(\alpha, \beta\), instead of using a single large search space for both parameters. 
 However, this is not simple to see, or to define. One way to do this would be rely on the 
 same argument used by Verlet~\cite{verletIntegralEquationsClassical1980}, and inform the 
 optimization procedure of the virial coefficients for the hard sphere fluid.
 However, as it was previously stated, this definition does not lead to a correct bridge 
 function, because a virial expansion needs to be truncated due to its infinite nature.
 
-The problem of the seach space can be further explored with the radial distribution 
+The problem of the search space can be further explored with the radial distribution 
 functions found, and the differences between the densities used. For instance, for a low 
 density of \(\phi=0.25\) volume fraction, the results agree quite well with the Monte Carlo 
 computer simulations and the original parameters from the Kinoshita closure. This result 
@@ -500,7 +500,7 @@ probabilities, and this is costly. Not to mention that the actual black-box func
 be costly as well. The method itself should just find some minima in a small period of 
 time, but in this case, a large portion of the time was spent with failed solutions of the 
 OZ equation. Indeed, several restarts of the numerical method were 
-needed in order to find values whithin the search space, and most of the time, numerical 
+needed in order to find values within the search space, and most of the time, numerical 
 instabilities were encountered. These methods are good enough for simple problems, such as 
 smooth and analytical high-dimensional functions, but other methods might be able to solve 
 the problem more quickly and efficiently, such as Differential 
@@ -541,7 +541,7 @@ An important aspect to study is the fact that the Neural Network approach of the
 chapter could be \emph{informed}, or combined, with the Kinoshita bridge function 
 approximation, and instead of reducing to the Hypernetted Chain, it could potentially 
 reduce to the Kinoshita closure relation. And yet, this seems like more work to do, because 
-the Kinoshita closure only has two free paramaters, compared to the thousands of parameters 
+the Kinoshita closure only has two free parameters, compared to the thousands of parameters 
 that appear in a Neural Network. Still, the Neural Network is faster to fit and solve than 
 using Evolutionary Computation methods, which could be extended to other systems as well.
 

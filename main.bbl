@@ -722,7 +722,7 @@
   multiple-step forecasting.%
     }
     \field{booktitle}{Business Intelligence: Second European Summer School,
-  EBISS 2012, Brussels, Belgium, July 15-21, 2012, Tutorial Lectures}
+  eBISS 2012, Brussels, Belgium, July 15-21, 2012, Tutorial Lectures}
     \verb{doi}
     \verb 10.1007/978-3-642-36318-4_3
     \endverb
@@ -4893,29 +4893,28 @@
          giveni={R\bibinitperiod},
       }}%
     }
-    \list{publisher}{1}{%
-      {American Institute of Physics}%
-    }
     \strng{namehash}{LSE+1}
     \strng{fullhash}{LSEEÃCDPÃGMAJMGMPCPR1}
     \field{labelnamesource}{author}
-    \field{labeltitlesource}{shorttitle}
+    \field{labeltitlesource}{title}
     \field{labelalpha}{LS+13}
     \field{sortinit}{L}
     \field{sortinithash}{L}
     \verb{doi}
     \verb 10.1063/1.4820559
     \endverb
-    \field{issn}{0021-9606}
+    \verb{eprint}
+    \verb https://doi.org/10.1063/1.4820559
+    \endverb
     \field{number}{10}
     \field{pages}{104908}
-    \field{shorttitle}{Demixing Transition, Structure, and Depletion Forces in
-  Binary Mixtures of Hard-Spheres}
-    \field{title}{Demixing Transition, Structure, and Depletion Forces in
-  Binary Mixtures of Hard-Spheres: The Role of Bridge Functions}
+    \field{title}{Demixing transition, structure, and depletion forces in
+  binary mixtures of hard-spheres: The role of bridge functions}
+    \verb{url}
+    \verb https://doi.org/10.1063/1.4820559
+    \endverb
     \field{volume}{139}
     \field{journaltitle}{The Journal of Chemical Physics}
-    \field{month}{09}
     \field{year}{2013}
   \endentry
 
@@ -5091,7 +5090,7 @@
   identify the model application that optimized forecast accuracy.Model
   calibration as measured by R2 and, secondarily, number of days with errors
   greater than 1 SD of daily volume.During the forecasted year, hospital 1 had
-  54 411 discharges (daily mean, 149) and hospital 2 had 47 456 discharges
+  54\,411 discharges (daily mean, 149) and hospital 2 had 47\,456 discharges
   (daily mean, 130). The machine learning method was well calibrated at both
   sites (R2, 0.843 and 0.726, respectively) and made errors greater than 1 SD
   of daily volume on only 13 and 22 days, respectively, of the forecast year at
