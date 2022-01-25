@@ -224,7 +224,7 @@ spaces is comprised of functions instead of vectors. There is, however, a partic
     \; ,
     \label{eq:linf-norm}
 \end{equation}
-also known as \(L^{\infty}\), and it is a function space that contains all the essentially bounded measurable functionss~\cite{taoIntroductionMeasureTheory2011}.
+also known as \(L^{\infty}\), and it is a function space that contains all the essentially bounded measurable functions~\cite{taoIntroductionMeasureTheory2011}.
 
 Why is $L^{\infty}$ so important in this context? The answer is one simple, but outstandingly powerful theorem: the Stone-Weierstrass theorem~\cite{stoneApplicationsTheoryBoolean1937, stoneGeneralizedWeierstrassApproximation1948}. In 
 1885, Karl Weierstrass proved that any function can be approximated by a polynomial of a 
@@ -303,7 +303,7 @@ can be constructed efficiently. Furthermore, a more complex decision-making syst
 
 Despite this, the model has serious drawbacks. For one, 
 there is no clear understanding of the threshold value and what it is. On the other hand, 
-having the perceptron output just two values might make it inaccesible in the most general 
+having the perceptron output just two values might make it inaccessible in the most general 
 case. After all, the idea of NN is to learn a mapping, a function that in general is 
 real-valued. Finally, how are the weights adjusted? Are these values picked randomly? Does 
 the user choose them? If in fact NN are learning models, then there is no real reason why 
@@ -383,17 +383,17 @@ extremely popular field of \emph{deep learning}~\cite{goodfellowDeepLearning2016
 learning, NN architectures are extended to be larger, deeper, and more complex than simple 
 multi-layer perceptrons. These new models can be thought of being several multi-layer 
 perceptrons, each stacked upon each other.
-Furthermore, deep learning attempts to generalize the simple percpetron model and introduce 
+Furthermore, deep learning attempts to generalize the simple perceptron model and introduce 
 better models that can perform with greater accuracy in certain tasks. The explosion of 
-deep learning came when \emph{convolutional neural networks} were applied successfuly in 
+deep learning came when \emph{convolutional neural networks} were applied successfully in 
 the AlexNet architecture~\cite{krizhevskyImageNetClassificationDeep2012}. There other kinds 
 of important variations in the topology of the network, such as the U-shaped networks use 
-for medical image segementation~\cite{ronnebergerUNetConvolutionalNetworks2015}; V-shaped 
+for medical image segmentation~\cite{ronnebergerUNetConvolutionalNetworks2015}; V-shaped 
 networks used for remote sensing~\cite{abdollahiVNetEndtoEndFully2020}; and very deep 
 topologies that can track images in real time~\cite{redmonYOLOv3IncrementalImprovement2018}.
 
 \subsection{Training}
-Choosing the correct activation function and the appropiate topology is hard, and a lot of 
+Choosing the correct activation function and the appropriate topology is hard, and a lot of 
 experimentation is needed. But even if these could be chosen automatically, there is still 
 a latent issue here: how weights can be adjusted. Up until this section, this issue has 
 been left aside and it is now time to address it. To do so, it is imperative to remember 
@@ -439,8 +439,8 @@ to the following expression,
     \; ,
     \label{eq:dsigmoid}
 \end{equation}
-where some steps were skipped to avoid taking too much space. Recalling that the ouput from 
-the simoid perceptron is given by \autoref{eq:output-sigmoid}, together with \autoref{eq:dsigmoid}, 
+where some steps were skipped to avoid taking too much space. Recalling that the output from 
+the sigmoid perceptron is given by \autoref{eq:output-sigmoid}, together with \autoref{eq:dsigmoid}, 
 the partial derivatives from \autoref{eq:output-combination} can be obtained without much
 effort. In more general cases when the perceptron uses a different activation function than 
 the sigmoid, the computation of derivatives is carried out using modern tooling known as 
@@ -461,7 +461,7 @@ Numerical optimization is a rigorous mathematical subject, and the use of gradie
 Here, only the main results will be mentioned and used. In optimization, specifically \emph{unconstrained optimization}, the task is to find the value of an input vector \(\bm{x}\) that \emph{minimizes the function} \(f\), such that \(f(\bm{x}) = 0\). The fact that it is unconstrained is because there is no restriction in the bounds of \(\bm{x}\), or in the form of \(f\), which in general is a non-linear function. In the context of optimization, \(f\) is referred to as a cost function, or objective function.
 Now, a relation between optimization and NN can be made by noting the following fact. The 
 purpose of NN is to learn the function that relates inputs and outputs in a given data set. 
-Or in the context of optimization: \emph{to minimze the error between the true values and 
+Or in the context of optimization: \emph{to minimize the error between the true values and 
 the approximation values}. The \emph{true values} correspond to the outputs in the data 
 set, and the \emph{approximation values} to the outputs from the NN. So, in essence, the 
 task is to find the best weights \(w_j\), and the best bias \(b\), that minimize the 
@@ -494,7 +494,7 @@ function. Thus, the gradient descent method is introduced, which follows the exp
 where the index \(j\) represents each of the steps taken to update each value. These steps 
 are also sometimes referred to as iterations. Hopefully, by doing several updates of 
 \autoref{eq:gradient-descent-nn}, then \autoref{eq:cost-nn} can be minimized and the 
-appropiate value of the weights and bias would have been found.
+appropriate value of the weights and bias would have been found.
 
 In practice, this simple rule is not actually followed for one simple reason. If looked at 
 closely, \autoref{eq:gradient-descent-nn} actually takes in all the information gathered so 
@@ -520,7 +520,7 @@ To summarize, the training mechanism of NN is as follows. Assuming a training da
 has the form of \autoref{eq:cost-nn} but it can be any other. Then, the weights and biases 
 are initialized at random. After that, the main loop of the algorithm is to repeat the 
 steps shown in \autoref{eq:gradient-descent-nn} while keeping track of the minimum. When a 
-certain minimum has been achieved, a performance measure can be used to check wheter the NN 
+certain minimum has been achieved, a performance measure can be used to check whether the NN 
 has a good performance for the task given. This concludes, roughly speaking, the common 
 practice of modern ML.
 
@@ -552,7 +552,7 @@ the main results will be stated here to be interpreted.
 In short, Hornik and Cybenko showed that, given the sigmoid function and a given topology, 
 there exists an arbitrary number of nodes that are needed to \emph{approximate} any 
 \emph{continuous} function. The topology is a three layer topology, similar to the one in 
-\autoref{fig:hidden-layer}, where there is an input, a hidden and an ouput layers. This 
+\autoref{fig:hidden-layer}, where there is an input, a hidden and an output layers. This 
 results is also similar to \autoref{approx}; however, in this case there is no polynomial 
 but a NN instead. The arguments that follow this result is beyond the scope of this work, 
 but the result remains valid. Then, as the research for the mathematical framework of NN 
@@ -562,7 +562,7 @@ continuous function that it continuously differentiable~\cite{parkMinimumWidthUn
 from which the generalization to deep learning 
 follows~\cite{zhouUniversalityDeepConvolutional2020,bernerModernMathematicsDeep2021}.
 In this work, these guidelines are used to create simple topologies for NN that can 
-actually satisfy the conditions of the theorem. A toplogy similar to 
+actually satisfy the conditions of the theorem. A topology similar to 
 \autoref{fig:hidden-layer} with a large amount of nodes for each layer, which should 
 suffice to satisfy the conditions of the theorem. However, in practice, it has been shown 
 that \emph{overparametrization}\textemdash when there are way more weights and bias to adjust than needed \textemdash is the key to generalization in 
@@ -579,7 +579,7 @@ behind EC is the way nature adapts itself through
 evolution~\cite{fogelWhatEvolutionaryComputation2000}. Although, in reality, evolution 
 takes millions of years but it eventually creates variations that adapt and \emph{converge} 
 to a particular goal. This particular goal, as described by Darwin, is to be fit to its 
-surroundings and survive. The idea behind EC is to use this powerful mechanim of evolution 
+surroundings and survive. The idea behind EC is to use this powerful mechanism of evolution 
 and apply it to complex problems, with the use of modern computational and mathematical 
 resources to facilitate and empower a simplified version of evolution. In the most general 
 case, evolution is roughly a two-step process: first comes \emph{variation} and then comes 
@@ -717,7 +717,7 @@ such that a \emph{local minimum} is found, where the local minimum is defined as
     \: .
     \label{eq:local-minimizer}
 \end{equation}
-Now, the goal is not to minimize the objective function directly, but to minimize an \emph{expected fitnesss} under a particular search distribution. This means that the parameters searched will define a continuous probability distribution. This cost function is now expressed as,
+Now, the goal is not to minimize the objective function directly, but to minimize an \emph{expected fitness} under a particular search distribution. This means that the parameters searched will define a continuous probability distribution. This cost function is now expressed as,
 \begin{equation}
     J(\theta) = \mathcal{E}_{\theta} \left[ f(\bm{x}) \right] = 
     \int f(\bm{x}) \, \pi (\bm{x} \, \vert \, \theta) \, d \bm{x}
@@ -795,7 +795,7 @@ such that, when sampled, the search distribution will in average output the mini
 the objective function. Here, most of the details have been omitted for the sake of 
 brevity, but the original work~\cite{wierstraNaturalEvolutionStrategies2014a} provides all 
 the information needed to implement the method. In this work, though, a variant of the NES 
-method is used, the \emph{distance-weighted exponentital} (DXNES)
+method is used, the \emph{distance-weighted exponential} (DXNES)
 NES~\cite{fukushimaProposalDistanceweightedExponential2011,nomuraDistanceweightedExponentialNatural2021}. 
 This method is a variation on the way the natural gradient and Fisher information matrix 
 are obtained, but the core of the method remains the same.
