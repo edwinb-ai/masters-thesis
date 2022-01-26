@@ -256,7 +256,7 @@ in pressure or stress.
 It can also be computed using the radial distribution function using the following
 expression~\cite{hansenTheorySimpleLiquids2013}
 \begin{equation}
-    \frac{\chi_{T} \, \beta}{\rho} = 1 + \rho \int d \vecr \, \left[ g(r) - 1 \right]
+    \frac{\chi_{T} \, \rho}{\beta} = 1 + \rho \int d \vecr \, \left[ g(r) - 1 \right]
     \; .
     \label{eq:chi-rdf}
 \end{equation}
@@ -610,7 +610,7 @@ Theory. Thus, it follows from \autoref{eq:cr-aysmp} that
 An additional important fact is that the compressibility equation, \autoref{eq:chi-rdf},
 can be defined in terms of the $c(r)$ functions as follows
 \begin{equation}
-    \frac{\beta}{\rho \chi_{T}} = 1 - \rho \int_{0}^{\infty} 4 \pi r^2 c(r) \, dr
+    \frac{\beta}{\rho \chi_{T}} = 1 - \rho \int c(r) \, d \vecr
     \, ,
     \label{eq:compressibility-cr}
 \end{equation}
